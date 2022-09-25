@@ -26,6 +26,3 @@ class CustomText extends StatelessWidget {
   }
 }
 
-// class WhiteText extends CustomText {
-//   const WhiteText(data, {Color? color, Key? key, double? size}) : super('')
-// }
