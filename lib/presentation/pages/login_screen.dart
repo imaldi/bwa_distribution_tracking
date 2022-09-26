@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
+import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,8 @@ import 'package:flutter/material.dart';
 import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../widgets/text_form_field/no_underline_text_form_field.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,9 @@ class LoginPage extends StatelessWidget {
                                       margin: const EdgeInsets.symmetric(
                                           vertical: sizeMedium),
                                       child: ElevatedButton(
-                                          onPressed: (){},
+                                          onPressed: (){
+                                            context.router.push(const HomeRoute());
+                                          },
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.white,
                                             side: BorderSide.none,

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'presentation/pages/login_page.dart';
+import 'core/routes/app_router.gr.dart';
+import 'presentation/pages/login_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  // make sure you don't initiate your router
+  // inside of the build function.
+  final _appRouter = AppRouter();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
       title: 'BWA Distribution Tracking',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -30,7 +35,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const LoginPage(),
+      // home: const LoginScreen(),
     );
   }
 }
