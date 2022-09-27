@@ -18,6 +18,11 @@ abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilde
   @override
   String? get name;
 
+  @override
+  String? get phone;
+
+
+
 
   UserModel._();
 

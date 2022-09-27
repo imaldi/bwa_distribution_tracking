@@ -1,3 +1,4 @@
+import 'package:bwa_distribution_tracking/core/params/login_params.dart';
 import 'package:bwa_distribution_tracking/data/models/login_response.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/login_repository.dart';
@@ -9,21 +10,21 @@ import 'package:mockito/mockito.dart';
 
 import 'user_login_test.mocks.dart';
 
-@GenerateMocks([MockLoginRepository])
-class MockLoginRepository extends Mock
-    implements LoginRepository {
+@GenerateMocks([MockAuthRepository])
+class MockAuthRepository extends Mock
+    implements AuthRepository {
 }
 
 void main(){
   late UserLogin usecase;
-  late MockMockLoginRepository mockLoginRepository;
+  late MockMockAuthRepository mockAuthRepository;
 
   setUp((){
-    mockLoginRepository = MockMockLoginRepository();
-    usecase = UserLogin(mockLoginRepository);
+    mockAuthRepository = MockMockAuthRepository();
+    usecase = UserLogin(mockAuthRepository);
   });
 
-  const tUserName = "Aldi";
+  const tPhone = "082322323223";
   const tPassword = "Majid123";
   final tLoginResponse = LoginResponse(
           (b) => b
@@ -40,7 +41,7 @@ void main(){
       // When getConcreteNumberTrivia is called with any argument, always answer with
       // the Right "side" of Either containing a test NumberTrivia object.
       /// Ketika loginRepo.login() dipanggil dengan username dan password apapaun,
-      when(mockLoginRepository.login(any, any))
+      when(mockAuthRepository.login(any, any))
       /// maka jawab dengan instance Right(tLoginResponse)
           .thenAnswer((_) async => Right(tLoginResponse));
 
@@ -49,7 +50,7 @@ void main(){
       /// Kenapa usecase tidak di mock? karena satu2nya tugas usecase adalah
       /// memanggil function repository (end point) yang dibutuhkan,
       /// dan pemanggilan function repository itu yang mau dites pemanggilannya
-      final result = await usecase.execute(userName: tUserName, password: tPassword);
+      final result = await usecase(const LoginParams(phone: tPhone, password: tPassword));
       // print(result);
 
       // UseCase should simply return whatever was returned from the Repository
@@ -58,11 +59,11 @@ void main(){
 
       // Verify that the method has been called on the Repository
       /// pastikan class repository memanggil method login nya
-      verify(mockLoginRepository.login(tUserName,tPassword));
+      verify(mockAuthRepository.login(tPhone,tPassword));
 
       // Only the above method should be called and nothing more.
       /// pastikan di repository tidak terpanggil method lain
-      verifyNoMoreInteractions(mockLoginRepository);
+      verifyNoMoreInteractions(mockAuthRepository);
     },
   );
 }

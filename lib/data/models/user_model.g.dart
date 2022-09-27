@@ -32,6 +32,13 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.phone;
+    if (value != null) {
+      result
+        ..add('phone')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -54,6 +61,10 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'phone':
+          result.phone = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -66,11 +77,13 @@ class _$UserModel extends UserModel {
   final int? id;
   @override
   final String? name;
+  @override
+  final String? phone;
 
   factory _$UserModel([void Function(UserModelBuilder)? updates]) =>
       (new UserModelBuilder()..update(updates))._build();
 
-  _$UserModel._({this.id, this.name}) : super._();
+  _$UserModel._({this.id, this.name, this.phone}) : super._();
 
   @override
   UserModel rebuild(void Function(UserModelBuilder) updates) =>
@@ -82,19 +95,23 @@ class _$UserModel extends UserModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UserModel && id == other.id && name == other.name;
+    return other is UserModel &&
+        id == other.id &&
+        name == other.name &&
+        phone == other.phone;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, id.hashCode), name.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), phone.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'UserModel')
           ..add('id', id)
-          ..add('name', name))
+          ..add('name', name)
+          ..add('phone', phone))
         .toString();
   }
 }
@@ -110,6 +127,10 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  String? _phone;
+  String? get phone => _$this._phone;
+  set phone(String? phone) => _$this._phone = phone;
+
   UserModelBuilder();
 
   UserModelBuilder get _$this {
@@ -117,6 +138,7 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
     if ($v != null) {
       _id = $v.id;
       _name = $v.name;
+      _phone = $v.phone;
       _$v = null;
     }
     return this;
@@ -137,7 +159,7 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   UserModel build() => _build();
 
   _$UserModel _build() {
-    final _$result = _$v ?? new _$UserModel._(id: id, name: name);
+    final _$result = _$v ?? new _$UserModel._(id: id, name: name, phone: phone);
     replace(_$result);
     return _$result;
   }
