@@ -25,7 +25,8 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/bwa_logo.png"),
+                  const SizedBox(height: sizeBig,),
+                  Image.asset("assets/images/bwa_logo.png",width: 100,),
                   const CustomText(
                     "TRACKING",
                     color: Colors.white,

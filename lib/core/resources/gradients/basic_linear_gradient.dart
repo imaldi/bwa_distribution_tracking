@@ -1,8 +1,9 @@
+import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:flutter/material.dart';
 
 const List<Color> primaryGradientColor = [
-  Color(0xFF018ADF),
-  Color(0xFF00BD9B),
+  primaryBlue,
+  primaryGreen,
 ];
 
 Gradient basicLinearGradient(){

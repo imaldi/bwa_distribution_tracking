@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'core/routes/app_router.gr.dart';
 
 /// Entry Point
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(RootWidget());
 }
 
