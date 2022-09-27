@@ -1,5 +1,3 @@
-import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
-import 'package:bwa_distribution_tracking/core/resources/text_style/white_text_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -36,6 +34,7 @@ class CustomText extends StatelessWidget {
           decorationColor: shadows?.first.color,
           letterSpacing: letterSpacing,
           shadows: shadows),
+      softWrap: true,
     );
   }
 }
