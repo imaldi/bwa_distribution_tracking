@@ -5,9 +5,9 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:bwa_distribution_tracking/domain/entities/user_entity.dart';
-import '../../core/resources/serializers/serializers.dart';
+import '../../core/resources/serializers/serializers.bv.dart';
 
-part 'user_model.g.dart';
+part 'user_model.bv.g.dart';
 
 abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilder> {
   // class field here

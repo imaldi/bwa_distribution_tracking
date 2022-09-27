@@ -4,10 +4,10 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import '../../data/models/user_model.dart';
-import '../../core/resources/serializers/serializers.dart';
+import '../../data/models/user_model.bv.dart';
+import '../../core/resources/serializers/serializers.bv.dart';
 
-part 'login_response.g.dart';
+part 'login_response.bv.g.dart';
 
 abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
   // class field here
