@@ -1,0 +1,20 @@
+{
+  "0": 200,
+  "success": true,
+  "token": {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"
+  },
+  "user": {
+    "id": 1,
+    "name": "Majid",
+    "email": "bambang.wisnu@bwa.id",
+    "phone": "087887789889",
+    "foto": null,
+    "role": "Kurir",
+    "ttd": null,
+    "email_verified_at": null,
+    "api_token": null,
+    "created_at": "2022-09-24 23:55:21",
+    "updated_at": "2022-09-24 23:55:21"
+  }
+}
