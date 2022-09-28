@@ -1,7 +1,7 @@
 import 'package:bwa_distribution_tracking/core/params/login_params.dart';
 import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
-import 'package:bwa_distribution_tracking/domain/repositories/login_repository.dart';
+import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
