@@ -5,7 +5,9 @@ abstract class AuthLocalDataSource {
   /// the user had an internet connection.
   ///
   /// Throws [NoLocalDataException] if no cached data is present.
-  Future<LoginResponse> getCachedLogin();
+  // TODO change after test
+  Future<LoginResponse>? getCachedLogin();
 
-  Future<LoginResponse> cacheLoginResponse(LoginResponse loginResponse);
+  // TODO change after test
+  Future<void>? cacheLoginResponse(LoginResponse? loginResponse);
 }

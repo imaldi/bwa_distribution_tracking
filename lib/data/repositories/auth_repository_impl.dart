@@ -6,6 +6,8 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../core/error/exceptions.dart';
+
 class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
   final AuthLocalDataSource authLocalDataSource;
@@ -17,8 +19,29 @@ class AuthRepositoryImpl extends AuthRepository {
       required this.networkInfo});
 
   @override
-  Future<Either<Failure, LoginResponse>> login(
-      String userName, String password) {
-    throw UnimplementedError();
+  Future<Either<Failure, LoginResponse?>?>? login(
+      String phone, String password) async {
+    if(
+    (await networkInfo.isConnected) ?? true
+    ) {
+      try {
+        final remoteTrivia = await authRemoteDataSource.login(phone, password);
+        authLocalDataSource.cacheLoginResponse(remoteTrivia);
+        return Right(remoteTrivia);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try{
+        final localTrivia = await authLocalDataSource.getCachedLogin();
+        return Right(localTrivia);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
+
+
+
+
 }

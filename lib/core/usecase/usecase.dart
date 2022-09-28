@@ -6,5 +6,6 @@ import 'package:dartz/dartz.dart';
 /// misal loginRepository.login(LoginParams(phoneNumber, password)
 /// lalu loginRepository.logout(NoParams())
 abstract class UseCase<Type, P> {
-  Future<Either<Failure, Type>> call(P params);
+  // TODO change after test
+  Future<Either<Failure, Type?>?>? call(P params);
 }

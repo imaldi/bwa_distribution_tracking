@@ -12,7 +12,7 @@ class UserLogin extends UseCase<LoginResponse,LoginParams>{
   UserLogin(this.repository);
 
   @override
-  Future<Either<Failure, LoginResponse>> call(LoginParams params) async {
+  Future<Either<Failure, LoginResponse?>?>? call(LoginParams params) async {
     return await repository.login(params.phone, params.password);
   }
 }
