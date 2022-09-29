@@ -22,7 +22,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, LoginResponse>> login(
       String phone, String password) async {
     if(
-    (await networkInfo.isConnected) ?? true
+    (await networkInfo.isConnected)
     ) {
       try {
         final remoteTrivia = await authRemoteDataSource.login(phone, password);

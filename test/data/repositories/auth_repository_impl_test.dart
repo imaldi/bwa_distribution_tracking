@@ -1,4 +1,3 @@
-
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
@@ -9,13 +8,17 @@ import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+@GenerateNiceMocks([
+  MockSpec<NetworkInfo>(),
+  MockSpec<AuthRemoteDataSource>(),
+  MockSpec<AuthLocalDataSource>(),
+])
+import 'auth_repository_impl_test.mocks.dart';
 
-class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource{}
-class MockAuthLocalDataSource extends Mock implements AuthLocalDataSource{}
-class MockNetworkInfo extends Mock implements NetworkInfo{}
 
-void main(){
+void main() {
   late AuthRepositoryImpl repository;
   late MockAuthRemoteDataSource mockRemoteDataSource;
   late MockAuthLocalDataSource mockLocalDataSource;
@@ -32,7 +35,7 @@ void main(){
     );
   });
 
-  group('user login',(){
+  group('user login', () {
     /// DATA FOR THE MOCKS AND ASSERTIONS
     /// We'll use these three variables throughout all the tests
     // final tNumber = 1;
@@ -46,79 +49,109 @@ void main(){
     final tLoginResponse = LoginResponse().rebuild((p0) => p0
       ..responseCode = 200
       ..success = true
-      ..token = Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
-          .toBuilder()
+      ..token =
+          Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
+              .toBuilder()
       ..user = tUserModel.toBuilder());
-
 
     // final tNumberTriviaModel = NumberTriviaModel(number: tNumber, text:'test trivia');
     // final NumberTrivia tNumberTrivia = tNumberTriviaModel;
 
-    test('should check if the device is online', () {
+    // setUp(() {
+    //   when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    // });
+
+    test('should check if the device is online', () async {
       /// arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
       /// act
-      repository.login(tPhone,tPassword);
+      await repository.login(tPhone, tPassword);
+
       /// assert
       verify(mockNetworkInfo.isConnected);
     });
 
     group('device is online', () {
       /// This setup only to the 'device is online' group
-      setUp(() => when(mockNetworkInfo.isConnected).thenAnswer((_) async => true));
-      test('should return remote data when the call to remote data source is success',
-              () async{
-            /// arrange
-            when(mockRemoteDataSource.login(tPhone,tPassword)).thenAnswer((_) async => tLoginResponse);
-            /// act
-            final result = await repository.login(tPhone,tPassword);
-            print(result);
-            /// assert
-            verify(mockRemoteDataSource.login(tPhone, tPassword));
-            expect(result, equals(Right(tLoginResponse)));
-          });
-
-      test('should cache the data locally when the call to remote data source is successful', () async {
+      setUp(() =>
+          when(mockNetworkInfo.isConnected).thenAnswer((_) async => true));
+      test(
+          'should return remote data when the call to remote data source is success',
+          () async {
         /// arrange
-        when(mockRemoteDataSource.login(tPhone,tPassword)).thenAnswer((_) async => tLoginResponse);
+        when(mockRemoteDataSource.login(tPhone, tPassword))
+            .thenAnswer((_) async => tLoginResponse);
+
         /// act
-        await repository.login(tPhone,tPassword);
+        final result = await repository.login(tPhone, tPassword);
+        print(result);
+
         /// assert
-        verify(mockRemoteDataSource.login(tPhone,tPassword));
+        verify(mockRemoteDataSource.login(tPhone, tPassword));
+        expect(result, equals(Right(tLoginResponse)));
+      });
+
+      test(
+          'should cache the data locally when the call to remote data source is successful',
+          () async {
+        /// arrange
+        when(mockRemoteDataSource.login(tPhone, tPassword))
+            .thenAnswer((_) async => tLoginResponse);
+
+        /// act
+        await repository.login(tPhone, tPassword);
+
+        /// assert
+        verify(mockRemoteDataSource.login(tPhone, tPassword));
         verify(mockLocalDataSource.cacheLoginResponse(tLoginResponse));
       });
 
-      test('should return server failure when the call to remote data source is unsuccessful', () async {
+      test(
+          'should return server failure when the call to remote data source is unsuccessful',
+          () async {
         /// arrange
-        when(mockRemoteDataSource.login(tPhone,tPassword)).thenThrow(ServerException());
+        when(mockRemoteDataSource.login(tPhone, tPassword))
+            .thenThrow(ServerException());
+
         /// act
-        final result = await repository.login(tPhone,tPassword);
+        final result = await repository.login(tPhone, tPassword);
+
         /// assert
-        verify(mockRemoteDataSource.login(tPhone,tPassword));
+        verify(mockRemoteDataSource.login(tPhone, tPassword));
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
     });
 
-    group('device is offline', (){
-      setUp(() => when(mockNetworkInfo.isConnected).thenAnswer((realInvocation) async => false));
+    group('device is offline', () {
+      setUp(() => when(mockNetworkInfo.isConnected)
+          .thenAnswer((realInvocation) async => false));
 
-      test('should return last locally cached data when the cached data is present', () async {
+      test(
+          'should return last locally cached data when the cached data is present',
+          () async {
         /// arrange
-        when(mockLocalDataSource.getCachedLogin()).thenAnswer((realInvocation) async => tLoginResponse);
+        when(mockLocalDataSource.getCachedLogin())
+            .thenAnswer((realInvocation) async => tLoginResponse);
+
         /// act
-        final result = await repository.login(tPhone,tPassword);
+        final result = await repository.login(tPhone, tPassword);
+
         /// assert
         verifyZeroInteractions(mockRemoteDataSource);
         verify(mockLocalDataSource.getCachedLogin());
         expect(result, equals(Right(tLoginResponse)));
       });
 
-      test('should return CacheFailure when there is no cached data present', () async {
+      test('should return CacheFailure when there is no cached data present',
+          () async {
         /// arrange
         when(mockLocalDataSource.getCachedLogin()).thenThrow(CacheException());
+
         /// act
-        final result = await repository.login(tPhone,tPassword);
+        final result = await repository.login(tPhone, tPassword);
+
         /// assert
         verifyZeroInteractions(mockRemoteDataSource);
         verify(mockLocalDataSource.getCachedLogin());
