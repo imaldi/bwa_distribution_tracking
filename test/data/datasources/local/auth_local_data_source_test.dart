@@ -25,8 +25,26 @@ void main() {
     mockHiveBox = MockBox();
     mockHiveInterface = MockHiveInterface();
     mockHiveInterface.openBox(authBoxKey);
-    // cacheException = MockCacheException();
     dataSource = AuthLocalDataSourceImpl(hiveInterface: mockHiveInterface);
+    // cacheException = MockCacheException();
+  });
+  group('cacheLoginResponse', () {
+    final tLoginResponse =
+    LoginResponse.fromJson(fixture('login_response.json'));
+
+
+    test('should call put() to cache the data', () async {
+      /// arrange
+      /// pastikan sudah openBox
+      when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
+              (realInvocation) async => mockHiveBox
+      );
+      /// act
+      await dataSource.cacheLoginResponse(tLoginResponse);
+      /// assert
+      final expectedJsonString = tLoginResponse.toJson();
+      verify(mockHiveBox.put(cachedLoginResponse, expectedJsonString));
+    });
   });
 
   group('getCachedLogin', () {
@@ -70,15 +88,4 @@ void main() {
       expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
     });
   });
-  // group('cacheNumberTrivia', () {
-  //   final tLoginResponse = NumberTriviaModel(number: 1, text: 'test trivia');
-  //
-  //   test('should call SharedPreferences to cache the data', () {
-  //     /// act
-  //     dataSource.cacheNumberTrivia(tLoginResponse);
-  //     /// assert
-  //     final expectedJsonString = json.encode(tLoginResponse.toJson());
-  //     verify(mockHiveBox.setString(cachedNumberTrivia, expectedJsonString));
-  //   });
-  // });
 }
