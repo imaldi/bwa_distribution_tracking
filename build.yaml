@@ -6,4 +6,5 @@ targets:
       build_runner:build_runner:
         generate_for:
           # Example glob for only the Dart files under `lib/models`
-          - lib/data/models/**.bv.dart
+#          - lib/data/models/**.bv.dart
+          - test/core/platform/network_info_test.dart
