@@ -6,10 +6,10 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class UserLogin extends UseCase<LoginResponse,LoginParams>{
+class UserLoginUseCase extends UseCase<LoginResponse,LoginParams>{
   final AuthRepository repository;
 
-  UserLogin(this.repository);
+  UserLoginUseCase(this.repository);
 
   @override
   Future<Either<Failure, LoginResponse>> call(LoginParams params) async {

@@ -16,12 +16,12 @@ class MockAuthRepository extends Mock
 }
 
 void main(){
-  late UserLogin usecase;
+  late UserLoginUseCase usecase;
   late MockMockAuthRepository mockAuthRepository;
 
   setUp((){
     mockAuthRepository = MockMockAuthRepository();
-    usecase = UserLogin(mockAuthRepository);
+    usecase = UserLoginUseCase(mockAuthRepository);
   });
 
   const tPhone = "082322323223";
