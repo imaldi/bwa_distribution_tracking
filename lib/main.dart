@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'core/routes/app_router.gr.dart';
 
@@ -8,6 +9,9 @@ import 'core/routes/app_router.gr.dart';
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // /// Hive init
+  // final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  // Hive.init(appDocumentDir.path);
   runApp(RootWidget());
 }
 
