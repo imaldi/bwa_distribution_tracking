@@ -1,6 +1,5 @@
 part of 'auth_bloc.dart';
 
-@immutable
 abstract class AuthState extends Equatable {}
 
 class AuthInitial extends AuthState {
@@ -22,14 +21,12 @@ class AuthLoaded extends AuthState {
 }
 
 class AuthFailed extends AuthState {
-  String errorMessage;
-  set theErrorIs(String message) {
-      errorMessage = "The Error is $message";
-  }
+  final String errorMessage;
+
+  get debug => "The Error is: $errorMessage";
+
   AuthFailed({this.errorMessage = "Unspecified Error"});
 
   @override
-  List<Object?> get props => [
-    errorMessage
-  ];
+  List<Object?> get props => [errorMessage];
 }

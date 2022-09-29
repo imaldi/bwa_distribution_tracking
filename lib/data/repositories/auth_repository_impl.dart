@@ -21,23 +21,22 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, LoginResponse>> login(
       String phone, String password) async {
-    if(
-    (await networkInfo.isConnected)
-    ) {
-      try {
-        final remoteTrivia = await authRemoteDataSource.login(phone, password);
-        authLocalDataSource.cacheLoginResponse(remoteTrivia);
-        return Right(remoteTrivia);
-      } on ServerException {
-        return Left(ServerFailure());
-      }
-    } else {
-      try{
-        final localTrivia = await authLocalDataSource.getCachedLogin();
-        return Right(localTrivia);
-      } on CacheException {
-        return Left(CacheFailure());
-      }
+    late var test;
+    try {
+      final cred = await authLocalDataSource.getCachedLoginOrNull();
+      test = cred;
+      if (cred != null) return Right(cred);
+      // FIXME: NoInternetFailure()
+      if (!(await networkInfo.isConnected)) return Left(ServerFailure());
+
+      final remoteTrivia = await authRemoteDataSource.login(phone, password);
+      authLocalDataSource.cacheLoginResponse(remoteTrivia);
+      return Right(remoteTrivia);
+    } on ServerException {
+      // FIXME: return with error message
+      return Left(ServerFailure());
+    } finally {
+      print("value: $test");
     }
   }
 }

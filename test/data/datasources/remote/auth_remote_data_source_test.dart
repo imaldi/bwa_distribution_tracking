@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
@@ -22,13 +20,13 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-          (_) async => http.Response(fixture('login_response.json'), 200),
+      (_) async => http.Response(fixture('login_response.json'), 200),
     );
   }
 
   void setUpMockHttpClientFailure404() {
     when(mockHttpClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-          (_) async => http.Response('Something went wrong', 404),
+      (_) async => http.Response('Something went wrong', 404),
     );
   }
 
@@ -48,33 +46,34 @@ void main() {
     final tLoginResponse = LoginResponse().rebuild((p0) => p0
       ..responseCode = 200
       ..success = true
-      ..token = Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
-          .toBuilder()
+      ..token =
+          Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
+              .toBuilder()
       ..user = tUserModel.toBuilder());
 
     test(
         'should perform a GET request on an URL with number being the endpoint and with application/json header',
-            () {
-          /// arrange
-          setUpMockHttpClientSuccess200();
+        () {
+      /// arrange
+      setUpMockHttpClientSuccess200();
 
-          /// act
-          dataSource.login(tPhone, tPassword);
+      /// act
+      dataSource.login(tPhone, tPassword);
 
-          /// assert
-          verify(mockHttpClient
-              .get(Uri(path: baseUrl + loginUrl), headers: {
-            'Content-Type': 'application/json',
-          }));
-
-        });
+      /// assert
+      verify(mockHttpClient.get(Uri(path: baseUrl + loginUrl), headers: {
+        'Content-Type': 'application/json',
+      }));
+    });
 
     // final tAuthModel =
     // AuthModel.fromJson(json.decode(fixture('login_response.json')));
     //
-    test('should return Auth when the response code is 200 (success)', () async {
+    test('should return Auth when the response code is 200 (success)',
+        () async {
       /// arrange
       setUpMockHttpClientSuccess200();
+
       /// act
       final result = await dataSource.login(tPhone, tPassword);
 
@@ -82,13 +81,18 @@ void main() {
       expect(result, equals(tLoginResponse));
     });
     //
-    test('should throw a ServerException when the response code is 404 or other', () async {
+    test(
+        'should throw a ServerException when the response code is 404 or other',
+        () async {
       /// arrange
       setUpMockHttpClientFailure404();
+
       /// act
       final call = dataSource.login;
+
       /// assert
-      expect(() => call(tPhone,tPassword), throwsA(const TypeMatcher<ServerException>()));
+      expect(() => call(tPhone, tPassword),
+          throwsA(const TypeMatcher<ServerException>()));
     });
   });
 

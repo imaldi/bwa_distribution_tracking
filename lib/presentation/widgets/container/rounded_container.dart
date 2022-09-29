@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 
 class RoundedContainer extends StatelessWidget {
   const RoundedContainer(this.borderRadius,
-      {required this.child, this.boxDecoration = const BoxDecoration(
-        color: Colors.white
-      ), Key? key, this.padding, this.margin})
+      {required this.child,
+      this.boxDecoration = const BoxDecoration(color: Colors.white),
+      Key? key,
+      this.padding,
+      this.margin})
       : super(key: key);
   final double borderRadius;
   final Widget child;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
+
   /// Supaya masih bisa meng-custom box decoration walaupun sudah di beri nilai default
   final BoxDecoration boxDecoration;
 

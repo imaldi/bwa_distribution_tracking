@@ -12,7 +12,8 @@ import 'package:hive/hive.dart';
 part 'user_model.bv.g.dart';
 
 @HiveType(typeId: userTypeId)
-abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilder> {
+abstract class UserModel
+    implements UserEntity, Built<UserModel, UserModelBuilder> {
   // class field here
   // @BuiltValueField(wireName: 'a_field')
   @HiveField(0)
@@ -30,9 +31,6 @@ abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilde
   // @override
   // int? get typeId;
 
-
-
-
   UserModel._();
 
   factory UserModel([Function(UserModelBuilder b) updates]) = _$UserModel;
@@ -42,11 +40,13 @@ abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilde
   // ;
 
   Map<String, dynamic> toJson() {
-    return jsonDecode(jsonEncode(serializers.serializeWith(UserModel.serializer, this)));
+    return jsonDecode(
+        jsonEncode(serializers.serializeWith(UserModel.serializer, this)));
   }
 
   static UserModel fromJson(String jsonString) {
-    return serializers.deserializeWith(UserModel.serializer, json.decode(jsonString)) ??
+    return serializers.deserializeWith(
+            UserModel.serializer, json.decode(jsonString)) ??
         UserModel();
   }
 

@@ -1,2 +1,3 @@
-const baseUrl = "http://zulfikar.bwa.id:88/backend_inventory/api";
-const loginUrl = "/login";
+const baseUrl = "zulfikar.bwa.id:88";
+const apiUrl = "/backend_inventory/api";
+const loginUrl = "$apiUrl/login";

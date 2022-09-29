@@ -17,8 +17,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<LoginResponse> login(String phone, String password) async {
-    final response = await client.get(
-      Uri(path: baseUrl + loginUrl),
+    // TODO tanya kenapa query params, ga di body
+    final url = Uri.http(baseUrl, loginUrl, {
+      'phone': phone,
+      'password': password,
+    });
+    final response = await client.post(
+      url,
       headers: {'Content-Type': 'application/json'},
     );
 

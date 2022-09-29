@@ -10,5 +10,5 @@ part 'serializers.bv.g.dart';
   LoginResponse,
   Token,
 ])
-
-final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
+final Serializers serializers =
+    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

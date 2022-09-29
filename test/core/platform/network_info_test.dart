@@ -18,15 +18,20 @@ void main() {
   });
 
   group('isConnected', () {
-    test('should forward the call to DataConnectionChecker.hasConnection', () async {
+    test('should forward the call to DataConnectionChecker.hasConnection',
+        () async {
       /// arrange
       final tHasConnectionFuture = Future.value(true);
 
-      when(mockDataConnectionChecker.hasConnection).thenAnswer((realInvocation) => tHasConnectionFuture);
+      when(mockDataConnectionChecker.hasConnection)
+          .thenAnswer((realInvocation) => tHasConnectionFuture);
+
       /// act
       final result = networkInfo.isConnected;
+
       /// assert
       verify(mockDataConnectionChecker.hasConnection);
+
       /// Utilizing Dart's default referential equality.
       /// Only references to the same object are equal.
       expect(result, tHasConnectionFuture);

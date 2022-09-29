@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'injection_container.dart' as di;
+// import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'core/routes/app_router.gr.dart';
 
 /// Entry Point
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  // /// Hive init
-  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDir.path);
   await di.init();
   runApp(RootWidget());
 }
@@ -25,29 +19,29 @@ class RootWidget extends StatelessWidget {
 
   RootWidget({Key? key}) : super(key: key);
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          title: 'BWA Distribution Tracking',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            /// Mengubah font global menjadi 'Poppins'
-            textTheme: GoogleFonts.poppinsTextTheme(
-              Theme.of(context).textTheme
-            ),
-            /// Mengubah padding Text Form Field menjadi default bernilai 0
-            inputDecorationTheme: const InputDecorationTheme(
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            )
-          ),
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      title: 'BWA Distribution Tracking',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primarySwatch: Colors.blue,
 
-          // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-          // home: const LoginScreen(),
-        );
+          /// Mengubah font global menjadi 'Poppins'
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+
+          /// Mengubah padding Text Form Field menjadi default bernilai 0
+          inputDecorationTheme: const InputDecorationTheme(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          )),
+
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const LoginScreen(),
+    );
   }
 }

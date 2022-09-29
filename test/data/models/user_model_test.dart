@@ -13,20 +13,17 @@ void main() {
     ..name = "Majid"
     ..phone = "087887789889");
 
-
-  test(
-      'should be a subclass of UserEntity',
-          () async {
-        /// assert
-        expect(tUserModel, isA<UserEntity>());
-      }
-  );
+  test('should be a subclass of UserEntity', () async {
+    /// assert
+    expect(tUserModel, isA<UserEntity>());
+  });
 
   group('fromJson', () {
-    test('should return a valid model when retrieving the json response', () async {
+    test('should return a valid model when retrieving the json response',
+        () async {
       /// arrange
       final Map<String, dynamic> responseJsonMap =
-      json.decode(fixture('login_response.json'));
+          json.decode(fixture('login_response.json'));
       final responseModel = LoginResponse.fromJson(jsonEncode(responseJsonMap));
 
       /// act
@@ -48,10 +45,11 @@ void main() {
     // );
   });
 
-  group('toJson', (){
+  group('toJson', () {
     test('should return a JSON map containing the proper data', () async {
       /// act
       final result = tUserModel.toJson();
+
       /// assert
       final expectedJsonMap = {
         'id': 1,

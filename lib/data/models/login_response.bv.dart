@@ -12,7 +12,8 @@ import 'package:hive/hive.dart';
 part 'login_response.bv.g.dart';
 
 @HiveType(typeId: loginResponseTypeId)
-abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
+abstract class LoginResponse
+    implements Built<LoginResponse, LoginResponseBuilder> {
   // class field here
   // String? get aField;
   @HiveField(0)
@@ -27,18 +28,21 @@ abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilde
 
   LoginResponse._();
 
-  factory LoginResponse([Function(LoginResponseBuilder b) updates]) = _$LoginResponse;
+  factory LoginResponse([Function(LoginResponseBuilder b) updates]) =
+      _$LoginResponse;
 
   // static void _initializeBuilder(LoginResponseBuilder builder) => builder
   //   ..isLoading = false
   //   ..isFailed = false
   // ;
   Map<String, dynamic> toJson() {
-    return jsonDecode(jsonEncode(serializers.serializeWith(LoginResponse.serializer, this)));
+    return jsonDecode(
+        jsonEncode(serializers.serializeWith(LoginResponse.serializer, this)));
   }
 
   static LoginResponse fromJson(String jsonString) {
-    return serializers.deserializeWith(LoginResponse.serializer, json.decode(jsonString)) ??
+    return serializers.deserializeWith(
+            LoginResponse.serializer, json.decode(jsonString)) ??
         LoginResponse();
   }
 
@@ -57,11 +61,13 @@ abstract class Token implements Built<Token, TokenBuilder> {
   factory Token([Function(TokenBuilder b) updates]) = _$Token;
 
   Map<String, dynamic> toJson() {
-    return jsonDecode(jsonEncode(serializers.serializeWith(Token.serializer, this)));
+    return jsonDecode(
+        jsonEncode(serializers.serializeWith(Token.serializer, this)));
   }
 
   static Token fromJson(String jsonString) {
-    return serializers.deserializeWith(Token.serializer, json.decode(jsonString)) ??
+    return serializers.deserializeWith(
+            Token.serializer, json.decode(jsonString)) ??
         Token();
   }
 

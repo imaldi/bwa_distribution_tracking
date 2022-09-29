@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-TextStyle whiteText(){
+TextStyle whiteText() {
   return const TextStyle(color: Colors.white);
 }

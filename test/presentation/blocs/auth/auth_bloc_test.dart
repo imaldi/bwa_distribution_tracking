@@ -99,7 +99,8 @@ void main() {
         expect(bloc.state, AuthLoading());
 
         await untilCalled(mockUserLogin.call(any));
-        expect(bloc.state, AuthFailed()..theErrorIs = "${ServerFailure().runtimeType}");
+        expect(bloc.state,
+            AuthFailed(errorMessage: "${ServerFailure().runtimeType}"));
       },
     );
   });

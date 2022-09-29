@@ -29,8 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # state management
-  bloc: ^8.1.0
   # key-value database
   hive: ^2.2.3
   # networking
@@ -39,6 +37,8 @@ dependencies:
   intl: ^0.17.0
   # functional programming classes
   dartz: ^0.10.1
+  # state management
+  flutter_bloc: ^8.1.1
   # check internet connectivity
   data_connection_checker_tv: ^0.3.5-nullsafety
   equatable: ^2.0.5

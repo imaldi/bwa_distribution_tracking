@@ -17,7 +17,6 @@ import 'package:mockito/mockito.dart';
 ])
 import 'auth_repository_impl_test.mocks.dart';
 
-
 void main() {
   late AuthRepositoryImpl repository;
   late MockAuthRemoteDataSource mockRemoteDataSource;
@@ -85,7 +84,6 @@ void main() {
 
         /// act
         final result = await repository.login(tPhone, tPassword);
-        print(result);
 
         /// assert
         verify(mockRemoteDataSource.login(tPhone, tPassword));
