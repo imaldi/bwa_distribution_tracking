@@ -4,5 +4,5 @@ abstract class AuthRemoteDataSource {
   /// Calls the login endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<LoginResponse>? login(String? phone, String? password);
+  Future<LoginResponse> login(String? phone, String? password);
 }

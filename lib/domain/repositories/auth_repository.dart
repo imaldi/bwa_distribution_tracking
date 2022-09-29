@@ -3,7 +3,6 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AuthRepository {
-  // TODO change after test
-  Future<Either<Failure, LoginResponse?>?>? login(String phone, String password);
+  Future<Either<Failure, LoginResponse>> login(String phone, String password);
   // Future<Either<Failure, LoginResponse>> getRandomNumberTrivia();
 }

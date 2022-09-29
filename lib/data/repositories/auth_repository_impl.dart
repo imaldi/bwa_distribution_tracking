@@ -19,7 +19,7 @@ class AuthRepositoryImpl extends AuthRepository {
       required this.networkInfo});
 
   @override
-  Future<Either<Failure, LoginResponse?>?>? login(
+  Future<Either<Failure, LoginResponse>> login(
       String phone, String password) async {
     if(
     (await networkInfo.isConnected) ?? true
