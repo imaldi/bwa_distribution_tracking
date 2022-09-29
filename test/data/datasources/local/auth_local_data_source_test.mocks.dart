@@ -6,6 +6,8 @@
 import 'dart:async' as _i3;
 import 'dart:typed_data' as _i6;
 
+import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart'
+    as _i7;
 import 'package:hive/hive.dart' as _i2;
 import 'package:hive/src/box/default_compaction_strategy.dart' as _i5;
 import 'package:hive/src/box/default_key_comparator.dart' as _i4;
@@ -334,13 +336,13 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
 /// A class which mocks [Box].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
+class MockBox extends _i1.Mock implements _i2.Box<_i7.LoginResponse> {
   @override
-  Iterable<E> get values => (super.noSuchMethod(
+  Iterable<_i7.LoginResponse> get values => (super.noSuchMethod(
         Invocation.getter(#values),
-        returnValue: <E>[],
-        returnValueForMissingStub: <E>[],
-      ) as Iterable<E>);
+        returnValue: <_i7.LoginResponse>[],
+        returnValueForMissingStub: <_i7.LoginResponse>[],
+      ) as Iterable<_i7.LoginResponse>);
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
@@ -384,7 +386,7 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  Iterable<E> valuesBetween({
+  Iterable<_i7.LoginResponse> valuesBetween({
     dynamic startKey,
     dynamic endKey,
   }) =>
@@ -397,26 +399,26 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
             #endKey: endKey,
           },
         ),
-        returnValue: <E>[],
-        returnValueForMissingStub: <E>[],
-      ) as Iterable<E>);
+        returnValue: <_i7.LoginResponse>[],
+        returnValueForMissingStub: <_i7.LoginResponse>[],
+      ) as Iterable<_i7.LoginResponse>);
   @override
-  E? getAt(int? index) => (super.noSuchMethod(
+  _i7.LoginResponse? getAt(int? index) => (super.noSuchMethod(
         Invocation.method(
           #getAt,
           [index],
         ),
         returnValueForMissingStub: null,
-      ) as E?);
+      ) as _i7.LoginResponse?);
   @override
-  Map<dynamic, E> toMap() => (super.noSuchMethod(
+  Map<dynamic, _i7.LoginResponse> toMap() => (super.noSuchMethod(
         Invocation.method(
           #toMap,
           [],
         ),
-        returnValue: <dynamic, E>{},
-        returnValueForMissingStub: <dynamic, E>{},
-      ) as Map<dynamic, E>);
+        returnValue: <dynamic, _i7.LoginResponse>{},
+        returnValueForMissingStub: <dynamic, _i7.LoginResponse>{},
+      ) as Map<dynamic, _i7.LoginResponse>);
   @override
   dynamic keyAt(int? index) => super.noSuchMethod(
         Invocation.method(
@@ -447,7 +449,7 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   @override
   _i3.Future<void> put(
     dynamic key,
-    E? value,
+    _i7.LoginResponse? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -463,7 +465,7 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   @override
   _i3.Future<void> putAt(
     int? index,
-    E? value,
+    _i7.LoginResponse? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -477,7 +479,8 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> putAll(Map<dynamic, E>? entries) => (super.noSuchMethod(
+  _i3.Future<void> putAll(Map<dynamic, _i7.LoginResponse>? entries) =>
+      (super.noSuchMethod(
         Invocation.method(
           #putAll,
           [entries],
@@ -486,7 +489,7 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<int> add(E? value) => (super.noSuchMethod(
+  _i3.Future<int> add(_i7.LoginResponse? value) => (super.noSuchMethod(
         Invocation.method(
           #add,
           [value],
@@ -495,7 +498,8 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
         returnValueForMissingStub: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
   @override
-  _i3.Future<Iterable<int>> addAll(Iterable<E>? values) => (super.noSuchMethod(
+  _i3.Future<Iterable<int>> addAll(Iterable<_i7.LoginResponse>? values) =>
+      (super.noSuchMethod(
         Invocation.method(
           #addAll,
           [values],

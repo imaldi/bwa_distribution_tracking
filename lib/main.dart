@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'injection_container.dart' as di;
 
 import 'core/routes/app_router.gr.dart';
 
 /// Entry Point
-void main() {
+void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // /// Hive init
-  // final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
-  // Hive.init(appDocumentDir.path);
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  await di.init();
   runApp(RootWidget());
 }
 

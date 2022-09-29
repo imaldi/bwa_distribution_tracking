@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../fixtures/fixture_reader.dart';
 @GenerateNiceMocks([
   MockSpec<HiveInterface>(),
-  MockSpec<Box>(),
+  MockSpec<Box<LoginResponse>>(),
 ])
 import 'auth_local_data_source_test.mocks.dart';
 
@@ -22,10 +22,19 @@ void main() {
   late MockBox mockHiveBox;
 
   setUp(() {
+    final tLoginResponse =
+    LoginResponse.fromJson(fixture('login_response.json'));
     mockHiveBox = MockBox();
     mockHiveInterface = MockHiveInterface();
     mockHiveInterface.openBox(authBoxKey);
-    dataSource = AuthLocalDataSourceImpl(hiveInterface: mockHiveInterface);
+    when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
+            (realInvocation) async => mockHiveBox
+    );
+    when(mockHiveBox.containsKey(cachedLoginResponse)).thenReturn(true);
+    // when(mockHiveBox.get(cachedLoginResponse)).thenAnswer(
+    //         (realInvocation) async => tLoginResponse.toJson());
+
+    dataSource = AuthLocalDataSourceImpl(authBox: mockHiveBox);
     // cacheException = MockCacheException();
   });
   group('cacheLoginResponse', () {
@@ -36,14 +45,13 @@ void main() {
     test('should call put() to cache the data', () async {
       /// arrange
       /// pastikan sudah openBox
-      when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
-              (realInvocation) async => mockHiveBox
-      );
+      // when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
+      //         (realInvocation) async => mockHiveBox
+      // );
       /// act
       await dataSource.cacheLoginResponse(tLoginResponse);
       /// assert
-      final expectedJsonString = tLoginResponse.toJson();
-      verify(mockHiveBox.put(cachedLoginResponse, expectedJsonString));
+      verify(mockHiveBox.put(cachedLoginResponse, tLoginResponse));
     });
   });
 
@@ -54,11 +62,11 @@ void main() {
     test('should return LoginResponse from Hive when there is one in the cache', () async {
       /// arrange
       /// Ketika panggil mockHiveInterface.openBox(any), return mockHiveBox
-      when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
-              (realInvocation) async => mockHiveBox
-      );
+      // when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
+      //         (realInvocation) async => mockHiveBox
+      // );
       when(mockHiveBox.get(cachedLoginResponse))
-          .thenAnswer((realInvocation) async => tLoginResponse.toJson());
+          .thenAnswer((realInvocation) => tLoginResponse);
       /// ini untuk bypass if nya, karena belum tentu sudah put
       when(mockHiveBox.containsKey(cachedLoginResponse))
           .thenAnswer((_) => true);
@@ -74,9 +82,9 @@ void main() {
     test('should throw a CacheException when there is not a cached value',(){
       /// arrange
       /// Ketika panggil mockHiveInterface.openBox(any), return mockHiveBox
-      when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
-              (realInvocation) async => mockHiveBox
-      );
+      // when(mockHiveInterface.openBox(authBoxKey)).thenAnswer(
+      //         (realInvocation) async => mockHiveBox
+      // );
       /// ini untuk bypass if nya, karena belum tentu sudah put
       when(mockHiveBox.containsKey(cachedLoginResponse))
           .thenAnswer((_) => false);

@@ -15,47 +15,24 @@ abstract class AuthLocalDataSource {
   Future<void> cacheLoginResponse(LoginResponse loginResponse);
 }
 
-// TODO open box in main() later
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
-  // final SharedPreferences sharedPreferences;
-  final HiveInterface hiveInterface;
-  // box = Hive.box('myBox');
+  final Box authBox;
 
-  AuthLocalDataSourceImpl({required this.hiveInterface});
-
-  // factory AuthLocalDataSourceImpl.withExternalSharedPref(SharedPreferences sharedPreferences){
-  //   return  AuthLocalDataSourceImpl(sharedPreferences: sharedPreferences);
-  // }
-
-  // @override
-  // Future<AuthModel> getLastAuth() {
-  //   final jsonString = sharedPreferences.getString(cachedAuth);
-  //   if(jsonString != null){
-  //     return Future.value(
-  //         AuthModel.fromJson(json.decode(jsonString)));
-  //   } else {
-  //     throw CacheException();
-  //   }
-  // }
-  //
-  // @override
-  // Future<void> cacheAuth(AuthModel triviaToCache) {
-  //   return sharedPreferences.setString(cachedAuth, json.encode(triviaToCache.toJson()));
-  // }
+  AuthLocalDataSourceImpl({
+    required this.authBox,
+  });
 
   @override
   Future<void> cacheLoginResponse(LoginResponse loginResponse) async {
-    var box = await hiveInterface.openBox(authBoxKey);
-    await box.put(cachedLoginResponse, loginResponse.toJson());
+    await authBox.put(cachedLoginResponse, loginResponse);
   }
 
   @override
   Future<LoginResponse> getCachedLogin() async {
-    var box = await hiveInterface.openBox(authBoxKey);
-    if(box.containsKey(cachedLoginResponse)){
-      final Map<String, dynamic>? jsonString = await box.get(cachedLoginResponse);
-      return Future.value(
-          LoginResponse.fromJson(json.encode(jsonString)));
+    if (authBox.containsKey(cachedLoginResponse)) {
+      final LoginResponse response = await authBox.get(cachedLoginResponse);
+      return response;
+      // return Future.value(response);
     } else {
       throw CacheException();
     }

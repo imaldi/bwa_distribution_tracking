@@ -4,18 +4,25 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:bwa_distribution_tracking/core/resources/consts/hive_type_id.dart';
 import '../../data/models/user_model.bv.dart';
 import '../../core/resources/serializers/serializers.bv.dart';
+import 'package:hive/hive.dart';
 
 part 'login_response.bv.g.dart';
 
+@HiveType(typeId: loginResponseTypeId)
 abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
   // class field here
   // String? get aField;
+  @HiveField(0)
   @BuiltValueField(wireName: '0')
   int? get responseCode;
+  @HiveField(1)
   bool? get success;
+  @HiveField(2)
   Token? get token;
+  @HiveField(3)
   UserModel? get user;
 
   LoginResponse._();
@@ -38,9 +45,11 @@ abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilde
   static Serializer<LoginResponse> get serializer => _$loginResponseSerializer;
 }
 
+@HiveType(typeId: tokenTypeId)
 abstract class Token implements Built<Token, TokenBuilder> {
   // class field here
   // @BuiltValueField(wireName: 'a_field')
+  @HiveField(0)
   String? get token;
 
   Token._();

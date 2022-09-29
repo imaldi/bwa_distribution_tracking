@@ -4,22 +4,31 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:bwa_distribution_tracking/core/resources/consts/hive_type_id.dart';
 import 'package:bwa_distribution_tracking/domain/entities/user_entity.dart';
 import '../../core/resources/serializers/serializers.bv.dart';
+import 'package:hive/hive.dart';
 
 part 'user_model.bv.g.dart';
 
+@HiveType(typeId: userTypeId)
 abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilder> {
   // class field here
   // @BuiltValueField(wireName: 'a_field')
+  @HiveField(0)
   @override
   int? get id;
 
+  @HiveField(1)
   @override
   String? get name;
 
+  @HiveField(2)
   @override
   String? get phone;
+
+  // @override
+  // int? get typeId;
 
 
 
@@ -27,6 +36,10 @@ abstract class UserModel implements UserEntity, Built<UserModel, UserModelBuilde
   UserModel._();
 
   factory UserModel([Function(UserModelBuilder b) updates]) = _$UserModel;
+
+  // static void _initializeBuilder(UserModelBuilder builder) => builder
+  //   ..typeId = 0
+  // ;
 
   Map<String, dynamic> toJson() {
     return jsonDecode(jsonEncode(serializers.serializeWith(UserModel.serializer, this)));
