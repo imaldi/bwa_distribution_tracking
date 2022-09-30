@@ -6,6 +6,7 @@ import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/pages/home_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/custom_expanded/single_child_expanded_row.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,22 +16,32 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../widgets/text_form_field/no_underline_text_form_field.dart';
 
-class LoginScreen extends StatefulWidget implements AutoRouteWrapper {
+class LoginScreen extends StatefulWidget
+    // implements AutoRouteWrapper
+{
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(create: (context) =>   sl<AuthBloc>(), child: this,);
-  }
+  // @override
+  // Widget wrappedRoute(BuildContext context) {
+  //   return BlocProvider(create: (context) =>   sl<AuthBloc>(), child: this,);
+  // }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var phone = "085780907168";
+  var password = "bwa123Password";
+  late TextEditingController phoneTEC;
+  late TextEditingController passwordTEC;
   @override
   void initState() {
     super.initState();
+    phone = "085780907168";
+    password = "bwa123Password";
+    phoneTEC = TextEditingController(text: phone);
+    passwordTEC = TextEditingController(text: password);
     sl<AuthBloc>().add(const GetCachedLoginEvent());
   }
 
@@ -91,14 +102,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               RoundedContainer(
                                 sizeNormal,
                                 child: NoUnderlineTextFormField(
-                                  controller: TextEditingController(
-                                      text: "085780907168"),
+                                  controller: phoneTEC,
                                   onTap: () {},
+                                  onChanged: (val){
+                                    setState(() {
+                                      phone = val;
+                                    });
+                                  },
+                                  keyboardType: TextInputType.phone,
                                   decoration: const InputDecoration(
                                       hintStyle: TextStyle(
                                           color: Color(0xFFC5C5C5),
                                           fontStyle: FontStyle.italic),
-                                      hintText: "Masukkan No Hp"),
+                                      hintText: "Masukkan No Hp",
+                                  ),
                                 ),
                               ),
                               const CustomText(
@@ -108,9 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               RoundedContainer(
                                 sizeNormal,
                                 child: NoUnderlineTextFormField(
-                                  controller: TextEditingController(
-                                      text: "bwa123Password"),
+                                  controller: passwordTEC,
                                   onTap: () {},
+                                  onChanged: (val){
+                                    setState(() {
+                                      password = val;
+                                    });
+                                  },
                                   obscureText: true,
                                   decoration: const InputDecoration(
                                       hintStyle: TextStyle(
@@ -134,9 +155,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if (state is AuthFailed) {
                                           myToast("Gagal Login");
                                         } else if (state is AuthSuccess) {
-                                          context.router
-                                              .push(const HomeRoute());
-                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                                          // context.router
+                                          //     .push(const HomeRoute());
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
                                         } else if(state is AuthSuccess){
                                           print("BlocConsumer loaded: ${state.loginResponse}");
                                         }
@@ -151,16 +172,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                         print("BlocConsumer.builder: ${state.runtimeType}");
 
                                         if (state is AuthLoading) {
-                                          return const CircularProgressIndicator();
+                                          return Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: const [
+                                              SizedBox(child: CircularProgressIndicator()),
+                                            ],
+                                          );
                                         }
                                         return ElevatedButton(
                                             onPressed: () {
                                               BlocProvider.of<AuthBloc>(
                                                       context)
                                                   .add(
-                                                      const UserLoginAuthEvent(
-                                                          "085780907168",
-                                                          "bwa123Password"));
+                                                      UserLoginAuthEvent(
+                                                          phone,
+                                                          password));
                                             },
                                             style: ElevatedButton.styleFrom(
                                               primary: Colors.white,

@@ -1,11 +1,9 @@
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'injection_container.dart' as di;
-// import 'package:path_provider/path_provider.dart' as path_provider;
-
-import 'core/routes/app_router.gr.dart';
 import 'injection_container.dart';
 
 /// Entry Point
@@ -18,7 +16,7 @@ void main() async {
 class RootWidget extends StatelessWidget {
   // make sure you don't initiate your router
   // inside of the build function.
-  final _appRouter = AppRouter();
+  // final _appRouter = AppRouter();
 
   RootWidget({Key? key}) : super(key: key);
 
@@ -28,9 +26,11 @@ class RootWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: sl<AuthBloc>(),
-      child: MaterialApp.router(
-        routerDelegate: _appRouter.delegate(),
-        routeInformationParser: _appRouter.defaultRouteParser(),
+      child: MaterialApp
+          // .router
+        (
+        // routerDelegate: _appRouter.delegate(),
+        // routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'BWA Distribution Tracking',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -46,7 +46,7 @@ class RootWidget extends StatelessWidget {
             )),
 
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        // home: const LoginScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

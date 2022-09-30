@@ -25,6 +25,9 @@ class AuthRepositoryImpl extends AuthRepository {
 
     try {
       final remoteTrivia = await authRemoteDataSource.login(phone, password);
+      print("Repo data:");
+      print("Phone: $phone");
+      print("Password: $password");
       authLocalDataSource.cacheLoginResponse(remoteTrivia);
       return Right(remoteTrivia);
     } on ServerException {

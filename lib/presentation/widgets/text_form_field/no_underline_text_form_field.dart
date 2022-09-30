@@ -6,12 +6,14 @@ class NoUnderlineTextFormField extends StatelessWidget {
     this.decoration = const InputDecoration(),
     this.obscureText = false,
     this.controller,
-    Key? key,
+    Key? key, this.keyboardType, this.onChanged,
   }) : super(key: key);
   final Function()? onTap;
   final InputDecoration decoration;
   final bool obscureText;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,13 @@ class NoUnderlineTextFormField extends StatelessWidget {
       controller: controller,
       onTap: onTap,
       obscureText: obscureText,
+      keyboardType: keyboardType,
       decoration: decoration.copyWith(
         focusedBorder: InputBorder.none,
         enabledBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
       ),
+      onChanged: onChanged,
     );
   }
 }
