@@ -21,6 +21,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+    sl<AuthBloc>().add(const GetCachedLoginEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,13 +124,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                             BlocConsumer<AuthBloc, AuthState>(
                                                 listener: (lc, state) {
                                           print(
-                                              "BlocConsumer.listener: ${state.runtimeType}");
+                                              "BlocConsumer.listener: ${state.toString()}");
                                           // Call Toast Here when Failed
                                           if (state is AuthFailed) {
                                             myToast("Gagal Login");
                                           } else if (state is AuthLoaded) {
                                             context.router
                                                 .push(const HomeRoute());
+                                          } else if(state is AuthLoaded){
+                                            print("BlocConsumer loaded: ${state.loginResponse}");
                                           }
                                           // if (state is AuthInitial) {
                                           //   print("state is AuthInitial in listener");
@@ -135,15 +142,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           //           "", ""));
                                           // }
                                         }, builder: (context, state) {
-                                          print(
-                                              "BlocConsumer.builder: ${state.runtimeType}");
+                                          print("BlocConsumer.builder: ${state.runtimeType}");
 
                                           if (state is AuthLoading) {
                                             return const CircularProgressIndicator();
-                                          } else if (state is AuthInitial) {
-                                            BlocProvider.of<AuthBloc>(context).add(
-                                                const UserLoginAuthEvent(
-                                                    "", ""));
                                           }
                                           return ElevatedButton(
                                               onPressed: () {

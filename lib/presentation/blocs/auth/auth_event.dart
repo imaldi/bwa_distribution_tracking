@@ -5,6 +5,7 @@ abstract class AuthEvent extends Equatable {
 }
 
 class GetCachedLoginEvent extends AuthEvent {
+  const GetCachedLoginEvent();
   @override
   List<Object?> get props => [];
 }

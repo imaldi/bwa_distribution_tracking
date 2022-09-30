@@ -7,10 +7,13 @@ import 'dart:async' as _i5;
 
 import 'package:bwa_distribution_tracking/core/error/failures.dart' as _i6;
 import 'package:bwa_distribution_tracking/core/params/login_params.dart' as _i8;
+import 'package:bwa_distribution_tracking/core/params/no_params.dart' as _i10;
 import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart'
     as _i7;
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart'
     as _i2;
+import 'package:bwa_distribution_tracking/domain/usecases/check_user_login_status.dart'
+    as _i9;
 import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart'
     as _i4;
 import 'package:dartz/dartz.dart' as _i3;
@@ -67,6 +70,52 @@ class MockUserLoginUseCase extends _i1.Mock implements _i4.UserLoginUseCase {
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>> call(
           _i8.LoginParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>>.value(
+                _FakeEither_1<_i6.Failure, _i7.LoginResponse>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>>.value(
+                _FakeEither_1<_i6.Failure, _i7.LoginResponse>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>>);
+}
+
+/// A class which mocks [CheckUserLoginStatusUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCheckUserLoginStatusUseCase extends _i1.Mock
+    implements _i9.CheckUserLoginStatusUseCase {
+  @override
+  _i2.AuthRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeAuthRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeAuthRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.AuthRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>> call(
+          _i10.NoParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,

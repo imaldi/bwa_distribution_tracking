@@ -6,11 +6,13 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -23,11 +25,17 @@ Future<void> init() async {
 
   /// Features - Number Trivia
   //Bloc
-  sl.registerFactory(
-    () => AuthBloc(
+  sl.registerLazySingleton(
+      () => AuthBloc(
       userLogin: sl(),
+      checkUserLoginStatusUseCase: sl(),
     ),
   );
+  // sl.registerFactory(
+  //       () => AuthBloc(
+  //     userLogin: sl(),
+  //   ),
+  // );
 
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
@@ -49,6 +57,7 @@ Future<void> init() async {
 
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
+  sl.registerLazySingleton(() => CheckUserLoginStatusUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -63,4 +72,23 @@ Future<void> init() async {
   sl.registerLazySingleton(() => authBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
+
+  /// Permission
+  var statusCamera = await Permission.camera.status;
+  var statusStorage = await Permission.storage.status;
+  if (statusCamera.isDenied) {
+    await Permission.camera.request();
+    // We didn't ask for permission yet or the permission has been denied before but not permanently.
+  }
+  if (await Permission.camera.isPermanentlyDenied) {
+    openAppSettings();
+  }
+  if (statusStorage.isDenied) {
+    await Permission.storage.request();
+  }
+
+  if (await Permission.manageExternalStorage.status.isDenied ||
+      await Permission.manageExternalStorage.isPermanentlyDenied) {
+    await Permission.manageExternalStorage.request();
+  }
 }

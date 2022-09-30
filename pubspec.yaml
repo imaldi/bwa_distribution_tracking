@@ -50,6 +50,7 @@ dependencies:
   flutter_svg: ^1.1.5
   get_it: ^7.2.0
   path_provider: ^2.0.11
+  permission_handler: ^9.2.0
 #  injectable: ^1.5.3
 
 

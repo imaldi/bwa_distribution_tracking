@@ -28,6 +28,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
+      print("Response body: ${response.body}");
       return LoginResponse.fromJson(response.body);
     } else {
       throw ServerException();

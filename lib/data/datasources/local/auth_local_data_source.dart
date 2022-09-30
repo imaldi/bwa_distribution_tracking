@@ -10,8 +10,6 @@ abstract class AuthLocalDataSource {
   /// Throws [NoLocalDataException] if no cached data is present.
   Future<LoginResponse> getCachedLogin();
 
-  Future<LoginResponse?> getCachedLoginOrNull();
-
   Future<void> cacheLoginResponse(LoginResponse loginResponse);
 }
 
@@ -29,17 +27,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<LoginResponse> getCachedLogin() async {
-    final response = await getCachedLoginOrNull();
-    if (response == null) throw CacheException();
-    // TODO: if (!response.isValid) throw CacheInvalid();
-    return response;
-  }
-
-  @override
-  Future<LoginResponse?> getCachedLoginOrNull() async {
-    if (!authBox.containsKey(cachedLoginResponse)) {
-      return null;
+    if (authBox.containsKey(cachedLoginResponse)) {
+      final LoginResponse response = await authBox.get(cachedLoginResponse);
+      return response;
+      // return Future.value(response);
+    } else {
+      throw CacheException();
     }
-    return authBox.get(cachedLoginResponse);
   }
 }

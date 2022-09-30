@@ -30,3 +30,14 @@ class AuthFailed extends AuthState {
   @override
   List<Object?> get props => [errorMessage];
 }
+
+class AuthNoCachedData extends AuthState {
+  final String errorMessage;
+
+  get debug => "The Error is: $errorMessage";
+
+  AuthNoCachedData({this.errorMessage = "Unspecified Error"});
+
+  @override
+  List<Object?> get props => [errorMessage];
+}
