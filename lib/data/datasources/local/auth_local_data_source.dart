@@ -11,6 +11,8 @@ abstract class AuthLocalDataSource {
   Future<LoginResponse> getCachedLogin();
 
   Future<void> cacheLoginResponse(LoginResponse loginResponse);
+
+  Future<void> deleteCachedLogin();
 }
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
@@ -34,5 +36,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     } else {
       throw CacheException();
     }
+  }
+
+  @override
+  Future<void> deleteCachedLogin() async {
+      authBox.delete(cachedLoginResponse);
   }
 }

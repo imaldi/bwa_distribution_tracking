@@ -2,8 +2,9 @@ import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/core/params/login_params.dart';
 import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
-import 'package:bwa_distribution_tracking/domain/usecases/check_user_login_status.dart';
-import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +14,7 @@ import 'package:mockito/annotations.dart';
 @GenerateNiceMocks([
   MockSpec<UserLoginUseCase>(),
   MockSpec<CheckUserLoginStatusUseCase>(),
+  MockSpec<UserLogoutUseCase>(),
 ])
 import 'auth_bloc_test.mocks.dart';
 
@@ -20,15 +22,18 @@ void main() {
   late AuthBloc bloc;
   late MockUserLoginUseCase mockUserLogin;
   late MockCheckUserLoginStatusUseCase mockCheckUserLoginStatusUseCase;
+  late MockUserLogoutUseCase mockUserLogout;
 
   /// TODO test mockCheckUserLoginStatusUseCase
   setUp(() {
     mockUserLogin = MockUserLoginUseCase();
     mockCheckUserLoginStatusUseCase = MockCheckUserLoginStatusUseCase();
+    mockUserLogout = MockUserLogoutUseCase();
 
     bloc = AuthBloc(
       userLogin: mockUserLogin,
-      checkUserLoginStatusUseCase: mockCheckUserLoginStatusUseCase
+      checkUserLoginStatusUseCase: mockCheckUserLoginStatusUseCase,
+      userLogout: mockUserLogout
     );
   });
 
@@ -86,7 +91,7 @@ void main() {
         expect(bloc.state, AuthLoading());
 
         await untilCalled(mockUserLogin.call(any));
-        expect(bloc.state, AuthLoaded(loginResponse: tLoginResponse));
+        expect(bloc.state, AuthSuccess(loginResponse: tLoginResponse));
       },
     );
 

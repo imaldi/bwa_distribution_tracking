@@ -12,9 +12,9 @@ class AuthLoading extends AuthState {
   List<Object?> get props => [];
 }
 
-class AuthLoaded extends AuthState {
+class AuthSuccess extends AuthState {
   final LoginResponse loginResponse;
-  AuthLoaded({required this.loginResponse});
+  AuthSuccess({required this.loginResponse});
 
   @override
   List<Object?> get props => [loginResponse];
@@ -40,4 +40,10 @@ class AuthNoCachedData extends AuthState {
 
   @override
   List<Object?> get props => [errorMessage];
+}
+
+class AuthLoggedOut extends AuthState {
+  @override
+  List<Object?> get props => [];
+
 }

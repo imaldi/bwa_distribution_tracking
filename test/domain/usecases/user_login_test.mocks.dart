@@ -44,23 +44,6 @@ class MockMockAuthRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>> getCachedLogin() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getCachedLogin,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>>.value(
-                _FakeEither_0<_i5.Failure, _i6.LoginResponse>(
-          this,
-          Invocation.method(
-            #getCachedLogin,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>>);
-  @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>> login(
     String? phone,
     String? password,
@@ -86,4 +69,36 @@ class MockMockAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>> getCachedLogin() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCachedLogin,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>>.value(
+                _FakeEither_0<_i5.Failure, _i6.LoginResponse>(
+          this,
+          Invocation.method(
+            #getCachedLogin,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.LoginResponse>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, bool>> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
 }

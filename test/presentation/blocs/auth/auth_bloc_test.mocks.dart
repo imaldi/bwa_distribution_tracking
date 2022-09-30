@@ -12,10 +12,12 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart'
     as _i7;
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart'
     as _i2;
-import 'package:bwa_distribution_tracking/domain/usecases/check_user_login_status.dart'
+import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart'
     as _i9;
-import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart'
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart'
     as _i4;
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart'
+    as _i11;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -140,4 +142,47 @@ class MockCheckUserLoginStatusUseCase extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i7.LoginResponse>>);
+}
+
+/// A class which mocks [UserLogoutUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserLogoutUseCase extends _i1.Mock implements _i11.UserLogoutUseCase {
+  @override
+  _i2.AuthRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeAuthRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeAuthRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.AuthRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, void>> call(_i10.NoParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, void>>.value(
+            _FakeEither_1<_i6.Failure, void>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, void>>.value(
+                _FakeEither_1<_i6.Failure, void>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, void>>);
 }

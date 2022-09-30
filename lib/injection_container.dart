@@ -6,8 +6,9 @@ import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
-import 'package:bwa_distribution_tracking/domain/usecases/check_user_login_status.dart';
-import 'package:bwa_distribution_tracking/domain/usecases/user_login.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,12 @@ Future<void> init() async {
 
   /// Features - Number Trivia
   //Bloc
+  /// only Auth login will be initialized as singleton
   sl.registerLazySingleton(
       () => AuthBloc(
       userLogin: sl(),
       checkUserLoginStatusUseCase: sl(),
+      userLogout: sl(),
     ),
   );
   // sl.registerFactory(
@@ -58,6 +61,7 @@ Future<void> init() async {
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
   sl.registerLazySingleton(() => CheckUserLoginStatusUseCase(sl()));
+  sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

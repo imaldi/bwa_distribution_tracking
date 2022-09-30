@@ -41,4 +41,14 @@ class AuthRepositoryImpl extends AuthRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> logout() async {
+    try{
+      await authLocalDataSource.deleteCachedLogin();
+      return const Right(true);
+    } on CacheException {
+      return Left(CacheFailure());
+    }
+  }
 }

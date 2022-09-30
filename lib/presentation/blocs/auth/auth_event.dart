@@ -24,6 +24,7 @@ class UserLoginAuthEvent extends AuthEvent {
 }
 
 class UserLogoutAuthEvent extends AuthEvent {
+  const UserLogoutAuthEvent();
   @override
   List<Object?> get props => [];
 }
