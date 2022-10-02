@@ -44,11 +44,10 @@ abstract class UserModel
         jsonEncode(serializers.serializeWith(UserModel.serializer, this)));
   }
 
-  static UserModel fromJson(String jsonString) {
-    return serializers.deserializeWith(
-            UserModel.serializer, json.decode(jsonString)) ??
-        UserModel();
-  }
+  static UserModel fromJson(String jsonString) =>
+      serializers.deserializeWith(
+          UserModel.serializer, json.decode(jsonString)) ??
+      UserModel();
 
   static Serializer<UserModel> get serializer => _$userModelSerializer;
 }

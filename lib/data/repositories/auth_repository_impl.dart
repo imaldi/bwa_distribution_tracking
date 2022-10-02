@@ -21,13 +21,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, LoginResponse>> login(
       String phone, String password) async {
-    if(! (await networkInfo.isConnected)) return Left(NoInternetFailure());
+    if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
 
     try {
       final remoteTrivia = await authRemoteDataSource.login(phone, password);
-      print("Repo data:");
-      print("Phone: $phone");
-      print("Password: $password");
       authLocalDataSource.cacheLoginResponse(remoteTrivia);
       return Right(remoteTrivia);
     } on ServerException {
@@ -37,7 +34,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<Either<Failure, LoginResponse>> getCachedLogin() async {
-    try{
+    try {
       final localTrivia = await authLocalDataSource.getCachedLogin();
       return Right(localTrivia);
     } on CacheException {
@@ -47,7 +44,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<Either<Failure, bool>> logout() async {
-    try{
+    try {
       await authLocalDataSource.deleteCachedLogin();
       return const Right(true);
     } on CacheException {

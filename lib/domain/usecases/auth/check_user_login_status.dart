@@ -13,5 +13,4 @@ class CheckUserLoginStatusUseCase extends UseCase<LoginResponse, NoParams> {
   Future<Either<Failure, LoginResponse>> call(NoParams params) async {
     return await repository.getCachedLogin();
   }
-
 }

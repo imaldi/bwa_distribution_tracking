@@ -40,6 +40,6 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> deleteCachedLogin() async {
-      authBox.delete(cachedLoginResponse);
+    authBox.delete(cachedLoginResponse);
   }
 }

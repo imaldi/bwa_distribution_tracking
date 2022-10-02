@@ -23,13 +23,13 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   /// Features - Number Trivia
   //Bloc
   /// only Auth login will be initialized as singleton
   sl.registerLazySingleton(
-      () => AuthBloc(
+    () => AuthBloc(
       userLogin: sl(),
       checkUserLoginStatusUseCase: sl(),
       userLogout: sl(),

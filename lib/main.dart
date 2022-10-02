@@ -20,7 +20,6 @@ class RootWidget extends StatelessWidget {
 
   RootWidget({Key? key}) : super(key: key);
 
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class RootWidget extends StatelessWidget {
       value: sl<AuthBloc>(),
       child: MaterialApp
           // .router
-        (
+          (
         // routerDelegate: _appRouter.delegate(),
         // routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'BWA Distribution Tracking',
@@ -37,7 +36,8 @@ class RootWidget extends StatelessWidget {
             primarySwatch: Colors.blue,
 
             /// Mengubah font global menjadi 'Poppins'
-            textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+            textTheme:
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
 
             /// Mengubah padding Text Form Field menjadi default bernilai 0
             inputDecorationTheme: const InputDecorationTheme(

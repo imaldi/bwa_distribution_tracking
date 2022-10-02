@@ -17,7 +17,7 @@ import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../widgets/text_form_field/no_underline_text_form_field.dart';
 
 class LoginScreen extends StatefulWidget
-    // implements AutoRouteWrapper
+// implements AutoRouteWrapper
 {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -104,17 +104,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: NoUnderlineTextFormField(
                                   controller: phoneTEC,
                                   onTap: () {},
-                                  onChanged: (val){
+                                  onChanged: (val) {
                                     setState(() {
                                       phone = val;
                                     });
                                   },
                                   keyboardType: TextInputType.phone,
                                   decoration: const InputDecoration(
-                                      hintStyle: TextStyle(
-                                          color: Color(0xFFC5C5C5),
-                                          fontStyle: FontStyle.italic),
-                                      hintText: "Masukkan No Hp",
+                                    hintStyle: TextStyle(
+                                        color: Color(0xFFC5C5C5),
+                                        fontStyle: FontStyle.italic),
+                                    hintText: "Masukkan No Hp",
                                   ),
                                 ),
                               ),
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: NoUnderlineTextFormField(
                                   controller: passwordTEC,
                                   onTap: () {},
-                                  onChanged: (val){
+                                  onChanged: (val) {
                                     setState(() {
                                       password = val;
                                     });
@@ -146,9 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: sizeMedium),
-                                      child:
-                                          BlocConsumer<AuthBloc, AuthState>(
-                                              listener: (lc, state) {
+                                      child: BlocConsumer<AuthBloc, AuthState>(
+                                          listener: (lc, state) {
                                         print(
                                             "BlocConsumer.listener: ${state.toString()}");
                                         // Call Toast Here when Failed
@@ -157,9 +156,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         } else if (state is AuthSuccess) {
                                           // context.router
                                           //     .push(const HomeRoute());
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-                                        } else if(state is AuthSuccess){
-                                          print("BlocConsumer loaded: ${state.loginResponse}");
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomeScreen()));
+                                        } else if (state is AuthSuccess) {
+                                          print(
+                                              "BlocConsumer loaded: ${state.loginResponse}");
                                         }
                                         // if (state is AuthInitial) {
                                         //   print("state is AuthInitial in listener");
@@ -169,24 +173,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                         //           "", ""));
                                         // }
                                       }, builder: (bc, state) {
-                                        print("BlocConsumer.builder: ${state.runtimeType}");
+                                        print(
+                                            "BlocConsumer.builder: ${state.runtimeType}");
 
                                         if (state is AuthLoading) {
                                           return Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: const [
-                                              SizedBox(child: CircularProgressIndicator()),
+                                              SizedBox(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                color: Colors.white,
+                                              )),
                                             ],
                                           );
                                         }
                                         return ElevatedButton(
                                             onPressed: () {
-                                              BlocProvider.of<AuthBloc>(
-                                                      context)
-                                                  .add(
-                                                      UserLoginAuthEvent(
-                                                          phone,
-                                                          password));
+                                              BlocProvider.of<AuthBloc>(context)
+                                                  .add(UserLoginAuthEvent(
+                                                      phone, password));
                                             },
                                             style: ElevatedButton.styleFrom(
                                               primary: Colors.white,
@@ -198,8 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             child: const Text("Log In",
                                                 style: TextStyle(
-                                                    color:
-                                                        Color(0xFF009DDD))));
+                                                    color: Color(0xFF009DDD))));
                                       }),
                                     ),
                                   ),

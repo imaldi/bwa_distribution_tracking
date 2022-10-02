@@ -19,10 +19,13 @@ abstract class LoginResponse
   @HiveField(0)
   @BuiltValueField(wireName: '0')
   int? get responseCode;
+
   @HiveField(1)
   bool? get success;
+
   @HiveField(2)
   Token? get token;
+
   @HiveField(3)
   UserModel? get user;
 
@@ -35,6 +38,7 @@ abstract class LoginResponse
   //   ..isLoading = false
   //   ..isFailed = false
   // ;
+
   Map<String, dynamic> toJson() {
     return jsonDecode(
         jsonEncode(serializers.serializeWith(LoginResponse.serializer, this)));

@@ -45,5 +45,4 @@ class AuthNoCachedData extends AuthState {
 class AuthLoggedOut extends AuthState {
   @override
   List<Object?> get props => [];
-
 }

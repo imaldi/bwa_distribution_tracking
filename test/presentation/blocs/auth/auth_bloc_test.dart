@@ -31,10 +31,9 @@ void main() {
     mockUserLogout = MockUserLogoutUseCase();
 
     bloc = AuthBloc(
-      userLogin: mockUserLogin,
-      checkUserLoginStatusUseCase: mockCheckUserLoginStatusUseCase,
-      userLogout: mockUserLogout
-    );
+        userLogin: mockUserLogin,
+        checkUserLoginStatusUseCase: mockCheckUserLoginStatusUseCase,
+        userLogout: mockUserLogout);
   });
 
   test('initialState should be Empty', () {
