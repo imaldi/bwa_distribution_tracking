@@ -6,11 +6,16 @@ const List<Color> primaryGradientColor = [
   primaryGreen,
 ];
 
+const List<Color> primaryGradientColorTransparent = [
+  primaryBlueTransparent,
+  primaryGreenTransparent,
+];
+
 Gradient basicLinearGradient() {
   return const LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: primaryGradientColor);
+      colors: primaryGradientColorTransparent);
 }
 
 Gradient basicDiagonalGradient() {
