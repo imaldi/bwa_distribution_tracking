@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:bwa_distribution_tracking/core/error/failures.dart' as _i5;
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart'
+import 'package:bwa_distribution_tracking/data/models/login_response.dart'
     as _i6;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;

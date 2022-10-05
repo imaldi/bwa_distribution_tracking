@@ -154,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           // Call Toast Here when Failed
                                           if (state is AuthFailed) {
                                             myToast("Gagal Login");
-                                          } else if (state is AuthSuccess) {
+                                          }
+                                          if (state is AuthSuccess) {
                                             context.router
                                                 .replace(const HomeRoute());
                                             // Navigator.pushReplacement(
@@ -185,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 BlocProvider.of<AuthBloc>(context)
                                                     .add(UserLoginAuthEvent(
                                                         phone, password));
+                                                print("Tombol login ok");
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 primary: Colors.white,

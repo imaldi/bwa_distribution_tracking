@@ -1,7 +1,7 @@
 import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/core/params/login_params.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';

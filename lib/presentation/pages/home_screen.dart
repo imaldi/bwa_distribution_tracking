@@ -2,9 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/pages/login_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
-import 'package:bwa_distribution_tracking/presentation/widgets/custom_expanded/single_child_expanded_row.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -58,11 +56,12 @@ class HomeScreen extends StatelessWidget {
                                 Container(
                                   // color: primaryGreen,
                                   height: orientedHeightScreen(context,
-                                      portraitRatio: 0.20, landscapeRatio: 0.20),
+                                      portraitRatio: 0.20,
+                                      landscapeRatio: 0.20),
                                   child: FittedBox(
                                     child: Column(
-                                      children: const [
-                                        Center(
+                                      children: [
+                                        const Center(
                                           child: FittedBox(
                                             child: Icon(
                                               Icons.account_circle,
@@ -70,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        FittedBox(
+                                        const FittedBox(
                                           child: CustomText(
                                             "SELAMAT DATANG PETUGAS",
                                             color: Colors.white,
@@ -78,11 +77,15 @@ class HomeScreen extends StatelessWidget {
                                             weight: FontWeight.w700,
                                           ),
                                         ),
-                                        FittedBox(
-                                            child: CustomText(
-                                          "Mamat Untung",
-                                          color: Colors.white,
-                                          size: sizeHuge,
+                                        FittedBox(child:
+                                            BlocBuilder<AuthBloc, AuthState>(
+                                          builder: (context, state) {
+                                            return CustomText(
+                                              (state is AuthSuccess) ? "${state.loginResponse.user?.name}": "Guest User",
+                                              color: Colors.white,
+                                              size: sizeHuge,
+                                            );
+                                          },
                                         )),
                                       ],
                                     ),
@@ -93,11 +96,12 @@ class HomeScreen extends StatelessWidget {
                                 Container(
                                   // color: Colors.green,
                                   height: orientedHeightScreen(context,
-                                      portraitRatio: 0.15, landscapeRatio: 0.15),
+                                      portraitRatio: 0.15,
+                                      landscapeRatio: 0.15),
                                   padding: const EdgeInsets.all(sizeNormal),
                                   child: Column(
                                     children: [
-                                      CustomText(
+                                      const CustomText(
                                         "Masukkan UPC Anda",
                                         color: Colors.white,
                                       ),
@@ -160,7 +164,8 @@ class HomeScreen extends StatelessWidget {
                                     )),
                                 SizedBox(
                                   height: orientedHeightScreen(context,
-                                      portraitRatio: 0.15, landscapeRatio: 0.15),
+                                      portraitRatio: 0.15,
+                                      landscapeRatio: 0.15),
                                   width: widthScreen(context),
                                   child: FittedBox(
                                     child: Row(
@@ -184,7 +189,8 @@ class HomeScreen extends StatelessWidget {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: const [
-                                                    SizedBox(height: sizeNormal),
+                                                    SizedBox(
+                                                        height: sizeNormal),
                                                     Flexible(
                                                       child: FittedBox(
                                                         child: Padding(
@@ -231,7 +237,8 @@ class HomeScreen extends StatelessWidget {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: const [
-                                                    SizedBox(height: sizeNormal),
+                                                    SizedBox(
+                                                        height: sizeNormal),
                                                     Flexible(
                                                       child: FittedBox(
                                                         child: Padding(
@@ -291,16 +298,19 @@ class HomeScreen extends StatelessWidget {
                                   left: sizeMedium,
                                   top: sizeMedium,
                                   bottom: sizeNormal),
-                              boxDecoration: const BoxDecoration(color: primaryBlue),
-                              child:
-                                  SvgPicture.asset("assets/images/camera_white.svg"),
+                              boxDecoration:
+                                  const BoxDecoration(color: primaryBlue),
+                              child: SvgPicture.asset(
+                                  "assets/images/camera_white.svg"),
                             ),
                             const CustomText(
                               "Bulk Scan",
                               textAlign: TextAlign.center,
                               color: primaryBlue,
                             )
-                          ]..map((e) => FittedBox(child: e,)),
+                          ]..map((e) => FittedBox(
+                                child: e,
+                              )),
                         ),
                       ),
                       FittedBox(
@@ -314,9 +324,10 @@ class HomeScreen extends StatelessWidget {
                                   left: sizeMedium,
                                   top: sizeMedium,
                                   bottom: sizeNormal),
-                              boxDecoration: const BoxDecoration(color: primaryGreen),
-                              child:
-                                  SvgPicture.asset("assets/images/camera_white.svg"),
+                              boxDecoration:
+                                  const BoxDecoration(color: primaryGreen),
+                              child: SvgPicture.asset(
+                                  "assets/images/camera_white.svg"),
                             ),
                             const CustomText(
                               "Single Scan",

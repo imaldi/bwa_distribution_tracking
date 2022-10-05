@@ -5,11 +5,11 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/hive_type_id.dart';
-import '../../data/models/user_model.bv.dart';
-import '../../core/resources/serializers/serializers.bv.dart';
+import '../../data/models/user_model.dart';
+import '../../core/resources/serializers/serializers.dart';
 import 'package:hive/hive.dart';
 
-part 'login_response.bv.g.dart';
+part 'login_response.g.dart';
 
 @HiveType(typeId: loginResponseTypeId)
 abstract class LoginResponse

@@ -2,17 +2,21 @@ import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
+import 'package:bwa_distribution_tracking/data/datasources/remote/qr_scan_remote_data_source.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/user_model.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
+import 'package:bwa_distribution_tracking/data/repositories/scan_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
+import 'package:bwa_distribution_tracking/domain/repositories/scan_repository.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
@@ -35,11 +39,11 @@ Future<void> init() async {
       userLogout: sl(),
     ),
   );
-  // sl.registerFactory(
-  //       () => AuthBloc(
-  //     userLogin: sl(),
-  //   ),
-  // );
+  sl.registerFactory(
+        () => QRScanBloc(
+          bulkQRScanUseCase: sl(),
+    ),
+  );
 
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
@@ -50,6 +54,10 @@ Future<void> init() async {
     () => AuthLocalDataSourceImpl(authBox: sl<Box<LoginResponse>>()),
   );
 
+  sl.registerLazySingleton<QRScanRemoteDataSource>(
+        () => QRScanRemoteDataSourceImpl(client: sl()),
+  );
+
   /// Repository
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
@@ -58,11 +66,17 @@ Future<void> init() async {
       authLocalDataSource: sl(),
     ),
   );
+  sl.registerLazySingleton<ScanRepository>(
+    () => ScanRepositoryImpl(
+      networkInfo: sl(), qrScanRemoteDataSource: sl(),
+    ),
+  );
 
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
   sl.registerLazySingleton(() => CheckUserLoginStatusUseCase(sl()));
   sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
+  sl.registerLazySingleton(() => BulkQRScanUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

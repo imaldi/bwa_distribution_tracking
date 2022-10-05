@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AuthRemoteDataSource {
@@ -17,18 +19,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<LoginResponse> login(String phone, String password) async {
-    // TODO tanya kenapa query params, ga di body
-    final url = Uri.http(baseUrl, loginUrl, {
-      'phone': phone,
-      'password': password,
-    });
+    final url = Uri.http(baseUrl, loginUrl);
+    print("URL login remote data source: $url");
     final response = await client.post(
       url,
-      headers: {'Content-Type': 'application/json'},
-    );
+      headers: {'Accept': 'application/json'},
+      body: {
+        'phone': phone,
+        'password': password,
+      },
+    ).timeout(const Duration(seconds: 5), onTimeout: (){
+      throw TimeoutException("Ini ada yang salah");
+    });
+
+    print("Response Login: $response");
 
     if (response.statusCode == 200) {
-      print("Response body: ${response.body}");
       return LoginResponse.fromJson(response.body);
     } else {
       throw ServerException();
