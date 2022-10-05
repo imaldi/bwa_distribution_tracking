@@ -10,3 +10,9 @@ class BulkQRScanEvent extends QRScanEvent {
   @override
   List<Object?> get props => [qrcodeSj];
 }
+
+class MunculkanToastEvent extends QRScanEvent{
+  @override
+  List<Object?> get props => [];
+
+}

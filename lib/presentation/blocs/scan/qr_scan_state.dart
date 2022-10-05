@@ -26,6 +26,14 @@ class QRSingleScanSuccess extends QRScanState {
   List<Object> get props => [];
 }
 
+class ToastMunculState extends QRScanState {
+  final bool? isToast;
+  const ToastMunculState({this.isToast});
+  @override
+  List<Object?> get props => [isToast];
+
+}
+
 class QRScanFailed extends QRScanState {
   final String errorMessage;
 

@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
     passwordTEC = TextEditingController(text: password);
-    sl<AuthBloc>().add(const GetCachedLoginEvent());
+    context.read<AuthBloc>().add(const GetCachedLoginEvent());
   }
 
   @override

@@ -41,7 +41,7 @@ Future<void> init() async {
   );
   sl.registerFactory(
         () => QRScanBloc(
-          bulkQRScanUseCase: sl(),
+          bulkQRScanUseCase: sl<BulkQRScanUseCase>(),
     ),
   );
 

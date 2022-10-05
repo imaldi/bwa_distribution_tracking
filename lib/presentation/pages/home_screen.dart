@@ -80,6 +80,7 @@ class HomeScreen extends StatelessWidget {
                                         FittedBox(child:
                                             BlocBuilder<AuthBloc, AuthState>(
                                           builder: (context, state) {
+                                            /// FIXME ada bug nama null kalau di hot restart, why??
                                             return CustomText(
                                               (state is AuthSuccess) ? "${state.loginResponse.user?.name}": "Guest User",
                                               color: Colors.white,
@@ -115,6 +116,9 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         child: NoUnderlineTextFormField(
                                           onTap: () {},
+                                          onEditingComplete: (){
+                                            context.router.push(const ScanResultRoute());
+                                          },
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                               color: Colors.white),

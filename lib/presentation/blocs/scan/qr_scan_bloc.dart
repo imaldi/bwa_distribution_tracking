@@ -25,5 +25,13 @@ class QRScanBloc extends Bloc<QRScanEvent, QRScanState> {
               (bulkScanResponse) => QRBulkScanSuccess(bulkScanResponse));
       emit(currentState);
     });
+    on<MunculkanToastEvent>((event,emit) async {
+      emit(QRScanLoading());
+      print("current state is: ${state}");
+      await Future.delayed(const Duration(seconds: 2));
+      print("MunculkanToastEvent is called");
+      emit(ToastMunculState());
+      print("current state is: ${state}");
+    });
   }
 }
