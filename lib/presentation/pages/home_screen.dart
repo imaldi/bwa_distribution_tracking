@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
+import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/pages/login_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
@@ -337,9 +339,9 @@ class HomeScreen extends StatelessWidget {
         return BlocListener<AuthBloc, AuthState>(
           listener: (BuildContext context, state) {
             if (state is AuthLoggedOut) {
-              // context.router.push(const LoginRoute());
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              context.router.replace(const LoginRoute());
+              // Navigator.pushReplacement(context,
+              //     MaterialPageRoute(builder: (context) => const LoginScreen()));
             }
           },
           child: Container(

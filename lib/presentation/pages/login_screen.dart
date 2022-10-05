@@ -155,24 +155,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                           if (state is AuthFailed) {
                                             myToast("Gagal Login");
                                           } else if (state is AuthSuccess) {
-                                            // context.router
-                                            //     .push(const HomeRoute());
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const HomeScreen()));
-                                          } else if (state is AuthSuccess) {
-                                            print(
-                                                "BlocConsumer loaded: ${state.loginResponse}");
+                                            context.router
+                                                .replace(const HomeRoute());
+                                            // Navigator.pushReplacement(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             const HomeScreen()));
                                           }
-                                          // if (state is AuthInitial) {
-                                          //   print("state is AuthInitial in listener");
-                                          //   myToast("state is AuthInitial", toastLength: Toast.LENGTH_LONG);
-                                          //   BlocProvider.of<AuthBloc>(lc).add(
-                                          //       const UserLoginAuthEvent(
-                                          //           "", ""));
-                                          // }
                                         }, builder: (bc, state) {
                                           print(
                                               "BlocConsumer.builder: ${state.runtimeType}");
