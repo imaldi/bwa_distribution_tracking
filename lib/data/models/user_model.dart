@@ -6,10 +6,10 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/hive_type_id.dart';
 import 'package:bwa_distribution_tracking/domain/entities/user_entity.dart';
-import '../../core/resources/serializers/serializers.bv.dart';
+import '../../core/resources/serializers/serializers.dart';
 import 'package:hive/hive.dart';
 
-part 'user_model.bv.g.dart';
+part 'user_model.g.dart';
 
 @HiveType(typeId: userTypeId)
 abstract class UserModel

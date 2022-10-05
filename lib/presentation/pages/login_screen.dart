@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
     password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
     passwordTEC = TextEditingController(text: password);
-    sl<AuthBloc>().add(const GetCachedLoginEvent());
+    context.read<AuthBloc>().add(const GetCachedLoginEvent());
   }
 
   @override
@@ -174,13 +174,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                               if (state is AuthFailed) {
                                                 myToast("Gagal Login");
                                               } else if (state is AuthSuccess) {
-                                                // context.router
-                                                //     .push(const HomeRoute());
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const HomeScreen()));
+                                                context.router
+                                                    .push(const HomeRoute());
+                                                // Navigator.pushReplacement(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             const HomeScreen()));
                                               } else if (state is AuthSuccess) {
                                                 print(
                                                     "BlocConsumer loaded: ${state.loginResponse}");

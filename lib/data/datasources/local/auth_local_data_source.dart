@@ -1,6 +1,6 @@
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
 import 'package:hive/hive.dart';
 
 abstract class AuthLocalDataSource {

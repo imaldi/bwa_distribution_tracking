@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/entities/user_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -9,6 +9,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
     Key? key,
     this.keyboardType,
     this.onChanged,
+    this.onEditingComplete,
     this.textAlign,
     this.style,
   }) : super(key: key);
@@ -18,6 +19,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
+  final Function()? onEditingComplete;
   final TextAlign? textAlign;
   final TextStyle? style;
 
@@ -36,6 +38,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
         disabledBorder: InputBorder.none,
       ),
       onChanged: onChanged,
+      onEditingComplete: onEditingComplete,
     );
   }
 }

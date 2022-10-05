@@ -3,7 +3,7 @@ import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bwa_distribution_tracking/core/params/login_params.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:equatable/equatable.dart';
 
@@ -36,6 +36,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       var failOrLoaded = await userLogin(
           LoginParams(phone: event.phone, password: event.password));
+
+      print("failOrLoaded UserLoginAuthEvent: $failOrLoaded");
 
       var currentState = failOrLoaded.fold(
           (failure) => AuthFailed(errorMessage: "${failure.runtimeType}"),

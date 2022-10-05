@@ -6,7 +6,7 @@
 import 'dart:async' as _i3;
 import 'dart:typed_data' as _i6;
 
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart'
+import 'package:bwa_distribution_tracking/data/models/login_response.dart'
     as _i7;
 import 'package:hive/hive.dart' as _i2;
 import 'package:hive/src/box/default_compaction_strategy.dart' as _i5;

@@ -1,7 +1,7 @@
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.bv.dart';
+import 'package:bwa_distribution_tracking/data/models/login_response.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
