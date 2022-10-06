@@ -88,6 +88,7 @@ Future<void> init() async {
   /// External
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
+  /// FixMe use Type Parameter for .registerAdapter()
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(LoginResponseAdapter());
   Hive.registerAdapter(TokenAdapter());

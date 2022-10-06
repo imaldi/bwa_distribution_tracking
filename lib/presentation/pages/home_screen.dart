@@ -10,6 +10,7 @@ import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/n
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/gradients/basic_linear_gradient.dart';
@@ -138,11 +139,9 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
                                               textValue = controller.text;
                                               var qrBloc =
                                                   context.read<QRScanBloc>();
-                                              myToast("QR Code = $textValue");
                                               qrBloc.add(const BulkQRScanEvent(
                                                   // textValue
-                                              "002SPJ09-KALIMANTAN000001-0002"
-                                              ));
+                                                  "002SPJ09-KALIMANTAN000001-0002"));
                                               context.router.push(BulkScanRoute(
                                                   qrScanBloc: qrBloc));
                                             }
@@ -322,18 +321,31 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundedContainer(
-                              sizeMedium,
-                              padding: const EdgeInsets.all(sizeBig),
-                              margin: const EdgeInsets.only(
-                                  right: sizeMedium,
-                                  left: sizeMedium,
-                                  top: sizeMedium,
-                                  bottom: sizeNormal),
-                              boxDecoration:
-                                  const BoxDecoration(color: primaryBlue),
-                              child: SvgPicture.asset(
-                                  "assets/images/camera_white.svg"),
+                            InkWell(
+                              onTap: () async {
+                                await BarcodeScanner.scan()
+                                    .then((ScanResult bulkDetail) {
+                                      var qrBloc =
+                                      context.read<QRScanBloc>();
+                                      qrBloc.add(BulkQRScanEvent(
+                                          bulkDetail.rawContent));
+                                      context.router.push(BulkScanRoute(
+                                          qrScanBloc: qrBloc));
+                                });
+                              },
+                              child: RoundedContainer(
+                                sizeMedium,
+                                padding: const EdgeInsets.all(sizeBig),
+                                margin: const EdgeInsets.only(
+                                    right: sizeMedium,
+                                    left: sizeMedium,
+                                    top: sizeMedium,
+                                    bottom: sizeNormal),
+                                boxDecoration:
+                                    const BoxDecoration(color: primaryBlue),
+                                child: SvgPicture.asset(
+                                    "assets/images/camera_white.svg"),
+                              ),
                             ),
                             const CustomText(
                               "Bulk Scan",

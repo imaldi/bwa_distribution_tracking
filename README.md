@@ -4,6 +4,7 @@
 
 > Readme sementara di tulis dengan bahasa Indonesia
 
+> Jangan pakai Navigator bawaan dari Flutter, sudah pakai AutoRoute untuk navigasi
 ## Notes Architecture / Library yang digunakan
 
 - State Management : bloc
@@ -32,6 +33,4 @@
 
 ## To Do:
 
-- Buat Implementasi ke Widget
-- Tes ke device asli
 - Buat Flavor

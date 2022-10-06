@@ -16,5 +16,7 @@ part 'serializers.g.dart';
   BulkQRScanModel,
   BoxQRScanModel
 ])
-final Serializers serializers =
-    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())..add(Iso8601DateTimeSerializer())).build();
+final Serializers serializers = (_$serializers.toBuilder()
+      ..addPlugin(StandardJsonPlugin())
+      ..add(Iso8601DateTimeSerializer()))
+    .build();
