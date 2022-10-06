@@ -7,7 +7,6 @@ import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.d
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
-import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -30,7 +29,7 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    var textValue = "";
+    var textValue = "002SPJ09-KALIMANTAN000001-0002";
     var controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
@@ -136,15 +135,18 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
                                             var state =
                                                 context.read<AuthBloc>().state;
                                             if (state is AuthSuccess) {
-                                              textValue = controller.text;
+                                              // textValue = controller.text;
                                               var qrBloc =
                                                   context.read<QRScanBloc>();
-                                              qrBloc.add(const BulkQRScanEvent(
+                                              qrBloc.add(BulkQRScanEvent(
                                                   // textValue
-                                                  "002SPJ09-KALIMANTAN000001-0002"));
+                                                  controller.text
+                                                  // "002SPJ09-KALIMANTAN000001-0002"
+                                              ));
                                               context.router.push(BulkScanRoute(
                                                   qrScanBloc: qrBloc));
                                             }
+                                            FocusManager.instance.primaryFocus?.unfocus();
                                           },
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
@@ -395,8 +397,6 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
           listener: (BuildContext context, state) {
             if (state is AuthLoggedOut) {
               context.router.replace(const LoginRoute());
-              // Navigator.pushReplacement(context,
-              //     MaterialPageRoute(builder: (context) => const LoginScreen()));
             }
           },
           child: Container(

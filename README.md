@@ -33,4 +33,5 @@
 
 ## To Do:
 
+- Perbaiki Penggunaan Type Adapter dengan menggunakan type parameter saat register
 - Buat Flavor

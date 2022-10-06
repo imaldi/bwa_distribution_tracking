@@ -172,23 +172,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   "BlocConsumer.listener: ${state.toString()}");
                                               // Call Toast Here when Failed
                                               if (state is AuthFailed) {
-                                                myToast("Gagal Login");
+                                                myToast("Gagal Login: ${state.errorMessage}");
                                               }
                                               if (state is AuthSuccess) {
                                                 context.router
                                                     .push(const HomeRoute());
-                                                print("Auth Succes from listener");
-                                                myToast(state.loginResponse.token?.token.toString().substring(0,5) ?? "Empty");
-
-                                                // Navigator.pushReplacement(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             const HomeScreen()));
                                               }
                                             }, builder: (bc, state) {
-                                              print(
-                                                  "BlocConsumer.builder: ${state.runtimeType}");
 
                                               if (state is AuthLoading) {
                                                 return Row(
