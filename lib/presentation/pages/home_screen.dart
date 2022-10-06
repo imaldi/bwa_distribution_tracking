@@ -5,6 +5,7 @@ import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -362,6 +363,7 @@ class HomeScreen extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(top: sizeMedium),
             child: FloatingActionButton(
+              heroTag: "btn1",
               onPressed: () {
                 bc.read<AuthBloc>().add(const UserLogoutAuthEvent());
               },

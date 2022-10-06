@@ -39,8 +39,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, LoginResponse>> getCachedLogin() async {
     try {
-      final localTrivia = await authLocalDataSource.getCachedLogin();
-      return Right(localTrivia);
+      final cachedLogin = await authLocalDataSource.getCachedLogin();
+      return Right(cachedLogin);
     } on CacheException {
       return Left(CacheFailure());
     }

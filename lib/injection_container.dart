@@ -23,8 +23,12 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
+import 'data/models/normal_data_class.dart';
+
 final sl = GetIt.instance;
 
+// TODO use encrypted box
+// TODO use injectable
 Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -35,7 +39,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => AuthBloc(
       userLogin: sl(),
-      checkUserLoginStatusUseCase: sl(),
+      checkUserLoginStatusUseCase: sl<CheckUserLoginStatusUseCase>(),
       userLogout: sl(),
     ),
   );
@@ -51,7 +55,7 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-    () => AuthLocalDataSourceImpl(authBox: sl<Box<LoginResponse>>()),
+    () => AuthLocalDataSourceImpl(authBox: sl<Box>()),
   );
 
   sl.registerLazySingleton<QRScanRemoteDataSource>(
@@ -87,8 +91,9 @@ Future<void> init() async {
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(LoginResponseAdapter());
   Hive.registerAdapter(TokenAdapter());
-  final authBox = await Hive.openBox<LoginResponse>(authBoxKey);
-  sl.registerLazySingleton(() => authBox);
+  Hive.registerAdapter(NormalDataClassAdapter());
+  final authBox = await Hive.openBox(authBoxKey);
+  sl.registerLazySingleton<Box>(() => authBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 

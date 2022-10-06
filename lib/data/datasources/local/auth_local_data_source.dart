@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/models/login_response.dart';
@@ -24,13 +26,16 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> cacheLoginResponse(LoginResponse loginResponse) async {
-    await authBox.put(cachedLoginResponse, loginResponse);
+    // await authBox.put(cachedLoginResponse, loginResponse);
+    await authBox.put(cachedLoginResponse, loginResponse.toJson());
+    print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
   }
 
   @override
   Future<LoginResponse> getCachedLogin() async {
     if (authBox.containsKey(cachedLoginResponse)) {
-      final LoginResponse response = await authBox.get(cachedLoginResponse);
+      final LoginResponse response = LoginResponse.fromJson(jsonEncode(authBox.get(cachedLoginResponse)));
+      print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
       return response;
       // return Future.value(response);
     } else {
