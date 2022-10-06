@@ -28,14 +28,14 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> cacheLoginResponse(LoginResponse loginResponse) async {
     // await authBox.put(cachedLoginResponse, loginResponse);
     await authBox.put(cachedLoginResponse, loginResponse.toJson());
-    print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
+    // print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
   }
 
   @override
   Future<LoginResponse> getCachedLogin() async {
     if (authBox.containsKey(cachedLoginResponse)) {
       final LoginResponse response = LoginResponse.fromJson(jsonEncode(authBox.get(cachedLoginResponse)));
-      print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
+      // print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
       return response;
       // return Future.value(response);
     } else {

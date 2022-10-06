@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
+import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
@@ -14,11 +16,21 @@ import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../../core/resources/media_query/media_query_helpers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider.value(
+      value: sl<QRScanBloc>(),
+      child: this,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var textValue = "";
+    var controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -83,7 +95,9 @@ class HomeScreen extends StatelessWidget {
                                           builder: (context, state) {
                                             /// FIXME ada bug nama null kalau di hot restart, why??
                                             return CustomText(
-                                              (state is AuthSuccess) ? "${state.loginResponse.user?.name}": "Guest User",
+                                              (state is AuthSuccess)
+                                                  ? "${state.loginResponse.user?.name}"
+                                                  : "Guest User",
                                               color: Colors.white,
                                               size: sizeHuge,
                                             );
@@ -116,9 +130,22 @@ class HomeScreen extends StatelessWidget {
                                           // borderRadius: BorderRadius.all(Radius.circular(sizeBig)),
                                         ),
                                         child: NoUnderlineTextFormField(
-                                          onTap: () {},
-                                          onEditingComplete: (){
-                                            context.router.push(const ScanResultRoute());
+                                          controller: controller,
+                                          onEditingComplete: () {
+                                            var state =
+                                                context.read<AuthBloc>().state;
+                                            if (state is AuthSuccess) {
+                                              textValue = controller.text;
+                                              var qrBloc =
+                                                  context.read<QRScanBloc>();
+                                              myToast("QR Code = $textValue");
+                                              qrBloc.add(const BulkQRScanEvent(
+                                                  // textValue
+                                              "002SPJ09-KALIMANTAN000001-0002"
+                                              ));
+                                              context.router.push(BulkScanRoute(
+                                                  qrScanBloc: qrBloc));
+                                            }
                                           },
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
@@ -376,12 +403,4 @@ class HomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
-
-  // @override
-  // Widget wrappedRoute(BuildContext context) {
-  //   return BlocProvider.value(
-  //     value: sl<AuthBloc>(),
-  //     child: this,
-  //   );
-  // }
 }

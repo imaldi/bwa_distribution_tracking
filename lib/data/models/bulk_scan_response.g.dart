@@ -125,7 +125,7 @@ class _$BulkQRScanModelSerializer
     value = object.qrcodeSj;
     if (value != null) {
       result
-        ..add('qrcodeSj')
+        ..add('qrcode_sj')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -139,7 +139,7 @@ class _$BulkQRScanModelSerializer
     value = object.kodeBatch;
     if (value != null) {
       result
-        ..add('kodeBatch')
+        ..add('kode_batch')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -160,7 +160,7 @@ class _$BulkQRScanModelSerializer
     value = object.picTelp;
     if (value != null) {
       result
-        ..add('picTelp')
+        ..add('pic_telp')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -169,12 +169,12 @@ class _$BulkQRScanModelSerializer
       result
         ..add('tanggal')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
+            specifiedType: const FullType(String)));
     }
     value = object.dikirimBy;
     if (value != null) {
       result
-        ..add('dikirimBy')
+        ..add('dikirim_by')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -188,7 +188,7 @@ class _$BulkQRScanModelSerializer
     value = object.nmPengemudi;
     if (value != null) {
       result
-        ..add('nmPengemudi')
+        ..add('nm_pengemudi')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -223,42 +223,42 @@ class _$BulkQRScanModelSerializer
     value = object.ttdGa;
     if (value != null) {
       result
-        ..add('ttdGa')
+        ..add('ttd_ga')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.ttdWl;
     if (value != null) {
       result
-        ..add('ttdWl')
+        ..add('ttd_wl')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.createdBy;
     if (value != null) {
       result
-        ..add('createdBy')
+        ..add('created_by')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.updatedBy;
     if (value != null) {
       result
-        ..add('updatedBy')
+        ..add('updated_by')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
+            specifiedType: const FullType(String)));
     }
     value = object.createdAt;
     if (value != null) {
       result
-        ..add('createdAt')
+        ..add('created_at')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
     value = object.updatedAt;
     if (value != null) {
       result
-        ..add('updatedAt')
+        ..add('updated_at')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
@@ -285,7 +285,7 @@ class _$BulkQRScanModelSerializer
           result.nosj = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'qrcodeSj':
+        case 'qrcode_sj':
           result.qrcodeSj = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -293,7 +293,7 @@ class _$BulkQRScanModelSerializer
           result.nopc = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'kodeBatch':
+        case 'kode_batch':
           result.kodeBatch = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -305,15 +305,15 @@ class _$BulkQRScanModelSerializer
           result.pic = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'picTelp':
+        case 'pic_telp':
           result.picTelp = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'tanggal':
           result.tanggal = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
+              specifiedType: const FullType(String)) as String?;
           break;
-        case 'dikirimBy':
+        case 'dikirim_by':
           result.dikirimBy = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -321,7 +321,7 @@ class _$BulkQRScanModelSerializer
           result.nopol = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'nmPengemudi':
+        case 'nm_pengemudi':
           result.nmPengemudi = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -341,27 +341,27 @@ class _$BulkQRScanModelSerializer
           result.kg = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'ttdGa':
+        case 'ttd_ga':
           result.ttdGa = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'ttdWl':
+        case 'ttd_wl':
           result.ttdWl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'createdBy':
+        case 'created_by':
           result.createdBy = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'updatedBy':
+        case 'updated_by':
           result.updatedBy = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
+              specifiedType: const FullType(String)) as String?;
           break;
-        case 'createdAt':
+        case 'created_at':
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
-        case 'updatedAt':
+        case 'updated_at':
           result.updatedAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
@@ -407,28 +407,28 @@ class _$BoxQRScanModelSerializer
     value = object.kodeBatch;
     if (value != null) {
       result
-        ..add('kodeBatch')
+        ..add('kode_batch')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.nmProject;
     if (value != null) {
       result
-        ..add('nmProject')
+        ..add('nm_project')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.jenisQuran;
     if (value != null) {
       result
-        ..add('jenisQuran')
+        ..add('jenis_quran')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.jmlKeluar;
     if (value != null) {
       result
-        ..add('jmlKeluar')
+        ..add('jml_keluar')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -456,7 +456,7 @@ class _$BoxQRScanModelSerializer
     value = object.jenisReject;
     if (value != null) {
       result
-        ..add('jenisReject')
+        ..add('jenis_reject')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -491,35 +491,35 @@ class _$BoxQRScanModelSerializer
     value = object.tglDiajukan;
     if (value != null) {
       result
-        ..add('tglDiajukan')
+        ..add('tgl_diajukan')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
+            specifiedType: const FullType(String)));
     }
     value = object.createdBy;
     if (value != null) {
       result
-        ..add('createdBy')
+        ..add('created_by')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.updatedBy;
     if (value != null) {
       result
-        ..add('updatedBy')
+        ..add('updated_by')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.createdAt;
     if (value != null) {
       result
-        ..add('createdAt')
+        ..add('created_at')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
     value = object.updatedAt;
     if (value != null) {
       result
-        ..add('updatedAt')
+        ..add('updated_at')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
@@ -550,19 +550,19 @@ class _$BoxQRScanModelSerializer
           result.nosj = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'kodeBatch':
+        case 'kode_batch':
           result.kodeBatch = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'nmProject':
+        case 'nm_project':
           result.nmProject = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'jenisQuran':
+        case 'jenis_quran':
           result.jenisQuran = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'jmlKeluar':
+        case 'jml_keluar':
           result.jmlKeluar = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -578,7 +578,7 @@ class _$BoxQRScanModelSerializer
           result.status = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'jenisReject':
+        case 'jenis_reject':
           result.jenisReject = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -598,23 +598,23 @@ class _$BoxQRScanModelSerializer
           result.upload = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'tglDiajukan':
+        case 'tgl_diajukan':
           result.tglDiajukan = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
+              specifiedType: const FullType(String)) as String?;
           break;
-        case 'createdBy':
+        case 'created_by':
           result.createdBy = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'updatedBy':
+        case 'updated_by':
           result.updatedBy = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'createdAt':
+        case 'created_at':
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
-        case 'updatedAt':
+        case 'updated_at':
           result.updatedAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
@@ -773,7 +773,7 @@ class _$BulkQRScanModel extends BulkQRScanModel {
   @override
   final String? picTelp;
   @override
-  final DateTime? tanggal;
+  final String? tanggal;
   @override
   final String? dikirimBy;
   @override
@@ -795,7 +795,7 @@ class _$BulkQRScanModel extends BulkQRScanModel {
   @override
   final String? createdBy;
   @override
-  final DateTime? updatedBy;
+  final String? updatedBy;
   @override
   final DateTime? createdAt;
   @override
@@ -972,9 +972,9 @@ class BulkQRScanModelBuilder
   String? get picTelp => _$this._picTelp;
   set picTelp(String? picTelp) => _$this._picTelp = picTelp;
 
-  DateTime? _tanggal;
-  DateTime? get tanggal => _$this._tanggal;
-  set tanggal(DateTime? tanggal) => _$this._tanggal = tanggal;
+  String? _tanggal;
+  String? get tanggal => _$this._tanggal;
+  set tanggal(String? tanggal) => _$this._tanggal = tanggal;
 
   String? _dikirimBy;
   String? get dikirimBy => _$this._dikirimBy;
@@ -1016,9 +1016,9 @@ class BulkQRScanModelBuilder
   String? get createdBy => _$this._createdBy;
   set createdBy(String? createdBy) => _$this._createdBy = createdBy;
 
-  DateTime? _updatedBy;
-  DateTime? get updatedBy => _$this._updatedBy;
-  set updatedBy(DateTime? updatedBy) => _$this._updatedBy = updatedBy;
+  String? _updatedBy;
+  String? get updatedBy => _$this._updatedBy;
+  set updatedBy(String? updatedBy) => _$this._updatedBy = updatedBy;
 
   DateTime? _createdAt;
   DateTime? get createdAt => _$this._createdAt;
@@ -1136,7 +1136,7 @@ class _$BoxQRScanModel extends BoxQRScanModel {
   @override
   final String? upload;
   @override
-  final DateTime? tglDiajukan;
+  final String? tglDiajukan;
   @override
   final String? createdBy;
   @override
@@ -1339,9 +1339,9 @@ class BoxQRScanModelBuilder
   String? get upload => _$this._upload;
   set upload(String? upload) => _$this._upload = upload;
 
-  DateTime? _tglDiajukan;
-  DateTime? get tglDiajukan => _$this._tglDiajukan;
-  set tglDiajukan(DateTime? tglDiajukan) => _$this._tglDiajukan = tglDiajukan;
+  String? _tglDiajukan;
+  String? get tglDiajukan => _$this._tglDiajukan;
+  set tglDiajukan(String? tglDiajukan) => _$this._tglDiajukan = tglDiajukan;
 
   String? _createdBy;
   String? get createdBy => _$this._createdBy;
