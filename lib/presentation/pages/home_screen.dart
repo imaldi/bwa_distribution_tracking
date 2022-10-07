@@ -362,18 +362,23 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
                       FittedBox(
                         child: Column(
                           children: [
-                            RoundedContainer(
-                              sizeMedium,
-                              padding: const EdgeInsets.all(sizeBig),
-                              margin: const EdgeInsets.only(
-                                  right: sizeMedium,
-                                  left: sizeMedium,
-                                  top: sizeMedium,
-                                  bottom: sizeNormal),
-                              boxDecoration:
-                                  const BoxDecoration(color: primaryGreen),
-                              child: SvgPicture.asset(
-                                  "assets/images/camera_white.svg"),
+                            InkWell(
+                              onTap: (){
+                                context.router.push(const TestDhriveRoute());
+                              },
+                              child: RoundedContainer(
+                                sizeMedium,
+                                padding: const EdgeInsets.all(sizeBig),
+                                margin: const EdgeInsets.only(
+                                    right: sizeMedium,
+                                    left: sizeMedium,
+                                    top: sizeMedium,
+                                    bottom: sizeNormal),
+                                boxDecoration:
+                                    const BoxDecoration(color: primaryGreen),
+                                child: SvgPicture.asset(
+                                    "assets/images/camera_white.svg"),
+                              ),
                             ),
                             const CustomText(
                               "Single Scan",

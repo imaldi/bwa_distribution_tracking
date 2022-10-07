@@ -15,10 +15,10 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 
 import '../../presentation/blocs/scan/qr_scan_bloc.dart' as _i7;
-import '../../presentation/pages/bulk_scan_screen.dart' as _i4;
+import '../../presentation/pages/bulk_scan_screen.dart' as _i3;
 import '../../presentation/pages/home_screen.dart' as _i2;
 import '../../presentation/pages/login_screen.dart' as _i1;
-import '../../presentation/pages/scan_result_screen.dart' as _i3;
+import '../../presentation/pages/test_dhrive_screen.dart' as _i4;
 
 class AppRouter extends _i5.RootStackRouter {
   AppRouter([_i6.GlobalKey<_i6.NavigatorState>? navigatorKey])
@@ -38,21 +38,21 @@ class AppRouter extends _i5.RootStackRouter {
         child: _i5.WrappedRoute(child: const _i2.HomeScreen()),
       );
     },
-    ScanResultRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i5.WrappedRoute(child: const _i3.ScanResultScreen()),
-      );
-    },
     BulkScanRoute.name: (routeData) {
       final args = routeData.argsAs<BulkScanRouteArgs>();
       return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.WrappedRoute(
-            child: _i4.BulkScanScreen(
+            child: _i3.BulkScanScreen(
           qrScanBloc: args.qrScanBloc,
           key: args.key,
         )),
+      );
+    },
+    TestDhriveRoute.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i4.TestDhriveScreen(),
       );
     },
   };
@@ -68,12 +68,12 @@ class AppRouter extends _i5.RootStackRouter {
           path: '/home-screen',
         ),
         _i5.RouteConfig(
-          ScanResultRoute.name,
-          path: '/scan-result-screen',
-        ),
-        _i5.RouteConfig(
           BulkScanRoute.name,
           path: '/bulk-scan-screen',
+        ),
+        _i5.RouteConfig(
+          TestDhriveRoute.name,
+          path: '/test-dhrive-screen',
         ),
       ];
 }
@@ -103,19 +103,7 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.ScanResultScreen]
-class ScanResultRoute extends _i5.PageRouteInfo<void> {
-  const ScanResultRoute()
-      : super(
-          ScanResultRoute.name,
-          path: '/scan-result-screen',
-        );
-
-  static const String name = 'ScanResultRoute';
-}
-
-/// generated route for
-/// [_i4.BulkScanScreen]
+/// [_i3.BulkScanScreen]
 class BulkScanRoute extends _i5.PageRouteInfo<BulkScanRouteArgs> {
   BulkScanRoute({
     required _i7.QRScanBloc qrScanBloc,
@@ -146,4 +134,16 @@ class BulkScanRouteArgs {
   String toString() {
     return 'BulkScanRouteArgs{qrScanBloc: $qrScanBloc, key: $key}';
   }
+}
+
+/// generated route for
+/// [_i4.TestDhriveScreen]
+class TestDhriveRoute extends _i5.PageRouteInfo<void> {
+  const TestDhriveRoute()
+      : super(
+          TestDhriveRoute.name,
+          path: '/test-dhrive-screen',
+        );
+
+  static const String name = 'TestDhriveRoute';
 }
