@@ -11,20 +11,20 @@ import 'package:hive/hive.dart';
 
 part 'user_model.g.dart';
 
-@HiveType(typeId: userTypeId)
+// @HiveType(typeId: userTypeId)
 abstract class UserModel
     implements UserEntity, Built<UserModel, UserModelBuilder> {
   // class field here
   // @BuiltValueField(wireName: 'a_field')
-  @HiveField(0)
+  // @HiveField(0)
   @override
   int? get id;
 
-  @HiveField(1)
+  // @HiveField(1)
   @override
   String? get name;
 
-  @HiveField(2)
+  // @HiveField(2)
   @override
   String? get phone;
 

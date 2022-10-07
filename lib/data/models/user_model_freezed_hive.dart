@@ -11,9 +11,9 @@ class UserModelFreezedHive with _$UserModelFreezedHive{
 
   @HiveType(typeId: userTypeId,adapterName: 'UserModelFreezedHiveAdapter')
   const factory UserModelFreezedHive({
-    @HiveField(0)String? firstName,
-    @HiveField(1) String? lastName,
-    @HiveField(2) int? age,
+    @HiveField(1) String? firstName,
+    @HiveField(2) String? lastName,
+    @HiveField(3) int? age,
     }) = _UserModelFreezedHive;
 
     factory UserModelFreezedHive.fromJson(Map<String, Object?> json)

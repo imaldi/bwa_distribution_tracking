@@ -20,11 +20,11 @@ UserModelFreezedHive _$UserModelFreezedHiveFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModelFreezedHive {
-  @HiveField(0)
-  String? get firstName => throw _privateConstructorUsedError;
   @HiveField(1)
-  String? get lastName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @HiveField(2)
+  String? get lastName => throw _privateConstructorUsedError;
+  @HiveField(3)
   int? get age => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,9 +39,9 @@ abstract class $UserModelFreezedHiveCopyWith<$Res> {
           $Res Function(UserModelFreezedHive) then) =
       _$UserModelFreezedHiveCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) String? firstName,
-      @HiveField(1) String? lastName,
-      @HiveField(2) int? age});
+      {@HiveField(1) String? firstName,
+      @HiveField(2) String? lastName,
+      @HiveField(3) int? age});
 }
 
 /// @nodoc
@@ -84,9 +84,9 @@ abstract class _$$_UserModelFreezedHiveCopyWith<$Res>
       __$$_UserModelFreezedHiveCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) String? firstName,
-      @HiveField(1) String? lastName,
-      @HiveField(2) int? age});
+      {@HiveField(1) String? firstName,
+      @HiveField(2) String? lastName,
+      @HiveField(3) int? age});
 }
 
 /// @nodoc
@@ -128,21 +128,21 @@ class __$$_UserModelFreezedHiveCopyWithImpl<$Res>
 @HiveType(typeId: userTypeId, adapterName: 'UserModelFreezedHiveAdapter')
 class _$_UserModelFreezedHive implements _UserModelFreezedHive {
   const _$_UserModelFreezedHive(
-      {@HiveField(0) this.firstName,
-      @HiveField(1) this.lastName,
-      @HiveField(2) this.age});
+      {@HiveField(1) this.firstName,
+      @HiveField(2) this.lastName,
+      @HiveField(3) this.age});
 
   factory _$_UserModelFreezedHive.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFreezedHiveFromJson(json);
 
   @override
-  @HiveField(0)
+  @HiveField(1)
   final String? firstName;
   @override
-  @HiveField(1)
+  @HiveField(2)
   final String? lastName;
   @override
-  @HiveField(2)
+  @HiveField(3)
   final int? age;
 
   @override
@@ -184,21 +184,21 @@ class _$_UserModelFreezedHive implements _UserModelFreezedHive {
 
 abstract class _UserModelFreezedHive implements UserModelFreezedHive {
   const factory _UserModelFreezedHive(
-      {@HiveField(0) final String? firstName,
-      @HiveField(1) final String? lastName,
-      @HiveField(2) final int? age}) = _$_UserModelFreezedHive;
+      {@HiveField(1) final String? firstName,
+      @HiveField(2) final String? lastName,
+      @HiveField(3) final int? age}) = _$_UserModelFreezedHive;
 
   factory _UserModelFreezedHive.fromJson(Map<String, dynamic> json) =
       _$_UserModelFreezedHive.fromJson;
 
   @override
-  @HiveField(0)
+  @HiveField(1)
   String? get firstName;
   @override
-  @HiveField(1)
+  @HiveField(2)
   String? get lastName;
   @override
-  @HiveField(2)
+  @HiveField(3)
   int? get age;
   @override
   @JsonKey(ignore: true)
