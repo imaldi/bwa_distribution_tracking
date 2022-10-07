@@ -20,9 +20,12 @@ UserModelFreezedHive _$UserModelFreezedHiveFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModelFreezedHive {
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
+  @HiveField(0)
+  String? get firstName => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String? get lastName => throw _privateConstructorUsedError;
+  @HiveField(2)
+  int? get age => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +38,10 @@ abstract class $UserModelFreezedHiveCopyWith<$Res> {
   factory $UserModelFreezedHiveCopyWith(UserModelFreezedHive value,
           $Res Function(UserModelFreezedHive) then) =
       _$UserModelFreezedHiveCopyWithImpl<$Res>;
-  $Res call({String firstName, String lastName, int age});
+  $Res call(
+      {@HiveField(0) String? firstName,
+      @HiveField(1) String? lastName,
+      @HiveField(2) int? age});
 }
 
 /// @nodoc
@@ -57,15 +63,15 @@ class _$UserModelFreezedHiveCopyWithImpl<$Res>
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       age: age == freezed
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -77,7 +83,10 @@ abstract class _$$_UserModelFreezedHiveCopyWith<$Res>
           $Res Function(_$_UserModelFreezedHive) then) =
       __$$_UserModelFreezedHiveCopyWithImpl<$Res>;
   @override
-  $Res call({String firstName, String lastName, int age});
+  $Res call(
+      {@HiveField(0) String? firstName,
+      @HiveField(1) String? lastName,
+      @HiveField(2) int? age});
 }
 
 /// @nodoc
@@ -101,34 +110,40 @@ class __$$_UserModelFreezedHiveCopyWithImpl<$Res>
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       age: age == freezed
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: userTypeId, adapterName: 'UserModelFreezedHiveAdapter')
 class _$_UserModelFreezedHive implements _UserModelFreezedHive {
   const _$_UserModelFreezedHive(
-      {required this.firstName, required this.lastName, required this.age});
+      {@HiveField(0) this.firstName,
+      @HiveField(1) this.lastName,
+      @HiveField(2) this.age});
 
   factory _$_UserModelFreezedHive.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFreezedHiveFromJson(json);
 
   @override
-  final String firstName;
+  @HiveField(0)
+  final String? firstName;
   @override
-  final String lastName;
+  @HiveField(1)
+  final String? lastName;
   @override
-  final int age;
+  @HiveField(2)
+  final int? age;
 
   @override
   String toString() {
@@ -169,19 +184,22 @@ class _$_UserModelFreezedHive implements _UserModelFreezedHive {
 
 abstract class _UserModelFreezedHive implements UserModelFreezedHive {
   const factory _UserModelFreezedHive(
-      {required final String firstName,
-      required final String lastName,
-      required final int age}) = _$_UserModelFreezedHive;
+      {@HiveField(0) final String? firstName,
+      @HiveField(1) final String? lastName,
+      @HiveField(2) final int? age}) = _$_UserModelFreezedHive;
 
   factory _UserModelFreezedHive.fromJson(Map<String, dynamic> json) =
       _$_UserModelFreezedHive.fromJson;
 
   @override
-  String get firstName;
+  @HiveField(0)
+  String? get firstName;
   @override
-  String get lastName;
+  @HiveField(1)
+  String? get lastName;
   @override
-  int get age;
+  @HiveField(2)
+  int? get age;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelFreezedHiveCopyWith<_$_UserModelFreezedHive> get copyWith =>
