@@ -1,6 +1,5 @@
 import 'package:bwa_distribution_tracking/data/models/normal_data_class.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model_impl.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
