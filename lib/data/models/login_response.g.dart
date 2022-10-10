@@ -8,7 +8,6 @@ part of login_response;
 
 Serializer<LoginResponse> _$loginResponseSerializer =
     new _$LoginResponseSerializer();
-Serializer<Token> _$tokenSerializer = new _$TokenSerializer();
 
 class _$LoginResponseSerializer implements StructuredSerializer<LoginResponse> {
   @override
@@ -72,55 +71,12 @@ class _$LoginResponseSerializer implements StructuredSerializer<LoginResponse> {
               specifiedType: const FullType(bool)) as bool?;
           break;
         case 'token':
-          result.token.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Token))! as Token);
+          result.token = serializers.deserialize(value,
+              specifiedType: const FullType(Token)) as Token?;
           break;
         case 'user':
-          result.user.replace(serializers.deserialize(value,
-              specifiedType: const FullType(UserModel))! as UserModel);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$TokenSerializer implements StructuredSerializer<Token> {
-  @override
-  final Iterable<Type> types = const [Token, _$Token];
-  @override
-  final String wireName = 'Token';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, Token object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
-    Object? value;
-    value = object.token;
-    if (value != null) {
-      result
-        ..add('token')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    return result;
-  }
-
-  @override
-  Token deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new TokenBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'token':
-          result.token = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+          result.user = serializers.deserialize(value,
+              specifiedType: const FullType(UserModel)) as UserModel?;
           break;
       }
     }
@@ -193,13 +149,13 @@ class LoginResponseBuilder
   bool? get success => _$this._success;
   set success(bool? success) => _$this._success = success;
 
-  TokenBuilder? _token;
-  TokenBuilder get token => _$this._token ??= new TokenBuilder();
-  set token(TokenBuilder? token) => _$this._token = token;
+  Token? _token;
+  Token? get token => _$this._token;
+  set token(Token? token) => _$this._token = token;
 
-  UserModelBuilder? _user;
-  UserModelBuilder get user => _$this._user ??= new UserModelBuilder();
-  set user(UserModelBuilder? user) => _$this._user = user;
+  UserModel? _user;
+  UserModel? get user => _$this._user;
+  set user(UserModel? user) => _$this._user = user;
 
   LoginResponseBuilder();
 
@@ -208,8 +164,8 @@ class LoginResponseBuilder
     if ($v != null) {
       _responseCode = $v.responseCode;
       _success = $v.success;
-      _token = $v.token?.toBuilder();
-      _user = $v.user?.toBuilder();
+      _token = $v.token;
+      _user = $v.user;
       _$v = null;
     }
     return this;
@@ -230,100 +186,12 @@ class LoginResponseBuilder
   LoginResponse build() => _build();
 
   _$LoginResponse _build() {
-    _$LoginResponse _$result;
-    try {
-      _$result = _$v ??
-          new _$LoginResponse._(
-              responseCode: responseCode,
-              success: success,
-              token: _token?.build(),
-              user: _user?.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'token';
-        _token?.build();
-        _$failedField = 'user';
-        _user?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'LoginResponse', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$Token extends Token {
-  @override
-  final String? token;
-
-  factory _$Token([void Function(TokenBuilder)? updates]) =>
-      (new TokenBuilder()..update(updates))._build();
-
-  _$Token._({this.token}) : super._();
-
-  @override
-  Token rebuild(void Function(TokenBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  TokenBuilder toBuilder() => new TokenBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is Token && token == other.token;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, token.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'Token')..add('token', token))
-        .toString();
-  }
-}
-
-class TokenBuilder implements Builder<Token, TokenBuilder> {
-  _$Token? _$v;
-
-  String? _token;
-  String? get token => _$this._token;
-  set token(String? token) => _$this._token = token;
-
-  TokenBuilder();
-
-  TokenBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _token = $v.token;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(Token other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$Token;
-  }
-
-  @override
-  void update(void Function(TokenBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  Token build() => _build();
-
-  _$Token _build() {
-    final _$result = _$v ?? new _$Token._(token: token);
+    final _$result = _$v ??
+        new _$LoginResponse._(
+            responseCode: responseCode,
+            success: success,
+            token: token,
+            user: user);
     replace(_$result);
     return _$result;
   }
@@ -369,38 +237,6 @@ class LoginResponseAdapter extends TypeAdapter<LoginResponse> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is LoginResponseAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class TokenAdapter extends TypeAdapter<Token> {
-  @override
-  final int typeId = 2;
-
-  @override
-  Token read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return Token();
-  }
-
-  @override
-  void write(BinaryWriter writer, Token obj) {
-    writer
-      ..writeByte(1)
-      ..writeByte(0)
-      ..write(obj.token);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TokenAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

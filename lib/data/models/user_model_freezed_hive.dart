@@ -9,7 +9,7 @@ part 'user_model_freezed_hive.g.dart';
 @freezed
 class UserModelFreezedHive with _$UserModelFreezedHive{
 
-  @HiveType(typeId: userTypeId,adapterName: 'UserModelFreezedHiveAdapter')
+  @HiveType(typeId: userFHTypeId,adapterName: 'UserModelFreezedHiveAdapter')
   const factory UserModelFreezedHive({
     @HiveField(1) String? firstName,
     @HiveField(2) String? lastName,

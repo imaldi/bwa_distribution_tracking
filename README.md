@@ -17,8 +17,18 @@
 
 
     Note: 
-    Kalau ada cara penulisan readme yang perlu diperbaiki dipersilahkan memperbaiki
+    - Kalau ada cara penulisan readme yang perlu diperbaiki dipersilahkan memperbaiki
     Saya hanya menulis seperlunya dulu
+
+    Note tentang generate Hive Adapter dari Freezed Class:
+    Kalau mau create Adapter dari class freezed, pertama tulis saja dulu mixins-
+    nya dengan tambahan _ setelah dolar, contoh:
+    class ExampleModel with _$_ExampleModel{}
+    lalu setelah tergenerate, hapus saja _ tambahan tadi jadi
+    class ExampleModel with _$ExampleModel{}
+
+    gunakan build_runner watch supaya tidak perlu jalankan build berulang2
+    
 
 ## Application FLow:
     -> User Input 

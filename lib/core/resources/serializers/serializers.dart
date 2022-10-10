@@ -9,9 +9,7 @@ import 'date_time_serializer.dart';
 part 'serializers.g.dart';
 
 @SerializersFor([
-  UserModel,
   LoginResponse,
-  Token,
   BulkScanResponse,
   BulkQRScanModel,
   BoxQRScanModel

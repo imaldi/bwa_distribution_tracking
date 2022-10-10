@@ -2,6 +2,7 @@ import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
 import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/token.dart';
 import 'package:bwa_distribution_tracking/data/models/user_model.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -38,18 +39,16 @@ void main() {
   group('getConcreteAuth', () {
     const tPhone = '082233539949';
     const tPassword = 'asdfgh';
-    final tUserModel = UserModel().rebuild((p0) => p0
-      ..id = 1
-      ..name = "Majid"
-      ..phone = "087887789889");
+    const tUserModel = UserModel(id: 1,
+      name:"Majid",
+      phone: "087887789889");
 
     final tLoginResponse = LoginResponse().rebuild((p0) => p0
       ..responseCode = 200
       ..success = true
-      ..token =
-          Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
-              .toBuilder()
-      ..user = tUserModel.toBuilder());
+      ..token = const Token(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
+
+      ..user = tUserModel);
 
     test(
         'should perform a GET request on an URL with number being the endpoint and with application/json header',

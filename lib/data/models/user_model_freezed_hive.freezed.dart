@@ -125,7 +125,7 @@ class __$$_UserModelFreezedHiveCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: userTypeId, adapterName: 'UserModelFreezedHiveAdapter')
+@HiveType(typeId: userFHTypeId, adapterName: 'UserModelFreezedHiveAdapter')
 class _$_UserModelFreezedHive implements _UserModelFreezedHive {
   const _$_UserModelFreezedHive(
       {@HiveField(1) this.firstName,

@@ -24,8 +24,8 @@ class _TestDhriveScreenState extends State<TestDhriveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body:Center(child: Text("Hoi hoi hoi ${
-        sl<Box<UserModelFreezedHive>>().get("some user class")?.firstName
-        // sl<Box<NormalDataClass>>().get("some data class")?.name
+        // sl<Box<UserModelFreezedHive>>().get("some user class")?.firstName
+        sl<Box<NormalDataClass>>().get("some data class")?.name
       }"
     ),),);
   }

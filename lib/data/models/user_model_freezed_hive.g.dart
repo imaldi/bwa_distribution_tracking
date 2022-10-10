@@ -8,7 +8,7 @@ part of 'user_model_freezed_hive.dart';
 
 class UserModelFreezedHiveAdapter extends TypeAdapter<_$_UserModelFreezedHive> {
   @override
-  final int typeId = 0;
+  final int typeId = 5;
 
   @override
   _$_UserModelFreezedHive read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class UserModelFreezedHiveAdapter extends TypeAdapter<_$_UserModelFreezedHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_UserModelFreezedHive(
-      firstName: fields[0] as String?,
-      lastName: fields[1] as String?,
-      age: fields[2] as int?,
+      firstName: fields[1] as String?,
+      lastName: fields[2] as String?,
+      age: fields[3] as int?,
     );
   }
 
@@ -27,11 +27,11 @@ class UserModelFreezedHiveAdapter extends TypeAdapter<_$_UserModelFreezedHive> {
   void write(BinaryWriter writer, _$_UserModelFreezedHive obj) {
     writer
       ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.firstName)
       ..writeByte(1)
-      ..write(obj.lastName)
+      ..write(obj.firstName)
       ..writeByte(2)
+      ..write(obj.lastName)
+      ..writeByte(3)
       ..write(obj.age);
   }
 
