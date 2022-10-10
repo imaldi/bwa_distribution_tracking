@@ -8,7 +8,7 @@ import 'dart:async' as _i5;
 import 'package:bwa_distribution_tracking/core/error/failures.dart' as _i6;
 import 'package:bwa_distribution_tracking/core/params/login_params.dart' as _i8;
 import 'package:bwa_distribution_tracking/core/params/no_params.dart' as _i10;
-import 'package:bwa_distribution_tracking/data/models/login_response.dart'
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart'
     as _i7;
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart'
     as _i2;

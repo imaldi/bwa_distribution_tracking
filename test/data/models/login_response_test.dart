@@ -1,23 +1,21 @@
 import 'dart:convert';
 
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tUserModel = UserModel().rebuild((p0) => p0
-    ..id = 1
-    ..name = "Majid"
-    ..phone = "087887789889");
+  const tUserModel = UserModel(id: 1,
+    name: "Majid",
+    phone: "087887789889");
 
-  final tLoginResponse = LoginResponse().rebuild((p0) => p0
-    ..responseCode = 200
-    ..success = true
-    ..token = Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
-        .toBuilder()
-    ..user = tUserModel.toBuilder());
+  const tLoginResponse = LoginResponse(responseCode: 200,
+    success: true,
+    token: Token(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"),
+    user: tUserModel);
 
   group('fromJson', () {
     test('should return a valid model when retrieving the json response',
@@ -27,7 +25,7 @@ void main() {
           json.decode(fixture('login_response.json'));
 
       /// act
-      final responseModel = LoginResponse.fromJson(jsonEncode(responseJsonMap));
+      final responseModel = LoginResponse.fromJson(responseJsonMap);
       // final result = responseModel.user;
       // final result = UserModel.fromJson(jsonEncode(jsonMap));
 

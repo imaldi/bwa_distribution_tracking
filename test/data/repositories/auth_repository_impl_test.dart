@@ -3,8 +3,9 @@ import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,18 +41,14 @@ void main() {
     // final tNumber = 1;
     const tPhone = '082233539949';
     const tPassword = 'asdfgh';
-    final tUserModel = UserModel().rebuild((p0) => p0
-      ..id = 1
-      ..name = "Majid"
-      ..phone = "087887789889");
+    const tUserModel = UserModel(id: 1,
+        name: "Majid",
+        phone: "087887789889");
 
-    final tLoginResponse = LoginResponse().rebuild((p0) => p0
-      ..responseCode = 200
-      ..success = true
-      ..token =
-          Token((p0) => p0..token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")
-              .toBuilder()
-      ..user = tUserModel.toBuilder());
+    const tLoginResponse = LoginResponse(responseCode: 200,
+        success: true,
+        token: Token(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"),
+        user: tUserModel);
 
     // final tNumberTriviaModel = NumberTriviaModel(number: tNumber, text:'test trivia');
     // final NumberTrivia tNumberTrivia = tNumberTriviaModel;

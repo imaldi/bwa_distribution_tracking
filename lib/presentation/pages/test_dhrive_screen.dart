@@ -1,9 +1,4 @@
-import 'package:bwa_distribution_tracking/data/models/normal_data_class.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model_freezed_hive.dart';
-import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class TestDhriveScreen extends StatefulWidget {
   const TestDhriveScreen({Key? key}) : super(key: key);
@@ -23,10 +18,11 @@ class _TestDhriveScreenState extends State<TestDhriveScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:Center(child: Text("Hoi hoi hoi ${
+    return const Scaffold(body:Center(child: Text("Hoi hoi hoi")
+    // ${
         // sl<Box<UserModelFreezedHive>>().get("some user class")?.firstName
-        sl<Box<NormalDataClass>>().get("some data class")?.name
-      }"
-    ),),);
+        // sl<Box<NormalDataClass>>().get("some data class")?.name
+      // }"
+    ),);
   }
 }

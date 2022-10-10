@@ -1,6 +1,7 @@
 import 'package:bwa_distribution_tracking/core/params/login_params.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:dartz/dartz.dart';
@@ -24,13 +25,14 @@ void main() {
 
   const tPhone = "082322323223";
   const tPassword = "Majid123";
-  final tLoginResponse = LoginResponse((b) => b
-    ..responseCode = 200
-    ..success = true
-    ..token = Token((t) => t..token = "asdasdasdasda").toBuilder()
-    ..user = UserModel((usr) => usr
-      ..id = 1
-      ..name = "Aldi").toBuilder());
+  const tUserModel = UserModel(id: 1,
+      name: "Majid",
+      phone: "087887789889");
+
+  const tLoginResponse = LoginResponse(responseCode: 200,
+      success: true,
+      token: Token(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"),
+      user: tUserModel);
 
   test(
     'should get login response from the repository',

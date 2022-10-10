@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AuthRemoteDataSource {
@@ -35,7 +36,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     print("Response Login: $response");
 
     if (response.statusCode == 200) {
-      return LoginResponse.fromJson(response.body);
+      return LoginResponse.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

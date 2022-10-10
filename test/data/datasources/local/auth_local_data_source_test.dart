@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -33,7 +35,7 @@ void main() {
   });
   group('cacheLoginResponse', () {
     final tLoginResponse =
-        LoginResponse.fromJson(fixture('login_response.json'));
+        LoginResponse.fromJson(jsonDecode(fixture('login_response.json')));
 
     test('should call put() to cache the data', () async {
       /// arrange
@@ -51,7 +53,7 @@ void main() {
 
   group('getCachedLogin', () {
     final tLoginResponse =
-        LoginResponse.fromJson(fixture('login_response.json'));
+        LoginResponse.fromJson(jsonDecode(fixture('login_response.json')));
 
     test('should return LoginResponse from Hive when there is one in the cache',
         () async {

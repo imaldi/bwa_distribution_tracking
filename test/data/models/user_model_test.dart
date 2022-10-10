@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/entities/user_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tUserModel = UserModel().rebuild((p0) => p0
-    ..id = 1
-    ..name = "Majid"
-    ..phone = "087887789889");
+  const tUserModel = UserModel(id: 1,
+      name: "Majid",
+      phone: "087887789889");
+
 
   test('should be a subclass of UserEntity', () async {
     /// assert
@@ -24,7 +24,7 @@ void main() {
       /// arrange
       final Map<String, dynamic> responseJsonMap =
           json.decode(fixture('login_response.json'));
-      final responseModel = LoginResponse.fromJson(jsonEncode(responseJsonMap));
+      final responseModel = LoginResponse.fromJson(responseJsonMap);
 
       /// act
       final result = responseModel.user;

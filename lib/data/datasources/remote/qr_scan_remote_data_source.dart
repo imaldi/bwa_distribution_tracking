@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
-import 'package:bwa_distribution_tracking/data/models/bulk_scan_response.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_scan_response.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -35,7 +36,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     log("Bulk Scan response body: ${response.body.toString()}");
 
     if (response.statusCode == 200) {
-      return BulkScanResponse.fromJson(response.body);
+      return BulkScanResponse.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

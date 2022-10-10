@@ -3,10 +3,9 @@ import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/qr_scan_remote_data_source.dart';
-import 'package:bwa_distribution_tracking/data/models/login_response.dart';
-import 'package:bwa_distribution_tracking/data/models/token.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model.dart';
-import 'package:bwa_distribution_tracking/data/models/user_model_freezed_hive.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
+import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/scan_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
@@ -24,8 +23,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart' as path_provider;
-
-import 'data/models/normal_data_class.dart';
 
 final sl = GetIt.instance;
 
@@ -90,20 +87,13 @@ Future<void> init() async {
   /// External
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
-  /// FixMe use Type Parameter for .registerAdapter()
-  // Hive.registerAdapter<UserModelFreezedHive>(UserModelFreezedHiveAdapter());
   Hive.registerAdapter<UserModel>(UserModelAdapter());
   Hive.registerAdapter(LoginResponseAdapter());
   Hive.registerAdapter(TokenAdapter());
-  Hive.registerAdapter(NormalDataClassAdapter());
   final authBox = await Hive.openBox(authBoxKey);
-  final normalBox = await Hive.openBox<NormalDataClass>(normalBoxKey);
   final userBox = await Hive.openBox<UserModel>(userBoxKey);
-  // final userBox = await Hive.openBox<UserModelFreezedHive>(userBoxKey);
   sl.registerLazySingleton<Box>(() => authBox);
   sl.registerLazySingleton<Box<UserModel>>(() => userBox);
-  // sl.registerLazySingleton<Box<UserModelFreezedHive>>(() => userBox);
-  sl.registerLazySingleton<Box<NormalDataClass>>(() => normalBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 

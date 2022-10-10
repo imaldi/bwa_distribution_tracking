@@ -11,7 +11,7 @@ import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data
     as _i6;
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart'
     as _i5;
-import 'package:bwa_distribution_tracking/data/models/login_response.dart'
+import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
