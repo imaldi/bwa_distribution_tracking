@@ -54,7 +54,7 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-    () => AuthLocalDataSourceImpl(authBox: sl<Box>()),
+    () => AuthLocalDataSourceImpl(authBox: sl<Box<LoginResponse>>()),
   );
 
   sl.registerLazySingleton<QRScanRemoteDataSource>(
@@ -88,11 +88,11 @@ Future<void> init() async {
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   Hive.registerAdapter<UserModel>(UserModelAdapter());
-  Hive.registerAdapter(LoginResponseAdapter());
-  Hive.registerAdapter(TokenAdapter());
-  final authBox = await Hive.openBox(authBoxKey);
+  Hive.registerAdapter<LoginResponse>(LoginResponseAdapter());
+  Hive.registerAdapter<Token>(TokenAdapter());
+  final authBox = await Hive.openBox<LoginResponse>(authBoxKey);
   final userBox = await Hive.openBox<UserModel>(userBoxKey);
-  sl.registerLazySingleton<Box>(() => authBox);
+  sl.registerLazySingleton<Box<LoginResponse>>(() => authBox);
   sl.registerLazySingleton<Box<UserModel>>(() => userBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());

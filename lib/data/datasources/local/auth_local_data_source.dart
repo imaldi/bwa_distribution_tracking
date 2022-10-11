@@ -16,7 +16,7 @@ abstract class AuthLocalDataSource {
 }
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
-  final Box authBox;
+  final Box<LoginResponse> authBox;
 
   AuthLocalDataSourceImpl({
     required this.authBox,
@@ -25,14 +25,14 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> cacheLoginResponse(LoginResponse loginResponse) async {
     // await authBox.put(cachedLoginResponse, loginResponse);
-    await authBox.put(cachedLoginResponse, loginResponse.toJson());
+    await authBox.put(cachedLoginResponse, loginResponse);
     // print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
   }
 
   @override
   Future<LoginResponse> getCachedLogin() async {
     if (authBox.containsKey(cachedLoginResponse)) {
-      final LoginResponse response = authBox.get(cachedLoginResponse);
+      final LoginResponse response = authBox.get(cachedLoginResponse) ?? const LoginResponse();
       // print("authBox.get(cachedLoginResponse): ${authBox.get(cachedLoginResponse)}");
       return response;
       // return Future.value(response);
