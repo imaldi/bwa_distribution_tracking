@@ -40,7 +40,7 @@ dependencies:
   # state management
   flutter_bloc: ^8.1.1
   # check internet connectivity
-  data_connection_checker_tv: ^0.3.5-nullsafety
+  internet_connection_checker: ^1.0.0+1
   equatable: ^2.0.5
   fluttertoast: ^8.0.9
   barcode_scan2: ^4.2.1

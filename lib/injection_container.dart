@@ -16,9 +16,9 @@ import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart'
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
-import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -58,7 +58,7 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<QRScanRemoteDataSource>(
-    () => QRScanRemoteDataSourceImpl(client: sl()),
+    () => QRScanRemoteDataSourceImpl(client: sl(), authBox: sl<Box<LoginResponse>>()),
   );
 
   /// Repository
@@ -95,7 +95,7 @@ Future<void> init() async {
   sl.registerLazySingleton<Box<LoginResponse>>(() => authBox);
   sl.registerLazySingleton<Box<UserModel>>(() => userBox);
   sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton(() => InternetConnectionChecker());
 
   /// Permission
   var statusCamera = await Permission.camera.status;

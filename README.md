@@ -28,6 +28,9 @@
     class ExampleModel with _$ExampleModel{}
 
     gunakan build_runner watch supaya tidak perlu jalankan build berulang2
+
+    karena ada masalah error antara auto route generator dan hive generator, kalau setelah build
+    adapter "hilang", maka rollback saja dulu semua generated file di folder model
     
 
 ## Application FLow:
@@ -44,4 +47,5 @@
 ## To Do:
 
 - Perbaiki Penggunaan Type Adapter dengan menggunakan type parameter saat register
+- Pelajari dengan pasti cara kerja build runner supaya bisa exclude atau include suatu folder
 - Buat Flavor

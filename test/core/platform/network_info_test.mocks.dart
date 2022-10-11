@@ -5,7 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:data_connection_checker_tv/data_connection_checker.dart' as _i2;
+import 'package:internet_connection_checker/internet_connection_checker.dart'
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -40,29 +41,15 @@ class _FakeAddressCheckResult_1 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [DataConnectionChecker].
+/// A class which mocks [InternetConnectionChecker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDataConnectionChecker extends _i1.Mock
-    implements _i2.DataConnectionChecker {
-  MockDataConnectionChecker() {
+class MockInternetConnectionChecker extends _i1.Mock
+    implements _i2.InternetConnectionChecker {
+  MockInternetConnectionChecker() {
     _i1.throwOnMissingStub(this);
   }
 
-  @override
-  List<_i2.AddressCheckOptions> get addresses => (super.noSuchMethod(
-        Invocation.getter(#addresses),
-        returnValue: <_i2.AddressCheckOptions>[],
-      ) as List<_i2.AddressCheckOptions>);
-  @override
-  set addresses(List<_i2.AddressCheckOptions>? _addresses) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #addresses,
-          _addresses,
-        ),
-        returnValueForMissingStub: null,
-      );
   @override
   Duration get checkInterval => (super.noSuchMethod(
         Invocation.getter(#checkInterval),
@@ -72,36 +59,44 @@ class MockDataConnectionChecker extends _i1.Mock
         ),
       ) as Duration);
   @override
-  set checkInterval(Duration? _checkInterval) => super.noSuchMethod(
+  Duration get checkTimeout => (super.noSuchMethod(
+        Invocation.getter(#checkTimeout),
+        returnValue: _FakeDuration_0(
+          this,
+          Invocation.getter(#checkTimeout),
+        ),
+      ) as Duration);
+  @override
+  List<_i2.AddressCheckOptions> get addresses => (super.noSuchMethod(
+        Invocation.getter(#addresses),
+        returnValue: <_i2.AddressCheckOptions>[],
+      ) as List<_i2.AddressCheckOptions>);
+  @override
+  set addresses(List<_i2.AddressCheckOptions>? value) => super.noSuchMethod(
         Invocation.setter(
-          #checkInterval,
-          _checkInterval,
+          #addresses,
+          value,
         ),
         returnValueForMissingStub: null,
       );
-  @override
-  List<_i2.AddressCheckResult> get lastTryResults => (super.noSuchMethod(
-        Invocation.getter(#lastTryResults),
-        returnValue: <_i2.AddressCheckResult>[],
-      ) as List<_i2.AddressCheckResult>);
   @override
   _i3.Future<bool> get hasConnection => (super.noSuchMethod(
         Invocation.getter(#hasConnection),
         returnValue: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
   @override
-  _i3.Future<_i2.DataConnectionStatus> get connectionStatus =>
+  _i3.Future<_i2.InternetConnectionStatus> get connectionStatus =>
       (super.noSuchMethod(
         Invocation.getter(#connectionStatus),
-        returnValue: _i3.Future<_i2.DataConnectionStatus>.value(
-            _i2.DataConnectionStatus.disconnected),
-      ) as _i3.Future<_i2.DataConnectionStatus>);
+        returnValue: _i3.Future<_i2.InternetConnectionStatus>.value(
+            _i2.InternetConnectionStatus.connected),
+      ) as _i3.Future<_i2.InternetConnectionStatus>);
   @override
-  _i3.Stream<_i2.DataConnectionStatus> get onStatusChange =>
+  _i3.Stream<_i2.InternetConnectionStatus> get onStatusChange =>
       (super.noSuchMethod(
         Invocation.getter(#onStatusChange),
-        returnValue: _i3.Stream<_i2.DataConnectionStatus>.empty(),
-      ) as _i3.Stream<_i2.DataConnectionStatus>);
+        returnValue: _i3.Stream<_i2.InternetConnectionStatus>.empty(),
+      ) as _i3.Stream<_i2.InternetConnectionStatus>);
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),

@@ -1,19 +1,19 @@
 import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:data_connection_checker_tv/data_connection_checker.dart';
 
-@GenerateMocks([DataConnectionChecker])
+@GenerateMocks([InternetConnectionChecker])
 import 'network_info_test.mocks.dart';
 // class MockDataConnectionChecker extends Mock implements DataConnectionChecker {}
 
 void main() {
   late NetworkInfoImpl networkInfo;
-  late MockDataConnectionChecker mockDataConnectionChecker;
+  late MockInternetConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
-    mockDataConnectionChecker = MockDataConnectionChecker();
+    mockDataConnectionChecker = MockInternetConnectionChecker();
     networkInfo = NetworkInfoImpl(mockDataConnectionChecker);
   });
 
