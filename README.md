@@ -21,16 +21,10 @@
     Saya hanya menulis seperlunya dulu
 
     Note tentang generate Hive Adapter dari Freezed Class:
-    Kalau mau create Adapter dari class freezed, pertama tulis saja dulu mixins-
-    nya dengan tambahan _ setelah dolar, contoh:
-    class ExampleModel with _$_ExampleModel{}
-    lalu setelah tergenerate, hapus saja _ tambahan tadi jadi
-    class ExampleModel with _$ExampleModel{}
+    Kalau mau create Adapter dari class freezed, pertama comit dulu semua model yang sudah tergenerate,
+    baru setelah itu update dan generate dengan 'watch', lalu rollback folder 'model'
 
     gunakan build_runner watch supaya tidak perlu jalankan build berulang2
-
-    karena ada masalah error antara auto route generator dan hive generator, kalau setelah build
-    adapter "hilang", maka rollback saja dulu semua generated file di folder model
     
 
 ## Application FLow:
