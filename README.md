@@ -20,11 +20,19 @@
     - Kalau ada cara penulisan readme yang perlu diperbaiki dipersilahkan memperbaiki
     Saya hanya menulis seperlunya dulu
 
-    Note tentang generate Hive Adapter dari Freezed Class:
-    Kalau mau create Adapter dari class freezed, pertama comit dulu semua model yang sudah tergenerate,
+    Note tentang masalah generate Hive Adapter dan Auto Route dari Freezed Class:
+    Kalau mau create route baru, pertama comit dulu semua model yang sudah tergenerate,
     baru setelah itu update dan generate dengan 'watch', lalu rollback folder 'model'
-
+    
+    setelah itu kalau mau tambah field baru, kasih komen saja di fieldnya yang baru itu
+    pastiin adapter bener, dan kalau ada eror tambah2 atau hapus aja komen sampai solve sendiri selama watch
+    comment nya tidak harus di setiap field, buat saja di atas tapi ctrl+s dan berbeda dari sebelum d generate
+    pokoknya harus di gen, terus ubah lagi, baru ctrl+s lagi
+    
     gunakan build_runner watch supaya tidak perlu jalankan build berulang2
+
+    kalau mau rollback setelah gen freezed/hive, matikan dulu watch supaya ga ke gen lagi setelah rollback
+
     
 
 ## Application FLow:
