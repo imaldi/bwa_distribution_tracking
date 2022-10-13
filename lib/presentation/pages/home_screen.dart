@@ -327,12 +327,15 @@ class HomeScreen extends StatelessWidget implements AutoRouteWrapper {
                               onTap: () async {
                                 await BarcodeScanner.scan()
                                     .then((ScanResult bulkDetail) {
-                                      var qrBloc =
-                                      context.read<QRScanBloc>();
-                                      qrBloc.add(BulkQRScanEvent(
-                                          bulkDetail.rawContent));
-                                      context.router.push(BulkScanRoute(
-                                          qrScanBloc: qrBloc));
+                                      if(bulkDetail.rawContent.isNotEmpty) {
+                                        var qrBloc =
+                                        context.read<QRScanBloc>();
+                                        print("bulkDetail ${bulkDetail.rawContent}");
+                                        qrBloc.add(BulkQRScanEvent(
+                                            bulkDetail.rawContent));
+                                        context.router.push(BulkScanRoute(
+                                            qrScanBloc: qrBloc));
+                                      }
                                 });
                               },
                               child: RoundedContainer(
