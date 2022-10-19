@@ -1,3 +1,4 @@
+import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/core/params/no_params.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
@@ -40,7 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       print("failOrLoaded UserLoginAuthEvent: $failOrLoaded");
 
       var currentState = failOrLoaded.fold(
-          (failure) => AuthFailed(errorMessage: "${failure.runtimeType}"),
+          (failure) => AuthFailed(failure, errorMessage: "${failure.runtimeType}"),
           (loginResponse) => AuthSuccess(loginResponse: loginResponse));
       emit(currentState);
     });
@@ -51,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       var successLogoutOrCachedException = await userLogout(NoParams());
 
       var currentState = successLogoutOrCachedException.fold(
-          (l) => AuthFailed(errorMessage: "${l.runtimeType}"),
+          (l) => AuthFailed(l,errorMessage: "${l.runtimeType}"),
           (r) => AuthLoggedOut());
       emit(currentState);
     });

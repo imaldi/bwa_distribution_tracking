@@ -22,10 +22,11 @@ class AuthSuccess extends AuthState {
 
 class AuthFailed extends AuthState {
   final String errorMessage;
+  final Failure failure;
 
   get debug => "The Error is: $errorMessage";
 
-  AuthFailed({this.errorMessage = "Unspecified Error"});
+  AuthFailed(this.failure,{this.errorMessage = "Unspecified Error"});
 
   @override
   List<Object?> get props => [errorMessage];

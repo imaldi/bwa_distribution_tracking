@@ -35,11 +35,12 @@ class ToastMunculState extends QRScanState {
 }
 
 class QRScanFailed extends QRScanState {
+  final Failure failure;
   final String errorMessage;
 
   get debug => "The Error is: $errorMessage";
 
-  const QRScanFailed({this.errorMessage = "Unspecified Error"});
+  const QRScanFailed(this.failure,{this.errorMessage = "Unspecified Error"});
 
   @override
   List<Object?> get props => [errorMessage];

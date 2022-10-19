@@ -15,6 +15,7 @@ import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -45,6 +46,12 @@ Future<void> init() async {
   sl.registerFactory(
         () => QRScanBloc(
           bulkQRScanUseCase: sl<BulkQRScanUseCase>(),
+    ),
+  );
+
+  sl.registerFactory(
+        () => InternetConnectionCubit(
+          sl<NetworkInfo>(),
     ),
   );
 
