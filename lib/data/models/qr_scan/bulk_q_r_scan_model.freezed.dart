@@ -64,7 +64,8 @@ mixin _$BulkQRScanModel {
 abstract class $BulkQRScanModelCopyWith<$Res> {
   factory $BulkQRScanModelCopyWith(
           BulkQRScanModel value, $Res Function(BulkQRScanModel) then) =
-      _$BulkQRScanModelCopyWithImpl<$Res>;
+      _$BulkQRScanModelCopyWithImpl<$Res, BulkQRScanModel>;
+  @useResult
   $Res call(
       {int? id,
       String? nosj,
@@ -91,14 +92,16 @@ abstract class $BulkQRScanModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BulkQRScanModelCopyWithImpl<$Res>
+class _$BulkQRScanModelCopyWithImpl<$Res, $Val extends BulkQRScanModel>
     implements $BulkQRScanModelCopyWith<$Res> {
   _$BulkQRScanModelCopyWithImpl(this._value, this._then);
 
-  final BulkQRScanModel _value;
   // ignore: unused_field
-  final $Res Function(BulkQRScanModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -125,95 +128,95 @@ class _$BulkQRScanModelCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      nosj: nosj == freezed
+      nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
               as String?,
-      qrcodeSj: qrcodeSj == freezed
+      qrcodeSj: freezed == qrcodeSj
           ? _value.qrcodeSj
           : qrcodeSj // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopc: nopc == freezed
+      nopc: freezed == nopc
           ? _value.nopc
           : nopc // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodeBatch: kodeBatch == freezed
+      kodeBatch: freezed == kodeBatch
           ? _value.kodeBatch
           : kodeBatch // ignore: cast_nullable_to_non_nullable
               as String?,
-      alamat: alamat == freezed
+      alamat: freezed == alamat
           ? _value.alamat
           : alamat // ignore: cast_nullable_to_non_nullable
               as String?,
-      pic: pic == freezed
+      pic: freezed == pic
           ? _value.pic
           : pic // ignore: cast_nullable_to_non_nullable
               as String?,
-      picTelp: picTelp == freezed
+      picTelp: freezed == picTelp
           ? _value.picTelp
           : picTelp // ignore: cast_nullable_to_non_nullable
               as String?,
-      tanggal: tanggal == freezed
+      tanggal: freezed == tanggal
           ? _value.tanggal
           : tanggal // ignore: cast_nullable_to_non_nullable
               as String?,
-      dikirimBy: dikirimBy == freezed
+      dikirimBy: freezed == dikirimBy
           ? _value.dikirimBy
           : dikirimBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopol: nopol == freezed
+      nopol: freezed == nopol
           ? _value.nopol
           : nopol // ignore: cast_nullable_to_non_nullable
               as String?,
-      nmPengemudi: nmPengemudi == freezed
+      nmPengemudi: freezed == nmPengemudi
           ? _value.nmPengemudi
           : nmPengemudi // ignore: cast_nullable_to_non_nullable
               as String?,
-      notelp: notelp == freezed
+      notelp: freezed == notelp
           ? _value.notelp
           : notelp // ignore: cast_nullable_to_non_nullable
               as String?,
-      approval: approval == freezed
+      approval: freezed == approval
           ? _value.approval
           : approval // ignore: cast_nullable_to_non_nullable
               as String?,
-      total: total == freezed
+      total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as String?,
-      kg: kg == freezed
+      kg: freezed == kg
           ? _value.kg
           : kg // ignore: cast_nullable_to_non_nullable
               as String?,
-      ttdGa: ttdGa == freezed
+      ttdGa: freezed == ttdGa
           ? _value.ttdGa
           : ttdGa // ignore: cast_nullable_to_non_nullable
               as String?,
-      ttdWl: ttdWl == freezed
+      ttdWl: freezed == ttdWl
           ? _value.ttdWl
           : ttdWl // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdBy: createdBy == freezed
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedBy: updatedBy == freezed
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -224,6 +227,7 @@ abstract class _$$_BulkQRScanModelCopyWith<$Res>
           _$_BulkQRScanModel value, $Res Function(_$_BulkQRScanModel) then) =
       __$$_BulkQRScanModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? id,
       String? nosj,
@@ -251,15 +255,13 @@ abstract class _$$_BulkQRScanModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_BulkQRScanModelCopyWithImpl<$Res>
-    extends _$BulkQRScanModelCopyWithImpl<$Res>
+    extends _$BulkQRScanModelCopyWithImpl<$Res, _$_BulkQRScanModel>
     implements _$$_BulkQRScanModelCopyWith<$Res> {
   __$$_BulkQRScanModelCopyWithImpl(
       _$_BulkQRScanModel _value, $Res Function(_$_BulkQRScanModel) _then)
-      : super(_value, (v) => _then(v as _$_BulkQRScanModel));
+      : super(_value, _then);
 
-  @override
-  _$_BulkQRScanModel get _value => super._value as _$_BulkQRScanModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -286,91 +288,91 @@ class __$$_BulkQRScanModelCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$_BulkQRScanModel(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      nosj: nosj == freezed
+      nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
               as String?,
-      qrcodeSj: qrcodeSj == freezed
+      qrcodeSj: freezed == qrcodeSj
           ? _value.qrcodeSj
           : qrcodeSj // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopc: nopc == freezed
+      nopc: freezed == nopc
           ? _value.nopc
           : nopc // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodeBatch: kodeBatch == freezed
+      kodeBatch: freezed == kodeBatch
           ? _value.kodeBatch
           : kodeBatch // ignore: cast_nullable_to_non_nullable
               as String?,
-      alamat: alamat == freezed
+      alamat: freezed == alamat
           ? _value.alamat
           : alamat // ignore: cast_nullable_to_non_nullable
               as String?,
-      pic: pic == freezed
+      pic: freezed == pic
           ? _value.pic
           : pic // ignore: cast_nullable_to_non_nullable
               as String?,
-      picTelp: picTelp == freezed
+      picTelp: freezed == picTelp
           ? _value.picTelp
           : picTelp // ignore: cast_nullable_to_non_nullable
               as String?,
-      tanggal: tanggal == freezed
+      tanggal: freezed == tanggal
           ? _value.tanggal
           : tanggal // ignore: cast_nullable_to_non_nullable
               as String?,
-      dikirimBy: dikirimBy == freezed
+      dikirimBy: freezed == dikirimBy
           ? _value.dikirimBy
           : dikirimBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopol: nopol == freezed
+      nopol: freezed == nopol
           ? _value.nopol
           : nopol // ignore: cast_nullable_to_non_nullable
               as String?,
-      nmPengemudi: nmPengemudi == freezed
+      nmPengemudi: freezed == nmPengemudi
           ? _value.nmPengemudi
           : nmPengemudi // ignore: cast_nullable_to_non_nullable
               as String?,
-      notelp: notelp == freezed
+      notelp: freezed == notelp
           ? _value.notelp
           : notelp // ignore: cast_nullable_to_non_nullable
               as String?,
-      approval: approval == freezed
+      approval: freezed == approval
           ? _value.approval
           : approval // ignore: cast_nullable_to_non_nullable
               as String?,
-      total: total == freezed
+      total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as String?,
-      kg: kg == freezed
+      kg: freezed == kg
           ? _value.kg
           : kg // ignore: cast_nullable_to_non_nullable
               as String?,
-      ttdGa: ttdGa == freezed
+      ttdGa: freezed == ttdGa
           ? _value.ttdGa
           : ttdGa // ignore: cast_nullable_to_non_nullable
               as String?,
-      ttdWl: ttdWl == freezed
+      ttdWl: freezed == ttdWl
           ? _value.ttdWl
           : ttdWl // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdBy: createdBy == freezed
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedBy: updatedBy == freezed
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -474,61 +476,70 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BulkQRScanModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.nosj, nosj) &&
-            const DeepCollectionEquality().equals(other.qrcodeSj, qrcodeSj) &&
-            const DeepCollectionEquality().equals(other.nopc, nopc) &&
-            const DeepCollectionEquality().equals(other.kodeBatch, kodeBatch) &&
-            const DeepCollectionEquality().equals(other.alamat, alamat) &&
-            const DeepCollectionEquality().equals(other.pic, pic) &&
-            const DeepCollectionEquality().equals(other.picTelp, picTelp) &&
-            const DeepCollectionEquality().equals(other.tanggal, tanggal) &&
-            const DeepCollectionEquality().equals(other.dikirimBy, dikirimBy) &&
-            const DeepCollectionEquality().equals(other.nopol, nopol) &&
-            const DeepCollectionEquality()
-                .equals(other.nmPengemudi, nmPengemudi) &&
-            const DeepCollectionEquality().equals(other.notelp, notelp) &&
-            const DeepCollectionEquality().equals(other.approval, approval) &&
-            const DeepCollectionEquality().equals(other.total, total) &&
-            const DeepCollectionEquality().equals(other.kg, kg) &&
-            const DeepCollectionEquality().equals(other.ttdGa, ttdGa) &&
-            const DeepCollectionEquality().equals(other.ttdWl, ttdWl) &&
-            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
-            const DeepCollectionEquality().equals(other.updatedBy, updatedBy) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nosj, nosj) || other.nosj == nosj) &&
+            (identical(other.qrcodeSj, qrcodeSj) ||
+                other.qrcodeSj == qrcodeSj) &&
+            (identical(other.nopc, nopc) || other.nopc == nopc) &&
+            (identical(other.kodeBatch, kodeBatch) ||
+                other.kodeBatch == kodeBatch) &&
+            (identical(other.alamat, alamat) || other.alamat == alamat) &&
+            (identical(other.pic, pic) || other.pic == pic) &&
+            (identical(other.picTelp, picTelp) || other.picTelp == picTelp) &&
+            (identical(other.tanggal, tanggal) || other.tanggal == tanggal) &&
+            (identical(other.dikirimBy, dikirimBy) ||
+                other.dikirimBy == dikirimBy) &&
+            (identical(other.nopol, nopol) || other.nopol == nopol) &&
+            (identical(other.nmPengemudi, nmPengemudi) ||
+                other.nmPengemudi == nmPengemudi) &&
+            (identical(other.notelp, notelp) || other.notelp == notelp) &&
+            (identical(other.approval, approval) ||
+                other.approval == approval) &&
+            (identical(other.total, total) || other.total == total) &&
+            (identical(other.kg, kg) || other.kg == kg) &&
+            (identical(other.ttdGa, ttdGa) || other.ttdGa == ttdGa) &&
+            (identical(other.ttdWl, ttdWl) || other.ttdWl == ttdWl) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(id),
-        const DeepCollectionEquality().hash(nosj),
-        const DeepCollectionEquality().hash(qrcodeSj),
-        const DeepCollectionEquality().hash(nopc),
-        const DeepCollectionEquality().hash(kodeBatch),
-        const DeepCollectionEquality().hash(alamat),
-        const DeepCollectionEquality().hash(pic),
-        const DeepCollectionEquality().hash(picTelp),
-        const DeepCollectionEquality().hash(tanggal),
-        const DeepCollectionEquality().hash(dikirimBy),
-        const DeepCollectionEquality().hash(nopol),
-        const DeepCollectionEquality().hash(nmPengemudi),
-        const DeepCollectionEquality().hash(notelp),
-        const DeepCollectionEquality().hash(approval),
-        const DeepCollectionEquality().hash(total),
-        const DeepCollectionEquality().hash(kg),
-        const DeepCollectionEquality().hash(ttdGa),
-        const DeepCollectionEquality().hash(ttdWl),
-        const DeepCollectionEquality().hash(createdBy),
-        const DeepCollectionEquality().hash(updatedBy),
-        const DeepCollectionEquality().hash(createdAt),
-        const DeepCollectionEquality().hash(updatedAt)
+        id,
+        nosj,
+        qrcodeSj,
+        nopc,
+        kodeBatch,
+        alamat,
+        pic,
+        picTelp,
+        tanggal,
+        dikirimBy,
+        nopol,
+        nmPengemudi,
+        notelp,
+        approval,
+        total,
+        kg,
+        ttdGa,
+        ttdWl,
+        createdBy,
+        updatedBy,
+        createdAt,
+        updatedAt
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BulkQRScanModelCopyWith<_$_BulkQRScanModel> get copyWith =>
       __$$_BulkQRScanModelCopyWithImpl<_$_BulkQRScanModel>(this, _$identity);
 

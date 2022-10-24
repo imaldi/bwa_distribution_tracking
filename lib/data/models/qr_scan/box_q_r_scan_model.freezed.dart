@@ -61,7 +61,8 @@ mixin _$BoxQRScanModel {
 abstract class $BoxQRScanModelCopyWith<$Res> {
   factory $BoxQRScanModelCopyWith(
           BoxQRScanModel value, $Res Function(BoxQRScanModel) then) =
-      _$BoxQRScanModelCopyWithImpl<$Res>;
+      _$BoxQRScanModelCopyWithImpl<$Res, BoxQRScanModel>;
+  @useResult
   $Res call(
       {int? id,
       String? notrans,
@@ -86,14 +87,16 @@ abstract class $BoxQRScanModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BoxQRScanModelCopyWithImpl<$Res>
+class _$BoxQRScanModelCopyWithImpl<$Res, $Val extends BoxQRScanModel>
     implements $BoxQRScanModelCopyWith<$Res> {
   _$BoxQRScanModelCopyWithImpl(this._value, this._then);
 
-  final BoxQRScanModel _value;
   // ignore: unused_field
-  final $Res Function(BoxQRScanModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -118,87 +121,87 @@ class _$BoxQRScanModelCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      notrans: notrans == freezed
+      notrans: freezed == notrans
           ? _value.notrans
           : notrans // ignore: cast_nullable_to_non_nullable
               as String?,
-      nosj: nosj == freezed
+      nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodeBatch: kodeBatch == freezed
+      kodeBatch: freezed == kodeBatch
           ? _value.kodeBatch
           : kodeBatch // ignore: cast_nullable_to_non_nullable
               as String?,
-      nmProject: nmProject == freezed
+      nmProject: freezed == nmProject
           ? _value.nmProject
           : nmProject // ignore: cast_nullable_to_non_nullable
               as String?,
-      jenisQuran: jenisQuran == freezed
+      jenisQuran: freezed == jenisQuran
           ? _value.jenisQuran
           : jenisQuran // ignore: cast_nullable_to_non_nullable
               as String?,
-      jmlKeluar: jmlKeluar == freezed
+      jmlKeluar: freezed == jmlKeluar
           ? _value.jmlKeluar
           : jmlKeluar // ignore: cast_nullable_to_non_nullable
               as String?,
-      vendor: vendor == freezed
+      vendor: freezed == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String?,
-      warehouse: warehouse == freezed
+      warehouse: freezed == warehouse
           ? _value.warehouse
           : warehouse // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      jenisReject: jenisReject == freezed
+      jenisReject: freezed == jenisReject
           ? _value.jenisReject
           : jenisReject // ignore: cast_nullable_to_non_nullable
               as String?,
-      keterangan: keterangan == freezed
+      keterangan: freezed == keterangan
           ? _value.keterangan
           : keterangan // ignore: cast_nullable_to_non_nullable
               as String?,
-      approval: approval == freezed
+      approval: freezed == approval
           ? _value.approval
           : approval // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopc: nopc == freezed
+      nopc: freezed == nopc
           ? _value.nopc
           : nopc // ignore: cast_nullable_to_non_nullable
               as String?,
-      upload: upload == freezed
+      upload: freezed == upload
           ? _value.upload
           : upload // ignore: cast_nullable_to_non_nullable
               as String?,
-      tglDiajukan: tglDiajukan == freezed
+      tglDiajukan: freezed == tglDiajukan
           ? _value.tglDiajukan
           : tglDiajukan // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdBy: createdBy == freezed
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedBy: updatedBy == freezed
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -209,6 +212,7 @@ abstract class _$$_BoxQRScanModelCopyWith<$Res>
           _$_BoxQRScanModel value, $Res Function(_$_BoxQRScanModel) then) =
       __$$_BoxQRScanModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? id,
       String? notrans,
@@ -234,15 +238,13 @@ abstract class _$$_BoxQRScanModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_BoxQRScanModelCopyWithImpl<$Res>
-    extends _$BoxQRScanModelCopyWithImpl<$Res>
+    extends _$BoxQRScanModelCopyWithImpl<$Res, _$_BoxQRScanModel>
     implements _$$_BoxQRScanModelCopyWith<$Res> {
   __$$_BoxQRScanModelCopyWithImpl(
       _$_BoxQRScanModel _value, $Res Function(_$_BoxQRScanModel) _then)
-      : super(_value, (v) => _then(v as _$_BoxQRScanModel));
+      : super(_value, _then);
 
-  @override
-  _$_BoxQRScanModel get _value => super._value as _$_BoxQRScanModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -267,83 +269,83 @@ class __$$_BoxQRScanModelCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$_BoxQRScanModel(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      notrans: notrans == freezed
+      notrans: freezed == notrans
           ? _value.notrans
           : notrans // ignore: cast_nullable_to_non_nullable
               as String?,
-      nosj: nosj == freezed
+      nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodeBatch: kodeBatch == freezed
+      kodeBatch: freezed == kodeBatch
           ? _value.kodeBatch
           : kodeBatch // ignore: cast_nullable_to_non_nullable
               as String?,
-      nmProject: nmProject == freezed
+      nmProject: freezed == nmProject
           ? _value.nmProject
           : nmProject // ignore: cast_nullable_to_non_nullable
               as String?,
-      jenisQuran: jenisQuran == freezed
+      jenisQuran: freezed == jenisQuran
           ? _value.jenisQuran
           : jenisQuran // ignore: cast_nullable_to_non_nullable
               as String?,
-      jmlKeluar: jmlKeluar == freezed
+      jmlKeluar: freezed == jmlKeluar
           ? _value.jmlKeluar
           : jmlKeluar // ignore: cast_nullable_to_non_nullable
               as String?,
-      vendor: vendor == freezed
+      vendor: freezed == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String?,
-      warehouse: warehouse == freezed
+      warehouse: freezed == warehouse
           ? _value.warehouse
           : warehouse // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      jenisReject: jenisReject == freezed
+      jenisReject: freezed == jenisReject
           ? _value.jenisReject
           : jenisReject // ignore: cast_nullable_to_non_nullable
               as String?,
-      keterangan: keterangan == freezed
+      keterangan: freezed == keterangan
           ? _value.keterangan
           : keterangan // ignore: cast_nullable_to_non_nullable
               as String?,
-      approval: approval == freezed
+      approval: freezed == approval
           ? _value.approval
           : approval // ignore: cast_nullable_to_non_nullable
               as String?,
-      nopc: nopc == freezed
+      nopc: freezed == nopc
           ? _value.nopc
           : nopc // ignore: cast_nullable_to_non_nullable
               as String?,
-      upload: upload == freezed
+      upload: freezed == upload
           ? _value.upload
           : upload // ignore: cast_nullable_to_non_nullable
               as String?,
-      tglDiajukan: tglDiajukan == freezed
+      tglDiajukan: freezed == tglDiajukan
           ? _value.tglDiajukan
           : tglDiajukan // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdBy: createdBy == freezed
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedBy: updatedBy == freezed
+      updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -440,60 +442,70 @@ class _$_BoxQRScanModel implements _BoxQRScanModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BoxQRScanModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.notrans, notrans) &&
-            const DeepCollectionEquality().equals(other.nosj, nosj) &&
-            const DeepCollectionEquality().equals(other.kodeBatch, kodeBatch) &&
-            const DeepCollectionEquality().equals(other.nmProject, nmProject) &&
-            const DeepCollectionEquality()
-                .equals(other.jenisQuran, jenisQuran) &&
-            const DeepCollectionEquality().equals(other.jmlKeluar, jmlKeluar) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.warehouse, warehouse) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.jenisReject, jenisReject) &&
-            const DeepCollectionEquality()
-                .equals(other.keterangan, keterangan) &&
-            const DeepCollectionEquality().equals(other.approval, approval) &&
-            const DeepCollectionEquality().equals(other.nopc, nopc) &&
-            const DeepCollectionEquality().equals(other.upload, upload) &&
-            const DeepCollectionEquality()
-                .equals(other.tglDiajukan, tglDiajukan) &&
-            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
-            const DeepCollectionEquality().equals(other.updatedBy, updatedBy) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.notrans, notrans) || other.notrans == notrans) &&
+            (identical(other.nosj, nosj) || other.nosj == nosj) &&
+            (identical(other.kodeBatch, kodeBatch) ||
+                other.kodeBatch == kodeBatch) &&
+            (identical(other.nmProject, nmProject) ||
+                other.nmProject == nmProject) &&
+            (identical(other.jenisQuran, jenisQuran) ||
+                other.jenisQuran == jenisQuran) &&
+            (identical(other.jmlKeluar, jmlKeluar) ||
+                other.jmlKeluar == jmlKeluar) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.warehouse, warehouse) ||
+                other.warehouse == warehouse) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.jenisReject, jenisReject) ||
+                other.jenisReject == jenisReject) &&
+            (identical(other.keterangan, keterangan) ||
+                other.keterangan == keterangan) &&
+            (identical(other.approval, approval) ||
+                other.approval == approval) &&
+            (identical(other.nopc, nopc) || other.nopc == nopc) &&
+            (identical(other.upload, upload) || other.upload == upload) &&
+            (identical(other.tglDiajukan, tglDiajukan) ||
+                other.tglDiajukan == tglDiajukan) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(id),
-        const DeepCollectionEquality().hash(notrans),
-        const DeepCollectionEquality().hash(nosj),
-        const DeepCollectionEquality().hash(kodeBatch),
-        const DeepCollectionEquality().hash(nmProject),
-        const DeepCollectionEquality().hash(jenisQuran),
-        const DeepCollectionEquality().hash(jmlKeluar),
-        const DeepCollectionEquality().hash(vendor),
-        const DeepCollectionEquality().hash(warehouse),
-        const DeepCollectionEquality().hash(status),
-        const DeepCollectionEquality().hash(jenisReject),
-        const DeepCollectionEquality().hash(keterangan),
-        const DeepCollectionEquality().hash(approval),
-        const DeepCollectionEquality().hash(nopc),
-        const DeepCollectionEquality().hash(upload),
-        const DeepCollectionEquality().hash(tglDiajukan),
-        const DeepCollectionEquality().hash(createdBy),
-        const DeepCollectionEquality().hash(updatedBy),
-        const DeepCollectionEquality().hash(createdAt),
-        const DeepCollectionEquality().hash(updatedAt)
+        id,
+        notrans,
+        nosj,
+        kodeBatch,
+        nmProject,
+        jenisQuran,
+        jmlKeluar,
+        vendor,
+        warehouse,
+        status,
+        jenisReject,
+        keterangan,
+        approval,
+        nopc,
+        upload,
+        tglDiajukan,
+        createdBy,
+        updatedBy,
+        createdAt,
+        updatedAt
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BoxQRScanModelCopyWith<_$_BoxQRScanModel> get copyWith =>
       __$$_BoxQRScanModelCopyWithImpl<_$_BoxQRScanModel>(this, _$identity);
 

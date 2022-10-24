@@ -35,7 +35,8 @@ mixin _$BulkScanResponse {
 abstract class $BulkScanResponseCopyWith<$Res> {
   factory $BulkScanResponseCopyWith(
           BulkScanResponse value, $Res Function(BulkScanResponse) then) =
-      _$BulkScanResponseCopyWithImpl<$Res>;
+      _$BulkScanResponseCopyWithImpl<$Res, BulkScanResponse>;
+  @useResult
   $Res call(
       {bool? success,
       String? message,
@@ -44,14 +45,16 @@ abstract class $BulkScanResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BulkScanResponseCopyWithImpl<$Res>
+class _$BulkScanResponseCopyWithImpl<$Res, $Val extends BulkScanResponse>
     implements $BulkScanResponseCopyWith<$Res> {
   _$BulkScanResponseCopyWithImpl(this._value, this._then);
 
-  final BulkScanResponse _value;
   // ignore: unused_field
-  final $Res Function(BulkScanResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? success = freezed,
@@ -60,23 +63,23 @@ class _$BulkScanResponseCopyWithImpl<$Res>
     Object? detail = freezed,
   }) {
     return _then(_value.copyWith(
-      success: success == freezed
+      success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      message: message == freezed
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: data == freezed
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<BulkQRScanModel>?,
-      detail: detail == freezed
+      detail: freezed == detail
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
               as List<BoxQRScanModel>?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -87,6 +90,7 @@ abstract class _$$_BulkScanResponseCopyWith<$Res>
           _$_BulkScanResponse value, $Res Function(_$_BulkScanResponse) then) =
       __$$_BulkScanResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool? success,
       String? message,
@@ -96,15 +100,13 @@ abstract class _$$_BulkScanResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_BulkScanResponseCopyWithImpl<$Res>
-    extends _$BulkScanResponseCopyWithImpl<$Res>
+    extends _$BulkScanResponseCopyWithImpl<$Res, _$_BulkScanResponse>
     implements _$$_BulkScanResponseCopyWith<$Res> {
   __$$_BulkScanResponseCopyWithImpl(
       _$_BulkScanResponse _value, $Res Function(_$_BulkScanResponse) _then)
-      : super(_value, (v) => _then(v as _$_BulkScanResponse));
+      : super(_value, _then);
 
-  @override
-  _$_BulkScanResponse get _value => super._value as _$_BulkScanResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? success = freezed,
@@ -113,19 +115,19 @@ class __$$_BulkScanResponseCopyWithImpl<$Res>
     Object? detail = freezed,
   }) {
     return _then(_$_BulkScanResponse(
-      success: success == freezed
+      success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      message: message == freezed
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: data == freezed
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<BulkQRScanModel>?,
-      detail: detail == freezed
+      detail: freezed == detail
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
               as List<BoxQRScanModel>?,
@@ -162,8 +164,8 @@ class _$_BulkScanResponse implements _BulkScanResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BulkScanResponse &&
-            const DeepCollectionEquality().equals(other.success, success) &&
-            const DeepCollectionEquality().equals(other.message, message) &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality().equals(other.detail, detail));
   }
@@ -172,13 +174,14 @@ class _$_BulkScanResponse implements _BulkScanResponse {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(success),
-      const DeepCollectionEquality().hash(message),
+      success,
+      message,
       const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(detail));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BulkScanResponseCopyWith<_$_BulkScanResponse> get copyWith =>
       __$$_BulkScanResponseCopyWithImpl<_$_BulkScanResponse>(this, _$identity);
 
