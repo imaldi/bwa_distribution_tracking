@@ -10,3 +10,7 @@ class ServerFailure extends Failure {}
 class NoInternetFailure extends Failure {}
 
 class CacheFailure extends Failure {}
+
+class LocationServiceDisabledFailure extends Failure {}
+
+class PermissionDeniedFailure extends Failure {}

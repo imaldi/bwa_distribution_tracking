@@ -40,7 +40,8 @@ mixin _$LoginResponse {
 abstract class $LoginResponseCopyWith<$Res> {
   factory $LoginResponseCopyWith(
           LoginResponse value, $Res Function(LoginResponse) then) =
-      _$LoginResponseCopyWithImpl<$Res>;
+      _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
+  @useResult
   $Res call(
       {@JsonKey(name: '0') @HiveField(0) int? responseCode,
       @HiveField(1) bool? success,
@@ -52,14 +53,16 @@ abstract class $LoginResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoginResponseCopyWithImpl<$Res>
+class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
     implements $LoginResponseCopyWith<$Res> {
   _$LoginResponseCopyWithImpl(this._value, this._then);
 
-  final LoginResponse _value;
   // ignore: unused_field
-  final $Res Function(LoginResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? responseCode = freezed,
@@ -68,44 +71,46 @@ class _$LoginResponseCopyWithImpl<$Res>
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      responseCode: responseCode == freezed
+      responseCode: freezed == responseCode
           ? _value.responseCode
           : responseCode // ignore: cast_nullable_to_non_nullable
               as int?,
-      success: success == freezed
+      success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as Token?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $TokenCopyWith<$Res>? get token {
     if (_value.token == null) {
       return null;
     }
 
     return $TokenCopyWith<$Res>(_value.token!, (value) {
-      return _then(_value.copyWith(token: value));
+      return _then(_value.copyWith(token: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
     return $UserModelCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -117,6 +122,7 @@ abstract class _$$_LoginResponseCopyWith<$Res>
           _$_LoginResponse value, $Res Function(_$_LoginResponse) then) =
       __$$_LoginResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: '0') @HiveField(0) int? responseCode,
       @HiveField(1) bool? success,
@@ -131,15 +137,13 @@ abstract class _$$_LoginResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_LoginResponseCopyWithImpl<$Res>
-    extends _$LoginResponseCopyWithImpl<$Res>
+    extends _$LoginResponseCopyWithImpl<$Res, _$_LoginResponse>
     implements _$$_LoginResponseCopyWith<$Res> {
   __$$_LoginResponseCopyWithImpl(
       _$_LoginResponse _value, $Res Function(_$_LoginResponse) _then)
-      : super(_value, (v) => _then(v as _$_LoginResponse));
+      : super(_value, _then);
 
-  @override
-  _$_LoginResponse get _value => super._value as _$_LoginResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? responseCode = freezed,
@@ -148,19 +152,19 @@ class __$$_LoginResponseCopyWithImpl<$Res>
     Object? user = freezed,
   }) {
     return _then(_$_LoginResponse(
-      responseCode: responseCode == freezed
+      responseCode: freezed == responseCode
           ? _value.responseCode
           : responseCode // ignore: cast_nullable_to_non_nullable
               as int?,
-      success: success == freezed
+      success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as Token?,
-      user: user == freezed
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
@@ -206,24 +210,21 @@ class _$_LoginResponse implements _LoginResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginResponse &&
-            const DeepCollectionEquality()
-                .equals(other.responseCode, responseCode) &&
-            const DeepCollectionEquality().equals(other.success, success) &&
-            const DeepCollectionEquality().equals(other.token, token) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.responseCode, responseCode) ||
+                other.responseCode == responseCode) &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(responseCode),
-      const DeepCollectionEquality().hash(success),
-      const DeepCollectionEquality().hash(token),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode =>
+      Object.hash(runtimeType, responseCode, success, token, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoginResponseCopyWith<_$_LoginResponse> get copyWith =>
       __$$_LoginResponseCopyWithImpl<_$_LoginResponse>(this, _$identity);
 

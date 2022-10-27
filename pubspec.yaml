@@ -42,6 +42,7 @@ dependencies:
   # check internet connectivity
   internet_connection_checker: ^1.0.0+1
   equatable: ^2.0.5
+  image_picker: ^0.8.6
   fluttertoast: ^8.0.9
   barcode_scan2: ^4.2.1
   freezed_annotation: ^2.2.0

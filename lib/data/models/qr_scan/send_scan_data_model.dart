@@ -7,7 +7,7 @@ part 'send_scan_data_model.g.dart';
 
 @freezed
 class SendScanDataModel with _$SendScanDataModel {
-  // tes lagi
+  // tes lag
   @HiveType(
       typeId: sendScanDataModelTypeId, adapterName: 'SendScanDataModelAdapter')
   const factory SendScanDataModel({
@@ -19,9 +19,10 @@ class SendScanDataModel with _$SendScanDataModel {
     @HiveField(5) String? kota,
     @HiveField(6) String? keterangan,
     @HiveField(7) @JsonKey(name: 'status_pengiriman') String? statusPengiriman,
-    @HiveField(8) @JsonKey(name: 'created_by') String? createdBy,
-    @HiveField(9) @JsonKey(name: 'updated_at') DateTime? updatedAt,
-    @HiveField(10) @JsonKey(name: 'created_at') DateTime? createdAt,
+    @HiveField(8) String? foto,
+    @HiveField(9) @JsonKey(name: 'created_by') String? createdBy,
+    @HiveField(10) @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @HiveField(11) @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _SendScanDataModel;
 
   factory SendScanDataModel.fromJson(Map<String, Object?> json) =>

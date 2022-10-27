@@ -2,20 +2,25 @@ import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/data/datasources/local/auth_local_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/auth_remote_data_source.dart';
+import 'package:bwa_distribution_tracking/data/datasources/remote/current_location_remote_data_source.dart';
 import 'package:bwa_distribution_tracking/data/datasources/remote/qr_scan_remote_data_source.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
+import 'package:bwa_distribution_tracking/data/repositories/geolocator_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/scan_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
+import 'package:bwa_distribution_tracking/domain/repositories/geolocator_repository.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/scan_repository.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -55,6 +60,12 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerFactory(
+        () => BulkScanScreenCubit(
+          sl<GetCurrentPositionUseCase>(),
+    ),
+  );
+
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(client: sl()),
@@ -66,6 +77,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton<QRScanRemoteDataSource>(
     () => QRScanRemoteDataSourceImpl(client: sl(), authBox: sl<Box<LoginResponse>>()),
+  );
+
+  sl.registerLazySingleton<CurrentLocationRemoteDataSource>(
+    () => CurrentLocationRemoteDataSourceImpl(),
   );
 
   /// Repository
@@ -81,12 +96,18 @@ Future<void> init() async {
       networkInfo: sl(), qrScanRemoteDataSource: sl(),
     ),
   );
+  sl.registerLazySingleton<GeolocatorRepository>(
+    () => GeolocatorRepositoryImpl(
+      networkInfo: sl(), currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
+    ),
+  );
 
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
   sl.registerLazySingleton(() => CheckUserLoginStatusUseCase(sl()));
   sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
   sl.registerLazySingleton(() => BulkQRScanUseCase(sl()));
+  sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -107,10 +128,11 @@ Future<void> init() async {
   /// Permission
   var statusCamera = await Permission.camera.status;
   var statusStorage = await Permission.storage.status;
-  if (statusCamera.isDenied) {
-    await Permission.camera.request();
-    // We didn't ask for permission yet or the permission has been denied before but not permanently.
-  }
+  var statusLocation = await Permission.locationWhenInUse.status;
+
+  if(statusLocation.isDenied) await Permission.locationWhenInUse.request();
+  if(statusLocation.isPermanentlyDenied) openAppSettings();
+  if (statusCamera.isDenied) await Permission.camera.request();
   if (await Permission.camera.isPermanentlyDenied) {
     openAppSettings();
   }

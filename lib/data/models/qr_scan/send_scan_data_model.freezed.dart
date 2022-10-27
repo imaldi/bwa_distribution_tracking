@@ -38,12 +38,14 @@ mixin _$SendScanDataModel {
   @JsonKey(name: 'status_pengiriman')
   String? get statusPengiriman => throw _privateConstructorUsedError;
   @HiveField(8)
+  String? get foto => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'created_by')
   String? get createdBy => throw _privateConstructorUsedError;
-  @HiveField(9)
+  @HiveField(10)
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  @HiveField(10)
+  @HiveField(11)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -78,12 +80,14 @@ abstract class $SendScanDataModelCopyWith<$Res> {
       @JsonKey(name: 'status_pengiriman')
           String? statusPengiriman,
       @HiveField(8)
+          String? foto,
+      @HiveField(9)
       @JsonKey(name: 'created_by')
           String? createdBy,
-      @HiveField(9)
+      @HiveField(10)
       @JsonKey(name: 'updated_at')
           DateTime? updatedAt,
-      @HiveField(10)
+      @HiveField(11)
       @JsonKey(name: 'created_at')
           DateTime? createdAt});
 }
@@ -109,6 +113,7 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
     Object? kota = freezed,
     Object? keterangan = freezed,
     Object? statusPengiriman = freezed,
+    Object? foto = freezed,
     Object? createdBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
@@ -145,6 +150,10 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
       statusPengiriman: freezed == statusPengiriman
           ? _value.statusPengiriman
           : statusPengiriman // ignore: cast_nullable_to_non_nullable
+              as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
@@ -189,12 +198,14 @@ abstract class _$$_SendScanDataModelCopyWith<$Res>
       @JsonKey(name: 'status_pengiriman')
           String? statusPengiriman,
       @HiveField(8)
+          String? foto,
+      @HiveField(9)
       @JsonKey(name: 'created_by')
           String? createdBy,
-      @HiveField(9)
+      @HiveField(10)
       @JsonKey(name: 'updated_at')
           DateTime? updatedAt,
-      @HiveField(10)
+      @HiveField(11)
       @JsonKey(name: 'created_at')
           DateTime? createdAt});
 }
@@ -218,6 +229,7 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
     Object? kota = freezed,
     Object? keterangan = freezed,
     Object? statusPengiriman = freezed,
+    Object? foto = freezed,
     Object? createdBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
@@ -255,6 +267,10 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
           ? _value.statusPengiriman
           : statusPengiriman // ignore: cast_nullable_to_non_nullable
               as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -285,9 +301,10 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       @HiveField(5) this.kota,
       @HiveField(6) this.keterangan,
       @HiveField(7) @JsonKey(name: 'status_pengiriman') this.statusPengiriman,
-      @HiveField(8) @JsonKey(name: 'created_by') this.createdBy,
-      @HiveField(9) @JsonKey(name: 'updated_at') this.updatedAt,
-      @HiveField(10) @JsonKey(name: 'created_at') this.createdAt});
+      @HiveField(8) this.foto,
+      @HiveField(9) @JsonKey(name: 'created_by') this.createdBy,
+      @HiveField(10) @JsonKey(name: 'updated_at') this.updatedAt,
+      @HiveField(11) @JsonKey(name: 'created_at') this.createdAt});
 
   factory _$_SendScanDataModel.fromJson(Map<String, dynamic> json) =>
       _$$_SendScanDataModelFromJson(json);
@@ -319,20 +336,23 @@ class _$_SendScanDataModel implements _SendScanDataModel {
   final String? statusPengiriman;
   @override
   @HiveField(8)
+  final String? foto;
+  @override
+  @HiveField(9)
   @JsonKey(name: 'created_by')
   final String? createdBy;
   @override
-  @HiveField(9)
+  @HiveField(10)
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
-  @HiveField(10)
+  @HiveField(11)
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, createdBy: $createdBy, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, foto: $foto, createdBy: $createdBy, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -352,6 +372,7 @@ class _$_SendScanDataModel implements _SendScanDataModel {
                 other.keterangan == keterangan) &&
             (identical(other.statusPengiriman, statusPengiriman) ||
                 other.statusPengiriman == statusPengiriman) &&
+            (identical(other.foto, foto) || other.foto == foto) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -372,6 +393,7 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       kota,
       keterangan,
       statusPengiriman,
+      foto,
       createdBy,
       updatedAt,
       createdAt);
@@ -411,12 +433,14 @@ abstract class _SendScanDataModel implements SendScanDataModel {
       @JsonKey(name: 'status_pengiriman')
           final String? statusPengiriman,
       @HiveField(8)
+          final String? foto,
+      @HiveField(9)
       @JsonKey(name: 'created_by')
           final String? createdBy,
-      @HiveField(9)
+      @HiveField(10)
       @JsonKey(name: 'updated_at')
           final DateTime? updatedAt,
-      @HiveField(10)
+      @HiveField(11)
       @JsonKey(name: 'created_at')
           final DateTime? createdAt}) = _$_SendScanDataModel;
 
@@ -450,14 +474,17 @@ abstract class _SendScanDataModel implements SendScanDataModel {
   String? get statusPengiriman;
   @override
   @HiveField(8)
+  String? get foto;
+  @override
+  @HiveField(9)
   @JsonKey(name: 'created_by')
   String? get createdBy;
   @override
-  @HiveField(9)
+  @HiveField(10)
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
-  @HiveField(10)
+  @HiveField(11)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override

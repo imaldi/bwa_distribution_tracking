@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var textValue = "002SPJ09-KALIMANTAN000001-0002";
+    var textValue = "003SPJ22-MERANTI00098-0002";
     var controller = TextEditingController();
     return Scaffold(
       body: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     qrBloc.add(const BulkQRScanEvent(
                                                         // textValue
                                                         // controller.text
-                                                        "002SPJ09-KALIMANTAN000001-0002"));
+                                                        "003SPJ22-MERANTI00098-0002"));
                                                     context.router.push(
                                                         BulkScanRoute(
                                                             qrScanBloc: qrBloc));

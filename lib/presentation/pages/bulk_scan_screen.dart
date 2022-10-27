@@ -2,19 +2,47 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/gradients/basic_linear_gradient.dart';
+import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BulkScanScreen extends StatelessWidget implements AutoRouteWrapper {
+class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
   final QRScanBloc qrScanBloc;
 
   const BulkScanScreen({required this.qrScanBloc, Key? key}) : super(key: key);
 
+  @override
+  State<BulkScanScreen> createState() => _BulkScanScreenState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: qrScanBloc,
+        ),
+        BlocProvider.value(value: sl<BulkScanScreenCubit>())
+      ],
+      child: this,
+    );
+  }
+}
+
+class _BulkScanScreenState extends State<BulkScanScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<BulkScanScreenCubit>().getCurrentCoordinate();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,6 +250,17 @@ class BulkScanScreen extends StatelessWidget implements AutoRouteWrapper {
                             ],
                           ),
                         ),
+                        BlocBuilder<BulkScanScreenCubit, BulkScanScreenState>(
+                          builder: (context, state) {
+                            var text = "${state.sendScanDataModel.latitude}, ${state.sendScanDataModel.longtitude}";
+                            return RoundedContainer(sizeNormal,
+                                boxDecoration: BoxDecoration(
+                                    border: Border.all(color: primaryGreen)),
+                                child: NoUnderlineTextFormField(
+                                  controller: TextEditingController(text: text),
+                                ));
+                          },
+                        ),
                         // Text("Hello $name"),
                         // Text(
                         //   "The Response: ${response.toString()}",
@@ -237,14 +276,6 @@ class BulkScanScreen extends StatelessWidget implements AutoRouteWrapper {
           );
         },
       ),
-    );
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider.value(
-      value: qrScanBloc,
-      child: this,
     );
   }
 }
