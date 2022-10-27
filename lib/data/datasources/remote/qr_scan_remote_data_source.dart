@@ -22,7 +22,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<BulkScanResponse> bulkScan(String qrcodeSj) async {
-    final url = Uri.http(baseUrl, "$scanUrl/$qrcodeSj");
+    final url = Uri.https(baseUrl, "$scanUrl/$qrcodeSj");
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -37,6 +37,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("Bulk Scan response code: ${response.statusCode.toString()}");
     log("Bulk Scan response body: ${response.body.toString()}");
 
+    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     if (response.statusCode == 200) {
       var theResponse = BulkScanResponse.fromJson(jsonDecode(response.body));
       var isResponseDataNull = theResponse.data == null;

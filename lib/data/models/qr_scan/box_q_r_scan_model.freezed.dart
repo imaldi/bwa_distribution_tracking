@@ -20,7 +20,7 @@ BoxQRScanModel _$BoxQRScanModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BoxQRScanModel {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get notrans => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
   @JsonKey(name: 'kode_batch')
@@ -64,7 +64,7 @@ abstract class $BoxQRScanModelCopyWith<$Res> {
       _$BoxQRScanModelCopyWithImpl<$Res, BoxQRScanModel>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? notrans,
       String? nosj,
       @JsonKey(name: 'kode_batch') String? kodeBatch,
@@ -124,7 +124,7 @@ class _$BoxQRScanModelCopyWithImpl<$Res, $Val extends BoxQRScanModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       notrans: freezed == notrans
           ? _value.notrans
           : notrans // ignore: cast_nullable_to_non_nullable
@@ -214,7 +214,7 @@ abstract class _$$_BoxQRScanModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? notrans,
       String? nosj,
       @JsonKey(name: 'kode_batch') String? kodeBatch,
@@ -272,7 +272,7 @@ class __$$_BoxQRScanModelCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       notrans: freezed == notrans
           ? _value.notrans
           : notrans // ignore: cast_nullable_to_non_nullable
@@ -382,7 +382,7 @@ class _$_BoxQRScanModel implements _BoxQRScanModel {
       _$$_BoxQRScanModelFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? notrans;
   @override
@@ -519,7 +519,7 @@ class _$_BoxQRScanModel implements _BoxQRScanModel {
 
 abstract class _BoxQRScanModel implements BoxQRScanModel {
   const factory _BoxQRScanModel(
-          {final int? id,
+          {final String? id,
           final String? notrans,
           final String? nosj,
           @JsonKey(name: 'kode_batch') final String? kodeBatch,
@@ -545,7 +545,7 @@ abstract class _BoxQRScanModel implements BoxQRScanModel {
       _$_BoxQRScanModel.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get notrans;
   @override

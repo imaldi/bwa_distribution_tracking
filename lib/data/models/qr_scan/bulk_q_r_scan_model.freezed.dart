@@ -20,7 +20,7 @@ BulkQRScanModel _$BulkQRScanModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BulkQRScanModel {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
   @JsonKey(name: 'qrcode_sj')
   String? get qrcodeSj => throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $BulkQRScanModelCopyWith<$Res> {
       _$BulkQRScanModelCopyWithImpl<$Res, BulkQRScanModel>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nopc,
@@ -131,7 +131,7 @@ class _$BulkQRScanModelCopyWithImpl<$Res, $Val extends BulkQRScanModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -229,7 +229,7 @@ abstract class _$$_BulkQRScanModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nopc,
@@ -291,7 +291,7 @@ class __$$_BulkQRScanModelCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -411,7 +411,7 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
       _$$_BulkQRScanModelFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? nosj;
   @override
@@ -553,7 +553,7 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
 
 abstract class _BulkQRScanModel implements BulkQRScanModel {
   const factory _BulkQRScanModel(
-          {final int? id,
+          {final String? id,
           final String? nosj,
           @JsonKey(name: 'qrcode_sj') final String? qrcodeSj,
           final String? nopc,
@@ -581,7 +581,7 @@ abstract class _BulkQRScanModel implements BulkQRScanModel {
       _$_BulkQRScanModel.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get nosj;
   @override

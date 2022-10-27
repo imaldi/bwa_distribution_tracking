@@ -20,7 +20,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<LoginResponse> login(String phone, String password) async {
-    final url = Uri.http(baseUrl, loginUrl);
+    final url = Uri.https(baseUrl, loginUrl);
     print("URL login remote data source: $url");
     final response = await client.post(
       url,

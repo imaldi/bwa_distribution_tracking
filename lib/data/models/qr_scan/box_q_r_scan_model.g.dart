@@ -8,7 +8,7 @@ part of 'box_q_r_scan_model.dart';
 
 _$_BoxQRScanModel _$$_BoxQRScanModelFromJson(Map<String, dynamic> json) =>
     _$_BoxQRScanModel(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       notrans: json['notrans'] as String?,
       nosj: json['nosj'] as String?,
       kodeBatch: json['kode_batch'] as String?,

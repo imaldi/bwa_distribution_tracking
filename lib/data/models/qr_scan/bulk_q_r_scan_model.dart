@@ -6,9 +6,10 @@ part 'bulk_q_r_scan_model.g.dart';
 
 @freezed
 class BulkQRScanModel with _$BulkQRScanModel{
-
+  // test
+  // test
   const factory BulkQRScanModel({
-  int? id,
+  String? id,
   String? nosj,
   @JsonKey(name: 'qrcode_sj')
   String? qrcodeSj,

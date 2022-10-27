@@ -8,7 +8,7 @@ part of 'bulk_q_r_scan_model.dart';
 
 _$_BulkQRScanModel _$$_BulkQRScanModelFromJson(Map<String, dynamic> json) =>
     _$_BulkQRScanModel(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       nosj: json['nosj'] as String?,
       qrcodeSj: json['qrcode_sj'] as String?,
       nopc: json['nopc'] as String?,
