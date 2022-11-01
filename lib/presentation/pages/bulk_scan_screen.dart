@@ -278,9 +278,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                           //   print("The Path: ${theImage?.path ?? ""}");
                           //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
                           // },
-                          functionCallbackSetImageFilePath: (numb, theImage) {
+                          functionCallbackSetImageFilePath: (numb, theImage) async {
+                            // var size = theImage.runtimeType().toString();
                             print("INI NOMOR: $numb");
                             print("The Path: ${theImage?.path ?? ""}");
+                            print("foto size: ${theImage.runtimeType}");
+
                             context
                                 .read<BulkScanScreenCubit>()
                                 .setFotoPath(theImage?.path ?? "");

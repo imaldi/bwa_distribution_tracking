@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
@@ -10,6 +11,7 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_mod
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_response.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 abstract class QRScanRemoteDataSource {
   Future<BulkScanResponse> bulkScan(String qrcodeSj);
@@ -19,7 +21,6 @@ abstract class QRScanRemoteDataSource {
 class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
   final http.Client client;
   final Box<LoginResponse> authBox;
-
 
   QRScanRemoteDataSourceImpl({required this.client, required this.authBox});
 
@@ -44,7 +45,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     if (response.statusCode == 200) {
       var theResponse = BulkScanResponse.fromJson(jsonDecode(response.body));
       var isResponseDataNull = theResponse.data == null;
-      if(isResponseDataNull) {
+      if (isResponseDataNull) {
         throw ServerException();
       }
       return theResponse;
@@ -61,23 +62,31 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
     print("token: $token");
     print("latitude from sendScan in remote data source: ${model.latitude}");
-    final response = await client.post(
-      url,
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-      body: {
-        "nosj":model.nosj ?? "asdas",
-        "latitude":model.latitude ?? "",
-        "longtitude":model.longtitude ?? "",
-        "alamat":model.alamat ?? "asdas",
-        "kota":model.kota ?? "asdas",
-        "keterangan":model.keterangan ?? "asdasd",
-        // "foto": "asdasd",
-        "status_pengiriman": model.statusPengiriman ?? "asdsa",
-      }
-    );
+    var bodyMap = {
+      "nosj": model.nosj ?? "asdas",
+      "latitude": model.latitude ?? "",
+      "longtitude": model.longtitude ?? "",
+      "alamat": model.alamat ?? "asdas",
+      "kota": model.kota ?? "asdas",
+      "keterangan": model.keterangan ?? "asdasd",
+      // "foto": "asdasd",
+      "status_pengiriman": model.statusPengiriman ?? "asdsa",
+    };
+    final request = http.MultipartRequest("POST", url);
+    // var theImage = File(model.foto ?? "");
+
+    if ((model.foto ?? "").isNotEmpty) {
+      request.files.add(await http.MultipartFile.fromPath(
+          'foto', model.foto!));
+    }
+    request.fields.addAll(bodyMap);
+    request.headers.addAll({
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+      // 'Content-Type': 'application/json'
+    });
+    final response =
+    await http.Response.fromStream(await request.send());
     print("Bulk Scan response code: ${response.statusCode.toString()}");
     log("Bulk Scan response body: ${response.body.toString()}");
 
@@ -89,5 +98,4 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
       throw ServerException();
     }
   }
-
 }

@@ -5,10 +5,13 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
+import 'package:bwa_distribution_tracking/core/resources/helper/file_compressor.dart';
+import 'package:bwa_distribution_tracking/core/resources/helper/file_size_check.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_confirm_dialog/my_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'widget_cubit/ImagePickerCubit.dart';
@@ -43,7 +46,7 @@ class MyImagePickerWidget extends StatefulWidget {
 }
 
 class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
-  File? _storedImage;
+  late File _storedImage;
 
   // File ;
   Future _takePicture(BuildContext context, ImagePickerCubitState state) async {
@@ -59,27 +62,18 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
 
 
     _storedImage = File(pickedFile?.path ?? "");
+    print("image size in widget: ${fileSizeCheckInMB(_storedImage.readAsBytesSync().lengthInBytes)} MB");
+
+    _storedImage = await fileCompressor(_storedImage);
+    print("image size after Compressed: ${fileSizeCheckInMB(_storedImage.readAsBytesSync().lengthInBytes)} MB");
+
     cubit.updateState(storedImage: _storedImage);
     widget.functionCallbackSetImageFilePath?.call(69,_storedImage);
     // widget.setImageFilePath(0,_storedImage);
-    print("_storedImage path : ${_storedImage?.path}");
+    print("_storedImage path : ${_storedImage.path}");
+    cubit.updateState(storedImage: _storedImage);
+
     FocusScope.of(context).unfocus();
-
-    // print("_storedImage path : ${_storedImage?.path}");
-
-    // widget.issuerImage = _storedImage;
-    // ImagePicker imagePicker = ImagePicker();
-    // final imageFile = await imagePicker.getImage(source: ImageSource.camera,
-    //   maxWidth: 600,
-    // );
-    // if (imageFile == null) {
-    //   return;
-    // }
-    // setState(() {
-    //   _storedImage = imageFile;
-    // });
-    // final appDir = await syspaths.getApplicationDocumentsDirectory();    final fileName = path.basename(imageFile.path);
-    // final savedImage = await imageFile.copy('${appDir.path}/$fileName');
   }
 
   Future _pickFile(BuildContext context, ImagePickerCubitState state) async {
@@ -91,14 +85,17 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
     // _storedImage = File(result.files.single.path ?? "");
     ImagePicker imagePicker = ImagePicker();
 
-    PickedFile? pickedFile = await imagePicker.getImage(source: ImageSource.gallery).whenComplete(() {
+    XFile? pickedFile = await imagePicker.pickImage(source: ImageSource.gallery).whenComplete(() {
       // setState(() {});
     });
 
     print("pickedFile path : ${pickedFile?.path}");
 
     _storedImage = File(pickedFile?.path ?? "");
-    // widget.issuerImage = _storedImage;
+    print("image size in widget: ${fileSizeCheckInMB(_storedImage.readAsBytesSync().lengthInBytes)} MB");
+    _storedImage = await fileCompressor(_storedImage);
+    print("image size after Compressed: ${fileSizeCheckInMB(_storedImage.readAsBytesSync().lengthInBytes)} MB");
+
     cubit.updateState(storedImage: _storedImage);
 
     widget.functionCallbackSetImageFilePath?.call(0,_storedImage);
