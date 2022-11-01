@@ -18,7 +18,7 @@ part 'login_response.g.dart';
 
 @freezed
 class LoginResponse with _$LoginResponse{
-
+  // refresh for adapter with changing comments
   @HiveType(typeId: loginResponseTypeId,adapterName: 'LoginResponseAdapter')
   @JsonSerializable(explicitToJson: true)
   const factory LoginResponse({

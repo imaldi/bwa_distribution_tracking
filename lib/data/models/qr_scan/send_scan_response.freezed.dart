@@ -21,6 +21,7 @@ SendScanResponse _$SendScanResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SendScanResponse {
   bool? get success => throw _privateConstructorUsedError;
+  SendScanDataModel? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,9 @@ abstract class $SendScanResponseCopyWith<$Res> {
           SendScanResponse value, $Res Function(SendScanResponse) then) =
       _$SendScanResponseCopyWithImpl<$Res, SendScanResponse>;
   @useResult
-  $Res call({bool? success});
+  $Res call({bool? success, SendScanDataModel? data});
+
+  $SendScanDataModelCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -51,13 +54,30 @@ class _$SendScanResponseCopyWithImpl<$Res, $Val extends SendScanResponse>
   @override
   $Res call({
     Object? success = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SendScanDataModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SendScanDataModelCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $SendScanDataModelCopyWith<$Res>(_value.data!, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
   }
 }
 
@@ -69,7 +89,10 @@ abstract class _$$_SendScanResponseCopyWith<$Res>
       __$$_SendScanResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? success});
+  $Res call({bool? success, SendScanDataModel? data});
+
+  @override
+  $SendScanDataModelCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -84,12 +107,17 @@ class __$$_SendScanResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? success = freezed,
+    Object? data = freezed,
   }) {
     return _then(_$_SendScanResponse(
       success: freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SendScanDataModel?,
     ));
   }
 }
@@ -97,17 +125,19 @@ class __$$_SendScanResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SendScanResponse implements _SendScanResponse {
-  const _$_SendScanResponse({this.success});
+  const _$_SendScanResponse({this.success, this.data});
 
   factory _$_SendScanResponse.fromJson(Map<String, dynamic> json) =>
       _$$_SendScanResponseFromJson(json);
 
   @override
   final bool? success;
+  @override
+  final SendScanDataModel? data;
 
   @override
   String toString() {
-    return 'SendScanResponse(success: $success)';
+    return 'SendScanResponse(success: $success, data: $data)';
   }
 
   @override
@@ -115,12 +145,13 @@ class _$_SendScanResponse implements _SendScanResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SendScanResponse &&
-            (identical(other.success, success) || other.success == success));
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, success);
+  int get hashCode => Object.hash(runtimeType, success, data);
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +168,17 @@ class _$_SendScanResponse implements _SendScanResponse {
 }
 
 abstract class _SendScanResponse implements SendScanResponse {
-  const factory _SendScanResponse({final bool? success}) = _$_SendScanResponse;
+  const factory _SendScanResponse(
+      {final bool? success,
+      final SendScanDataModel? data}) = _$_SendScanResponse;
 
   factory _SendScanResponse.fromJson(Map<String, dynamic> json) =
       _$_SendScanResponse.fromJson;
 
   @override
   bool? get success;
+  @override
+  SendScanDataModel? get data;
   @override
   @JsonKey(ignore: true)
   _$$_SendScanResponseCopyWith<_$_SendScanResponse> get copyWith =>

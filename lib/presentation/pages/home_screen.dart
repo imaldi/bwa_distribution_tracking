@@ -78,10 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             //     portraitValue: sizeBig, landscapeValue: sizeMedium),
                             sizeBig,
                             0),
-                        decoration: BoxDecoration(
-                          gradient: basicDiagonalGradient(),
-                          color: Colors.blue,
-                          borderRadius: const BorderRadius.only(
+                        decoration: const BoxDecoration(
+                          // gradient: basicDiagonalGradient(),
+                          color: primaryColor,
+                          borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(sizeBig),
                               bottomRight: Radius.circular(sizeBig)),
                         ),

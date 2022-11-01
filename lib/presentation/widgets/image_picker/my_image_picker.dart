@@ -2,6 +2,7 @@ import 'dart:io';
 
 
 // import 'package:file_picker/file_picker.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
@@ -18,8 +19,9 @@ import 'widget_cubit/ImagePickerCubit.dart';
 
 class MyImagePickerWidget extends StatefulWidget {
   MyImagePickerWidget(
-      this.setImageFile, {
+      {
         Key? key,
+        this.functionCallbackSetImageFilePath,
         this.isEnabled = true,
         this.imageURL,
         this.title,
@@ -28,7 +30,8 @@ class MyImagePickerWidget extends StatefulWidget {
       }) : super(key: key);
 
   // File? issuerImage;
-  Function(File? theImage) setImageFile;
+  // final void Function(int, File?) setImageFilePath;
+  final Function(int,File?)? functionCallbackSetImageFilePath;
   // bool Function() checkIsEmpty;
   bool isEnabled;
   String? imageURL;
@@ -49,14 +52,17 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
 
     PickedFile? pickedFile = await imagePicker.getImage(source: ImageSource.camera).whenComplete(() {
       // setState(() {});
-      Navigator.of(context).pop();
+      context.router.pop();
+      // Navigator.of(context).pop();
     });
     print("pickedFile path : ${pickedFile?.path}");
 
 
     _storedImage = File(pickedFile?.path ?? "");
     cubit.updateState(storedImage: _storedImage);
-    widget.setImageFile(_storedImage);
+    widget.functionCallbackSetImageFilePath?.call(69,_storedImage);
+    // widget.setImageFilePath(0,_storedImage);
+    print("_storedImage path : ${_storedImage?.path}");
     FocusScope.of(context).unfocus();
 
     // print("_storedImage path : ${_storedImage?.path}");
@@ -95,7 +101,7 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
     // widget.issuerImage = _storedImage;
     cubit.updateState(storedImage: _storedImage);
 
-    widget.setImageFile(_storedImage);
+    widget.functionCallbackSetImageFilePath?.call(0,_storedImage);
 
     print("_storedImage path : ${_storedImage?.path}");
     FocusScope.of(context).unfocus();

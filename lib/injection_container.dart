@@ -18,6 +18,7 @@ import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/send_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
@@ -49,20 +50,18 @@ Future<void> init() async {
     ),
   );
   sl.registerFactory(
-        () => QRScanBloc(
-          bulkQRScanUseCase: sl<BulkQRScanUseCase>(),
+    () => QRScanBloc(sl<BulkQRScanUseCase>(), sl<SendScanUseCase>()),
+  );
+
+  sl.registerFactory(
+    () => InternetConnectionCubit(
+      sl<NetworkInfo>(),
     ),
   );
 
   sl.registerFactory(
-        () => InternetConnectionCubit(
-          sl<NetworkInfo>(),
-    ),
-  );
-
-  sl.registerFactory(
-        () => BulkScanScreenCubit(
-          sl<GetCurrentPositionUseCase>(),
+    () => BulkScanScreenCubit(
+      sl<GetCurrentPositionUseCase>(),
     ),
   );
 
@@ -76,7 +75,8 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<QRScanRemoteDataSource>(
-    () => QRScanRemoteDataSourceImpl(client: sl(), authBox: sl<Box<LoginResponse>>()),
+    () => QRScanRemoteDataSourceImpl(
+        client: sl(), authBox: sl<Box<LoginResponse>>()),
   );
 
   sl.registerLazySingleton<CurrentLocationRemoteDataSource>(
@@ -93,12 +93,14 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<ScanRepository>(
     () => ScanRepositoryImpl(
-      networkInfo: sl(), qrScanRemoteDataSource: sl(),
+      networkInfo: sl(),
+      qrScanRemoteDataSource: sl(),
     ),
   );
   sl.registerLazySingleton<GeolocatorRepository>(
     () => GeolocatorRepositoryImpl(
-      networkInfo: sl(), currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
+      networkInfo: sl(),
+      currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
     ),
   );
 
@@ -107,6 +109,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CheckUserLoginStatusUseCase(sl()));
   sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
   sl.registerLazySingleton(() => BulkQRScanUseCase(sl()));
+  sl.registerLazySingleton(() => SendScanUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
 
   /// Core
@@ -130,8 +133,8 @@ Future<void> init() async {
   var statusStorage = await Permission.storage.status;
   var statusLocation = await Permission.locationWhenInUse.status;
 
-  if(statusLocation.isDenied) await Permission.locationWhenInUse.request();
-  if(statusLocation.isPermanentlyDenied) openAppSettings();
+  if (statusLocation.isDenied) await Permission.locationWhenInUse.request();
+  if (statusLocation.isPermanentlyDenied) openAppSettings();
   if (statusCamera.isDenied) await Permission.camera.request();
   if (await Permission.camera.isPermanentlyDenied) {
     openAppSettings();

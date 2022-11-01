@@ -5,9 +5,9 @@ import 'package:bwa_distribution_tracking/core/resources/gradients/basic_linear_
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/image_picker/my_image_picker.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
@@ -43,6 +43,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
 
     context.read<BulkScanScreenCubit>().getCurrentCoordinate();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +57,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
             name = state.loginResponse.user?.name ?? "";
           }
 
-          return BlocBuilder<QRScanBloc, QRScanState>(
+          return BlocConsumer<QRScanBloc, QRScanState>(
+              listener: (context, state) {
+                if(state is SendScanSuccess){
+                  myToast("Send Scan Success");
+                }
+              },
             builder: (context, state) {
               // var response;
               if (state is QRScanLoading) {
@@ -92,8 +98,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                         ),
                         RoundedContainer(sizeMedium,
                             padding: const EdgeInsets.all(sizeMedium),
-                            boxDecoration: BoxDecoration(
-                              gradient: basicDiagonalGradient(),
+                            boxDecoration: const BoxDecoration(
+                              color: primaryColor,
+                              // gradient: basicDiagonalGradient(),
                             ),
                             child: Column(
                               children: [
@@ -196,9 +203,10 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               ],
                             )),
                         Container(
-                          decoration: BoxDecoration(
-                              gradient: basicDiagonalGradient(),
-                              borderRadius: const BorderRadius.all(
+                          decoration: const BoxDecoration(
+                              color: primaryColor,
+                              // gradient: basicDiagonalGradient(),
+                              borderRadius: BorderRadius.all(
                                   Radius.circular(sizeMedium))),
                           child: Column(
                             children: [
@@ -211,7 +219,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     state.bulkScanResponse.detail?.length,
                                 itemBuilder: (cont, ind) {
                                   return Container(
-                                    color: ind % 2 == 0 ? null : primaryBlue,
+                                    color: ind % 2 == 0
+                                        ? null
+                                        : primaryDarkerColor,
                                     child: ListTile(
                                         title: Center(
                                             child: CustomText(
@@ -252,7 +262,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                         ),
                         BlocBuilder<BulkScanScreenCubit, BulkScanScreenState>(
                           builder: (context, state) {
-                            var text = "${state.sendScanDataModel.latitude}, ${state.sendScanDataModel.longtitude}";
+                            var text =
+                                "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
                             return RoundedContainer(sizeNormal,
                                 boxDecoration: BoxDecoration(
                                     border: Border.all(color: primaryGreen)),
@@ -261,11 +272,37 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 ));
                           },
                         ),
-                        // Text("Hello $name"),
-                        // Text(
-                        //   "The Response: ${response.toString()}",
-                        //   softWrap: true,
-                        // )
+                        MyImagePickerWidget(
+                          //   setImageFilePath: (numb, theImage) => (){
+                          //   print("INI NOMOR: $numb");
+                          //   print("The Path: ${theImage?.path ?? ""}");
+                          //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
+                          // },
+                          functionCallbackSetImageFilePath: (numb, theImage) {
+                            print("INI NOMOR: $numb");
+                            print("The Path: ${theImage?.path ?? ""}");
+                            context
+                                .read<BulkScanScreenCubit>()
+                                .setFotoPath(theImage?.path ?? "");
+                          },
+                        ),
+                        Builder(
+                          builder: (context) {
+                            return ElevatedButton(
+                                onPressed: () {
+                                  var model = context
+                                      .read<BulkScanScreenCubit>()
+                                      .state
+                                      .sendScanDataModel;
+                                  context
+                                      .read<QRScanBloc>()
+                                      .add(SendScanEvent(model));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: primaryColor),
+                                child: const Text("Simpan"));
+                          }
+                        )
                       ],
                     ),
                   ),

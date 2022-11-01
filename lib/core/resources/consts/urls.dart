@@ -4,3 +4,4 @@ const baseUrl = "dev-trackingbwa.my.id";
 const apiUrl = "/api";
 const loginUrl = "$apiUrl/login";
 const scanUrl = "$apiUrl/scan_sj";
+const storeUrl = "$scanUrl/store";

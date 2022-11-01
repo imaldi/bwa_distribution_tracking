@@ -11,6 +11,13 @@ class BulkQRScanEvent extends QRScanEvent {
   List<Object?> get props => [qrcodeSj];
 }
 
+class SendScanEvent extends QRScanEvent {
+  final SendScanDataModel model;
+  const SendScanEvent(this.model);
+  @override
+  List<Object?> get props => [model];
+}
+
 class MunculkanToastEvent extends QRScanEvent{
   @override
   List<Object?> get props => [];
