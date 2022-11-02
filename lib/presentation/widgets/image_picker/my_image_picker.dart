@@ -7,11 +7,13 @@ import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/helper/file_compressor.dart';
 import 'package:bwa_distribution_tracking/core/resources/helper/file_size_check.dart';
+import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_confirm_dialog/my_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'widget_cubit/ImagePickerCubit.dart';
@@ -179,14 +181,65 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                         sizeNormal,
                         // height: sizeHuge * 4,
                         // width:
-                        child: (cubitState.imageURL == null)
-                            ? cubitState.storedImage == null
-                            ? const Icon(
-                          Icons.image,
-                          size: sizeHuge * 4,
-                          color: primaryGreen,
-                        )
-                            : Image.file(cubitState.storedImage!,
+                        child: Row(children: [
+                          Expanded(child: SizedBox(
+
+                            height: widthScreen(context) * 0.4,
+                            width: widthScreen(context) * 0.4,
+
+
+                            // margin: const EdgeInsets.only(
+                            //     right: sizeMedium,
+                            //     left: sizeMedium,
+                            //     top: sizeMedium,
+                            //     bottom: sizeNormal),
+                            child: FittedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(sizeSmall),
+                                child: RoundedContainer(sizeNormal,
+                                  // height: widthScreen(context) * 0.4,
+                                  // width: widthScreen(context) * 0.4,
+                                  boxDecoration: const BoxDecoration(color: primaryGreen),
+                                  child: SvgPicture.asset(
+                                      "assets/images/camera_white.svg",
+
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),),
+                          Expanded(child: (cubitState.imageURL == null)
+                              ? cubitState.storedImage == null
+                              ? Icon(
+                            Icons.image,
+                            size: widthScreen(context) * 0.4,
+                            color: primaryGreen,
+                          )
+                              : Image.file(cubitState.storedImage!,
+                              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                // setState(() {
+                                cubitState.imageURL = null;
+                                // });
+                                return const Icon(
+                                  Icons.image,
+                                  size: sizeHuge * 3,
+                                  color: primaryGreen,
+                                );
+                              })
+                              : (cubitState.localImageURL != cubitState.imageURL && cubitState.localImageURL != null && cubitState.storedImage != null)
+                              ? Image.file(cubitState.storedImage!,
+                              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                // setState(() {
+                                cubitState.imageURL = null;
+                                // });
+                                return const Icon(
+                                  Icons.image,
+                                  size: sizeHuge * 3,
+                                  color: primaryGreen,
+                                );
+                              })
+                              : Image.network(
+                            cubitState.imageURL!,
                             errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                               // setState(() {
                               cubitState.imageURL = null;
@@ -196,32 +249,9 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                                 size: sizeHuge * 3,
                                 color: primaryGreen,
                               );
-                            })
-                            : (cubitState.localImageURL != cubitState.imageURL && cubitState.localImageURL != null && cubitState.storedImage != null)
-                            ? Image.file(cubitState.storedImage!,
-                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                              // setState(() {
-                              cubitState.imageURL = null;
-                              // });
-                              return const Icon(
-                                Icons.image,
-                                size: sizeHuge * 3,
-                                color: primaryGreen,
-                              );
-                            })
-                            : Image.network(
-                          cubitState.imageURL!,
-                          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                            // setState(() {
-                            cubitState.imageURL = null;
-                            // });
-                            return const Icon(
-                              Icons.image,
-                              size: sizeHuge * 3,
-                              color: primaryGreen,
-                            );
-                          },
-                        ),
+                            },
+                          ),)
+                        ],)
                       ),
                     ),
                     Visibility(visible: cubitState.title != null, child: Container(padding: const EdgeInsets.all(sizeNormal),child: Text("${cubitState.title ?? ""}")))

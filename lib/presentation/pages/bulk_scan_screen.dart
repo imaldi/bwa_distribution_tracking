@@ -61,6 +61,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
               listener: (context, state) {
                 if(state is SendScanSuccess){
                   myToast("Send Scan Success");
+                  context.router.pop();
                 }
               },
             builder: (context, state) {

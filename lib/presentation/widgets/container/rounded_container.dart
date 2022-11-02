@@ -8,9 +8,13 @@ class RoundedContainer extends StatelessWidget {
       Key? key,
       this.padding,
       this.margin,
+        this.height,
+        this.width,
       this.constraints})
       : super(key: key);
   final double borderRadius;
+  final double? height;
+  final double? width;
   final Widget child;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
@@ -22,6 +26,8 @@ class RoundedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width,
       padding: padding ?? const EdgeInsets.all(sizeNormal),
       margin: margin ?? const EdgeInsets.symmetric(vertical: sizeNormal),
       constraints: constraints ?? const BoxConstraints(minHeight: sizeBig),
