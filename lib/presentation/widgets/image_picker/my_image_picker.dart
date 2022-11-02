@@ -31,6 +31,7 @@ class MyImagePickerWidget extends StatefulWidget {
         this.imageURL,
         this.title,
         this.localImageURL,
+        this.defaultImagePlaceholder,
         // this.checkIsEmpty = _checkIsEmptyDefault
       }) : super(key: key);
 
@@ -42,6 +43,7 @@ class MyImagePickerWidget extends StatefulWidget {
   String? imageURL;
   String? localImageURL;
   String? title;
+  Widget? defaultImagePlaceholder;
 
   @override
   _MyImagePickerWidgetState createState() => _MyImagePickerWidgetState();
@@ -175,24 +177,16 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: sizeHuge * 5,
-                      width: sizeHuge * 5,
+                      height: widthScreen(context) * 0.8,
+                      width: widthScreen(context) * 0.8,
                       child: RoundedContainer(
                         sizeNormal,
                         // height: sizeHuge * 4,
                         // width:
                         child: Row(children: [
                           Expanded(child: SizedBox(
-
                             height: widthScreen(context) * 0.4,
                             width: widthScreen(context) * 0.4,
-
-
-                            // margin: const EdgeInsets.only(
-                            //     right: sizeMedium,
-                            //     left: sizeMedium,
-                            //     top: sizeMedium,
-                            //     bottom: sizeNormal),
                             child: FittedBox(
                               child: Padding(
                                 padding: const EdgeInsets.all(sizeSmall),
@@ -201,7 +195,7 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                                   // width: widthScreen(context) * 0.4,
                                   boxDecoration: const BoxDecoration(color: primaryGreen),
                                   child: SvgPicture.asset(
-                                      "assets/images/camera_white.svg",
+                                      "assets/images/bi_camera.svg",
 
                                   ),
                                 ),
@@ -210,21 +204,13 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                           ),),
                           Expanded(child: (cubitState.imageURL == null)
                               ? cubitState.storedImage == null
-                              ? Icon(
-                            Icons.image,
-                            size: widthScreen(context) * 0.4,
-                            color: primaryGreen,
-                          )
+                              ? widget.defaultImagePlaceholder ?? const _DefaultIconPlaceholder()
                               : Image.file(cubitState.storedImage!,
                               errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                                 // setState(() {
                                 cubitState.imageURL = null;
                                 // });
-                                return const Icon(
-                                  Icons.image,
-                                  size: sizeHuge * 3,
-                                  color: primaryGreen,
-                                );
+                                return widget.defaultImagePlaceholder ?? const _DefaultIconPlaceholder();
                               })
                               : (cubitState.localImageURL != cubitState.imageURL && cubitState.localImageURL != null && cubitState.storedImage != null)
                               ? Image.file(cubitState.storedImage!,
@@ -232,11 +218,7 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                                 // setState(() {
                                 cubitState.imageURL = null;
                                 // });
-                                return const Icon(
-                                  Icons.image,
-                                  size: sizeHuge * 3,
-                                  color: primaryGreen,
-                                );
+                                return widget.defaultImagePlaceholder ?? const _DefaultIconPlaceholder();
                               })
                               : Image.network(
                             cubitState.imageURL!,
@@ -244,11 +226,7 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
                               // setState(() {
                               cubitState.imageURL = null;
                               // });
-                              return const Icon(
-                                Icons.image,
-                                size: sizeHuge * 3,
-                                color: primaryGreen,
-                              );
+                              return widget.defaultImagePlaceholder ?? const _DefaultIconPlaceholder();
                             },
                           ),)
                         ],)
@@ -261,6 +239,21 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
             );
           }
       ),
+    );
+  }
+}
+
+
+
+class _DefaultIconPlaceholder extends StatelessWidget {
+  const _DefaultIconPlaceholder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.image,
+      size: widthScreen(context) * 0.4,
+      color: primaryGreen,
     );
   }
 }

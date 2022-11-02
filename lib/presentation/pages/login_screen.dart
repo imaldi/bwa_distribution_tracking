@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               }
                                               if (state is AuthSuccess) {
                                                 context.router
-                                                    .push(const HomeRoute());
+                                                    .replace(const HomeRoute());
                                               }
                                             }, builder: (bc, state) {
 

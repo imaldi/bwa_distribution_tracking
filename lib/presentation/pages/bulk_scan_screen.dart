@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/gradients/basic_linear_gradient.dart';
+import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
@@ -58,12 +59,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
           }
 
           return BlocConsumer<QRScanBloc, QRScanState>(
-              listener: (context, state) {
-                if(state is SendScanSuccess){
-                  myToast("Send Scan Success");
-                  context.router.pop();
-                }
-              },
+            listener: (context, state) {
+              if (state is SendScanSuccess) {
+                myToast("Send Scan Success");
+                context.router.pop();
+              }
+            },
             builder: (context, state) {
               // var response;
               if (state is QRScanLoading) {
@@ -76,6 +77,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
               if (state is QRScanFailed) {
                 // response = "null";
                 myToast("Mohon maaf, ada kesalahan");
+                context.router.pop();
               }
               if (state is QRBulkScanSuccess) {
                 // response = state.bulkScanResponse;
@@ -279,7 +281,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                           //   print("The Path: ${theImage?.path ?? ""}");
                           //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
                           // },
-                          functionCallbackSetImageFilePath: (numb, theImage) async {
+                          functionCallbackSetImageFilePath:
+                              (numb, theImage) async {
                             // var size = theImage.runtimeType().toString();
                             print("INI NOMOR: $numb");
                             print("The Path: ${theImage?.path ?? ""}");
@@ -289,24 +292,43 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 .read<BulkScanScreenCubit>()
                                 .setFotoPath(theImage?.path ?? "");
                           },
+                          defaultImagePlaceholder: FittedBox(
+                            child: Padding(
+                              padding: const EdgeInsets.all(sizeBig),
+                              child: RoundedContainer(
+                                sizeNormal,
+                                height: widthScreen(context) * 0.4,
+                                width: widthScreen(context) * 0.4,
+                                boxDecoration: const BoxDecoration(color: Colors.grey),
+                                child: const Center(
+                                  child:  FittedBox(
+                                    child: CustomText(
+                                      "No Picture",
+                                      color: Colors.white,
+                                      size: sizeBig,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        Builder(
-                          builder: (context) {
-                            return ElevatedButton(
-                                onPressed: () {
-                                  var model = context
-                                      .read<BulkScanScreenCubit>()
-                                      .state
-                                      .sendScanDataModel;
-                                  context
-                                      .read<QRScanBloc>()
-                                      .add(SendScanEvent(model));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: primaryColor),
-                                child: const Text("Simpan"));
-                          }
-                        )
+                        Builder(builder: (context) {
+                          return ElevatedButton(
+                              onPressed: () {
+                                var model = context
+                                    .read<BulkScanScreenCubit>()
+                                    .state
+                                    .sendScanDataModel;
+                                context
+                                    .read<QRScanBloc>()
+                                    .add(SendScanEvent(model));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: primaryColor),
+                              child: const Text("Simpan"));
+                        })
                       ],
                     ),
                   ),
