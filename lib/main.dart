@@ -1,8 +1,10 @@
 import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
+import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'injection_container.dart' as di;
@@ -32,27 +34,26 @@ class RootWidget extends StatelessWidget {
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => sl<InternetConnectionCubit>()),
       ],
-      child: MaterialApp
-          .router
-        (
+      child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'BWA Distribution Tracking',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primaryColor: primaryGreen,
+            // primarySwatch: customPrimaryMaterialColor,
+            appBarTheme: AppBarTheme.of(context).copyWith(
+              backgroundColor: primaryGreen,
+            ),
 
             /// Mengubah font global menjadi 'Poppins'
             textTheme:
-            GoogleFonts.poppinsTextTheme(Theme
-                .of(context)
-                .textTheme),
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
 
             /// Mengubah padding Text Form Field menjadi default bernilai 0
             inputDecorationTheme: const InputDecorationTheme(
               isDense: true,
-              contentPadding: EdgeInsets.symmetric(
-                  horizontal: 0, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             )),
 
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),

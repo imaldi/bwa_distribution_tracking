@@ -370,21 +370,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   InkWell(
                                     onTap: () async {
-                                      context.router.push(
-                                          const TestDhriveRoute()
-                                      );
-                                      // await BarcodeScanner.scan()
-                                      //     .then((ScanResult bulkDetail) {
-                                      //   if (bulkDetail.rawContent.isNotEmpty) {
-                                      //     var qrBloc = context.read<QRScanBloc>();
-                                      //     print(
-                                      //         "bulkDetail ${bulkDetail.rawContent}");
-                                      //     qrBloc.add(BulkQRScanEvent(
-                                      //         bulkDetail.rawContent));
-                                      //     context.router.push(
-                                      //         BulkScanRoute(qrScanBloc: qrBloc));
-                                      //   }
-                                      // });
+                                      // context.router.push(
+                                      //     const TestDhriveRoute()
+                                      // );
+                                      await BarcodeScanner.scan()
+                                          .then((ScanResult bulkDetail) {
+                                        if (bulkDetail.rawContent.isNotEmpty) {
+                                          var qrBloc = context.read<QRScanBloc>();
+                                          print(
+                                              "bulkDetail ${bulkDetail.rawContent}");
+                                          qrBloc.add(BulkQRScanEvent(
+                                              bulkDetail.rawContent));
+                                          context.router.push(
+                                              BulkScanRoute(qrScanBloc: qrBloc));
+                                        }
+                                      });
                                     },
                                     child: RoundedContainer(
                                       sizeMedium,
