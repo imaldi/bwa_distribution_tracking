@@ -161,7 +161,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   children: [
                                     const Expanded(
                                         child: CustomText(
-                                      "Dikirim Dengan",
+                                      "Nama Ekspedisi",
                                       color: Colors.white,
                                     )),
                                     Expanded(
@@ -226,12 +226,44 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         ? null
                                         : primaryDarkerColor,
                                     child: ListTile(
-                                        title: Center(
-                                            child: CustomText(
-                                      "Kode Batch: ${details?[ind].kodeBatch} | Nama Barang (Project): ${details?[ind].nmProject} | QTY: ${details?[ind].jmlKeluar} | Satuan: Satuan | Jumlah: ${details?[ind].jmlKeluar} | Satuan: KG",
-                                      color: Colors.white,
-                                      textAlign: TextAlign.center,
-                                    ))),
+                                        title: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          child: Row(children: [
+                                            Flexible(
+                                              flex:3,
+                                              child: FittedBox(
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                                  decoration: const BoxDecoration(border: Border(right: BorderSide(width: 2,color: Colors.white))),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      CustomText("Kode Batch: ${details?[ind].kodeBatch}",color: Colors.white),
+                                                      CustomText("Nama Barang (Project): ${details?[ind].nmProject}",color: Colors.white,),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              child: FittedBox(
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      // FIXME tanyakan soal field yang benar
+                                                      CustomText("QTY: ${details?[ind].jmlKeluar}",color: Colors.white),
+                                                      CustomText("Jumlah: ${details?[ind].jmlKeluar}",color: Colors.white),
+                                                      CustomText("Satuan: ${details?[ind].jmlKeluar}",color: Colors.white),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                            // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
+                                          ],),
+                                        )),
                                   );
                                 },
                               ),
