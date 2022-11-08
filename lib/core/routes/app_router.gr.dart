@@ -11,38 +11,45 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i6;
+import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 
-import '../../presentation/blocs/scan/qr_scan_bloc.dart' as _i7;
-import '../../presentation/pages/bulk_scan_screen.dart' as _i3;
-import '../../presentation/pages/home_screen.dart' as _i2;
-import '../../presentation/pages/login_screen.dart' as _i1;
-import '../../presentation/pages/test_dhrive_screen.dart' as _i4;
+import '../../presentation/blocs/scan/qr_scan_bloc.dart' as _i11;
+import '../../presentation/screens/bulk_scan_screen.dart' as _i3;
+import '../../presentation/screens/history_children_screen/all_history_screen.dart'
+    as _i6;
+import '../../presentation/screens/history_children_screen/dus_history_screen.dart'
+    as _i8;
+import '../../presentation/screens/history_children_screen/users_history_screen.dart'
+    as _i7;
+import '../../presentation/screens/history_screen.dart' as _i5;
+import '../../presentation/screens/home_screen.dart' as _i2;
+import '../../presentation/screens/login_screen.dart' as _i1;
+import '../../presentation/screens/test_dhrive_screen.dart' as _i4;
 
-class AppRouter extends _i5.RootStackRouter {
-  AppRouter([_i6.GlobalKey<_i6.NavigatorState>? navigatorKey])
+class AppRouter extends _i9.RootStackRouter {
+  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i5.PageFactory> pagesMap = {
+  final Map<String, _i9.PageFactory> pagesMap = {
     LoginRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.LoginScreen(),
       );
     },
     HomeRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.WrappedRoute(child: const _i2.HomeScreen()),
+        child: _i9.WrappedRoute(child: const _i2.HomeScreen()),
       );
     },
     BulkScanRoute.name: (routeData) {
       final args = routeData.argsAs<BulkScanRouteArgs>();
-      return _i5.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.WrappedRoute(
+        child: _i9.WrappedRoute(
             child: _i3.BulkScanScreen(
           qrScanBloc: args.qrScanBloc,
           key: args.key,
@@ -50,37 +57,82 @@ class AppRouter extends _i5.RootStackRouter {
       );
     },
     TestDhriveRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.TestDhriveScreen(),
+      );
+    },
+    HistoryRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i5.HistoryScreen(),
+      );
+    },
+    AllHistoryRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i6.AllHistoryScreen(),
+      );
+    },
+    UsersHistoryRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i7.UsersHistoryScreen(),
+      );
+    },
+    DusHistoryRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i8.DusHistoryScreen(),
       );
     },
   };
 
   @override
-  List<_i5.RouteConfig> get routes => [
-        _i5.RouteConfig(
+  List<_i9.RouteConfig> get routes => [
+        _i9.RouteConfig(
           LoginRoute.name,
           path: '/',
         ),
-        _i5.RouteConfig(
+        _i9.RouteConfig(
           HomeRoute.name,
           path: '/home-screen',
         ),
-        _i5.RouteConfig(
+        _i9.RouteConfig(
           BulkScanRoute.name,
           path: '/bulk-scan-screen',
         ),
-        _i5.RouteConfig(
+        _i9.RouteConfig(
           TestDhriveRoute.name,
           path: '/test-dhrive-screen',
+        ),
+        _i9.RouteConfig(
+          HistoryRoute.name,
+          path: '/history-screen',
+          children: [
+            _i9.RouteConfig(
+              AllHistoryRoute.name,
+              path: '',
+              parent: HistoryRoute.name,
+            ),
+            _i9.RouteConfig(
+              UsersHistoryRoute.name,
+              path: 'users-history-screen',
+              parent: HistoryRoute.name,
+            ),
+            _i9.RouteConfig(
+              DusHistoryRoute.name,
+              path: 'dus-history-screen',
+              parent: HistoryRoute.name,
+            ),
+          ],
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.LoginScreen]
-class LoginRoute extends _i5.PageRouteInfo<void> {
+class LoginRoute extends _i9.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -92,7 +144,7 @@ class LoginRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomeScreen]
-class HomeRoute extends _i5.PageRouteInfo<void> {
+class HomeRoute extends _i9.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
@@ -104,10 +156,10 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.BulkScanScreen]
-class BulkScanRoute extends _i5.PageRouteInfo<BulkScanRouteArgs> {
+class BulkScanRoute extends _i9.PageRouteInfo<BulkScanRouteArgs> {
   BulkScanRoute({
-    required _i7.QRScanBloc qrScanBloc,
-    _i6.Key? key,
+    required _i11.QRScanBloc qrScanBloc,
+    _i10.Key? key,
   }) : super(
           BulkScanRoute.name,
           path: '/bulk-scan-screen',
@@ -126,9 +178,9 @@ class BulkScanRouteArgs {
     this.key,
   });
 
-  final _i7.QRScanBloc qrScanBloc;
+  final _i11.QRScanBloc qrScanBloc;
 
-  final _i6.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -138,7 +190,7 @@ class BulkScanRouteArgs {
 
 /// generated route for
 /// [_i4.TestDhriveScreen]
-class TestDhriveRoute extends _i5.PageRouteInfo<void> {
+class TestDhriveRoute extends _i9.PageRouteInfo<void> {
   const TestDhriveRoute()
       : super(
           TestDhriveRoute.name,
@@ -146,4 +198,53 @@ class TestDhriveRoute extends _i5.PageRouteInfo<void> {
         );
 
   static const String name = 'TestDhriveRoute';
+}
+
+/// generated route for
+/// [_i5.HistoryScreen]
+class HistoryRoute extends _i9.PageRouteInfo<void> {
+  const HistoryRoute({List<_i9.PageRouteInfo>? children})
+      : super(
+          HistoryRoute.name,
+          path: '/history-screen',
+          initialChildren: children,
+        );
+
+  static const String name = 'HistoryRoute';
+}
+
+/// generated route for
+/// [_i6.AllHistoryScreen]
+class AllHistoryRoute extends _i9.PageRouteInfo<void> {
+  const AllHistoryRoute()
+      : super(
+          AllHistoryRoute.name,
+          path: '',
+        );
+
+  static const String name = 'AllHistoryRoute';
+}
+
+/// generated route for
+/// [_i7.UsersHistoryScreen]
+class UsersHistoryRoute extends _i9.PageRouteInfo<void> {
+  const UsersHistoryRoute()
+      : super(
+          UsersHistoryRoute.name,
+          path: 'users-history-screen',
+        );
+
+  static const String name = 'UsersHistoryRoute';
+}
+
+/// generated route for
+/// [_i8.DusHistoryScreen]
+class DusHistoryRoute extends _i9.PageRouteInfo<void> {
+  const DusHistoryRoute()
+      : super(
+          DusHistoryRoute.name,
+          path: 'dus-history-screen',
+        );
+
+  static const String name = 'DusHistoryRoute';
 }

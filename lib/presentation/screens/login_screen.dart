@@ -5,7 +5,6 @@ import 'package:bwa_distribution_tracking/core/resources/media_query/media_query
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/pages/home_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/custom_expanded/single_child_expanded_row.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';

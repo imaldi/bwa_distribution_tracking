@@ -416,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: () {
                                       context.router
-                                          .push(const TestDhriveRoute());
+                                          .push(const HistoryRoute());
                                     },
                                     child: RoundedContainer(
                                       sizeMedium,
