@@ -60,7 +60,7 @@ class ScanRepositoryImpl extends ScanRepository {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
 
     try{
-      final response = await qrScanRemoteDataSource.getUserScanHistory();
+      final response = await qrScanRemoteDataSource.getAllScanHistory();
 
       return Right(response);
     } on ServerException {

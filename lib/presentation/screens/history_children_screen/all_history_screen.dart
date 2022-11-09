@@ -27,12 +27,12 @@ class _AllHistoryScreenState extends State<AllHistoryScreen> {
       child: BlocConsumer<HistoryScanBloc,HistoryScanState>(
         listener: (c,state){
           if(state is AllHistoryScanLoaded){
-            c.read<HistoryScanCubit>().initUserHistory(state.scanAllHistoryResponse);
+            c.read<HistoryScanCubit>().initAllHistory(state.scanAllHistoryResponse);
           }
         },
         builder: (context,state) {
           var listData = <SendScanDataModel>[];
-          listData.addAll(context.watch<HistoryScanCubit>().state.scanUserHistoryResponse?.data ?? []);
+          listData.addAll(context.watch<HistoryScanCubit>().state.allHistoryResponse?.data ?? []);
 
           return ListView.builder(
               padding: const EdgeInsets.symmetric(

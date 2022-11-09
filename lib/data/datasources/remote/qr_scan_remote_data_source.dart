@@ -131,8 +131,8 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<ScanUserHistoryResponse> getAllScanHistory() async {
-    final url = Uri.https(baseUrl, historyUser);
-    print("User Scan History Url: $url");
+    final url = Uri.https(baseUrl, historyAll);
+    print("All Scan History Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
     print("token: $token");

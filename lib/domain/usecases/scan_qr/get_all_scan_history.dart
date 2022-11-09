@@ -12,7 +12,7 @@ class GetAllScanHistoryUseCase extends UseCase<ScanUserHistoryResponse, NoParams
   GetAllScanHistoryUseCase(this.scanRepository);
   @override
   Future<Either<Failure, ScanUserHistoryResponse>> call(NoParams params) {
-    return scanRepository.getUserScanHistory();
+    return scanRepository.getAllScanHistory();
   }
 
 }

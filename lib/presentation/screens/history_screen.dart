@@ -43,15 +43,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
           appBar: AppBar(
             title: const Text("History Screen"),
             leading: const AutoLeadingButton(),
-            bottom: TabBar(
-              controller: controller,
-              tabs: const [
-                Tab(text: 'All'),
-                Tab(text: 'Users'),
-                Tab(text: 'Dus'),
-              ],),
+            // bottom: ,
           ),
-          body: child,
+          body: Column(
+            children: [
+              Text("Helloooo"),
+              TabBar(
+                controller: controller,
+                tabs: const [
+                  Tab(text: 'All'),
+                  Tab(text: 'Users'),
+                  Tab(text: 'Dus'),
+                ],),
+              Expanded(child: child),
+            ],
+          ),
         );
       },
     );
