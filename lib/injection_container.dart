@@ -18,8 +18,11 @@ import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_all_scan_history.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_user_scan_history.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/send_qr_scan.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
@@ -51,6 +54,10 @@ Future<void> init() async {
   );
   sl.registerFactory(
     () => QRScanBloc(sl<BulkQRScanUseCase>(), sl<SendScanUseCase>()),
+  );
+
+  sl.registerFactory(
+        () => HistoryScanBloc(sl<GetUserScanHistoryUseCase>(),sl<GetAllScanHistoryUseCase>()),
   );
 
   sl.registerFactory(
@@ -110,6 +117,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserLogoutUseCase(sl()));
   sl.registerLazySingleton(() => BulkQRScanUseCase(sl()));
   sl.registerLazySingleton(() => SendScanUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserScanHistoryUseCase(sl()));
+  sl.registerLazySingleton(() => GetAllScanHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
 
   /// Core

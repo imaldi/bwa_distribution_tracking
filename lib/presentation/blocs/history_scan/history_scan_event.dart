@@ -7,3 +7,13 @@ class TestKeptHistoryStateEvent extends HistoryScanEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GetUserScanHistoryEvent extends HistoryScanEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class GetAllScanHistoryEvent extends HistoryScanEvent {
+  @override
+  List<Object?> get props => [];
+}

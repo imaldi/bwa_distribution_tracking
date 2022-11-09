@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
+import 'package:bwa_distribution_tracking/injection_container.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/cubit/history_scan_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +11,12 @@ class HistoryScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(create: (_)=>HistoryScanBloc(),child: this,);
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (_)=>sl<HistoryScanBloc>()),
+      BlocProvider(create: (_)=>HistoryScanCubit()),
+
+    ],
+      child: this,);
   }
 
   @override

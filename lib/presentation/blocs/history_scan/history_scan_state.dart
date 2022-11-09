@@ -15,13 +15,22 @@ class HistoryScanLoading extends HistoryScanState {
   List<Object?> get props => [];
 }
 
-class HistoryScanLoaded extends HistoryScanState {
+class UserHistoryScanLoaded extends HistoryScanState {
   final ScanUserHistoryResponse scanUserHistoryResponse;
-  const HistoryScanLoaded(
+  const UserHistoryScanLoaded(
       this.scanUserHistoryResponse
       );
   @override
   List<Object?> get props => [scanUserHistoryResponse];
+}
+
+class AllHistoryScanLoaded extends HistoryScanState {
+  final ScanUserHistoryResponse scanAllHistoryResponse;
+  const AllHistoryScanLoaded(
+      this.scanAllHistoryResponse
+      );
+  @override
+  List<Object?> get props => [scanAllHistoryResponse];
 }
 
 class HistoryScanFailed extends HistoryScanState {

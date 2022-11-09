@@ -7,6 +7,7 @@ import 'package:bwa_distribution_tracking/core/resources/consts/strings.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/urls.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_scan_response.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/scan_user_history_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_model.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_response.dart';
 import 'package:hive/hive.dart';
@@ -16,6 +17,8 @@ import 'package:http_parser/http_parser.dart';
 abstract class QRScanRemoteDataSource {
   Future<BulkScanResponse> bulkScan(String qrcodeSj);
   Future<SendScanResponse> sendScan(SendScanDataModel model);
+  Future<ScanUserHistoryResponse> getUserScanHistory();
+  Future<ScanUserHistoryResponse> getAllScanHistory();
 }
 
 class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
@@ -56,7 +59,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<SendScanResponse> sendScan(SendScanDataModel model) async {
-    final url = Uri.https(baseUrl, "$storeUrl");
+    final url = Uri.https(baseUrl, storeUrl);
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -91,8 +94,61 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     log("Bulk Scan response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
+    // TODO perbaiki response kalau hasilnya not found
     if (response.statusCode == 200) {
       var theResponse = SendScanResponse(success: true, data: model);
+      return theResponse;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<ScanUserHistoryResponse> getUserScanHistory() async {
+    final url = Uri.https(baseUrl, historyUser);
+    print("User Scan History Url: $url");
+    // final box = Hive.box(authBoxKey);
+    final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
+    print("token: $token");
+    final response = await client.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    print("History Scan User response code: ${response.statusCode.toString()}");
+    log("History Scan User response body: ${response.body.toString()}");
+
+    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
+    if (response.statusCode == 200) {
+    var theResponse = ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
+    return theResponse;
+    } else {
+    throw ServerException();
+    }
+  }
+
+  @override
+  Future<ScanUserHistoryResponse> getAllScanHistory() async {
+    final url = Uri.https(baseUrl, historyUser);
+    print("User Scan History Url: $url");
+    // final box = Hive.box(authBoxKey);
+    final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
+    print("token: $token");
+    final response = await client.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    print("History Scan User response code: ${response.statusCode.toString()}");
+    log("History Scan User response body: ${response.body.toString()}");
+
+    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
+    if (response.statusCode == 200) {
+      var theResponse = ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
       return theResponse;
     } else {
       throw ServerException();
