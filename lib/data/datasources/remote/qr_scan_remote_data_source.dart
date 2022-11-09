@@ -57,6 +57,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     }
   }
 
+  // FIXME ada error kalau ngambil foto dua kali atau ganti orientasi layar
   @override
   Future<SendScanResponse> sendScan(SendScanDataModel model) async {
     final url = Uri.https(baseUrl, storeUrl);

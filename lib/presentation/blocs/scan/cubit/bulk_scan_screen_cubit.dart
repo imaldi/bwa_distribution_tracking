@@ -25,6 +25,8 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
 
   setFotoPath(String? path){
     emit(BulkScanScreenState(state.sendScanDataModel.copyWith(foto: path)));
+    print("LATITUDE FROM SET FOTO CUBIT: ${state.sendScanDataModel.latitude}");
+    print("LONGITUDE FROM SET FOTO CUBIT: ${state.sendScanDataModel.longtitude}");
     print("set foto path: ${path.toString()}");
   }
 }

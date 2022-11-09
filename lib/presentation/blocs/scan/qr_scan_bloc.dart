@@ -18,6 +18,7 @@ part 'qr_scan_state.dart';
 
 class QRScanBloc extends Bloc<QRScanEvent, QRScanState> {
   final BulkQRScanUseCase _bulkQRScanUseCase;
+  // FIXME ada error kalau ngambil foto dua kali atau ganti orientasi layar
   final SendScanUseCase _sendScanUseCase;
   QRScanBloc(this._bulkQRScanUseCase, this._sendScanUseCase)
       : super(QRScanInitial()) {

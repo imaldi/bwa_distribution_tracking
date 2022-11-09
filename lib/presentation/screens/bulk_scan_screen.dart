@@ -3,6 +3,7 @@ import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/gradients/basic_linear_gradient.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
+import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
@@ -91,12 +92,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                       children: [
                         const CustomText(
                           "NOMOR ID",
-                          color: primaryBlue,
+                          color: primaryGreen,
                           weight: FontWeight.bold,
                         ),
                         CustomText(
                           "${data?.nosj}",
-                          color: primaryBlue,
+                          color: primaryGreen,
                           weight: FontWeight.bold,
                         ),
                         RoundedContainer(sizeMedium,
@@ -295,6 +296,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             ],
                           ),
                         ),
+                        Container(
+                            margin: const EdgeInsets.only(top: sizeBig),
+                            child: const CustomText("Lokasi Anda",color: primaryGreen,size: sizeMedium,weight: FontWeight.w600,)),
                         BlocBuilder<BulkScanScreenCubit, BulkScanScreenState>(
                           builder: (context, state) {
                             var text =
@@ -346,21 +350,34 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             ),
                           ),
                         ),
-                        Builder(builder: (context) {
-                          return ElevatedButton(
-                              onPressed: () {
-                                var model = context
-                                    .read<BulkScanScreenCubit>()
-                                    .state
-                                    .sendScanDataModel;
-                                context
-                                    .read<QRScanBloc>()
-                                    .add(SendScanEvent(model));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: primaryColor),
-                              child: const Text("Simpan"));
-                        })
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  context.router
+                                      .push(const HistoryRoute());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: primaryColor),
+                                child: const Text("History")),
+                            Builder(builder: (context) {
+                              return ElevatedButton(
+                                  onPressed: () {
+                                    var model = context
+                                        .read<BulkScanScreenCubit>()
+                                        .state
+                                        .sendScanDataModel;
+                                    context
+                                        .read<QRScanBloc>()
+                                        .add(SendScanEvent(model));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor),
+                                  child: const Text("Simpan"));
+                            }),
+                          ],
+                        )
                       ],
                     ),
                   ),
