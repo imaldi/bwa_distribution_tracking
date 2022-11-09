@@ -1,15 +1,28 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HistoryScreen extends StatefulWidget {
+class HistoryScreen extends StatefulWidget implements AutoRouteWrapper {
   const HistoryScreen({Key? key}) : super(key: key);
 
   @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(create: (_)=>HistoryScanBloc(),child: this,);
+  }
+
+  @override
   _HistoryScreenState createState() => _HistoryScreenState();
+
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+  @override
+  void initState() {
+    context.read<HistoryScanBloc>().add(TestKeptHistoryStateEvent());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.tabBar(

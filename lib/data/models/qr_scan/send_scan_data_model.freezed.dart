@@ -43,9 +43,12 @@ mixin _$SendScanDataModel {
   @JsonKey(name: 'created_by')
   String? get createdBy => throw _privateConstructorUsedError;
   @HiveField(10)
+  @JsonKey(name: 'updated_by')
+  String? get updatedBy => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  @HiveField(11)
+  @HiveField(12)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -85,9 +88,12 @@ abstract class $SendScanDataModelCopyWith<$Res> {
       @JsonKey(name: 'created_by')
           String? createdBy,
       @HiveField(10)
+      @JsonKey(name: 'updated_by')
+          String? updatedBy,
+      @HiveField(11)
       @JsonKey(name: 'updated_at')
           DateTime? updatedAt,
-      @HiveField(11)
+      @HiveField(12)
       @JsonKey(name: 'created_at')
           DateTime? createdAt});
 }
@@ -115,6 +121,7 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
     Object? statusPengiriman = freezed,
     Object? foto = freezed,
     Object? createdBy = freezed,
+    Object? updatedBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
   }) {
@@ -158,6 +165,10 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedBy: freezed == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -203,9 +214,12 @@ abstract class _$$_SendScanDataModelCopyWith<$Res>
       @JsonKey(name: 'created_by')
           String? createdBy,
       @HiveField(10)
+      @JsonKey(name: 'updated_by')
+          String? updatedBy,
+      @HiveField(11)
       @JsonKey(name: 'updated_at')
           DateTime? updatedAt,
-      @HiveField(11)
+      @HiveField(12)
       @JsonKey(name: 'created_at')
           DateTime? createdAt});
 }
@@ -231,6 +245,7 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
     Object? statusPengiriman = freezed,
     Object? foto = freezed,
     Object? createdBy = freezed,
+    Object? updatedBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
   }) {
@@ -275,6 +290,10 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      updatedBy: freezed == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -303,8 +322,9 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       @HiveField(7) @JsonKey(name: 'status_pengiriman') this.statusPengiriman,
       @HiveField(8) this.foto,
       @HiveField(9) @JsonKey(name: 'created_by') this.createdBy,
-      @HiveField(10) @JsonKey(name: 'updated_at') this.updatedAt,
-      @HiveField(11) @JsonKey(name: 'created_at') this.createdAt});
+      @HiveField(10) @JsonKey(name: 'updated_by') this.updatedBy,
+      @HiveField(11) @JsonKey(name: 'updated_at') this.updatedAt,
+      @HiveField(12) @JsonKey(name: 'created_at') this.createdAt});
 
   factory _$_SendScanDataModel.fromJson(Map<String, dynamic> json) =>
       _$$_SendScanDataModelFromJson(json);
@@ -343,16 +363,20 @@ class _$_SendScanDataModel implements _SendScanDataModel {
   final String? createdBy;
   @override
   @HiveField(10)
+  @JsonKey(name: 'updated_by')
+  final String? updatedBy;
+  @override
+  @HiveField(11)
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
-  @HiveField(11)
+  @HiveField(12)
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, foto: $foto, createdBy: $createdBy, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, foto: $foto, createdBy: $createdBy, updatedBy: $updatedBy, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -375,6 +399,8 @@ class _$_SendScanDataModel implements _SendScanDataModel {
             (identical(other.foto, foto) || other.foto == foto) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.createdAt, createdAt) ||
@@ -395,6 +421,7 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       statusPengiriman,
       foto,
       createdBy,
+      updatedBy,
       updatedAt,
       createdAt);
 
@@ -438,9 +465,12 @@ abstract class _SendScanDataModel implements SendScanDataModel {
       @JsonKey(name: 'created_by')
           final String? createdBy,
       @HiveField(10)
+      @JsonKey(name: 'updated_by')
+          final String? updatedBy,
+      @HiveField(11)
       @JsonKey(name: 'updated_at')
           final DateTime? updatedAt,
-      @HiveField(11)
+      @HiveField(12)
       @JsonKey(name: 'created_at')
           final DateTime? createdAt}) = _$_SendScanDataModel;
 
@@ -481,10 +511,14 @@ abstract class _SendScanDataModel implements SendScanDataModel {
   String? get createdBy;
   @override
   @HiveField(10)
+  @JsonKey(name: 'updated_by')
+  String? get updatedBy;
+  @override
+  @HiveField(11)
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
-  @HiveField(11)
+  @HiveField(12)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override

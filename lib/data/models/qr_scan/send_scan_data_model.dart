@@ -21,8 +21,9 @@ class SendScanDataModel with _$SendScanDataModel {
     @HiveField(7) @JsonKey(name: 'status_pengiriman') String? statusPengiriman,
     @HiveField(8) String? foto,
     @HiveField(9) @JsonKey(name: 'created_by') String? createdBy,
-    @HiveField(10) @JsonKey(name: 'updated_at') DateTime? updatedAt,
-    @HiveField(11) @JsonKey(name: 'created_at') DateTime? createdAt,
+    @HiveField(10) @JsonKey(name: 'updated_by') String? updatedBy,
+    @HiveField(11) @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @HiveField(12) @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _SendScanDataModel;
 
   factory SendScanDataModel.fromJson(Map<String, Object?> json) =>

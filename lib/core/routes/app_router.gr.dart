@@ -65,7 +65,7 @@ class AppRouter extends _i9.RootStackRouter {
     HistoryRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.HistoryScreen(),
+        child: _i9.WrappedRoute(child: const _i5.HistoryScreen()),
       );
     },
     AllHistoryRoute.name: (routeData) {
