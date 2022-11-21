@@ -5,6 +5,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
     this.onTap,
     this.decoration = const InputDecoration(),
     this.obscureText = false,
+    this.enabled = true,
     this.controller,
     Key? key,
     this.keyboardType,
@@ -16,6 +17,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
   final Function()? onTap;
   final InputDecoration decoration;
   final bool obscureText;
+  final bool enabled;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
@@ -26,6 +28,7 @@ class NoUnderlineTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       style: style,
       controller: controller,
       textAlign: textAlign ?? TextAlign.start,

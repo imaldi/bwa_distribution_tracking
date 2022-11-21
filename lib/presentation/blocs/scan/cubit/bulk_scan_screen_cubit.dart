@@ -3,6 +3,7 @@ import 'package:bwa_distribution_tracking/core/params/no_params.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_model.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:equatable/equatable.dart';
+import 'package:geocoding/geocoding.dart';
 
 part 'bulk_scan_screen_state.dart';
 
@@ -12,7 +13,7 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
   BulkScanScreenCubit(this._getCurrentPositionUseCase)
       : super(const BulkScanScreenState(SendScanDataModel()));
 
-  getCurrentCoordinate() async {
+  getCurrentCoordinateAndAddress() async {
     var eitherPositionOrFailure = await _getCurrentPositionUseCase(NoParams());
     var newSendScanDataModel = eitherPositionOrFailure.fold(
         (l) => state.sendScanDataModel.copyWith(latitude: "", longtitude: ""),
@@ -20,7 +21,25 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
             latitude: r.latitude.toString(),
             longtitude: r.longitude.toString()));
     emit(BulkScanScreenState(newSendScanDataModel));
+    _getAddress(double.parse(state.sendScanDataModel.latitude ?? "0"), double.parse(state.sendScanDataModel.latitude ?? "0"));
     print("LATITUDE FROM CUBIT: ${state.sendScanDataModel.latitude}");
+  }
+
+  _getAddress(double lat, double long) async {
+    await placemarkFromCoordinates(
+        lat, lat)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+      emit(state.copyWith(address: place.name));
+      print("Alamat dari cubit: ${state.address}");
+      // setState(() {
+      //   _currentAddress =
+      //   '${place.street}, ${place.subLocality},
+      //   ${place.subAdministrativeArea}, ${place.postalCode}';
+      // });
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   setFotoPath(String? path){

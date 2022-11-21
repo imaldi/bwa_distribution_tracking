@@ -86,6 +86,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   controller: controller,
                   indicatorColor: primaryGreen,
                   labelColor: Colors.white,
+                  indicatorSize: TabBarIndicatorSize.tab,
                   // overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
                   //   if (states.contains(MaterialState.selected))
                   //     {

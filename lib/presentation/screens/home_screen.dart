@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Column(
                                           children: [
                                             const CustomText(
-                                              "Masukkan UPC Anda",
+                                              "Masukkan Nomor Surat Jalan",
                                               color: Colors.white,
                                             ),
                                             RoundedContainer(
@@ -171,7 +171,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     qrBloc.add(const BulkQRScanEvent(
                                                         // textValue
                                                         // controller.text
-                                                        "003SPJ22-MERANTI00098-0002"));
+                                                        "003SPJ22-MERANTI00098-0002"
+                                                    ));
                                                     context.router.push(
                                                         BulkScanRoute(
                                                             qrScanBloc: qrBloc));
@@ -189,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       color: Colors.white,
                                                     ),
                                                     // filled: true,
-                                                    hintText: "Kode UPC"),
+                                                    hintText: "Nomor Surat Jalan"),
                                               ),
                                             ),
                                           ],
@@ -401,7 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   const CustomText(
-                                    "Bulk Scan",
+                                    "Surat Jalan",
                                     textAlign: TextAlign.center,
                                     color: primaryBlue,
                                   )
@@ -432,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   const CustomText(
-                                    "Single Scan",
+                                    "Dus",
                                     textAlign: TextAlign.center,
                                     color: primaryGreen,
                                   )

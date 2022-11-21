@@ -12,7 +12,6 @@ import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded
 import 'package:bwa_distribution_tracking/presentation/widgets/my_confirm_dialog/my_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 

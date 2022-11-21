@@ -43,7 +43,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
   void initState() {
     super.initState();
 
-    context.read<BulkScanScreenCubit>().getCurrentCoordinate();
+    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
   }
 
   @override
@@ -63,7 +63,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
             listener: (context, state) {
               if (state is SendScanSuccess) {
                 myToast("Send Scan Success");
-                context.router.pop();
+                // context.router.pop();
+                context.router
+                    .replace(const HistoryRoute());
               }
             },
             builder: (context, state) {
@@ -308,6 +310,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     border: Border.all(color: primaryGreen)),
                                 child: NoUnderlineTextFormField(
                                   controller: TextEditingController(text: text),
+                                  enabled: false,
                                 ));
                           },
                         ),
