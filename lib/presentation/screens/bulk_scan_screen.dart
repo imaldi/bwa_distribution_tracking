@@ -92,6 +92,161 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+
+                        // Container(
+                        //     margin: const EdgeInsets.only(
+                        //         top: sizeMedium),
+                        //     height: orientedHeightScreen(context,
+                        //         portraitRatio: 0.15,
+                        //         landscapeRatio: 0.15),
+                        //     width: widthScreen(context),
+                        //     child: Card(
+                        //       color: const Color(0xFF00D3AD),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius:
+                        //         BorderRadius.circular(15),
+                        //       ),
+                        //       child: Column(
+                        //         mainAxisAlignment:
+                        //         MainAxisAlignment.center,
+                        //         children: const [
+                        //           SizedBox(height: sizeNormal),
+                        //           CustomText(
+                        //             "Total Stack Keseluruhan",
+                        //             color: Colors.white,
+                        //           ),
+                        //           Expanded(
+                        //               child: FittedBox(
+                        //                   child: CustomText(
+                        //                     "50000",
+                        //                     color: Colors.white,
+                        //                     size: sizeHuge * 2,
+                        //                     weight: FontWeight.w600,
+                        //                   ))),
+                        //         ],
+                        //       ),
+                        //     )),
+                        // SizedBox(
+                        //   height: orientedHeightScreen(context,
+                        //       portraitRatio: 0.15,
+                        //       landscapeRatio: 0.15),
+                        //   width: widthScreen(context),
+                        //   child: FittedBox(
+                        //     child: Row(
+                        //       children: [
+                        //         Container(
+                        //           padding:
+                        //           const EdgeInsets.symmetric(
+                        //               vertical: sizeSmall),
+                        //           height: orientedHeightScreen(
+                        //               context,
+                        //               portraitRatio: 0.15,
+                        //               landscapeRatio: 0.15),
+                        //           child: Card(
+                        //             color: const Color(0xFFFFB259),
+                        //             shape: RoundedRectangleBorder(
+                        //               borderRadius:
+                        //               BorderRadius.circular(15),
+                        //             ),
+                        //             child: Container(
+                        //                 padding:
+                        //                 const EdgeInsets.only(
+                        //                     bottom: sizeNormal),
+                        //                 child: Column(
+                        //                   mainAxisAlignment:
+                        //                   MainAxisAlignment
+                        //                       .center,
+                        //                   children: const [
+                        //                     SizedBox(
+                        //                         height: sizeNormal),
+                        //                     Flexible(
+                        //                       child: FittedBox(
+                        //                         child: Padding(
+                        //                           padding: EdgeInsets
+                        //                               .symmetric(
+                        //                               horizontal:
+                        //                               sizeNormal),
+                        //                           child: CustomText(
+                        //                             "Stock Dalam Proses",
+                        //                             color: Colors
+                        //                                 .white,
+                        //                           ),
+                        //                         ),
+                        //                       ),
+                        //                     ),
+                        //                     Expanded(
+                        //                         child: FittedBox(
+                        //                           child: CustomText(
+                        //                             "50000",
+                        //                             color: Colors.white,
+                        //                             size: sizeBig,
+                        //                             weight:
+                        //                             FontWeight.w600,
+                        //                           ),
+                        //                         )),
+                        //                   ],
+                        //                 )),
+                        //           ),
+                        //         ),
+                        //         Container(
+                        //           height: orientedHeightScreen(
+                        //               context,
+                        //               portraitRatio: 0.15,
+                        //               landscapeRatio: 0.15),
+                        //           padding:
+                        //           const EdgeInsets.symmetric(
+                        //               vertical: sizeSmall),
+                        //           child: Card(
+                        //             color: const Color(0xFF9059FF),
+                        //             shape: RoundedRectangleBorder(
+                        //               borderRadius:
+                        //               BorderRadius.circular(15),
+                        //             ),
+                        //             child: Container(
+                        //                 padding:
+                        //                 const EdgeInsets.only(
+                        //                     bottom: sizeNormal),
+                        //                 child: Column(
+                        //                   mainAxisAlignment:
+                        //                   MainAxisAlignment
+                        //                       .center,
+                        //                   children: const [
+                        //                     SizedBox(
+                        //                         height: sizeNormal),
+                        //                     Flexible(
+                        //                       child: FittedBox(
+                        //                         child: Padding(
+                        //                           padding: EdgeInsets
+                        //                               .symmetric(
+                        //                               horizontal:
+                        //                               sizeNormal),
+                        //                           child: CustomText(
+                        //                             "Stock Selesai Diterima",
+                        //                             color: Colors
+                        //                                 .white,
+                        //                           ),
+                        //                         ),
+                        //                       ),
+                        //                     ),
+                        //                     Expanded(
+                        //                         child: FittedBox(
+                        //                           child: CustomText(
+                        //                             "50000",
+                        //                             color: Colors.white,
+                        //                             size: sizeBig,
+                        //                             weight:
+                        //                             FontWeight.w600,
+                        //                           ),
+                        //                         )),
+                        //                   ],
+                        //                 )),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //       // ]..map((e) => Expanded(child: e)),
+                        //     ),
+                        //   ),
+                        // ),
                         const CustomText(
                           "NOMOR ID",
                           color: primaryGreen,

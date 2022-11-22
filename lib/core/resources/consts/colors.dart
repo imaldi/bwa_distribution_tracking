@@ -7,6 +7,8 @@ const primaryGreen = Color(0xFF00BD9B);
 const primaryBlueTransparent = Color(0xBB018ADF);
 const primaryGreenTransparent = Color(0xBB00BD9B);
 const hintTextColor = Color(0xFFC5C5C5);
+const listColorLight = Color(0xFF01A2AD);
+const listColorDark = Color(0xFF11828A);
 
 Map<int, Color> customPrimarySwatch = {
   50: Color.fromRGBO(0, 189, 155, .1),

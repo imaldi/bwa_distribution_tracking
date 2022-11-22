@@ -6,12 +6,14 @@ import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/my_paginator/my_paginator.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:number_pagination/number_pagination.dart';
 
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/gradients/basic_linear_gradient.dart';
@@ -44,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var textValue = "003SPJ22-MERANTI00098-0002";
     var controller = TextEditingController();
+    var selectedPageNumber = 3;
     return Scaffold(
       body: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
         listener: (context, state) {
@@ -57,23 +60,24 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               context.read<InternetConnectionCubit>().checkConnection();
             },
             child: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                         // color: Colors.blue,
-                        height: orientedHeightScreen(context,
-                            portraitRatio: 0.75, landscapeRatio: 0.75),
+                        // height: orientedHeightScreen(context,
+                        //     portraitRatio: 0.75, landscapeRatio: 0.75),
                         width: orientedWidthScreen(context,
                             portraitRatio: 1, landscapeRatio: 1),
                         padding: EdgeInsets.fromLTRB(
                             sizeBig,
                             orientedHeightScreen(context,
-                                portraitRatio: 0.05, landscapeRatio: 0.05),
+                                portraitRatio: 0.04, landscapeRatio: 0.04),
                             // orientedValueOf<double>(context,
                             //     portraitValue: sizeBig, landscapeValue: sizeMedium),
                             sizeBig,
@@ -81,6 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: const BoxDecoration(
                           // gradient: basicDiagonalGradient(),
                           color: primaryColor,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image:
+                                AssetImage("assets/images/background_main.png"),
+                          ),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(sizeBig),
                               bottomRight: Radius.circular(sizeBig)),
@@ -91,9 +100,51 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          BlocBuilder<AuthBloc, AuthState>(
+                                              builder: (bc, authState) {
+                                            return BlocListener<AuthBloc,
+                                                AuthState>(
+                                              listener: (BuildContext context,
+                                                  state) {
+                                                if (state is AuthLoggedOut) {
+                                                  context.router.replace(
+                                                      const LoginRoute());
+                                                }
+                                              },
+                                              child: InkWell(
+                                                onTap: () {
+                                                  bc.read<AuthBloc>().add(
+                                                      const UserLogoutAuthEvent());
+                                                },
+                                                // backgroundColor: primaryBlue,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: const [
+                                                    Icon(
+                                                      Icons.logout,
+                                                      color: Colors.white,
+                                                      size: sizeBig,
+                                                    ),
+                                                    CustomText(
+                                                      "Logout",
+                                                      color: Colors.white,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        ],
+                                      ),
                                       Container(
                                         // color: primaryGreen,
                                         height: orientedHeightScreen(context,
@@ -142,7 +193,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: orientedHeightScreen(context,
                                             portraitRatio: 0.15,
                                             landscapeRatio: 0.15),
-                                        padding: const EdgeInsets.all(sizeNormal),
+                                        padding:
+                                            const EdgeInsets.all(sizeNormal),
                                         child: Column(
                                           children: [
                                             const CustomText(
@@ -168,14 +220,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     // textValue = controller.text;
                                                     var qrBloc = context
                                                         .read<QRScanBloc>();
-                                                    qrBloc.add(const BulkQRScanEvent(
-                                                        // textValue
-                                                        // controller.text
-                                                        "003SPJ22-MERANTI00098-0002"
-                                                    ));
+                                                    qrBloc.add(
+                                                        const BulkQRScanEvent(
+                                                            // textValue
+                                                            // controller.text
+                                                            "003SPJ22-MERANTI00098-0002"));
                                                     context.router.push(
                                                         BulkScanRoute(
-                                                            qrScanBloc: qrBloc));
+                                                            qrScanBloc:
+                                                                qrBloc));
                                                   }
                                                   FocusManager
                                                       .instance.primaryFocus
@@ -196,160 +249,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                          margin: const EdgeInsets.only(
-                                              top: sizeMedium),
-                                          height: orientedHeightScreen(context,
-                                              portraitRatio: 0.15,
-                                              landscapeRatio: 0.15),
-                                          width: widthScreen(context),
-                                          child: Card(
-                                            color: const Color(0xFF00D3AD),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: const [
-                                                SizedBox(height: sizeNormal),
-                                                CustomText(
-                                                  "Total Stack Keseluruhan",
-                                                  color: Colors.white,
-                                                ),
-                                                Expanded(
-                                                    child: FittedBox(
-                                                        child: CustomText(
-                                                  "50000",
-                                                  color: Colors.white,
-                                                  size: sizeHuge * 2,
-                                                  weight: FontWeight.w600,
-                                                ))),
-                                              ],
-                                            ),
-                                          )),
-                                      SizedBox(
-                                        height: orientedHeightScreen(context,
-                                            portraitRatio: 0.15,
-                                            landscapeRatio: 0.15),
-                                        width: widthScreen(context),
-                                        child: FittedBox(
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: sizeSmall),
-                                                height: orientedHeightScreen(
-                                                    context,
-                                                    portraitRatio: 0.15,
-                                                    landscapeRatio: 0.15),
-                                                child: Card(
-                                                  color: const Color(0xFFFFB259),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(15),
-                                                  ),
-                                                  child: Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              bottom: sizeNormal),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: const [
-                                                          SizedBox(
-                                                              height: sizeNormal),
-                                                          Flexible(
-                                                            child: FittedBox(
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            sizeNormal),
-                                                                child: CustomText(
-                                                                  "Stock Dalam Proses",
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                              child: FittedBox(
-                                                            child: CustomText(
-                                                              "50000",
-                                                              color: Colors.white,
-                                                              size: sizeBig,
-                                                              weight:
-                                                                  FontWeight.w600,
-                                                            ),
-                                                          )),
-                                                        ],
-                                                      )),
-                                                ),
-                                              ),
-                                              Container(
-                                                height: orientedHeightScreen(
-                                                    context,
-                                                    portraitRatio: 0.15,
-                                                    landscapeRatio: 0.15),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: sizeSmall),
-                                                child: Card(
-                                                  color: const Color(0xFF9059FF),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(15),
-                                                  ),
-                                                  child: Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              bottom: sizeNormal),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: const [
-                                                          SizedBox(
-                                                              height: sizeNormal),
-                                                          Flexible(
-                                                            child: FittedBox(
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            sizeNormal),
-                                                                child: CustomText(
-                                                                  "Stock Selesai Diterima",
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                              child: FittedBox(
-                                                            child: CustomText(
-                                                              "50000",
-                                                              color: Colors.white,
-                                                              size: sizeBig,
-                                                              weight:
-                                                                  FontWeight.w600,
-                                                            ),
-                                                          )),
-                                                        ],
-                                                      )),
-                                                ),
-                                              ),
-                                            ],
-                                            // ]..map((e) => Expanded(child: e)),
-                                          ),
-                                        ),
-                                      ),
                                     ]
                                     // ..map((e) => Flexible(child: e))
                                     ),
@@ -357,6 +256,99 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         )),
+                    Container(
+                      margin: const EdgeInsets.only(top: sizeMedium),
+                      padding: const EdgeInsets.all(sizeNormal),
+                      child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          // padding: const EdgeInsets.all(sizeNormal),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: 5,
+                          // state.bulkScanResponse.detail?.length,
+                          itemBuilder: (c, i) {
+                            return Card(
+                                color:
+                                    i % 2 == 0 ? listColorLight : listColorDark,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      CustomText(
+                                        "Kode Surat Jalan",
+                                        color: Colors.white,
+                                      ),
+                                      FittedBox(
+                                          child: CustomText(
+                                        "003/SPJ/22-MERANTI00098-000${i + 1}",
+                                        color: Colors.white,
+                                        weight: FontWeight.bold,
+                                      )),
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            top: sizeNormal),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Flexible(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: const [
+                                                CustomText(
+                                                  "Stock Dalam Proses",
+                                                  color: Colors.white,
+                                                ),
+                                                CustomText(
+                                                  "100",
+                                                  color: Colors.white,
+                                                  weight: FontWeight.bold,
+                                                ),
+                                              ],
+                                            )),
+                                            Flexible(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: const [
+                                                CustomText(
+                                                  "Stock Selesai Diterimma",
+                                                  color: Colors.white,
+                                                ),
+                                                CustomText(
+                                                  "100",
+                                                  color: Colors.white,
+                                                  weight: FontWeight.bold,
+                                                ),
+                                              ],
+                                            )),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ));
+                          }),
+                    ),
+                    // NumberPagination(
+                    //   onPageChanged: (int pageNumber) {
+                    //     //do somthing for selected page
+                    //     setState(() {
+                    //       selectedPageNumber = pageNumber;
+                    //     });
+                    //   },
+                    //   pageTotal: 100,
+                    //   pageInit: selectedPageNumber, // picked number when init page
+                    //   colorPrimary: Colors.red,
+                    //   colorSub: Colors.yellow,
+                    // ),
+
+                    MyPaginator(pageLength: 100, onPageChanged: (index){
+                      myToast("Index: $index");
+                    },),
                     Container(
                       height: orientedHeightScreen(context,
                           portraitRatio: 0.20, landscapeRatio: 0.20),
@@ -377,13 +369,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       await BarcodeScanner.scan()
                                           .then((ScanResult bulkDetail) {
                                         if (bulkDetail.rawContent.isNotEmpty) {
-                                          var qrBloc = context.read<QRScanBloc>();
+                                          var qrBloc =
+                                              context.read<QRScanBloc>();
                                           print(
                                               "bulkDetail ${bulkDetail.rawContent}");
                                           qrBloc.add(BulkQRScanEvent(
                                               bulkDetail.rawContent));
-                                          context.router.push(
-                                              BulkScanRoute(qrScanBloc: qrBloc));
+                                          context.router.push(BulkScanRoute(
+                                              qrScanBloc: qrBloc));
                                         }
                                       });
                                     },
@@ -395,8 +388,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           left: sizeMedium,
                                           top: sizeMedium,
                                           bottom: sizeNormal),
-                                      boxDecoration:
-                                          const BoxDecoration(color: primaryBlue),
+                                      boxDecoration: const BoxDecoration(
+                                          color: primaryBlue),
                                       child: SvgPicture.asset(
                                           "assets/images/camera_white.svg"),
                                     ),
@@ -411,35 +404,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )),
                               ),
                             ),
-                            FittedBox(
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-
-                                    },
-                                    child: RoundedContainer(
-                                      sizeMedium,
-                                      padding: const EdgeInsets.all(sizeBig),
-                                      margin: const EdgeInsets.only(
-                                          right: sizeMedium,
-                                          left: sizeMedium,
-                                          top: sizeMedium,
-                                          bottom: sizeNormal),
-                                      boxDecoration: const BoxDecoration(
-                                          color: primaryGreen),
-                                      child: SvgPicture.asset(
-                                          "assets/images/camera_white.svg"),
-                                    ),
-                                  ),
-                                  const CustomText(
-                                    "Dus",
-                                    textAlign: TextAlign.center,
-                                    color: primaryGreen,
-                                  )
-                                ]..map((e) => FittedBox(child: e)),
-                              ),
-                            ),
+                            // FittedBox(
+                            //   child: Column(
+                            //     children: [
+                            //       InkWell(
+                            //         onTap: () {
+                            //
+                            //         },
+                            //         child: RoundedContainer(
+                            //           sizeMedium,
+                            //           padding: const EdgeInsets.all(sizeBig),
+                            //           margin: const EdgeInsets.only(
+                            //               right: sizeMedium,
+                            //               left: sizeMedium,
+                            //               top: sizeMedium,
+                            //               bottom: sizeNormal),
+                            //           boxDecoration: const BoxDecoration(
+                            //               color: primaryGreen),
+                            //           child: SvgPicture.asset(
+                            //               "assets/images/camera_white.svg"),
+                            //         ),
+                            //       ),
+                            //       const CustomText(
+                            //         "Dus",
+                            //         textAlign: TextAlign.center,
+                            //         color: primaryGreen,
+                            //       )
+                            //     ]..map((e) => FittedBox(child: e)),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -451,28 +444,9 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      floatingActionButton:
-          BlocBuilder<AuthBloc, AuthState>(builder: (bc, authState) {
-        return BlocListener<AuthBloc, AuthState>(
-          listener: (BuildContext context, state) {
-            if (state is AuthLoggedOut) {
-              context.router.replace(const LoginRoute());
-            }
-          },
-          child: Container(
-            margin: const EdgeInsets.only(top: sizeMedium),
-            child: FloatingActionButton(
-              heroTag: "btn1",
-              onPressed: () {
-                bc.read<AuthBloc>().add(const UserLogoutAuthEvent());
-              },
-              backgroundColor: primaryBlue,
-              child: const Icon(Icons.logout),
-            ),
-          ),
-        );
-      }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      // floatingActionButton:
+      //
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
