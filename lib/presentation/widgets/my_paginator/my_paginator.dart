@@ -15,6 +15,12 @@ class MyPaginator extends StatefulWidget {
 
 class _MyPaginatorState extends State<MyPaginator> {
   var selectedIndex = 1;
+  var targetKey = <GlobalKey>[];
+  @override
+  void initState() {
+    super.initState();
+    targetKey = List<GlobalKey>.generate(widget.pageLength, (index) => GlobalKey());
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,26 +29,27 @@ class _MyPaginatorState extends State<MyPaginator> {
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 64),
             width: double.infinity,
             height: 32,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               // shrinkWrap: true,
-              itemCount: widget.pageLength + 2,
+              itemCount: widget.pageLength,
               itemBuilder: (BuildContext context, int i) {
-                if (i == 0 || i == widget.pageLength + 1) {
-                  return const RoundedContainer(
-                    sizeNormal,
-                    boxDecoration:
-                    BoxDecoration(color: Colors.transparent),
-                    child: Icon(
-                      Icons.do_not_disturb_on_total_silence,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                  );
-                }
+                // if (i == 0 || i == widget.pageLength + 1) {
+                //   return const RoundedContainer(
+                //     sizeNormal,
+                //     boxDecoration:
+                //     BoxDecoration(color: Colors.transparent),
+                //     child: Icon(
+                //       Icons.do_not_disturb_on_total_silence,
+                //       color: Colors.white,
+                //       size: 32,
+                //     ),
+                //   );
+                // }
                 return InkWell(
                   onTap: (){
                     setState(() {
@@ -51,10 +58,11 @@ class _MyPaginatorState extends State<MyPaginator> {
                     });
                   },
                   child: Container(
+                    key: targetKey[i],
                     color: selectedIndex == i ? primaryColor : null,
                       padding: const EdgeInsets.symmetric(
                           horizontal: sizeNormal),
-                      child: Center(child: Text("$i",style: TextStyle(color: selectedIndex == i ? Colors.white : Colors.black),))),
+                      child: Center(child: Text("${i + 1}",style: TextStyle(color: selectedIndex == i ? Colors.white : Colors.black),))),
                 );
               },
             ),
@@ -69,6 +77,13 @@ class _MyPaginatorState extends State<MyPaginator> {
                     if(selectedIndex > 1){
                       selectedIndex--;
                       widget.onPageChanged(selectedIndex);
+                      Scrollable.ensureVisible(
+                        targetKey[selectedIndex].currentContext!,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                        alignment: 32,
+                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+                      );
                     }
                   });
                 },
@@ -89,6 +104,13 @@ class _MyPaginatorState extends State<MyPaginator> {
                     if(selectedIndex < widget.pageLength){
                       selectedIndex++;
                       widget.onPageChanged(selectedIndex);
+                      Scrollable.ensureVisible(
+                        targetKey[selectedIndex].currentContext!,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                        alignment: 32,
+                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+                      );
                     }
                   });
                 },
