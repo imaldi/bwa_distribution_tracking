@@ -20,6 +20,7 @@ import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../../core/resources/media_query/media_query_helpers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+//test push
 class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
 
