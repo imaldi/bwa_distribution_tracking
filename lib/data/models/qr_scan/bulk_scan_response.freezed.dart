@@ -22,8 +22,9 @@ BulkScanResponse _$BulkScanResponseFromJson(Map<String, dynamic> json) {
 mixin _$BulkScanResponse {
   bool? get success => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  List<SuratJalanModel>? get header => throw _privateConstructorUsedError;
   List<BulkQRScanModel>? get data => throw _privateConstructorUsedError;
-  List<BoxQRScanModel>? get detail => throw _privateConstructorUsedError;
+  BulkScanQrDetailPerPage? get detail => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,8 +41,11 @@ abstract class $BulkScanResponseCopyWith<$Res> {
   $Res call(
       {bool? success,
       String? message,
+      List<SuratJalanModel>? header,
       List<BulkQRScanModel>? data,
-      List<BoxQRScanModel>? detail});
+      BulkScanQrDetailPerPage? detail});
+
+  $BulkScanQrDetailPerPageCopyWith<$Res>? get detail;
 }
 
 /// @nodoc
@@ -59,6 +63,7 @@ class _$BulkScanResponseCopyWithImpl<$Res, $Val extends BulkScanResponse>
   $Res call({
     Object? success = freezed,
     Object? message = freezed,
+    Object? header = freezed,
     Object? data = freezed,
     Object? detail = freezed,
   }) {
@@ -71,6 +76,10 @@ class _$BulkScanResponseCopyWithImpl<$Res, $Val extends BulkScanResponse>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as List<SuratJalanModel>?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -78,8 +87,20 @@ class _$BulkScanResponseCopyWithImpl<$Res, $Val extends BulkScanResponse>
       detail: freezed == detail
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
-              as List<BoxQRScanModel>?,
+              as BulkScanQrDetailPerPage?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BulkScanQrDetailPerPageCopyWith<$Res>? get detail {
+    if (_value.detail == null) {
+      return null;
+    }
+
+    return $BulkScanQrDetailPerPageCopyWith<$Res>(_value.detail!, (value) {
+      return _then(_value.copyWith(detail: value) as $Val);
+    });
   }
 }
 
@@ -94,8 +115,12 @@ abstract class _$$_BulkScanResponseCopyWith<$Res>
   $Res call(
       {bool? success,
       String? message,
+      List<SuratJalanModel>? header,
       List<BulkQRScanModel>? data,
-      List<BoxQRScanModel>? detail});
+      BulkScanQrDetailPerPage? detail});
+
+  @override
+  $BulkScanQrDetailPerPageCopyWith<$Res>? get detail;
 }
 
 /// @nodoc
@@ -111,6 +136,7 @@ class __$$_BulkScanResponseCopyWithImpl<$Res>
   $Res call({
     Object? success = freezed,
     Object? message = freezed,
+    Object? header = freezed,
     Object? data = freezed,
     Object? detail = freezed,
   }) {
@@ -123,6 +149,10 @@ class __$$_BulkScanResponseCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as List<SuratJalanModel>?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -130,7 +160,7 @@ class __$$_BulkScanResponseCopyWithImpl<$Res>
       detail: freezed == detail
           ? _value.detail
           : detail // ignore: cast_nullable_to_non_nullable
-              as List<BoxQRScanModel>?,
+              as BulkScanQrDetailPerPage?,
     ));
   }
 }
@@ -140,7 +170,7 @@ class __$$_BulkScanResponseCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_BulkScanResponse implements _BulkScanResponse {
   const _$_BulkScanResponse(
-      {this.success, this.message, this.data, this.detail});
+      {this.success, this.message, this.header, this.data, this.detail});
 
   factory _$_BulkScanResponse.fromJson(Map<String, dynamic> json) =>
       _$$_BulkScanResponseFromJson(json);
@@ -150,13 +180,15 @@ class _$_BulkScanResponse implements _BulkScanResponse {
   @override
   final String? message;
   @override
+  final List<SuratJalanModel>? header;
+  @override
   final List<BulkQRScanModel>? data;
   @override
-  final List<BoxQRScanModel>? detail;
+  final BulkScanQrDetailPerPage? detail;
 
   @override
   String toString() {
-    return 'BulkScanResponse(success: $success, message: $message, data: $data, detail: $detail)';
+    return 'BulkScanResponse(success: $success, message: $message, header: $header, data: $data, detail: $detail)';
   }
 
   @override
@@ -166,8 +198,9 @@ class _$_BulkScanResponse implements _BulkScanResponse {
             other is _$_BulkScanResponse &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other.header, header) &&
             const DeepCollectionEquality().equals(other.data, data) &&
-            const DeepCollectionEquality().equals(other.detail, detail));
+            (identical(other.detail, detail) || other.detail == detail));
   }
 
   @JsonKey(ignore: true)
@@ -176,8 +209,9 @@ class _$_BulkScanResponse implements _BulkScanResponse {
       runtimeType,
       success,
       message,
+      const DeepCollectionEquality().hash(header),
       const DeepCollectionEquality().hash(data),
-      const DeepCollectionEquality().hash(detail));
+      detail);
 
   @JsonKey(ignore: true)
   @override
@@ -197,8 +231,9 @@ abstract class _BulkScanResponse implements BulkScanResponse {
   const factory _BulkScanResponse(
       {final bool? success,
       final String? message,
+      final List<SuratJalanModel>? header,
       final List<BulkQRScanModel>? data,
-      final List<BoxQRScanModel>? detail}) = _$_BulkScanResponse;
+      final BulkScanQrDetailPerPage? detail}) = _$_BulkScanResponse;
 
   factory _BulkScanResponse.fromJson(Map<String, dynamic> json) =
       _$_BulkScanResponse.fromJson;
@@ -208,9 +243,11 @@ abstract class _BulkScanResponse implements BulkScanResponse {
   @override
   String? get message;
   @override
+  List<SuratJalanModel>? get header;
+  @override
   List<BulkQRScanModel>? get data;
   @override
-  List<BoxQRScanModel>? get detail;
+  BulkScanQrDetailPerPage? get detail;
   @override
   @JsonKey(ignore: true)
   _$$_BulkScanResponseCopyWith<_$_BulkScanResponse> get copyWith =>

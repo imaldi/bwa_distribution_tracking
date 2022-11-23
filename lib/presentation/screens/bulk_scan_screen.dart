@@ -371,60 +371,63 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   Radius.circular(sizeMedium))),
                           child: Column(
                             children: [
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                // padding: const EdgeInsets.all(sizeNormal),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount:
-                                    state.bulkScanResponse.detail?.length,
-                                itemBuilder: (cont, ind) {
-                                  return Container(
-                                    color: ind % 2 == 0
-                                        ? null
-                                        : primaryDarkerColor,
-                                    child: ListTile(
-                                        title: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                          child: Row(children: [
-                                            Flexible(
-                                              flex:3,
-                                              child: FittedBox(
-                                                child: Container(
-                                                  padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
-                                                  decoration: const BoxDecoration(border: Border(right: BorderSide(width: 2,color: Colors.white))),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      CustomText("Kode Batch: ${details?[ind].kodeBatch}",color: Colors.white),
-                                                      CustomText("Nama Barang (Project): ${details?[ind].nmProject}",color: Colors.white,),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Flexible(
-                                              child: FittedBox(
-                                                child: Container(
-                                                  padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      // FIXME tanyakan soal field yang benar
-                                                      CustomText("QTY: ${details?[ind].jmlKeluar}",color: Colors.white),
-                                                      CustomText("Jumlah: ${details?[ind].jmlKeluar}",color: Colors.white),
-                                                      CustomText("Satuan: ${details?[ind].jmlKeluar}",color: Colors.white),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                            // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
-                                          ],),
-                                        )),
-                                  );
-                                },
-                              ),
+                              const CustomText("Sedang perbaikan",color: Colors.white,),
+
+                              // ListView.builder(
+                              //   physics: const NeverScrollableScrollPhysics(),
+                              //   // padding: const EdgeInsets.all(sizeNormal),
+                              //   scrollDirection: Axis.vertical,
+                              //   shrinkWrap: true,
+                              //   itemCount:
+                              //       state.bulkScanResponse.detail?.length,
+                              //   itemBuilder: (cont, ind) {
+                              //     return Container(
+                              //       color: ind % 2 == 0
+                              //           ? null
+                              //           : primaryDarkerColor,
+                              //       child:
+                              //       ListTile(
+                              //           title: Padding(
+                              //             padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              //             child: Row(children: [
+                              //               Flexible(
+                              //                 flex:3,
+                              //                 child: FittedBox(
+                              //                   child: Container(
+                              //                     padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                              //                     decoration: const BoxDecoration(border: Border(right: BorderSide(width: 2,color: Colors.white))),
+                              //                     child: Column(
+                              //                       crossAxisAlignment: CrossAxisAlignment.start,
+                              //                       children: [
+                              //                         CustomText("Kode Batch: ${details?[ind].kodeBatch}",color: Colors.white),
+                              //                         CustomText("Nama Barang (Project): ${details?[ind].nmProject}",color: Colors.white,),
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               ),
+                              //               Flexible(
+                              //                 child: FittedBox(
+                              //                   child: Container(
+                              //                     padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                              //                     child: Column(
+                              //                       crossAxisAlignment: CrossAxisAlignment.start,
+                              //                       children: [
+                              //                         // FIXME tanyakan soal field yang benar
+                              //                         CustomText("QTY: ${details?[ind].jmlKeluar}",color: Colors.white),
+                              //                         CustomText("Jumlah: ${details?[ind].jmlKeluar}",color: Colors.white),
+                              //                         CustomText("Satuan: ${details?[ind].jmlKeluar}",color: Colors.white),
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               )
+                              //               // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
+                              //             ],),
+                              //           )),
+                              //     );
+                              //   },
+                              // ),
                               Container(
                                   padding: const EdgeInsets.all(sizeMedium),
                                   child: Column(

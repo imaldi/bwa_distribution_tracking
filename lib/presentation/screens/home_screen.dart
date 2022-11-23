@@ -271,7 +271,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) {
                         var suratJalanState = context.watch<SuratJalanCubit>().state;
                         var listSJ = suratJalanState.suratJalanResponse?.data?.data;
-                        var listLength = listSJ?.length ?? 0;
+                        var listTotal = suratJalanState.suratJalanResponse?.data?.total ?? 0;
+                        //FIXME PIKIRIN GIMANA KALAU HASILNYA 0
+                        var listLength = (listTotal % 5) + 1;
                         log("listSJ: $listSJ");
                         return Container(
                           margin: const EdgeInsets.only(top: sizeMedium),
@@ -280,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
-                              itemCount: listLength,
+                              itemCount: listSJ?.length ?? 0,
                               itemBuilder: (c, i) {
                                 return Card(
                                     color:
@@ -367,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Builder(
                       builder: (context) {
                         var isLoading = context.watch<SuratJalanCubit>().state.isLoading;
-                        var pageLength = context.watch<SuratJalanCubit>().state.suratJalanResponse?.data?.total ?? 0;
+                        var pageLength = ((context.watch<SuratJalanCubit>().state.suratJalanResponse?.data?.total ?? 0) ~/ 5) + 1;
                         print("pageLength $pageLength");
                         return isLoading ? const CircularProgressIndicator() : MyPaginator(
                           pageLength: pageLength,

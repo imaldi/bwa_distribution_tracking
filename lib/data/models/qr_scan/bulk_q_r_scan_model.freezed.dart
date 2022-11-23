@@ -24,6 +24,10 @@ mixin _$BulkQRScanModel {
   String? get nosj => throw _privateConstructorUsedError;
   @JsonKey(name: 'qrcode_sj')
   String? get qrcodeSj => throw _privateConstructorUsedError;
+  @JsonKey(name: 'kd_project')
+  String? get kdProject => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nm_project')
+  String? get nmProject => throw _privateConstructorUsedError;
   String? get nopc => throw _privateConstructorUsedError;
   @JsonKey(name: 'kode_batch')
   String? get kodeBatch => throw _privateConstructorUsedError;
@@ -70,6 +74,8 @@ abstract class $BulkQRScanModelCopyWith<$Res> {
       {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
+      @JsonKey(name: 'kd_project') String? kdProject,
+      @JsonKey(name: 'nm_project') String? nmProject,
       String? nopc,
       @JsonKey(name: 'kode_batch') String? kodeBatch,
       String? alamat,
@@ -107,6 +113,8 @@ class _$BulkQRScanModelCopyWithImpl<$Res, $Val extends BulkQRScanModel>
     Object? id = freezed,
     Object? nosj = freezed,
     Object? qrcodeSj = freezed,
+    Object? kdProject = freezed,
+    Object? nmProject = freezed,
     Object? nopc = freezed,
     Object? kodeBatch = freezed,
     Object? alamat = freezed,
@@ -139,6 +147,14 @@ class _$BulkQRScanModelCopyWithImpl<$Res, $Val extends BulkQRScanModel>
       qrcodeSj: freezed == qrcodeSj
           ? _value.qrcodeSj
           : qrcodeSj // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kdProject: freezed == kdProject
+          ? _value.kdProject
+          : kdProject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nmProject: freezed == nmProject
+          ? _value.nmProject
+          : nmProject // ignore: cast_nullable_to_non_nullable
               as String?,
       nopc: freezed == nopc
           ? _value.nopc
@@ -232,6 +248,8 @@ abstract class _$$_BulkQRScanModelCopyWith<$Res>
       {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
+      @JsonKey(name: 'kd_project') String? kdProject,
+      @JsonKey(name: 'nm_project') String? nmProject,
       String? nopc,
       @JsonKey(name: 'kode_batch') String? kodeBatch,
       String? alamat,
@@ -267,6 +285,8 @@ class __$$_BulkQRScanModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? nosj = freezed,
     Object? qrcodeSj = freezed,
+    Object? kdProject = freezed,
+    Object? nmProject = freezed,
     Object? nopc = freezed,
     Object? kodeBatch = freezed,
     Object? alamat = freezed,
@@ -299,6 +319,14 @@ class __$$_BulkQRScanModelCopyWithImpl<$Res>
       qrcodeSj: freezed == qrcodeSj
           ? _value.qrcodeSj
           : qrcodeSj // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kdProject: freezed == kdProject
+          ? _value.kdProject
+          : kdProject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nmProject: freezed == nmProject
+          ? _value.nmProject
+          : nmProject // ignore: cast_nullable_to_non_nullable
               as String?,
       nopc: freezed == nopc
           ? _value.nopc
@@ -387,6 +415,8 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
       {this.id,
       this.nosj,
       @JsonKey(name: 'qrcode_sj') this.qrcodeSj,
+      @JsonKey(name: 'kd_project') this.kdProject,
+      @JsonKey(name: 'nm_project') this.nmProject,
       this.nopc,
       @JsonKey(name: 'kode_batch') this.kodeBatch,
       this.alamat,
@@ -417,6 +447,12 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
   @override
   @JsonKey(name: 'qrcode_sj')
   final String? qrcodeSj;
+  @override
+  @JsonKey(name: 'kd_project')
+  final String? kdProject;
+  @override
+  @JsonKey(name: 'nm_project')
+  final String? nmProject;
   @override
   final String? nopc;
   @override
@@ -468,7 +504,7 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
 
   @override
   String toString() {
-    return 'BulkQRScanModel(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, nopc: $nopc, kodeBatch: $kodeBatch, alamat: $alamat, pic: $pic, picTelp: $picTelp, tanggal: $tanggal, dikirimBy: $dikirimBy, nopol: $nopol, nmPengemudi: $nmPengemudi, notelp: $notelp, approval: $approval, total: $total, kg: $kg, ttdGa: $ttdGa, ttdWl: $ttdWl, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'BulkQRScanModel(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, kdProject: $kdProject, nmProject: $nmProject, nopc: $nopc, kodeBatch: $kodeBatch, alamat: $alamat, pic: $pic, picTelp: $picTelp, tanggal: $tanggal, dikirimBy: $dikirimBy, nopol: $nopol, nmPengemudi: $nmPengemudi, notelp: $notelp, approval: $approval, total: $total, kg: $kg, ttdGa: $ttdGa, ttdWl: $ttdWl, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -480,6 +516,10 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
             (identical(other.nosj, nosj) || other.nosj == nosj) &&
             (identical(other.qrcodeSj, qrcodeSj) ||
                 other.qrcodeSj == qrcodeSj) &&
+            (identical(other.kdProject, kdProject) ||
+                other.kdProject == kdProject) &&
+            (identical(other.nmProject, nmProject) ||
+                other.nmProject == nmProject) &&
             (identical(other.nopc, nopc) || other.nopc == nopc) &&
             (identical(other.kodeBatch, kodeBatch) ||
                 other.kodeBatch == kodeBatch) &&
@@ -516,6 +556,8 @@ class _$_BulkQRScanModel implements _BulkQRScanModel {
         id,
         nosj,
         qrcodeSj,
+        kdProject,
+        nmProject,
         nopc,
         kodeBatch,
         alamat,
@@ -556,6 +598,8 @@ abstract class _BulkQRScanModel implements BulkQRScanModel {
           {final String? id,
           final String? nosj,
           @JsonKey(name: 'qrcode_sj') final String? qrcodeSj,
+          @JsonKey(name: 'kd_project') final String? kdProject,
+          @JsonKey(name: 'nm_project') final String? nmProject,
           final String? nopc,
           @JsonKey(name: 'kode_batch') final String? kodeBatch,
           final String? alamat,
@@ -587,6 +631,12 @@ abstract class _BulkQRScanModel implements BulkQRScanModel {
   @override
   @JsonKey(name: 'qrcode_sj')
   String? get qrcodeSj;
+  @override
+  @JsonKey(name: 'kd_project')
+  String? get kdProject;
+  @override
+  @JsonKey(name: 'nm_project')
+  String? get nmProject;
   @override
   String? get nopc;
   @override

@@ -13,6 +13,10 @@ class BulkQRScanModel with _$BulkQRScanModel{
   String? nosj,
   @JsonKey(name: 'qrcode_sj')
   String? qrcodeSj,
+    @JsonKey(name: 'kd_project')
+  String? kdProject,
+    @JsonKey(name: 'nm_project')
+  String? nmProject,
   String? nopc,
   @JsonKey(name: 'kode_batch')
   String? kodeBatch,

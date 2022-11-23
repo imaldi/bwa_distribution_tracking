@@ -2,6 +2,9 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/box_q_r_scan_model
 import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_q_r_scan_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../surat_jalan/surat_jalan_model.dart';
+import 'bulk_scan_qr_detail_per_page.dart';
+
 part 'bulk_scan_response.freezed.dart';
 part 'bulk_scan_response.g.dart';
 
@@ -13,8 +16,9 @@ class BulkScanResponse with _$BulkScanResponse{
   const factory BulkScanResponse({
     bool? success,
     String? message,
+    List<SuratJalanModel>? header,
     List<BulkQRScanModel>? data,
-    List<BoxQRScanModel>? detail,
+    BulkScanQrDetailPerPage? detail,
   }) = _BulkScanResponse;
 
   factory BulkScanResponse.fromJson(Map<String, Object?> json)
