@@ -198,7 +198,7 @@ class __$$_SuratJalanRespDataCopyWithImpl<$Res>
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int?,
       data: freezed == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<SuratJalanModel>?,
       firstPageUrl: freezed == firstPageUrl
@@ -251,7 +251,7 @@ class __$$_SuratJalanRespDataCopyWithImpl<$Res>
 class _$_SuratJalanRespData implements _SuratJalanRespData {
   const _$_SuratJalanRespData(
       {this.currentPage,
-      this.data,
+      final List<SuratJalanModel>? data,
       @JsonKey(name: "first_page_url") this.firstPageUrl,
       this.from,
       @JsonKey(name: "last_page") this.lastPage,
@@ -261,15 +261,23 @@ class _$_SuratJalanRespData implements _SuratJalanRespData {
       @JsonKey(name: "per_page") this.perPage,
       @JsonKey(name: "prev_page_url") this.prevPageUrl,
       this.to,
-      this.total});
+      this.total})
+      : _data = data;
 
   factory _$_SuratJalanRespData.fromJson(Map<String, dynamic> json) =>
       _$$_SuratJalanRespDataFromJson(json);
 
   @override
   final int? currentPage;
+  final List<SuratJalanModel>? _data;
   @override
-  final List<SuratJalanModel>? data;
+  List<SuratJalanModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: "first_page_url")
   final String? firstPageUrl;
@@ -309,7 +317,7 @@ class _$_SuratJalanRespData implements _SuratJalanRespData {
             other is _$_SuratJalanRespData &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
-            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.firstPageUrl, firstPageUrl) ||
                 other.firstPageUrl == firstPageUrl) &&
             (identical(other.from, from) || other.from == from) &&
@@ -332,7 +340,7 @@ class _$_SuratJalanRespData implements _SuratJalanRespData {
   int get hashCode => Object.hash(
       runtimeType,
       currentPage,
-      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(_data),
       firstPageUrl,
       from,
       lastPage,

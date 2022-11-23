@@ -7,12 +7,14 @@ import 'package:bwa_distribution_tracking/data/datasources/remote/qr_scan_remote
 import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
+import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_response.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/geolocator_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/scan_repository_impl.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/geolocator_repository.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/scan_repository.dart';
+import 'package:bwa_distribution_tracking/domain/repositories/surat_jalan_repository.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
@@ -21,11 +23,13 @@ import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.d
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_all_scan_history.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_user_scan_history.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/send_qr_scan.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/surat_jalan/get_surat_jalan_per_page.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -33,6 +37,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart' as path_provider;
+
+import 'data/datasources/remote/surat_jalan_remote_data_source.dart';
+import 'data/repositories/surat_jalan_repository_impl.dart';
 
 
 final sl = GetIt.instance;
@@ -73,6 +80,8 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerFactory(() => SuratJalanCubit(sl<GetSuratJalanPerPageUseCase>()));
+
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(client: sl()),
@@ -90,6 +99,9 @@ Future<void> init() async {
   sl.registerLazySingleton<CurrentLocationRemoteDataSource>(
     () => CurrentLocationRemoteDataSourceImpl(),
   );
+
+  sl.registerFactory<SuratJalanRemoteDataSource>(() => SuratJalanRemoteDataSourceImpl(sl(), sl<Box<LoginResponse>>()));
+
 
   /// Repository
   sl.registerLazySingleton<AuthRepository>(
@@ -111,6 +123,9 @@ Future<void> init() async {
       currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
     ),
   );
+  sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(sl<SuratJalanRemoteDataSource>()));
+
+
 
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
@@ -121,6 +136,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserScanHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAllScanHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
+  sl.registerFactory<GetSuratJalanPerPageUseCase>(() => GetSuratJalanPerPageUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
@@ -5,6 +7,7 @@ import 'package:bwa_distribution_tracking/injection_container.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/surat_jalan/surat_jalan_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_paginator/my_paginator.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
@@ -29,10 +32,16 @@ class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider.value(
-      value: sl<QRScanBloc>(),
-      child: this,
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider.value(
+        value: sl<QRScanBloc>(),
+        child: this,
+      ),
+      BlocProvider(
+        create: (_) => sl<SuratJalanCubit>(),
+        child: this,
+      ),
+    ], child: this);
   }
 }
 
@@ -41,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<InternetConnectionCubit>().checkConnection();
+    context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
   }
 
   @override
@@ -257,82 +267,89 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         )),
-                    Container(
-                      margin: const EdgeInsets.only(top: sizeMedium),
-                      padding: const EdgeInsets.all(sizeNormal),
-                      child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          // padding: const EdgeInsets.all(sizeNormal),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: 5,
-                          // state.bulkScanResponse.detail?.length,
-                          itemBuilder: (c, i) {
-                            return Card(
-                                color:
-                                    i % 2 == 0 ? listColorLight : listColorDark,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      CustomText(
-                                        "Kode Surat Jalan",
-                                        color: Colors.white,
+                    Builder(
+                      builder: (context) {
+                        var suratJalanState = context.watch<SuratJalanCubit>().state;
+                        var listSJ = suratJalanState.suratJalanResponse?.data?.data;
+                        var listLength = listSJ?.length ?? 0;
+                        log("listSJ: $listSJ");
+                        return Container(
+                          margin: const EdgeInsets.only(top: sizeMedium),
+                          padding: const EdgeInsets.all(sizeNormal),
+                          child: suratJalanState.isLoading ? CircularProgressIndicator() :ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: listLength,
+                              itemBuilder: (c, i) {
+                                return Card(
+                                    color:
+                                        i % 2 == 0 ? listColorLight : listColorDark,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const CustomText(
+                                            "Kode Surat Jalan",
+                                            color: Colors.white,
+                                          ),
+                                          FittedBox(
+                                              child: CustomText(
+                                            // "003/SPJ/22-MERANTI00098-000${i + 1}",
+                                            "${listSJ?[i].nosj}",
+                                            color: Colors.white,
+                                            weight: FontWeight.bold,
+                                          )),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                top: sizeNormal),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Flexible(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const CustomText(
+                                                      "Stock Dalam Proses",
+                                                      color: Colors.white,
+                                                    ),
+                                                    CustomText(
+                                                      "${listSJ?[i].onproses}",
+                                                      color: Colors.white,
+                                                      weight: FontWeight.bold,
+                                                    ),
+                                                  ],
+                                                )),
+                                                Flexible(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const CustomText(
+                                                      "Stock Selesai Diterimma",
+                                                      color: Colors.white,
+                                                    ),
+                                                    CustomText(
+                                                      "${listSJ?[i].selesai}",
+                                                      color: Colors.white,
+                                                      weight: FontWeight.bold,
+                                                    ),
+                                                  ],
+                                                )),
+                                              ],
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      FittedBox(
-                                          child: CustomText(
-                                        "003/SPJ/22-MERANTI00098-000${i + 1}",
-                                        color: Colors.white,
-                                        weight: FontWeight.bold,
-                                      )),
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            top: sizeNormal),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Flexible(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: const [
-                                                CustomText(
-                                                  "Stock Dalam Proses",
-                                                  color: Colors.white,
-                                                ),
-                                                CustomText(
-                                                  "100",
-                                                  color: Colors.white,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ],
-                                            )),
-                                            Flexible(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: const [
-                                                CustomText(
-                                                  "Stock Selesai Diterimma",
-                                                  color: Colors.white,
-                                                ),
-                                                CustomText(
-                                                  "100",
-                                                  color: Colors.white,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ],
-                                            )),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ));
-                          }),
+                                    ));
+                              }),
+                        );
+                      }
                     ),
                     // NumberPagination(
                     //   onPageChanged: (int pageNumber) {
@@ -347,9 +364,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     //   colorSub: Colors.yellow,
                     // ),
 
-                    MyPaginator(pageLength: 100, onPageChanged: (index){
-                      myToast("Index: $index");
-                    },),
+                    Builder(
+                      builder: (context) {
+                        var isLoading = context.watch<SuratJalanCubit>().state.isLoading;
+                        var pageLength = context.watch<SuratJalanCubit>().state.suratJalanResponse?.data?.total ?? 0;
+                        print("pageLength $pageLength");
+                        return isLoading ? const CircularProgressIndicator() : MyPaginator(
+                          pageLength: pageLength,
+                          onPageChanged: (index) {
+                            context.read<SuratJalanCubit>().getSuratJalanPerPage(index+1);
+                            myToast("Index: $index");
+                          },
+                        );
+                      }
+                    ),
                     Container(
                       height: orientedHeightScreen(context,
                           portraitRatio: 0.20, landscapeRatio: 0.20),

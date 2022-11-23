@@ -2,11 +2,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'surat_jalan_model.freezed.dart';
 part 'surat_jalan_model.g.dart';
-@Freezed(makeCollectionsUnmodifiable: false)
+// @Freezed(makeCollectionsUnmodifiable: false)
+@freezed
 class SuratJalanModel with _$SuratJalanModel {
   @JsonSerializable(explicitToJson: true)
   const factory SuratJalanModel({
-    int? id,
+    String? id,
     String? nosj,
     @JsonKey(name: "qrcode_sj")
     String? qrcodeSj,

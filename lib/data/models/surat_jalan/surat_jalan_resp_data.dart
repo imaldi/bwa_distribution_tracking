@@ -4,7 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'surat_jalan_resp_data.freezed.dart';
 part 'surat_jalan_resp_data.g.dart';
 
-@Freezed(makeCollectionsUnmodifiable: false)
+// @Freezed(makeCollectionsUnmodifiable: false)
+@freezed
 class SuratJalanRespData with _$SuratJalanRespData {
   @JsonSerializable(explicitToJson: true)
   const factory SuratJalanRespData({

@@ -12,7 +12,6 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_mod
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_response.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 
 abstract class QRScanRemoteDataSource {
   Future<BulkScanResponse> bulkScan(String qrcodeSj);

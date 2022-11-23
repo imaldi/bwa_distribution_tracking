@@ -14,7 +14,7 @@ class MyPaginator extends StatefulWidget {
 }
 
 class _MyPaginatorState extends State<MyPaginator> {
-  var selectedIndex = 1;
+  var selectedIndex = 0;
   var targetKey = <GlobalKey>[];
   @override
   void initState() {
@@ -38,18 +38,6 @@ class _MyPaginatorState extends State<MyPaginator> {
               // shrinkWrap: true,
               itemCount: widget.pageLength,
               itemBuilder: (BuildContext context, int i) {
-                // if (i == 0 || i == widget.pageLength + 1) {
-                //   return const RoundedContainer(
-                //     sizeNormal,
-                //     boxDecoration:
-                //     BoxDecoration(color: Colors.transparent),
-                //     child: Icon(
-                //       Icons.do_not_disturb_on_total_silence,
-                //       color: Colors.white,
-                //       size: 32,
-                //     ),
-                //   );
-                // }
                 return InkWell(
                   onTap: (){
                     setState(() {
