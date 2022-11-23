@@ -74,7 +74,7 @@ class _MyPaginatorState extends State<MyPaginator> {
               InkWell(
                 onTap: (){
                   setState(() {
-                    if(selectedIndex > 1){
+                    if(selectedIndex > 0){
                       selectedIndex--;
                       widget.onPageChanged(selectedIndex);
                       Scrollable.ensureVisible(

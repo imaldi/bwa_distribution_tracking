@@ -128,6 +128,10 @@ Future<void> init() async {
   /// External
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
+  /// Kalau ada problem disini habis generate, rollback aja file2 ini:
+  /// user_model.g.dart
+  /// login_response.g.dart
+  /// token.g.dart
   Hive.registerAdapter<UserModel>(UserModelAdapter());
   Hive.registerAdapter<LoginResponse>(LoginResponseAdapter());
   Hive.registerAdapter<Token>(TokenAdapter());
