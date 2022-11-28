@@ -8,6 +8,8 @@ import 'package:bwa_distribution_tracking/presentation/screens/home_screen.dart'
 import 'package:bwa_distribution_tracking/presentation/screens/login_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/screens/test_dhrive_screen.dart';
 
+import '../../presentation/screens/single_scan_screen.dart';
+
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
@@ -22,6 +24,7 @@ import 'package:bwa_distribution_tracking/presentation/screens/test_dhrive_scree
       AutoRoute(page: DusHistoryScreen),
     ]
     ),
+    AutoRoute(page: SingleScanScreen),
   ],
 )
 class $AppRouter {}

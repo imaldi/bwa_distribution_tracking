@@ -83,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         // color: Colors.blue,
                         // height: orientedHeightScreen(context,
                         //     portraitRatio: 0.75, landscapeRatio: 0.75),
-                        width: orientedWidthScreen(context,
-                            portraitRatio: 1, landscapeRatio: 1),
+                        // width: orientedWidthScreen(context,
+                        //     portraitRatio: 1, landscapeRatio: 1),
                         padding: EdgeInsets.fromLTRB(
                             sizeBig,
                             orientedHeightScreen(context,

@@ -103,7 +103,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
         key: widget.formKey,
         child: Container(
             color: Colors.white,
-            margin: const EdgeInsets.symmetric(vertical: sizeMedium),
+            margin: const EdgeInsets.symmetric(vertical: sizeMedium,horizontal: sizeNormal),
             child: _myDropdownButton<T>(widget.values, widget.textValue)));
   }
 }
