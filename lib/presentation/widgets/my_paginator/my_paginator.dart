@@ -7,7 +7,16 @@ import '../container/rounded_container.dart';
 class MyPaginator extends StatefulWidget {
   final int pageLength;
   final Function(int) onPageChanged;
-  const MyPaginator({required this.pageLength, required this.onPageChanged, Key? key}) : super(key: key);
+  final Color? primaryColor;
+  final Color? secondaryColor;
+
+  const MyPaginator(
+      {required this.pageLength,
+      required this.onPageChanged,
+      this.primaryColor,
+      this.secondaryColor,
+      Key? key})
+      : super(key: key);
 
   @override
   State<MyPaginator> createState() => _MyPaginatorState();
@@ -16,11 +25,14 @@ class MyPaginator extends StatefulWidget {
 class _MyPaginatorState extends State<MyPaginator> {
   var selectedIndex = 0;
   var targetKey = <GlobalKey>[];
+
   @override
   void initState() {
     super.initState();
-    targetKey = List<GlobalKey>.generate(widget.pageLength, (index) => GlobalKey());
+    targetKey =
+        List<GlobalKey>.generate(widget.pageLength, (index) => GlobalKey());
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,18 +51,27 @@ class _MyPaginatorState extends State<MyPaginator> {
               itemCount: widget.pageLength,
               itemBuilder: (BuildContext context, int i) {
                 return InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       selectedIndex = i;
                       widget.onPageChanged(i);
                     });
                   },
                   child: Container(
-                    key: targetKey[i],
-                    color: selectedIndex == i ? primaryColor : null,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: sizeNormal),
-                      child: Center(child: Text("${i + 1}",style: TextStyle(color: selectedIndex == i ? Colors.white : Colors.black),))),
+                      key: targetKey[i],
+                      color: selectedIndex == i
+                          ? (widget.primaryColor ?? primaryColor)
+                          : null,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: sizeNormal),
+                      child: Center(
+                          child: Text(
+                        "${i + 1}",
+                        style: TextStyle(
+                            color: selectedIndex == i
+                                ? (widget.secondaryColor ?? Colors.white)
+                                : (widget.primaryColor ?? Colors.black)),
+                      ))),
                 );
               },
             ),
@@ -60,9 +81,9 @@ class _MyPaginatorState extends State<MyPaginator> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(selectedIndex > 0){
+                    if (selectedIndex > 0) {
                       selectedIndex--;
                       widget.onPageChanged(selectedIndex);
                       Scrollable.ensureVisible(
@@ -70,26 +91,27 @@ class _MyPaginatorState extends State<MyPaginator> {
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
                         alignment: 32,
-                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+                        alignmentPolicy:
+                            ScrollPositionAlignmentPolicy.keepVisibleAtStart,
                       );
                     }
                   });
                 },
-                child: const RoundedContainer(
+                child: RoundedContainer(
                   sizeNormal,
                   boxDecoration:
-                  BoxDecoration(color: primaryColor),
+                  BoxDecoration(color: widget.secondaryColor),
                   child: Icon(
                     Icons.keyboard_arrow_left,
-                    color: Colors.white,
+                    color: widget.primaryColor ?? primaryColor,
                     size: 32,
                   ),
                 ),
               ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(selectedIndex < widget.pageLength){
+                    if (selectedIndex < widget.pageLength) {
                       selectedIndex++;
                       widget.onPageChanged(selectedIndex);
                       Scrollable.ensureVisible(
@@ -97,20 +119,21 @@ class _MyPaginatorState extends State<MyPaginator> {
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
                         alignment: 32,
-                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+                        alignmentPolicy:
+                            ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
                       );
                     }
                   });
                 },
-                child: const RoundedContainer(
+                child: RoundedContainer(
                   sizeNormal,
                   // padding: const EdgeInsets.all(0),
                   margin: EdgeInsets.all(0),
                   boxDecoration:
-                  BoxDecoration(color: primaryColor),
+                  BoxDecoration(color: widget.secondaryColor),
                   child: Icon(
                     Icons.keyboard_arrow_right,
-                    color: Colors.white,
+                    color: widget.primaryColor ?? primaryColor,
                     size: 32,
                   ),
                 ),
@@ -119,7 +142,6 @@ class _MyPaginatorState extends State<MyPaginator> {
           ),
         ],
       ),
-    )
-    ;
+    );
   }
 }

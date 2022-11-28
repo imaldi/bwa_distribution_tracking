@@ -10,6 +10,8 @@ import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_sca
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/image_picker/my_image_picker.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/my_dropdown_button/my_dropdown_button.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/my_paginator/my_paginator.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
@@ -64,8 +66,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
               if (state is SendScanSuccess) {
                 myToast("Send Scan Success");
                 // context.router.pop();
-                context.router
-                    .replace(const HistoryRoute());
+                context.router.replace(const HistoryRoute());
               }
             },
             builder: (context, state) {
@@ -86,167 +87,13 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                 // response = state.bulkScanResponse;
                 var data = state.bulkScanResponse.data?.first;
                 var details = state.bulkScanResponse.detail;
+                var dataPerPage = details?.data;
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(sizeMedium),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        // Container(
-                        //     margin: const EdgeInsets.only(
-                        //         top: sizeMedium),
-                        //     height: orientedHeightScreen(context,
-                        //         portraitRatio: 0.15,
-                        //         landscapeRatio: 0.15),
-                        //     width: widthScreen(context),
-                        //     child: Card(
-                        //       color: const Color(0xFF00D3AD),
-                        //       shape: RoundedRectangleBorder(
-                        //         borderRadius:
-                        //         BorderRadius.circular(15),
-                        //       ),
-                        //       child: Column(
-                        //         mainAxisAlignment:
-                        //         MainAxisAlignment.center,
-                        //         children: const [
-                        //           SizedBox(height: sizeNormal),
-                        //           CustomText(
-                        //             "Total Stack Keseluruhan",
-                        //             color: Colors.white,
-                        //           ),
-                        //           Expanded(
-                        //               child: FittedBox(
-                        //                   child: CustomText(
-                        //                     "50000",
-                        //                     color: Colors.white,
-                        //                     size: sizeHuge * 2,
-                        //                     weight: FontWeight.w600,
-                        //                   ))),
-                        //         ],
-                        //       ),
-                        //     )),
-                        // SizedBox(
-                        //   height: orientedHeightScreen(context,
-                        //       portraitRatio: 0.15,
-                        //       landscapeRatio: 0.15),
-                        //   width: widthScreen(context),
-                        //   child: FittedBox(
-                        //     child: Row(
-                        //       children: [
-                        //         Container(
-                        //           padding:
-                        //           const EdgeInsets.symmetric(
-                        //               vertical: sizeSmall),
-                        //           height: orientedHeightScreen(
-                        //               context,
-                        //               portraitRatio: 0.15,
-                        //               landscapeRatio: 0.15),
-                        //           child: Card(
-                        //             color: const Color(0xFFFFB259),
-                        //             shape: RoundedRectangleBorder(
-                        //               borderRadius:
-                        //               BorderRadius.circular(15),
-                        //             ),
-                        //             child: Container(
-                        //                 padding:
-                        //                 const EdgeInsets.only(
-                        //                     bottom: sizeNormal),
-                        //                 child: Column(
-                        //                   mainAxisAlignment:
-                        //                   MainAxisAlignment
-                        //                       .center,
-                        //                   children: const [
-                        //                     SizedBox(
-                        //                         height: sizeNormal),
-                        //                     Flexible(
-                        //                       child: FittedBox(
-                        //                         child: Padding(
-                        //                           padding: EdgeInsets
-                        //                               .symmetric(
-                        //                               horizontal:
-                        //                               sizeNormal),
-                        //                           child: CustomText(
-                        //                             "Stock Dalam Proses",
-                        //                             color: Colors
-                        //                                 .white,
-                        //                           ),
-                        //                         ),
-                        //                       ),
-                        //                     ),
-                        //                     Expanded(
-                        //                         child: FittedBox(
-                        //                           child: CustomText(
-                        //                             "50000",
-                        //                             color: Colors.white,
-                        //                             size: sizeBig,
-                        //                             weight:
-                        //                             FontWeight.w600,
-                        //                           ),
-                        //                         )),
-                        //                   ],
-                        //                 )),
-                        //           ),
-                        //         ),
-                        //         Container(
-                        //           height: orientedHeightScreen(
-                        //               context,
-                        //               portraitRatio: 0.15,
-                        //               landscapeRatio: 0.15),
-                        //           padding:
-                        //           const EdgeInsets.symmetric(
-                        //               vertical: sizeSmall),
-                        //           child: Card(
-                        //             color: const Color(0xFF9059FF),
-                        //             shape: RoundedRectangleBorder(
-                        //               borderRadius:
-                        //               BorderRadius.circular(15),
-                        //             ),
-                        //             child: Container(
-                        //                 padding:
-                        //                 const EdgeInsets.only(
-                        //                     bottom: sizeNormal),
-                        //                 child: Column(
-                        //                   mainAxisAlignment:
-                        //                   MainAxisAlignment
-                        //                       .center,
-                        //                   children: const [
-                        //                     SizedBox(
-                        //                         height: sizeNormal),
-                        //                     Flexible(
-                        //                       child: FittedBox(
-                        //                         child: Padding(
-                        //                           padding: EdgeInsets
-                        //                               .symmetric(
-                        //                               horizontal:
-                        //                               sizeNormal),
-                        //                           child: CustomText(
-                        //                             "Stock Selesai Diterima",
-                        //                             color: Colors
-                        //                                 .white,
-                        //                           ),
-                        //                         ),
-                        //                       ),
-                        //                     ),
-                        //                     Expanded(
-                        //                         child: FittedBox(
-                        //                           child: CustomText(
-                        //                             "50000",
-                        //                             color: Colors.white,
-                        //                             size: sizeBig,
-                        //                             weight:
-                        //                             FontWeight.w600,
-                        //                           ),
-                        //                         )),
-                        //                   ],
-                        //                 )),
-                        //           ),
-                        //         ),
-                        //       ],
-                        //       // ]..map((e) => Expanded(child: e)),
-                        //     ),
-                        //   ),
-                        // ),
                         const CustomText(
                           "NOMOR ID",
                           color: primaryGreen,
@@ -371,69 +218,103 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   Radius.circular(sizeMedium))),
                           child: Column(
                             children: [
-                              const CustomText("Sedang perbaikan",color: Colors.white,),
+                              // const CustomText("Sedang perbaikan",color: Colors.white,),
 
-                              // ListView.builder(
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   // padding: const EdgeInsets.all(sizeNormal),
-                              //   scrollDirection: Axis.vertical,
-                              //   shrinkWrap: true,
-                              //   itemCount:
-                              //       state.bulkScanResponse.detail?.length,
-                              //   itemBuilder: (cont, ind) {
-                              //     return Container(
-                              //       color: ind % 2 == 0
-                              //           ? null
-                              //           : primaryDarkerColor,
-                              //       child:
-                              //       ListTile(
-                              //           title: Padding(
-                              //             padding: const EdgeInsets.symmetric(vertical: 8.0),
-                              //             child: Row(children: [
-                              //               Flexible(
-                              //                 flex:3,
-                              //                 child: FittedBox(
-                              //                   child: Container(
-                              //                     padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
-                              //                     decoration: const BoxDecoration(border: Border(right: BorderSide(width: 2,color: Colors.white))),
-                              //                     child: Column(
-                              //                       crossAxisAlignment: CrossAxisAlignment.start,
-                              //                       children: [
-                              //                         CustomText("Kode Batch: ${details?[ind].kodeBatch}",color: Colors.white),
-                              //                         CustomText("Nama Barang (Project): ${details?[ind].nmProject}",color: Colors.white,),
-                              //                       ],
-                              //                     ),
-                              //                   ),
-                              //                 ),
-                              //               ),
-                              //               Flexible(
-                              //                 child: FittedBox(
-                              //                   child: Container(
-                              //                     padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
-                              //                     child: Column(
-                              //                       crossAxisAlignment: CrossAxisAlignment.start,
-                              //                       children: [
-                              //                         // FIXME tanyakan soal field yang benar
-                              //                         CustomText("QTY: ${details?[ind].jmlKeluar}",color: Colors.white),
-                              //                         CustomText("Jumlah: ${details?[ind].jmlKeluar}",color: Colors.white),
-                              //                         CustomText("Satuan: ${details?[ind].jmlKeluar}",color: Colors.white),
-                              //                       ],
-                              //                     ),
-                              //                   ),
-                              //                 ),
-                              //               )
-                              //               // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
-                              //             ],),
-                              //           )),
-                              //     );
-                              //   },
-                              // ),
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                // padding: const EdgeInsets.all(sizeNormal),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount:
+                                    state.bulkScanResponse.detail?.data?.length,
+                                itemBuilder: (cont, ind) {
+                                  return Container(
+                                    color: ind % 2 == 0
+                                        ? null
+                                        : primaryDarkerColor,
+                                    child: ListTile(
+                                        title: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Flexible(
+                                            flex: 3,
+                                            child: FittedBox(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: sizeNormal),
+                                                decoration: const BoxDecoration(
+                                                    border: Border(
+                                                        right: BorderSide(
+                                                            width: 2,
+                                                            color:
+                                                                Colors.white))),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    CustomText(
+                                                        "Kode Batch: ${dataPerPage?[ind].kodeBatch}",
+                                                        color: Colors.white),
+                                                    CustomText(
+                                                      "Nama Barang (Project): ${dataPerPage?[ind].nmProject}",
+                                                      color: Colors.white,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            child: FittedBox(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: sizeNormal),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // FIXME tanyakan soal field yang benar
+                                                    CustomText(
+                                                        "QTY: ${dataPerPage?[ind].jmlKeluar}",
+                                                        color: Colors.white),
+                                                    CustomText(
+                                                        "Jumlah: ${dataPerPage?[ind].jmlKeluar}",
+                                                        color: Colors.white),
+                                                    CustomText(
+                                                        "Satuan: ${dataPerPage?[ind].jmlKeluar}",
+                                                        color: Colors.white),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                          // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
+                                        ],
+                                      ),
+                                    )),
+                                  );
+                                },
+                              ),
                               Container(
                                   padding: const EdgeInsets.all(sizeMedium),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
+                                      MyPaginator(
+                                          pageLength: ((details?.total ?? 1) ~/
+                                                  (details?.perPage ?? 1)) +
+                                              1,
+                                          onPageChanged: (index) {
+                                            myToast(index.toString());
+                                          },
+                                          primaryColor: Colors.white,
+                                          secondaryColor: primaryColor,
+                                          ),
                                       const CustomText(
                                         "TOTAL QTY, PACKING DAN BERAT",
                                         color: Colors.white,
@@ -456,88 +337,121 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                            margin: const EdgeInsets.only(top: sizeBig),
-                            child: const CustomText("Lokasi Anda",color: primaryGreen,size: sizeMedium,weight: FontWeight.w600,)),
-                        BlocBuilder<BulkScanScreenCubit, BulkScanScreenState>(
-                          builder: (context, state) {
-                            var text =
-                                "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
-                            return RoundedContainer(sizeNormal,
-                                boxDecoration: BoxDecoration(
-                                    border: Border.all(color: primaryGreen)),
-                                child: NoUnderlineTextFormField(
-                                  controller: TextEditingController(text: text),
-                                  enabled: false,
-                                ));
-                          },
-                        ),
-                        MyImagePickerWidget(
-                          //   setImageFilePath: (numb, theImage) => (){
-                          //   print("INI NOMOR: $numb");
-                          //   print("The Path: ${theImage?.path ?? ""}");
-                          //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
-                          // },
-                          functionCallbackSetImageFilePath:
-                              (numb, theImage) async {
-                            // var size = theImage.runtimeType().toString();
-                            print("INI NOMOR: $numb");
-                            print("The Path: ${theImage?.path ?? ""}");
-                            print("foto size: ${theImage.runtimeType}");
+                        // TODO remove this and its bloc
+                        Visibility(
+                          visible: false,
+                          child: Column(
+                            children: [
+                              Container(
+                                  margin: const EdgeInsets.only(top: sizeBig),
+                                  child: const CustomText(
+                                    "Lokasi Anda",
+                                    color: primaryGreen,
+                                    size: sizeMedium,
+                                    weight: FontWeight.w600,
+                                  )),
+                              BlocBuilder<BulkScanScreenCubit, BulkScanScreenState>(
+                                builder: (context, state) {
+                                  var text =
+                                      "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
+                                  return RoundedContainer(sizeNormal,
+                                      boxDecoration: BoxDecoration(
+                                          border: Border.all(color: primaryGreen)),
+                                      child: NoUnderlineTextFormField(
+                                        controller: TextEditingController(text: text),
+                                        enabled: false,
+                                      ));
+                                },
+                              ),
 
-                            context
-                                .read<BulkScanScreenCubit>()
-                                .setFotoPath(theImage?.path ?? "");
-                          },
-                          defaultImagePlaceholder: FittedBox(
-                            child: Padding(
-                              padding: const EdgeInsets.all(sizeBig),
-                              child: RoundedContainer(
-                                sizeNormal,
-                                height: widthScreen(context) * 0.4,
-                                width: widthScreen(context) * 0.4,
-                                boxDecoration: const BoxDecoration(color: Colors.grey),
-                                child: const Center(
-                                  child:  FittedBox(
-                                    child: CustomText(
-                                      "No Picture",
-                                      color: Colors.white,
-                                      size: sizeBig,
-                                      textAlign: TextAlign.center,
+                            ],
+                          ),
+                        ),
+                        MyDropdownButton<String>(
+                            ["Dropship","Pengiriman"], (v) => v,
+                          hint: const Text("Status Pengiriman",style: TextStyle(color: primaryGreen),),
+                        ),
+
+                        ElevatedButton(
+                            onPressed: () {
+                              myToast("OI OI OI");
+                              // context.router.push(const HistoryRoute());
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor),
+                            child: const Text("Simpan")),
+                        // TODO pindahkan ke halaman scan dus
+                        Visibility(
+                          visible: false,
+                          child: Column(children: [
+                            MyImagePickerWidget(
+                              //   setImageFilePath: (numb, theImage) => (){
+                              //   print("INI NOMOR: $numb");
+                              //   print("The Path: ${theImage?.path ?? ""}");
+                              //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
+                              // },
+                              functionCallbackSetImageFilePath:
+                                  (numb, theImage) async {
+                                // var size = theImage.runtimeType().toString();
+                                print("INI NOMOR: $numb");
+                                print("The Path: ${theImage?.path ?? ""}");
+                                print("foto size: ${theImage.runtimeType}");
+
+                                context
+                                    .read<BulkScanScreenCubit>()
+                                    .setFotoPath(theImage?.path ?? "");
+                              },
+                              defaultImagePlaceholder: FittedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(sizeBig),
+                                  child: RoundedContainer(
+                                    sizeNormal,
+                                    height: widthScreen(context) * 0.4,
+                                    width: widthScreen(context) * 0.4,
+                                    boxDecoration:
+                                    const BoxDecoration(color: Colors.grey),
+                                    child: const Center(
+                                      child: FittedBox(
+                                        child: CustomText(
+                                          "No Picture",
+                                          color: Colors.white,
+                                          size: sizeBig,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  context.router
-                                      .push(const HistoryRoute());
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: primaryColor),
-                                child: const Text("History")),
-                            Builder(builder: (context) {
-                              return ElevatedButton(
-                                  onPressed: () {
-                                    var model = context
-                                        .read<BulkScanScreenCubit>()
-                                        .state
-                                        .sendScanDataModel;
-                                    context
-                                        .read<QRScanBloc>()
-                                        .add(SendScanEvent(model));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: primaryColor),
-                                  child: const Text("Simpan"));
-                            }),
-                          ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      context.router.push(const HistoryRoute());
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: primaryColor),
+                                    child: const Text("History")),
+                                Builder(builder: (context) {
+                                  return ElevatedButton(
+                                      onPressed: () {
+                                        var model = context
+                                            .read<BulkScanScreenCubit>()
+                                            .state
+                                            .sendScanDataModel;
+                                        context
+                                            .read<QRScanBloc>()
+                                            .add(SendScanEvent(model));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: primaryColor),
+                                      child: const Text("Simpan"));
+                                }),
+                              ],
+                            )
+                          ],),
                         )
                       ],
                     ),
