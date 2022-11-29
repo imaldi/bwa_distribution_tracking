@@ -53,6 +53,7 @@ class AppRouter extends _i10.RootStackRouter {
         child: _i10.WrappedRoute(
             child: _i3.BulkScanScreen(
           qrScanBloc: args.qrScanBloc,
+          firstTimeScan: args.firstTimeScan,
           key: args.key,
         )),
       );
@@ -72,7 +73,7 @@ class AppRouter extends _i10.RootStackRouter {
     SingleScanRoute.name: (routeData) {
       return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i10.WrappedRoute(child: _i6.SingleScanScreen()),
+        child: _i10.WrappedRoute(child: const _i6.SingleScanScreen()),
       );
     },
     AllHistoryRoute.name: (routeData) {
@@ -170,12 +171,14 @@ class HomeRoute extends _i10.PageRouteInfo<void> {
 class BulkScanRoute extends _i10.PageRouteInfo<BulkScanRouteArgs> {
   BulkScanRoute({
     required _i12.QRScanBloc qrScanBloc,
+    bool firstTimeScan = true,
     _i11.Key? key,
   }) : super(
           BulkScanRoute.name,
           path: '/bulk-scan-screen',
           args: BulkScanRouteArgs(
             qrScanBloc: qrScanBloc,
+            firstTimeScan: firstTimeScan,
             key: key,
           ),
         );
@@ -186,16 +189,19 @@ class BulkScanRoute extends _i10.PageRouteInfo<BulkScanRouteArgs> {
 class BulkScanRouteArgs {
   const BulkScanRouteArgs({
     required this.qrScanBloc,
+    this.firstTimeScan = true,
     this.key,
   });
 
   final _i12.QRScanBloc qrScanBloc;
 
+  final bool firstTimeScan;
+
   final _i11.Key? key;
 
   @override
   String toString() {
-    return 'BulkScanRouteArgs{qrScanBloc: $qrScanBloc, key: $key}';
+    return 'BulkScanRouteArgs{qrScanBloc: $qrScanBloc, firstTimeScan: $firstTimeScan, key: $key}';
   }
 }
 

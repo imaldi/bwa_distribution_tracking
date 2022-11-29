@@ -555,19 +555,22 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   ),
                                 ),
 
-                                ElevatedButton(
-                                    onPressed: () {
-                                      var model = context
-                                          .read<BulkScanScreenCubit>()
-                                          .state
-                                          .sendScanDataModel;
-                                      context
-                                          .read<QRScanBloc>()
-                                          .add(SendScanEvent(model));
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: primaryColor),
-                                    child: const Text("Simpan")),
+                                Visibility(
+                                  visible: widget.firstTimeScan,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        var model = context
+                                            .read<BulkScanScreenCubit>()
+                                            .state
+                                            .sendScanDataModel;
+                                        context
+                                            .read<QRScanBloc>()
+                                            .add(SendScanEvent(model));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: primaryColor),
+                                      child: const Text("Simpan")),
+                                ),
                                 // TODO pindahkan ke halaman scan dus
                                 Visibility(
                                   visible: false,
@@ -646,7 +649,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   ),
                                 ),
                                 Visibility(
-                                  visible: true,
+                                  visible: !widget.firstTimeScan,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -671,7 +674,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         ),
                                       ),
                                       const CustomText(
-                                        "Surat Jalan",
+                                        "Scan Dus",
                                         textAlign: TextAlign.center,
                                         color: primaryColor,
                                       )

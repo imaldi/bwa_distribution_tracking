@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!state.isOnline) {
             myToast("Internet Disconnected");
           }
-          if(state.isOnline){
+          if (state.isOnline) {
             context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
           }
           // else {
@@ -271,130 +271,148 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         )),
-                    Builder(
-                      builder: (context) {
-                        var suratJalanState = context.watch<SuratJalanCubit>().state;
-                        var listSJ = suratJalanState.suratJalanResponse?.data?.data;
-                        var internetConnection = context.watch<InternetConnectionCubit>().state.isOnline;
-                        var listTotal = suratJalanState.suratJalanResponse?.data?.total ?? 0;
-                        log("listSJ: $listSJ");
-                        if(!internetConnection) {return Center(child: Padding(
-                          padding: const EdgeInsets.all(sizeMedium),
-                          child: Text("No Internet Connection, Tap to Refresh"),
-                        ),);};
-                        return Container(
-                          margin: const EdgeInsets.only(top: sizeMedium),
-                          padding: const EdgeInsets.all(sizeNormal),
-                          child: suratJalanState.isLoading ? CircularProgressIndicator(color: primaryGreen,) :ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: listSJ?.length ?? 0,
-                              itemBuilder: (c, i) {
-                                return InkWell(
-                                  onTap:(){
-                                    var qrBloc = context
-                                        .read<QRScanBloc>();
-                                    qrBloc.add(
-                                        BulkQRScanEvent(
-                                          // textValue
-                                          // controller.text
-                                            "${listSJ?[i].qrcodeSj}"));
-                                    context.router.push(
-                                        BulkScanRoute(
-                                            qrScanBloc:
-                                            qrBloc));
-                                  },
-                                  child: Card(
-                                      color: Colors.white,
-                                          // i % 2 == 0 ? listColorLight : listColorDark,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            const CustomText(
-                                              "Kode Surat Jalan",
-                                              color: Colors.white,
-                                            ),
-                                            FittedBox(
-                                                child: CustomText(
-                                              // "003/SPJ/22-MERANTI00098-000${i + 1}",
-                                              "${listSJ?[i].nosj}",
-                                              color: primaryColor,
-                                              weight: FontWeight.bold,
-                                            )),
-                                            Container(
-                                              margin: const EdgeInsets.only(
-                                                  top: sizeNormal),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  Flexible(
-                                                      child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    children: [
-                                                      const FittedBox(
-                                                        child: CustomText(
-                                                          "Dalam Proses",
-                                                          color: primaryColor,
-                                                        ),
-                                                      ),
-                                                      CustomText(
-                                                        "${listSJ?[i].onproses}",
-                                                        color: primaryColor,
-                                                        weight: FontWeight.bold,
-                                                      ),
-                                                    ],
-                                                  )),
-                                                  Flexible(
-                                                      child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    children: [
-                                                      const FittedBox(
-                                                        child: CustomText(
-                                                          "Selesai Diterima",
-                                                          color: primaryColor,
-                                                        ),
-                                                      ),
-                                                      CustomText(
-                                                        "${listSJ?[i].selesai}",
-                                                        color: primaryColor,
-                                                        weight: FontWeight.bold,
-                                                      ),
-                                                    ],
-                                                  )),
-                                                  Flexible(
-                                                      child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    children: [
-                                                      const CustomText(
-                                                        "Total",
-                                                        color: primaryColor,
-                                                      ),
-                                                      CustomText(
-                                                        "${listSJ?[i].total}",
-                                                        color: primaryColor,
-                                                        weight: FontWeight.bold,
-                                                      ),
-                                                    ],
-                                                  )),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )),
-                                );
-                              }),
+                    Builder(builder: (context) {
+                      var suratJalanState =
+                          context.watch<SuratJalanCubit>().state;
+                      var listSJ =
+                          suratJalanState.suratJalanResponse?.data?.data;
+                      var internetConnection = context
+                          .watch<InternetConnectionCubit>()
+                          .state
+                          .isOnline;
+                      var listTotal =
+                          suratJalanState.suratJalanResponse?.data?.total ?? 0;
+                      log("listSJ: $listSJ");
+                      if (!internetConnection) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(sizeMedium),
+                            child:
+                                Text("No Internet Connection, Tap to Refresh"),
+                          ),
                         );
                       }
-                    ),
+                      ;
+                      return Container(
+                        margin: const EdgeInsets.only(top: sizeMedium),
+                        padding: const EdgeInsets.all(sizeNormal),
+                        child: suratJalanState.isLoading
+                            ? CircularProgressIndicator(
+                                color: primaryGreen,
+                              )
+                            : ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: listSJ?.length ?? 0,
+                                itemBuilder: (c, i) {
+                                  return InkWell(
+                                    onTap: () {
+                                      var qrBloc = context.read<QRScanBloc>();
+                                      qrBloc.add(BulkQRScanEvent(
+                                          // textValue
+                                          // controller.text
+                                          "${listSJ?[i].qrcodeSj}"));
+                                      context.router.push(BulkScanRoute(
+                                          qrScanBloc: qrBloc,
+                                          firstTimeScan: false));
+                                    },
+                                    child: Card(
+                                        color: Colors.white,
+                                        // i % 2 == 0 ? listColorLight : listColorDark,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              const CustomText(
+                                                "Kode Surat Jalan",
+                                                color: Colors.white,
+                                              ),
+                                              FittedBox(
+                                                  child: CustomText(
+                                                // "003/SPJ/22-MERANTI00098-000${i + 1}",
+                                                "${listSJ?[i].nosj}",
+                                                color: primaryColor,
+                                                weight: FontWeight.bold,
+                                              )),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: sizeNormal),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Flexible(
+                                                        child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const FittedBox(
+                                                          child: CustomText(
+                                                            "Dalam Proses",
+                                                            color: primaryColor,
+                                                          ),
+                                                        ),
+                                                        CustomText(
+                                                          "${listSJ?[i].onproses}",
+                                                          color: primaryColor,
+                                                          weight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ],
+                                                    )),
+                                                    Flexible(
+                                                        child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const FittedBox(
+                                                          child: CustomText(
+                                                            "Selesai Diterima",
+                                                            color: primaryColor,
+                                                          ),
+                                                        ),
+                                                        CustomText(
+                                                          "${listSJ?[i].selesai}",
+                                                          color: primaryColor,
+                                                          weight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ],
+                                                    )),
+                                                    Flexible(
+                                                        child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const CustomText(
+                                                          "Total",
+                                                          color: primaryColor,
+                                                        ),
+                                                        CustomText(
+                                                          "${listSJ?[i].total}",
+                                                          color: primaryColor,
+                                                          weight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ],
+                                                    )),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                  );
+                                }),
+                      );
+                    }),
                     // NumberPagination(
                     //   onPageChanged: (int pageNumber) {
                     //     //do somthing for selected page
@@ -408,21 +426,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     //   colorSub: Colors.yellow,
                     // ),
 
-                    Builder(
-                      builder: (context) {
-                        var state = context.watch<SuratJalanCubit>().state;
-                        var isLoading = state.isLoading;
-                        var pageLength = ((state.suratJalanResponse?.data?.total ?? 0) ~/ (state.suratJalanResponse?.data?.perPage ?? 1)) + 1;
-                        print("pageLength $pageLength");
-                        return isLoading ? const CircularProgressIndicator(color: primaryGreen,) : MyPaginator(
-                          pageLength: pageLength,
-                          onPageChanged: (index) {
-                            context.read<SuratJalanCubit>().getSuratJalanPerPage(index+1);
-                            myToast("Index: $index");
-                          },
-                        );
-                      }
-                    ),
+                    Builder(builder: (context) {
+                      var state = context.watch<SuratJalanCubit>().state;
+                      var isLoading = state.isLoading;
+                      var pageLength =
+                          ((state.suratJalanResponse?.data?.total ?? 0) ~/
+                                  (state.suratJalanResponse?.data?.perPage ??
+                                      1)) +
+                              1;
+                      print("pageLength $pageLength");
+                      return isLoading
+                          ? const CircularProgressIndicator(
+                              color: primaryGreen,
+                            )
+                          : MyPaginator(
+                              pageLength: pageLength,
+                              onPageChanged: (index) {
+                                context
+                                    .read<SuratJalanCubit>()
+                                    .getSuratJalanPerPage(index + 1);
+                                myToast("Index: $index");
+                              },
+                            );
+                    }),
                     Container(
                       height: orientedHeightScreen(context,
                           portraitRatio: 0.20, landscapeRatio: 0.20),
