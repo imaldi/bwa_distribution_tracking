@@ -18,6 +18,8 @@ class MyDropdownButton<T> extends StatefulWidget {
     this.textInCenter = false,
     this.defaultChoiceFunction,
     this.hint,
+        this.padding,
+        this.margin,
   }) : super(key: key);
 
   // Function defaultOnItemTapped;
@@ -32,6 +34,8 @@ class MyDropdownButton<T> extends StatefulWidget {
   bool? textInCenter;
   bool? defaultChoiceFunction;
   Widget? hint;
+  EdgeInsets? padding;
+  EdgeInsets? margin;
 
   // final DropdownButton<T> myDropdownButton;
 
@@ -54,10 +58,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
             widget.onItemTapped!(e);
           });
       return DropdownMenuItem(
-          onTap: ((values.indexOf(e) != 0 && widget.onItemTapped != null) ||
-                  widget.defaultChoiceFunction == true)
-              ? onTap
-              : null,
+          onTap: onTap,
           value: e,
           child: widget.textInCenter ?? false
               ? Center(child: Text(textValue(e)))
@@ -103,7 +104,8 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
         key: widget.formKey,
         child: Container(
             color: Colors.white,
-            margin: const EdgeInsets.symmetric(vertical: sizeMedium,horizontal: sizeNormal),
+            padding: widget.padding,
+            margin: widget.margin ?? const EdgeInsets.symmetric(vertical: sizeMedium,horizontal: sizeNormal),
             child: _myDropdownButton<T>(widget.values, widget.textValue)));
   }
 }

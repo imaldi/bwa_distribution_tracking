@@ -12,6 +12,7 @@ class MyPaginator extends StatefulWidget {
 
   const MyPaginator(
       {required this.pageLength,
+      /// pageLength has to be more than 0
       required this.onPageChanged,
       this.primaryColor,
       this.secondaryColor,
@@ -111,7 +112,7 @@ class _MyPaginatorState extends State<MyPaginator> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    if (selectedIndex < widget.pageLength) {
+                    if (selectedIndex < widget.pageLength-1) {
                       selectedIndex++;
                       widget.onPageChanged(selectedIndex);
                       Scrollable.ensureVisible(

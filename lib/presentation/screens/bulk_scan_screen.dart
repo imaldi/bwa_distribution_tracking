@@ -17,11 +17,15 @@ import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/n
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
   final QRScanBloc qrScanBloc;
+  final bool firstTimeScan;
 
-  const BulkScanScreen({required this.qrScanBloc, Key? key}) : super(key: key);
+  const BulkScanScreen(
+      {required this.qrScanBloc, this.firstTimeScan = true, Key? key})
+      : super(key: key);
 
   @override
   State<BulkScanScreen> createState() => _BulkScanScreenState();
@@ -45,7 +49,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
   void initState() {
     super.initState();
 
-    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
+    if (widget.firstTimeScan) {
+      context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
+    }
   }
 
   @override
@@ -57,8 +63,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
             child: Column(
               children: [
                 Container(
-                  width: orientedWidthScreen(context,
-                      portraitRatio: 1, landscapeRatio: 1),
+                  // width: orientedWidthScreen(context,
+                  //     portraitRatio: 1, landscapeRatio: 1),
                   padding: const EdgeInsets.all(sizeMedium),
                   decoration: const BoxDecoration(
                     // gradient: basicDiagonalGradient(),
@@ -76,9 +82,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Stack(
-                          alignment: Alignment.centerLeft,
-                          children: [
+                      Stack(alignment: Alignment.centerLeft, children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,14 +91,14 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 child: CustomText(
                               "Detail Barang",
                               color: Colors.white,
-                                  size: sizeMedium,
+                              size: sizeMedium,
                             ))
                           ],
                         ),
-                            InkWell(
-                              onTap: (){
-                                context.router.pop();
-                              },
+                        InkWell(
+                          onTap: () {
+                            context.router.pop();
+                          },
                           child: const Icon(
                             Icons.keyboard_arrow_left_outlined,
                             color: Colors.white,
@@ -106,13 +110,26 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FittedBox(
+                            Padding(
+                              padding: const EdgeInsets.all(sizeMedium),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                CustomText("Total Al-Quran Keseluruhan",color: Colors.white, size: sizeMedium,),
-                                CustomText("50.000",color: Colors.white,size: sizeHuge,weight: FontWeight.bold,),
-                              ],),
+                                  FittedBox(
+                                      child: CustomText(
+                                    "Total Al-Quran Keseluruhan",
+                                    color: Colors.white,
+                                    size: sizeMedium,
+                                  )),
+                                  FittedBox(
+                                      child: CustomText(
+                                    "50.000",
+                                    color: Colors.white,
+                                    size: sizeHuge - 10,
+                                    weight: FontWeight.bold,
+                                  )),
+                                ],
+                              ),
                             ),
                             Row(
                               children: [
@@ -120,22 +137,48 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   child: Padding(
                                     padding: EdgeInsets.all(sizeMedium),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: const [
-                                      FittedBox(child: CustomText("Al-Quran diproses",color: Colors.white, size: sizeMedium,)),
-                                      FittedBox(child: CustomText("50.000",color: Colors.white,size: sizeHuge,weight: FontWeight.bold,)),
-                                    ],),
+                                        FittedBox(
+                                            child: CustomText(
+                                          "Al-Quran diproses",
+                                          color: Colors.white,
+                                          size: sizeMedium,
+                                        )),
+                                        FittedBox(
+                                            child: CustomText(
+                                          "50.000",
+                                          color: Colors.white,
+                                          size: sizeHuge,
+                                          weight: FontWeight.bold,
+                                        )),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Flexible(
                                   child: Padding(
                                     padding: EdgeInsets.all(sizeMedium),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: const [
-                                      CustomText("Al-Quran Selesai",color: Colors.white, size: sizeMedium,),
-                                      FittedBox(child: CustomText("50.000",color: Colors.white,size: sizeHuge,weight: FontWeight.bold,)),
-                                    ],),
+                                        FittedBox(
+                                            child: CustomText(
+                                          "Al-Quran Selesai",
+                                          color: Colors.white,
+                                          size: sizeMedium,
+                                        )),
+                                        FittedBox(
+                                            child: CustomText(
+                                          "50.000",
+                                          color: Colors.white,
+                                          size: sizeHuge,
+                                          weight: FontWeight.bold,
+                                        )),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -166,7 +209,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
 
                         if (state is QRScanLoading) {
                           return SizedBox(
-                            height: heightScreen(context)/4,
+                            height: heightScreen(context) / 4,
                             child: const Center(
                               child: CircularProgressIndicator(
                                 color: primaryGreen,
@@ -190,16 +233,15 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-
                                 RoundedContainer(sizeMedium,
                                     padding: const EdgeInsets.all(sizeMedium),
-                                    margin: const EdgeInsets.symmetric(vertical: sizeBig),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: sizeBig),
                                     boxDecoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: textColor)
-                                      // color: primaryColor,
-                                      // gradient: basicDiagonalGradient(),
-                                    ),
+                                        border: Border.all(color: textColor)
+                                        // color: primaryColor,
+                                        // gradient: basicDiagonalGradient(),
+                                        ),
                                     child: Column(
                                       children: [
                                         const CustomText(
@@ -212,7 +254,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           color: primaryGreen,
                                           weight: FontWeight.bold,
                                         ),
-                                        SizedBox(height: sizeBig,),
+                                        SizedBox(
+                                          height: sizeBig,
+                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
@@ -297,7 +341,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: [
-                                             Expanded(
+                                            Expanded(
                                                 child: CustomText(
                                               "Alamat Pengirimiman",
                                               color: textColor,
@@ -336,18 +380,20 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                 : primaryDarkerColor,
                                             child: ListTile(
                                                 title: Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 8.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
                                               child: Row(
                                                 children: [
                                                   Flexible(
                                                     flex: 3,
                                                     child: FittedBox(
                                                       child: Container(
-                                                        padding: const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal:
-                                                                sizeNormal),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    sizeNormal),
                                                         decoration: const BoxDecoration(
                                                             border: Border(
                                                                 right: BorderSide(
@@ -361,11 +407,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                           children: [
                                                             CustomText(
                                                                 "Kode Batch: ${dataPerPage?[ind].kodeBatch}",
-                                                                color:
-                                                                    Colors.white),
+                                                                color: Colors
+                                                                    .white),
                                                             CustomText(
                                                               "Nama Barang (Project): ${dataPerPage?[ind].nmProject}",
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ],
                                                         ),
@@ -375,10 +422,11 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                   Flexible(
                                                     child: FittedBox(
                                                       child: Container(
-                                                        padding: const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal:
-                                                                sizeNormal),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    sizeNormal),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -387,16 +435,16 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                             // FIXME tanyakan soal field yang benar
                                                             CustomText(
                                                                 "QTY: ${dataPerPage?[ind].jmlKeluar}",
-                                                                color:
-                                                                    Colors.white),
+                                                                color: Colors
+                                                                    .white),
                                                             CustomText(
                                                                 "Jumlah: ${dataPerPage?[ind].jmlKeluar}",
-                                                                color:
-                                                                    Colors.white),
+                                                                color: Colors
+                                                                    .white),
                                                             CustomText(
                                                                 "Satuan: ${dataPerPage?[ind].jmlKeluar}",
-                                                                color:
-                                                                    Colors.white),
+                                                                color: Colors
+                                                                    .white),
                                                           ],
                                                         ),
                                                       ),
@@ -417,10 +465,11 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               MyPaginator(
-                                                pageLength: ((details?.total ??
-                                                            1) ~/
-                                                        (details?.perPage ?? 1)) +
-                                                    1,
+                                                pageLength:
+                                                    ((details?.total ?? 1) ~/
+                                                            (details?.perPage ??
+                                                                1)) +
+                                                        1,
                                                 onPageChanged: (index) {
                                                   myToast(index.toString());
                                                 },
@@ -456,8 +505,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   child: Column(
                                     children: [
                                       Container(
-                                          margin:
-                                              const EdgeInsets.only(top: sizeBig),
+                                          margin: const EdgeInsets.only(
+                                              top: sizeBig),
                                           child: const CustomText(
                                             "Lokasi Anda",
                                             color: primaryGreen,
@@ -474,8 +523,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                   border: Border.all(
                                                       color: primaryGreen)),
                                               child: NoUnderlineTextFormField(
-                                                controller: TextEditingController(
-                                                    text: text),
+                                                controller:
+                                                    TextEditingController(
+                                                        text: text),
                                                 enabled: false,
                                               ));
                                         },
@@ -483,23 +533,37 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(sizeMedium),
-                                  child: MyDropdownButton<String>(
-                                    ["Dropship", "Pengiriman"],
-                                    (v) => v,
-                                    hint: const Text(
-                                      "Status Pengiriman",
-                                      style: TextStyle(color: primaryGreen),
+                                Visibility(
+                                  visible: widget.firstTimeScan,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(sizeMedium),
+                                    child: MyDropdownButton<String>(
+                                      ["Dropship", "Pengiriman"],
+                                      (v) => v,
+                                      onItemTapped: (val) {
+                                        context
+                                            .read<BulkScanScreenCubit>()
+                                        .updateModelState((dataModel){
+                                          return dataModel.copyWith(statusPengiriman: val);
+                                        });
+                                      },
+                                      hint: const Text(
+                                        "Status Pengiriman",
+                                        style: TextStyle(color: primaryGreen),
+                                      ),
                                     ),
                                   ),
                                 ),
 
                                 ElevatedButton(
                                     onPressed: () {
-                                      myToast("OI OI OI");
-                                      context.router
-                                          .push(const SingleScanRoute());
+                                      var model = context
+                                          .read<BulkScanScreenCubit>()
+                                          .state
+                                          .sendScanDataModel;
+                                      context
+                                          .read<QRScanBloc>()
+                                          .add(SendScanEvent(model));
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: primaryColor),
@@ -526,7 +590,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
 
                                           context
                                               .read<BulkScanScreenCubit>()
-                                              .setFotoPath(theImage?.path ?? "");
+                                              .setFotoPath(
+                                                  theImage?.path ?? "");
                                         },
                                         defaultImagePlaceholder: FittedBox(
                                           child: Padding(
@@ -534,10 +599,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                 const EdgeInsets.all(sizeBig),
                                             child: RoundedContainer(
                                               sizeNormal,
-                                              height: widthScreen(context) * 0.4,
+                                              height:
+                                                  widthScreen(context) * 0.4,
                                               width: widthScreen(context) * 0.4,
-                                              boxDecoration: const BoxDecoration(
-                                                  color: Colors.grey),
+                                              boxDecoration:
+                                                  const BoxDecoration(
+                                                      color: Colors.grey),
                                               child: const Center(
                                                 child: FittedBox(
                                                   child: CustomText(
@@ -562,19 +629,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                     .push(const HistoryRoute());
                                               },
                                               style: ElevatedButton.styleFrom(
-                                                  backgroundColor: primaryColor),
+                                                  backgroundColor:
+                                                      primaryColor),
                                               child: const Text("History")),
                                           Builder(builder: (context) {
                                             return ElevatedButton(
-                                                onPressed: () {
-                                                  var model = context
-                                                      .read<BulkScanScreenCubit>()
-                                                      .state
-                                                      .sendScanDataModel;
-                                                  context
-                                                      .read<QRScanBloc>()
-                                                      .add(SendScanEvent(model));
-                                                },
+                                                onPressed: () {},
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor:
                                                         primaryColor),
@@ -583,6 +643,41 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         ],
                                       )
                                     ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: true,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          context.router
+                                              .push(const SingleScanRoute());
+                                        },
+                                        child: RoundedContainer(
+                                          sizeMedium,
+                                          padding:
+                                              const EdgeInsets.all(sizeBig),
+                                          margin: const EdgeInsets.only(
+                                              right: sizeMedium,
+                                              left: sizeMedium,
+                                              top: sizeMedium,
+                                              bottom: sizeNormal),
+                                          boxDecoration: const BoxDecoration(
+                                              color: primaryColor),
+                                          child: SvgPicture.asset(
+                                              "assets/images/camera_white.svg"),
+                                        ),
+                                      ),
+                                      const CustomText(
+                                        "Surat Jalan",
+                                        textAlign: TextAlign.center,
+                                        color: primaryColor,
+                                      )
+                                    ]..map((e) => FittedBox(
+                                          child: e,
+                                        )),
                                   ),
                                 )
                               ],

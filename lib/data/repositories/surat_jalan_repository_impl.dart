@@ -5,14 +5,19 @@ import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_re
 
 import 'package:dartz/dartz.dart';
 
+import '../../core/platform/network_info.dart';
 import '../../domain/repositories/surat_jalan_repository.dart';
 import '../datasources/remote/surat_jalan_remote_data_source.dart';
 
 class SuratJalanRepositoryImpl extends SuratJalanRepository{
   final SuratJalanRemoteDataSource remoteDataSource;
-  SuratJalanRepositoryImpl(this.remoteDataSource);
+  final NetworkInfo networkInfo;
+
+  SuratJalanRepositoryImpl(this.remoteDataSource,this.networkInfo);
   @override
   Future<Either<Failure, SuratJalanResponse>> getSuratJalanPerPage(int pageNumber) async {
+    if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
+
     try{
       final result = await remoteDataSource.getSuratJalanPerPage(pageNumber);
       return Right(result);

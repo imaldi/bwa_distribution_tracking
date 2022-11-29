@@ -64,6 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!state.isOnline) {
             myToast("Internet Disconnected");
           }
+          if(state.isOnline){
+            context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
+          }
           // else {
           //   myToast("Internet Reconnected");
           // }
@@ -231,6 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     // textValue = controller.text;
                                                     var qrBloc = context
                                                         .read<QRScanBloc>();
+                                                    // var isNewScan
                                                     qrBloc.add(
                                                         const BulkQRScanEvent(
                                                             // textValue
@@ -271,12 +275,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) {
                         var suratJalanState = context.watch<SuratJalanCubit>().state;
                         var listSJ = suratJalanState.suratJalanResponse?.data?.data;
+                        var internetConnection = context.watch<InternetConnectionCubit>().state.isOnline;
                         var listTotal = suratJalanState.suratJalanResponse?.data?.total ?? 0;
                         log("listSJ: $listSJ");
+                        if(!internetConnection) {return Center(child: Padding(
+                          padding: const EdgeInsets.all(sizeMedium),
+                          child: Text("No Internet Connection, Tap to Refresh"),
+                        ),);};
                         return Container(
                           margin: const EdgeInsets.only(top: sizeMedium),
                           padding: const EdgeInsets.all(sizeNormal),
-                          child: suratJalanState.isLoading ? CircularProgressIndicator() :ListView.builder(
+                          child: suratJalanState.isLoading ? CircularProgressIndicator(color: primaryGreen,) :ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
@@ -405,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         var isLoading = state.isLoading;
                         var pageLength = ((state.suratJalanResponse?.data?.total ?? 0) ~/ (state.suratJalanResponse?.data?.perPage ?? 1)) + 1;
                         print("pageLength $pageLength");
-                        return isLoading ? const CircularProgressIndicator() : MyPaginator(
+                        return isLoading ? const CircularProgressIndicator(color: primaryGreen,) : MyPaginator(
                           pageLength: pageLength,
                           onPageChanged: (index) {
                             context.read<SuratJalanCubit>().getSuratJalanPerPage(index+1);
@@ -462,7 +471,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const CustomText(
                                     "Surat Jalan",
                                     textAlign: TextAlign.center,
-                                    color: primaryBlue,
+                                    color: primaryColor,
                                   )
                                 ]..map((e) => FittedBox(
                                       child: e,

@@ -123,7 +123,7 @@ Future<void> init() async {
       currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
     ),
   );
-  sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(sl<SuratJalanRemoteDataSource>()));
+  sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(sl<SuratJalanRemoteDataSource>(), sl<NetworkInfo>()));
 
 
 

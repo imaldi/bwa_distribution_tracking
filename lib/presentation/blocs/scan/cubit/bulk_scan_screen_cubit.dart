@@ -13,6 +13,11 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
   BulkScanScreenCubit(this._getCurrentPositionUseCase)
       : super(const BulkScanScreenState(SendScanDataModel()));
 
+  updateModelState(SendScanDataModel Function(SendScanDataModel) changeCallback){
+    emit(state.copyWith(sendScanDataModel: changeCallback(state.sendScanDataModel)));
+    print("Updated Status data: ${state.sendScanDataModel.statusPengiriman}");
+  }
+
   getCurrentCoordinateAndAddress() async {
     var eitherPositionOrFailure = await _getCurrentPositionUseCase(NoParams());
     var newSendScanDataModel = eitherPositionOrFailure.fold(
