@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
+import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_dropdown_button/my_dropdown_button.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,9 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       hint: const CustomText("Status Pengiriman",
                           color: primaryGreen),
                       margin: const EdgeInsets.symmetric(vertical: sizeNormal),
+                      onItemTapped: (val){
+
+                      },
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -264,8 +268,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                         Expanded(
                           child: ElevatedButton(
                               onPressed: () {
-                                // context.router
-                                //     .push(const SingleScanRoute());
+                                context.router
+                                    .push(const RiwayatSuratJalanRoute());
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: primaryColor),

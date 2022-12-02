@@ -7,9 +7,9 @@ import '../../../core/resources/media_query/media_query_helpers.dart';
 import '../text/custom_text.dart';
 
 class CustomAppbarContainer extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final String? titleText;
-  const CustomAppbarContainer({required this.child, this.titleText, Key? key}) : super(key: key);
+  const CustomAppbarContainer({this.child, this.titleText, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class CustomAppbarContainer extends StatelessWidget {
             ),
           ]),
 
-          child,
+          child ?? Container(),
         ],
       ),
     );
