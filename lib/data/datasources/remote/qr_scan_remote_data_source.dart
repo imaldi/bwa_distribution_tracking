@@ -95,7 +95,6 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("Bulk Scan response code: ${response.statusCode.toString()}");
     log("Bulk Scan response body: ${response.body.toString()}");
 
-    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     // TODO perbaiki response kalau hasilnya not found
     if (response.statusCode == 200) {
       var theResponse = SendScanResponse(success: true, data: model);

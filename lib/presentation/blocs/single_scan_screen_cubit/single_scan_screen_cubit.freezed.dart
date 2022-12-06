@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SingleScanScreenState _$SingleScanScreenStateFromJson(
+SingleScanScreenCubitState _$SingleScanScreenCubitStateFromJson(
     Map<String, dynamic> json) {
   return _SingleScanScreenState.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SingleScanScreenState {
+mixin _$SingleScanScreenCubitState {
   DusListResponse? get dusListResponse => throw _privateConstructorUsedError;
   DusScanResponse? get dusScanResponse => throw _privateConstructorUsedError;
   StoreSelesaiResponse? get storeSelesaiResponse =>
@@ -28,15 +28,16 @@ mixin _$SingleScanScreenState {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SingleScanScreenStateCopyWith<SingleScanScreenState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SingleScanScreenCubitStateCopyWith<SingleScanScreenCubitState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SingleScanScreenStateCopyWith<$Res> {
-  factory $SingleScanScreenStateCopyWith(SingleScanScreenState value,
-          $Res Function(SingleScanScreenState) then) =
-      _$SingleScanScreenStateCopyWithImpl<$Res, SingleScanScreenState>;
+abstract class $SingleScanScreenCubitStateCopyWith<$Res> {
+  factory $SingleScanScreenCubitStateCopyWith(SingleScanScreenCubitState value,
+          $Res Function(SingleScanScreenCubitState) then) =
+      _$SingleScanScreenCubitStateCopyWithImpl<$Res,
+          SingleScanScreenCubitState>;
   @useResult
   $Res call(
       {DusListResponse? dusListResponse,
@@ -49,10 +50,10 @@ abstract class $SingleScanScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SingleScanScreenStateCopyWithImpl<$Res,
-        $Val extends SingleScanScreenState>
-    implements $SingleScanScreenStateCopyWith<$Res> {
-  _$SingleScanScreenStateCopyWithImpl(this._value, this._then);
+class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
+        $Val extends SingleScanScreenCubitState>
+    implements $SingleScanScreenCubitStateCopyWith<$Res> {
+  _$SingleScanScreenCubitStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -122,7 +123,7 @@ class _$SingleScanScreenStateCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_SingleScanScreenStateCopyWith<$Res>
-    implements $SingleScanScreenStateCopyWith<$Res> {
+    implements $SingleScanScreenCubitStateCopyWith<$Res> {
   factory _$$_SingleScanScreenStateCopyWith(_$_SingleScanScreenState value,
           $Res Function(_$_SingleScanScreenState) then) =
       __$$_SingleScanScreenStateCopyWithImpl<$Res>;
@@ -143,7 +144,8 @@ abstract class _$$_SingleScanScreenStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SingleScanScreenStateCopyWithImpl<$Res>
-    extends _$SingleScanScreenStateCopyWithImpl<$Res, _$_SingleScanScreenState>
+    extends _$SingleScanScreenCubitStateCopyWithImpl<$Res,
+        _$_SingleScanScreenState>
     implements _$$_SingleScanScreenStateCopyWith<$Res> {
   __$$_SingleScanScreenStateCopyWithImpl(_$_SingleScanScreenState _value,
       $Res Function(_$_SingleScanScreenState) _then)
@@ -194,7 +196,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
 
   @override
   String toString() {
-    return 'SingleScanScreenState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, storeSelesaiResponse: $storeSelesaiResponse)';
+    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, storeSelesaiResponse: $storeSelesaiResponse)';
   }
 
   @override
@@ -230,7 +232,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   }
 }
 
-abstract class _SingleScanScreenState implements SingleScanScreenState {
+abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   const factory _SingleScanScreenState(
           {final DusListResponse? dusListResponse,
           final DusScanResponse? dusScanResponse,

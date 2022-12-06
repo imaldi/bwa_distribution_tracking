@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/single_scan_screen_bloc/single_scan_screen_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/single_scan_screen_cubit/single_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_dropdown_button/my_dropdown_button.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
@@ -36,6 +38,7 @@ class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
         MultiBlocProvider(providers: [
       BlocProvider.value(value: sl<BulkScanScreenCubit>()),
       BlocProvider.value(value: sl<SingleScanScreenCubit>()),
+      BlocProvider.value(value: sl<SingleScanScreenBloc>()),
     ], child: this);
   }
 }
@@ -47,6 +50,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
   void initState() {
     super.initState();
     context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
+    context.read<SingleScanScreenCubit>().updateStoreSelesaiResponse((p0) => p0.copyWith(qrcodeSj: widget.qrcodeSj));
+
   }
 
   @override
@@ -81,12 +86,15 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       ],
                     ),
                   )),
-              Builder(builder: (context) {
+              BlocBuilder<SingleScanScreenCubit,SingleScanScreenCubitState>(builder: (context,state) {
                 var formKey = GlobalKey<FormState>();
+                var dropdownKey = GlobalKey<FormState>();
                 var cubit = context.read<SingleScanScreenCubit>();
-                var storeSelesaiState = context
-                    .watch<SingleScanScreenCubit>()
-                    .state
+                var storeSelesaiState =
+                    // context
+                    // .watch<SingleScanScreenCubit>()
+                    // .
+                state
                     .storeSelesaiResponse;
                 return Form(
                   key: formKey,
@@ -177,6 +185,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                         MyDropdownButton<String>(
                           const ["Dikirim", "Sampai"],
                           (v) => v,
+                          formKey: dropdownKey,
+                          value: storeSelesaiState?.header?.statusPengiriman,
                           hint: const CustomText("Status Pengiriman",
                               color: primaryGreen),
                           margin:
@@ -185,7 +195,11 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             cubit.updateStoreSelesaiResponse(
                                 (p0) => p0.copyWith(statusPengiriman: val));
                           },
-                        ),
+                          validator: (val){
+                            if(val == null) return "Wajib Isi Woi";
+                            return null;
+                          },
+),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -294,10 +308,13 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                         ),
 
                         BlocListener<SingleScanScreenCubit,
-                            SingleScanScreenState>(
+                            SingleScanScreenCubitState>(
                           listener: (context, state) {
                             // myToast("Image Path: ${state.storeSelesaiResponse?.header?.foto.toString()}");
                             myToast("Success Choosing Image");
+                          },
+                          listenWhen: (before,after){
+                            return before.storeSelesaiResponse?.header?.foto != after.storeSelesaiResponse?.header?.foto;
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -404,10 +421,18 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             Expanded(
                               child: ElevatedButton(
                                   onPressed: () {
-                                    if (formKey.currentState?.validate() ??
-                                        false) {
-                                      formKey.currentState?.save();
+                                    if (formKey.currentState?.validate() ?? false) {
+                                        formKey.currentState?.save();
+                                        if(dropdownKey.currentState?.validate() ??
+                                            false){
+                                          dropdownKey.currentState?.save();
+                                          // TODO disini tambahkan event Bloc store selesai
+                                          context.read<SingleScanScreenBloc>().add(SendRequesStoreSelesai(storeSelesaiState ?? StoreSelesaiResponse()));
+                                        } else {
+                                          myToast("Dropdown Status Pengiriman Belum Dipilih");
+                                        }
                                     }
+
                                     // context.router
                                     //     .push(const RiwayatSuratJalanRoute());
                                   },

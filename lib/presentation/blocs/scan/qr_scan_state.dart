@@ -50,5 +50,5 @@ class QRScanFailed extends QRScanState {
   const QRScanFailed(this.failure,{this.errorMessage = "Unspecified Error"});
 
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object?> get props => [failure,errorMessage];
 }

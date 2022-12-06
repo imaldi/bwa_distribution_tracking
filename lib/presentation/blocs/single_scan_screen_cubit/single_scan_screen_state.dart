@@ -3,13 +3,13 @@ part of 'single_scan_screen_cubit.dart';
 
 
 @freezed
-class SingleScanScreenState with _$SingleScanScreenState{
-  const factory SingleScanScreenState({
+class SingleScanScreenCubitState with _$SingleScanScreenCubitState{
+  const factory SingleScanScreenCubitState({
     DusListResponse? dusListResponse,
     DusScanResponse? dusScanResponse,
     @Default(StoreSelesaiResponse()) StoreSelesaiResponse? storeSelesaiResponse,
   }) = _SingleScanScreenState;
 
-  factory SingleScanScreenState.fromJson(Map<String, Object?> json)
-  => _$SingleScanScreenStateFromJson(json);
+  factory SingleScanScreenCubitState.fromJson(Map<String, Object?> json)
+  => _$SingleScanScreenCubitStateFromJson(json);
 }
