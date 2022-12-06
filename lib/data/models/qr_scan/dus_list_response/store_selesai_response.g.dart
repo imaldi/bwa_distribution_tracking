@@ -11,7 +11,7 @@ _$_StoreSelesaiResponse _$$_StoreSelesaiResponseFromJson(
     _$_StoreSelesaiResponse(
       success: json['success'] as bool?,
       header: json['header'] == null
-          ? null
+          ? const StoreSelesaiHeader()
           : StoreSelesaiHeader.fromJson(json['header'] as Map<String, dynamic>),
     );
 

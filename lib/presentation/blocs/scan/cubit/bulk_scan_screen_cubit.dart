@@ -16,7 +16,6 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
 
   updateModelState(SendScanDataModel Function(SendScanDataModel) changeCallback){
     emit(state.copyWith(sendScanDataModel: changeCallback(state.sendScanDataModel)));
-    print("Updated Status data: ${state.sendScanDataModel.statusPengiriman}");
   }
 
   getCurrentCoordinateAndAddress() async {

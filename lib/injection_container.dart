@@ -29,6 +29,7 @@ import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/histor
 import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/blocs/single_scan_screen_cubit/single_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -77,6 +78,11 @@ Future<void> init() async {
   sl.registerFactory(
     () => BulkScanScreenCubit(
       sl<GetCurrentPositionUseCase>(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => SingleScanScreenCubit(
     ),
   );
 

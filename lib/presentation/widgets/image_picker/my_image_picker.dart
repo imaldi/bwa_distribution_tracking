@@ -117,33 +117,13 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
         basicContentString: "Choose Report Image",
         positiveButton: () async {
           await _pickFile(context, state);
-          // setState(() {
-          //   print("setState when picfile called");
-          //   widget.imageURL = null;
-          //   print("widget.imageURL ${widget.imageURL}");
-          //
-          // });
         },
         positiveButtonText: "From Gallery",
         negativeButton: () async {
           await _takePicture(context, state);
-          // setState(() {
-          //   print("setState when picfile called");
-          //   widget.imageURL = null;
-          //   print("widget.imageURL ${widget.imageURL}");
-          //
-          // });
         },
         negativeButtonText: "Pick From Camera");
   }
-
-  // @override
-  // void initState() {
-  //   // if (!widget.checkIsEmpty()) {
-  //   //   widget.imageURL == null;
-  //   // }
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {

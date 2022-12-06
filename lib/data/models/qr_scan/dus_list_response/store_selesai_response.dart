@@ -9,7 +9,7 @@ class StoreSelesaiResponse with _$StoreSelesaiResponse{
 
   const factory StoreSelesaiResponse({
     bool? success,
-    StoreSelesaiHeader? header,
+    @Default(StoreSelesaiHeader())  StoreSelesaiHeader? header,
   }) = _StoreSelesaiResponse;
 
   factory StoreSelesaiResponse.fromJson(Map<String, Object?> json)

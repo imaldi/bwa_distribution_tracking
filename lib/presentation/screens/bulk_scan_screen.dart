@@ -61,12 +61,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
             child: BlocConsumer<QRScanBloc, QRScanState>(
               listener: (context, state) {
                 if (state is QRBulkScanSuccess) {
-                  context
-                      .read<BulkScanScreenCubit>()
-                      .updateModelState((dataModel) {
-                    return dataModel.copyWith(
-                        nosj: state.bulkScanResponse.data?.first.nosj);
-                  });
+                  context.read<BulkScanScreenCubit>().updateModelState(
+                      (model) => model.copyWith(
+                          nosj: state.bulkScanResponse.data?.first.nosj));
                 }
 
                 if (state is SendScanSuccess) {
@@ -607,18 +604,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             Visibility(
                               visible: widget.firstTimeScan,
                               child: MyImagePickerWidget(
-                                //   setImageFilePath: (numb, theImage) => (){
-                                //   print("INI NOMOR: $numb");
-                                //   print("The Path: ${theImage?.path ?? ""}");
-                                //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
-                                // },
                                 functionCallbackSetImageFilePath:
                                     (numb, theImage) async {
-                                  // var size = theImage.runtimeType().toString();
-                                  print("INI NOMOR: $numb");
-                                  print("The Path: ${theImage?.path ?? ""}");
-                                  print("foto size: ${theImage.runtimeType}");
-
                                   context
                                       .read<BulkScanScreenCubit>()
                                       .setFotoPath(theImage?.path ?? "");
@@ -700,8 +687,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      context.router
-                                          .push(SingleScanRoute(qrcodeSj: data?.qrcodeSj ?? "-"));
+                                      context.router.push(SingleScanRoute(
+                                          qrcodeSj: data?.qrcodeSj ?? "-"));
                                     },
                                     child: RoundedContainer(
                                       sizeMedium,

@@ -8,7 +8,10 @@ class MyTextField extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final double? borderRadius;
   final TextEditingController? controller;
-  const MyTextField({this.contentPadding, this.controller, this.label, this.borderRadius, Key? key}) : super(key: key);
+  final Function(String?)? onSaved;
+  final TextInputType? keyboardType;
+  final bool? enabled;
+  const MyTextField({this.enabled, this.contentPadding, this.keyboardType, this.onSaved, this.controller, this.label, this.borderRadius, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,10 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        enabled: enabled,
         controller: controller,
+        onSaved: onSaved,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           contentPadding: contentPadding ?? const EdgeInsets.all(sizeMedium),
           labelText: label,

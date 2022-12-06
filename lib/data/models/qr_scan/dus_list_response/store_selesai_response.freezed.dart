@@ -126,7 +126,8 @@ class __$$_StoreSelesaiResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_StoreSelesaiResponse implements _StoreSelesaiResponse {
-  const _$_StoreSelesaiResponse({this.success, this.header});
+  const _$_StoreSelesaiResponse(
+      {this.success, this.header = const StoreSelesaiHeader()});
 
   factory _$_StoreSelesaiResponse.fromJson(Map<String, dynamic> json) =>
       _$$_StoreSelesaiResponseFromJson(json);
@@ -134,6 +135,7 @@ class _$_StoreSelesaiResponse implements _StoreSelesaiResponse {
   @override
   final bool? success;
   @override
+  @JsonKey()
   final StoreSelesaiHeader? header;
 
   @override
