@@ -50,9 +50,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
   void initState() {
     super.initState();
 
-    if (widget.firstTimeScan) {
-      context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
-    }
+    // if (widget.firstTimeScan) {
+    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
+    // }
   }
 
   @override
@@ -61,12 +61,14 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            child:
-            BlocConsumer<QRScanBloc, QRScanState>(
+            child: BlocConsumer<QRScanBloc, QRScanState>(
               listener: (context, state) {
                 if (state is QRBulkScanSuccess) {
-                  context.read<BulkScanScreenCubit>().updateModelState((dataModel){
-                    return dataModel.copyWith(nosj: state.bulkScanResponse.data?.first.nosj);
+                  context
+                      .read<BulkScanScreenCubit>()
+                      .updateModelState((dataModel) {
+                    return dataModel.copyWith(
+                        nosj: state.bulkScanResponse.data?.first.nosj);
                   });
                 }
 
@@ -101,80 +103,84 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                   var details = state.bulkScanResponse.detail;
                   var dataPerPage = details?.data;
                   var textColor = primaryColor;
-                  return
-
-                    Column(
-                      children: [
-                        Container(
-                          // width: orientedWidthScreen(context,
-                          //     portraitRatio: 1, landscapeRatio: 1),
-                          padding: const EdgeInsets.all(sizeMedium),
-                          decoration: const BoxDecoration(
-                            // gradient: basicDiagonalGradient(),
-                            color: primaryColor,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
-                              image: AssetImage("assets/images/background_main.png"),
-                            ),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(sizeBig),
-                                bottomRight: Radius.circular(sizeBig)),
+                  return Column(
+                    children: [
+                      Container(
+                        // width: orientedWidthScreen(context,
+                        //     portraitRatio: 1, landscapeRatio: 1),
+                        padding: const EdgeInsets.all(sizeMedium),
+                        decoration: const BoxDecoration(
+                          // gradient: basicDiagonalGradient(),
+                          color: primaryColor,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                            image:
+                                AssetImage("assets/images/background_main.png"),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Stack(alignment: Alignment.centerLeft, children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
-                                    Center(
-                                        child: CustomText(
-                                          "Detail Barang",
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(sizeBig),
+                              bottomRight: Radius.circular(sizeBig)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(alignment: Alignment.centerLeft, children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Center(
+                                      child: CustomText(
+                                    "Detail Barang",
+                                    color: Colors.white,
+                                    size: sizeMedium,
+                                  ))
+                                ],
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context.router.pop();
+                                },
+                                child: const Icon(
+                                  Icons.keyboard_arrow_left_outlined,
+                                  color: Colors.white,
+                                  size: sizeBig,
+                                ),
+                              ),
+                            ]),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: sizeMedium,
+                                        bottom: sizeMedium,
+                                        right: sizeMedium),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const FittedBox(
+                                            child: CustomText(
+                                          "Total Al-Quran Keseluruhan",
                                           color: Colors.white,
                                           size: sizeMedium,
-                                        ))
-                                  ],
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    context.router.pop();
-                                  },
-                                  child: const Icon(
-                                    Icons.keyboard_arrow_left_outlined,
-                                    color: Colors.white,
-                                    size: sizeBig,
-                                  ),
-                                ),
-                              ]),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: sizeMedium,bottom: sizeMedium,right: sizeMedium),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          const FittedBox(
-                                              child: CustomText(
-                                                "Total Al-Quran Keseluruhan",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              )),
-                                          FittedBox(
-                                              child: CustomText(
-                                                "${headerData?.total ?? 0}",
-                                                color: Colors.white,
-                                                size: sizeHuge - 10,
-                                                weight: FontWeight.bold,
-                                              )),
-                                        ],
-                                      ),
+                                        )),
+                                        FittedBox(
+                                            child: CustomText(
+                                          "${headerData?.total ?? 0}",
+                                          color: Colors.white,
+                                          size: sizeHuge - 10,
+                                          weight: FontWeight.bold,
+                                        )),
+                                      ],
                                     ),
-                                    Table(children: [
+                                  ),
+                                  Table(
+                                    children: [
                                       const TableRow(children: [
                                         Align(
                                           alignment: Alignment.centerLeft,
@@ -201,13 +207,13 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           ),
                                         ),
                                       ]),
-                                      TableRow(
-                                          children: [
+                                      TableRow(children: [
                                         Align(
                                           alignment: Alignment.centerLeft,
                                           child: UnconstrainedBox(
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 8.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
                                               child: FittedBox(
                                                 child: CustomText(
                                                   "${headerData?.onproses ?? 0}",
@@ -223,7 +229,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           alignment: Alignment.centerLeft,
                                           child: UnconstrainedBox(
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 8.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
                                               child: FittedBox(
                                                 child: CustomText(
                                                   "${headerData?.selesai ?? 0}",
@@ -236,420 +243,405 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           ),
                                         ),
                                       ]),
-
-                                    ],),
-                                    // Row(
-                                    //   children: [
-                                    //     Flexible(
-                                    //       child: Padding(
-                                    //         padding: EdgeInsets.all(sizeMedium),
-                                    //         child: Column(
-                                    //           crossAxisAlignment:
-                                    //           CrossAxisAlignment.start,
-                                    //           children: [
-                                    //             const FittedBox(
-                                    //                 child: ),
-                                    //             FittedBox(
-                                    //                 child: ),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //     Flexible(
-                                    //       child: Padding(
-                                    //         padding: EdgeInsets.all(sizeMedium),
-                                    //         child: Column(
-                                    //           crossAxisAlignment:
-                                    //           CrossAxisAlignment.start,
-                                    //           children: [
-                                    //             const FittedBox(
-                                    //                 child: ),
-                                    //             FittedBox(
-                                    //                 child: ),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                    ],
+                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Flexible(
+                                  //       child: Padding(
+                                  //         padding: EdgeInsets.all(sizeMedium),
+                                  //         child: Column(
+                                  //           crossAxisAlignment:
+                                  //           CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             const FittedBox(
+                                  //                 child: ),
+                                  //             FittedBox(
+                                  //                 child: ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //     Flexible(
+                                  //       child: Padding(
+                                  //         padding: EdgeInsets.all(sizeMedium),
+                                  //         child: Column(
+                                  //           crossAxisAlignment:
+                                  //           CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             const FittedBox(
+                                  //                 child: ),
+                                  //             FittedBox(
+                                  //                 child: ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(sizeMedium),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              RoundedContainer(sizeMedium,
-                                  padding: const EdgeInsets.all(sizeMedium),
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: sizeBig),
-                                  boxDecoration: BoxDecoration(
-                                      border: Border.all(color: textColor)
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(sizeMedium),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            RoundedContainer(sizeMedium,
+                                padding: const EdgeInsets.all(sizeMedium),
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: sizeBig),
+                                boxDecoration: BoxDecoration(
+                                    border: Border.all(color: textColor)
                                     // color: primaryColor,
                                     // gradient: basicDiagonalGradient(),
+                                    ),
+                                child: Column(
+                                  children: [
+                                    const CustomText(
+                                      "NOMOR ID",
+                                      color: primaryGreen,
+                                      weight: FontWeight.bold,
+                                    ),
+                                    CustomText(
+                                      "${data?.nosj}",
+                                      color: primaryGreen,
+                                      weight: FontWeight.bold,
+                                    ),
+                                    const SizedBox(
+                                      height: sizeBig,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Tanggal",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.tanggal}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Nomor PC/PO",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.nopc}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "No Polisi",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.nopol}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Nama Ekspedisi",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.dikirimBy}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Nama Pengemudi",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": 05-09-2022",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Alamat Pengirimiman",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.alamat}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            Container(
+                              decoration: const BoxDecoration(
+                                  color: primaryColor,
+                                  // gradient: basicDiagonalGradient(),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(sizeMedium))),
+                              child: Column(
+                                children: [
+                                  // const CustomText("Sedang perbaikan",color: Colors.white,),
+
+                                  ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    // padding: const EdgeInsets.all(sizeNormal),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: state
+                                        .bulkScanResponse.detail?.data?.length,
+                                    itemBuilder: (cont, ind) {
+                                      return Container(
+                                        color: ind % 2 == 0
+                                            ? null
+                                            : primaryDarkerColor,
+                                        child: ListTile(
+                                            title: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                flex: 3,
+                                                child: FittedBox(
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: sizeNormal),
+                                                    decoration: const BoxDecoration(
+                                                        border: Border(
+                                                            right: BorderSide(
+                                                                width: 2,
+                                                                color: Colors
+                                                                    .white))),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        CustomText(
+                                                            "Kode Batch: ${dataPerPage?[ind].kodeBatch}",
+                                                            color:
+                                                                Colors.white),
+                                                        CustomText(
+                                                          "Nama Barang (Project): ${dataPerPage?[ind].nmProject}",
+                                                          color: Colors.white,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Flexible(
+                                                child: FittedBox(
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: sizeNormal),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        // FIXME tanyakan soal field yang benar
+                                                        CustomText(
+                                                            "QTY: ${dataPerPage?[ind].jmlKeluar}",
+                                                            color:
+                                                                Colors.white),
+                                                        CustomText(
+                                                            "Jumlah: ${dataPerPage?[ind].jmlKeluar}",
+                                                            color:
+                                                                Colors.white),
+                                                        CustomText(
+                                                            "Satuan: ${dataPerPage?[ind].jmlKeluar}",
+                                                            color:
+                                                                Colors.white),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                              // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
+                                            ],
+                                          ),
+                                        )),
+                                      );
+                                    },
                                   ),
+                                  Container(
+                                      padding: const EdgeInsets.all(sizeMedium),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          MyPaginator(
+                                            pageLength: ((details?.total ??
+                                                        1) ~/
+                                                    (details?.perPage ?? 1)) +
+                                                1,
+                                            onPageChanged: (index) {
+                                              myToast(index.toString());
+                                            },
+                                            primaryColor: Colors.white,
+                                            secondaryColor: primaryColor,
+                                          ),
+                                          const CustomText(
+                                            "TOTAL QTY, PACKING DAN BERAT",
+                                            color: Colors.white,
+                                            weight: FontWeight.bold,
+                                            decoration:
+                                                TextDecoration.underline,
+                                            size: sizeMedium,
+                                          ),
+                                          CustomText(
+                                            "QTY: ${data?.total} | Berat: 1270 KG",
+                                            color: Colors.white,
+                                          ),
+                                          const CustomText(
+                                            "TOTAL STOCK: 30.000",
+                                            color: Colors.white,
+                                            weight: FontWeight.bold,
+                                            size: sizeMedium,
+                                          ),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                            Builder(
+                              builder: (context) {
+                                var state =
+                                    context.watch<BulkScanScreenCubit>().state;
+                                var text =
+                                    "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
+                                print("latlong in bulk scan screen: $text");
+                                return Visibility(
+                                  visible: false,
                                   child: Column(
                                     children: [
-                                      const CustomText(
-                                        "NOMOR ID",
-                                        color: primaryGreen,
-                                        weight: FontWeight.bold,
-                                      ),
-                                      CustomText(
-                                        "${data?.nosj}",
-                                        color: primaryGreen,
-                                        weight: FontWeight.bold,
-                                      ),
-                                      const SizedBox(
-                                        height: sizeBig,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "Tanggal",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": ${data?.tanggal}",
-                                                color: textColor,
-                                              )),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "Nomor PC/PO",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": ${data?.nopc}",
-                                                color: textColor,
-                                              )),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "No Polisi",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": ${data?.nopol}",
-                                                color: textColor,
-                                              )),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "Nama Ekspedisi",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": ${data?.dikirimBy}",
-                                                color: textColor,
-                                              )),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "Nama Pengemudi",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": 05-09-2022",
-                                                color: textColor,
-                                              )),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                              child: CustomText(
-                                                "Alamat Pengirimiman",
-                                                color: textColor,
-                                              )),
-                                          Expanded(
-                                              child: CustomText(
-                                                ": ${data?.alamat}",
-                                                color: textColor,
-                                              )),
-                                        ],
+                                      Container(
+                                          margin: const EdgeInsets.only(
+                                              top: sizeBig),
+                                          child: const CustomText(
+                                            "Lokasi Anda",
+                                            color: primaryGreen,
+                                            size: sizeMedium,
+                                            weight: FontWeight.w600,
+                                          )),
+                                      Visibility(
+                                        visible: false,
+                                        child: RoundedContainer(sizeNormal,
+                                            boxDecoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: primaryGreen)),
+                                            child: NoUnderlineTextFormField(
+                                              controller: TextEditingController(
+                                                  text: text),
+                                              enabled: false,
+                                            )),
                                       ),
                                     ],
-                                  )),
-                              Container(
-                                decoration: const BoxDecoration(
-                                    color: primaryColor,
-                                    // gradient: basicDiagonalGradient(),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(sizeMedium))),
-                                child: Column(
-                                  children: [
-                                    // const CustomText("Sedang perbaikan",color: Colors.white,),
-
-                                    ListView.builder(
-                                      physics:
-                                      const NeverScrollableScrollPhysics(),
-                                      // padding: const EdgeInsets.all(sizeNormal),
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      itemCount: state.bulkScanResponse.detail
-                                          ?.data?.length,
-                                      itemBuilder: (cont, ind) {
-                                        return Container(
-                                          color: ind % 2 == 0
-                                              ? null
-                                              : primaryDarkerColor,
-                                          child: ListTile(
-                                              title: Padding(
-                                                padding:
-                                                const EdgeInsets.symmetric(
-                                                    vertical: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Flexible(
-                                                      flex: 3,
-                                                      child: FittedBox(
-                                                        child: Container(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal:
-                                                              sizeNormal),
-                                                          decoration: const BoxDecoration(
-                                                              border: Border(
-                                                                  right: BorderSide(
-                                                                      width: 2,
-                                                                      color: Colors
-                                                                          .white))),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              CustomText(
-                                                                  "Kode Batch: ${dataPerPage?[ind].kodeBatch}",
-                                                                  color: Colors
-                                                                      .white),
-                                                              CustomText(
-                                                                "Nama Barang (Project): ${dataPerPage?[ind].nmProject}",
-                                                                color:
-                                                                Colors.white,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Flexible(
-                                                      child: FittedBox(
-                                                        child: Container(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal:
-                                                              sizeNormal),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              // FIXME tanyakan soal field yang benar
-                                                              CustomText(
-                                                                  "QTY: ${dataPerPage?[ind].jmlKeluar}",
-                                                                  color: Colors
-                                                                      .white),
-                                                              CustomText(
-                                                                  "Jumlah: ${dataPerPage?[ind].jmlKeluar}",
-                                                                  color: Colors
-                                                                      .white),
-                                                              CustomText(
-                                                                  "Satuan: ${dataPerPage?[ind].jmlKeluar}",
-                                                                  color: Colors
-                                                                      .white),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                    // CustomText("Kode Batch: ${details?[ind].kodeBatch}"),
-                                                  ],
-                                                ),
-                                              )),
-                                        );
-                                      },
-                                    ),
-                                    Container(
-                                        padding:
-                                        const EdgeInsets.all(sizeMedium),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            MyPaginator(
-                                              pageLength:
-                                              ((details?.total ?? 1) ~/
-                                                  (details?.perPage ??
-                                                      1)) +
-                                                  1,
-                                              onPageChanged: (index) {
-                                                myToast(index.toString());
-                                              },
-                                              primaryColor: Colors.white,
-                                              secondaryColor: primaryColor,
-                                            ),
-                                            const CustomText(
-                                              "TOTAL QTY, PACKING DAN BERAT",
-                                              color: Colors.white,
-                                              weight: FontWeight.bold,
-                                              decoration:
-                                              TextDecoration.underline,
-                                              size: sizeMedium,
-                                            ),
-                                            CustomText(
-                                              "QTY: ${data?.total} | Berat: 1270 KG",
-                                              color: Colors.white,
-                                            ),
-                                            const CustomText(
-                                              "TOTAL STOCK: 30.000",
-                                              color: Colors.white,
-                                              weight: FontWeight.bold,
-                                              size: sizeMedium,
-                                            ),
-                                          ],
-                                        ))
-                                  ],
-                                ),
-                              ),
-                              // TODO remove this and its bloc
-                              Visibility(
-                                visible: false,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        margin: const EdgeInsets.only(
-                                            top: sizeBig),
-                                        child: const CustomText(
-                                          "Lokasi Anda",
-                                          color: primaryGreen,
-                                          size: sizeMedium,
-                                          weight: FontWeight.w600,
-                                        )),
-                                    BlocBuilder<BulkScanScreenCubit,
-                                        BulkScanScreenState>(
-                                      builder: (context, state) {
-                                        var text =
-                                            "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
-                                        return Visibility(
-                                          visible: false,
-                                          child: RoundedContainer(sizeNormal,
-                                              boxDecoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: primaryGreen)),
-                                              child: NoUnderlineTextFormField(
-                                                controller:
-                                                TextEditingController(
-                                                    text: text),
-                                                enabled: false,
-                                              )),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: widget.firstTimeScan,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(sizeMedium),
-                                  child: MyDropdownButton<String>(
-                                    ["Dropship", "Pengiriman"],
-                                        (v) => v,
-                                    onItemTapped: (val) {
-                                      context
-                                          .read<BulkScanScreenCubit>()
-                                          .updateModelState((dataModel){
-                                        return dataModel.copyWith(statusPengiriman: val);
-                                      });
-                                    },
-                                    hint: const Text(
-                                      "Status Pengiriman",
-                                      style: TextStyle(color: primaryGreen),
-                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            Visibility(
+                              visible: widget.firstTimeScan,
+                              child: Padding(
+                                padding: const EdgeInsets.all(sizeMedium),
+                                child: MyDropdownButton<String>(
+                                  ["Dropship", "Pengiriman"],
+                                  (v) => v,
+                                  onItemTapped: (val) {
+                                    context
+                                        .read<BulkScanScreenCubit>()
+                                        .updateModelState((dataModel) {
+                                      return dataModel.copyWith(
+                                          statusPengiriman: val);
+                                    });
+                                  },
+                                  hint: const Text(
+                                    "Status Pengiriman",
+                                    style: TextStyle(color: primaryGreen),
                                   ),
                                 ),
                               ),
-                              Visibility(
-                                visible: widget.firstTimeScan,
+                            ),
+                            Visibility(
+                              visible: widget.firstTimeScan,
+                              child: MyImagePickerWidget(
+                                //   setImageFilePath: (numb, theImage) => (){
+                                //   print("INI NOMOR: $numb");
+                                //   print("The Path: ${theImage?.path ?? ""}");
+                                //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
+                                // },
+                                functionCallbackSetImageFilePath:
+                                    (numb, theImage) async {
+                                  // var size = theImage.runtimeType().toString();
+                                  print("INI NOMOR: $numb");
+                                  print("The Path: ${theImage?.path ?? ""}");
+                                  print("foto size: ${theImage.runtimeType}");
 
-                                child: MyImagePickerWidget(
-                                  //   setImageFilePath: (numb, theImage) => (){
-                                  //   print("INI NOMOR: $numb");
-                                  //   print("The Path: ${theImage?.path ?? ""}");
-                                  //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
-                                  // },
-                                  functionCallbackSetImageFilePath:
-                                      (numb, theImage) async {
-                                    // var size = theImage.runtimeType().toString();
-                                    print("INI NOMOR: $numb");
-                                    print(
-                                        "The Path: ${theImage?.path ?? ""}");
-                                    print(
-                                        "foto size: ${theImage.runtimeType}");
-
-                                    context
-                                        .read<BulkScanScreenCubit>()
-                                        .setFotoPath(
-                                        theImage?.path ?? "");
-                                  },
-                                  defaultImagePlaceholder: FittedBox(
-                                    child: Padding(
-                                      padding:
-                                      const EdgeInsets.all(sizeBig),
-                                      child: RoundedContainer(
-                                        sizeNormal,
-                                        height:
-                                        widthScreen(context) * 0.4,
-                                        width: widthScreen(context) * 0.4,
-                                        boxDecoration:
-                                        const BoxDecoration(
-                                            color: Colors.grey),
-                                        child: const Center(
-                                          child: FittedBox(
-                                            child: CustomText(
-                                              "No Picture",
-                                              color: Colors.white,
-                                              size: sizeBig,
-                                              textAlign: TextAlign.center,
-                                            ),
+                                  context
+                                      .read<BulkScanScreenCubit>()
+                                      .setFotoPath(theImage?.path ?? "");
+                                },
+                                defaultImagePlaceholder: FittedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(sizeBig),
+                                    child: RoundedContainer(
+                                      sizeNormal,
+                                      height: widthScreen(context) * 0.4,
+                                      width: widthScreen(context) * 0.4,
+                                      boxDecoration: const BoxDecoration(
+                                          color: Colors.grey),
+                                      child: const Center(
+                                        child: FittedBox(
+                                          child: CustomText(
+                                            "No Picture",
+                                            color: Colors.white,
+                                            size: sizeBig,
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
@@ -657,102 +649,96 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   ),
                                 ),
                               ),
+                            ),
 
-                              Visibility(
-                                visible: widget.firstTimeScan,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      var model = context
-                                          .read<BulkScanScreenCubit>()
-                                          .state
-                                          .sendScanDataModel;
-                                      context
-                                          .read<QRScanBloc>()
-                                          .add(SendScanEvent(model));
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: primaryColor),
-                                    child: const Text("Simpan")),
-                              ),
-                              // TODO pindahkan ke halaman scan dus
-                              Visibility(
-                                visible: false,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              context.router
-                                                  .push(const HistoryRoute());
-                                            },
+                            Visibility(
+                              visible: widget.firstTimeScan,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    var model = context
+                                        .read<BulkScanScreenCubit>()
+                                        .state
+                                        .sendScanDataModel;
+                                    context
+                                        .read<QRScanBloc>()
+                                        .add(SendScanEvent(model));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor),
+                                  child: const Text("Simpan")),
+                            ),
+                            // TODO pindahkan ke halaman scan dus
+                            Visibility(
+                              visible: false,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            context.router
+                                                .push(const HistoryRoute());
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: primaryColor),
+                                          child: const Text("History")),
+                                      Builder(builder: (context) {
+                                        return ElevatedButton(
+                                            onPressed: () {},
                                             style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                primaryColor),
-                                            child: const Text("History")),
-                                        Builder(builder: (context) {
-                                          return ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                  primaryColor),
-                                              child: const Text("Simpan"));
-                                        }),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                                backgroundColor: primaryColor),
+                                            child: const Text("Simpan"));
+                                      }),
+                                    ],
+                                  )
+                                ],
                               ),
-                              Visibility(
-                                visible: !widget.firstTimeScan,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        context.router
-                                            .push(const SingleScanRoute());
-                                      },
-                                      child: RoundedContainer(
-                                        sizeMedium,
-                                        padding:
-                                        const EdgeInsets.all(sizeBig),
-                                        margin: const EdgeInsets.only(
-                                            right: sizeMedium,
-                                            left: sizeMedium,
-                                            top: sizeMedium,
-                                            bottom: sizeNormal),
-                                        boxDecoration: const BoxDecoration(
-                                            color: primaryColor),
-                                        child: SvgPicture.asset(
-                                            "assets/images/camera_white.svg"),
-                                      ),
+                            ),
+                            Visibility(
+                              visible: !widget.firstTimeScan,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      context.router
+                                          .push(const SingleScanRoute());
+                                    },
+                                    child: RoundedContainer(
+                                      sizeMedium,
+                                      padding: const EdgeInsets.all(sizeBig),
+                                      margin: const EdgeInsets.only(
+                                          right: sizeMedium,
+                                          left: sizeMedium,
+                                          top: sizeMedium,
+                                          bottom: sizeNormal),
+                                      boxDecoration: const BoxDecoration(
+                                          color: primaryColor),
+                                      child: SvgPicture.asset(
+                                          "assets/images/camera_white.svg"),
                                     ),
-                                    const CustomText(
-                                      "Scan Dus",
-                                      textAlign: TextAlign.center,
-                                      color: primaryColor,
-                                    )
-                                  ]..map((e) => FittedBox(
-                                    child: e,
-                                  )),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-
-                      ],
-                    )
-                  ;
+                                  ),
+                                  const CustomText(
+                                    "Scan Dus",
+                                    textAlign: TextAlign.center,
+                                    color: primaryColor,
+                                  )
+                                ]..map((e) => FittedBox(
+                                      child: e,
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  );
                 }
                 return Container();
               },
-            )
-
-            ,
+            ),
           ),
         ),
       ),
