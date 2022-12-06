@@ -63,17 +63,19 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
-    print("token: $token");
+    print("status_pengiriman: ${ model.statusPengiriman ?? "asdsa"}");
+    print("latitude di data source: ${ model.latitude ?? "asdsa"}");
+    print("longtitude di data source: ${ model.longtitude ?? "asdsa"}");
     print("latitude from sendScan in remote data source: ${model.latitude}");
     var bodyMap = {
-      "nosj": model.nosj ?? "asdas",
-      "latitude": model.latitude ?? "",
-      "longtitude": model.longtitude ?? "",
-      "alamat": model.alamat ?? "asdas",
-      "kota": model.kota ?? "asdas",
-      "keterangan": model.keterangan ?? "asdasd",
+      "nosj": model.nosj ?? "-",
+      "latitude": model.latitude ?? "-",
+      "longtitude": model.longtitude ?? "-",
+      "alamat": model.alamat ?? "-",
+      "kota": model.kota ?? "-",
+      "keterangan": model.keterangan ?? "-",
       // "foto": "asdasd",
-      "status_pengiriman": model.statusPengiriman ?? "asdsa",
+      "status_pengiriman": model.statusPengiriman ?? "-",
     };
     final request = http.MultipartRequest("POST", url);
     // var theImage = File(model.foto ?? "");

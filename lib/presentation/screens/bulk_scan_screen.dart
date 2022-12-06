@@ -198,10 +198,16 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
 
                     return BlocConsumer<QRScanBloc, QRScanState>(
                       listener: (context, state) {
+                        if (state is QRBulkScanSuccess) {
+                          context.read<BulkScanScreenCubit>().updateModelState((dataModel){
+                            return dataModel.copyWith(nosj: state.bulkScanResponse.data?.first.nosj);
+                          });
+                        }
+
                         if (state is SendScanSuccess) {
                           myToast("Send Scan Success");
                           // context.router.pop();
-                          context.router.replace(const HistoryRoute());
+                          context.router.replace(const HomeRoute());
                         }
                       },
                       builder: (context, state) {
@@ -518,16 +524,19 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         builder: (context, state) {
                                           var text =
                                               "${state.sendScanDataModel.latitude ?? "?"}, ${state.sendScanDataModel.longtitude ?? "?"}";
-                                          return RoundedContainer(sizeNormal,
-                                              boxDecoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: primaryGreen)),
-                                              child: NoUnderlineTextFormField(
-                                                controller:
-                                                    TextEditingController(
-                                                        text: text),
-                                                enabled: false,
-                                              ));
+                                          return Visibility(
+                                            visible: false,
+                                            child: RoundedContainer(sizeNormal,
+                                                boxDecoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: primaryGreen)),
+                                                child: NoUnderlineTextFormField(
+                                                  controller:
+                                                      TextEditingController(
+                                                          text: text),
+                                                  enabled: false,
+                                                )),
+                                          );
                                         },
                                       ),
                                     ],
@@ -554,6 +563,56 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     ),
                                   ),
                                 ),
+                                Visibility(
+                                  visible: widget.firstTimeScan,
+
+                                  child: MyImagePickerWidget(
+                                    //   setImageFilePath: (numb, theImage) => (){
+                                    //   print("INI NOMOR: $numb");
+                                    //   print("The Path: ${theImage?.path ?? ""}");
+                                    //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
+                                    // },
+                                    functionCallbackSetImageFilePath:
+                                        (numb, theImage) async {
+                                      // var size = theImage.runtimeType().toString();
+                                      print("INI NOMOR: $numb");
+                                      print(
+                                          "The Path: ${theImage?.path ?? ""}");
+                                      print(
+                                          "foto size: ${theImage.runtimeType}");
+
+                                      context
+                                          .read<BulkScanScreenCubit>()
+                                          .setFotoPath(
+                                          theImage?.path ?? "");
+                                    },
+                                    defaultImagePlaceholder: FittedBox(
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(sizeBig),
+                                        child: RoundedContainer(
+                                          sizeNormal,
+                                          height:
+                                          widthScreen(context) * 0.4,
+                                          width: widthScreen(context) * 0.4,
+                                          boxDecoration:
+                                          const BoxDecoration(
+                                              color: Colors.grey),
+                                          child: const Center(
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                "No Picture",
+                                                color: Colors.white,
+                                                size: sizeBig,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
 
                                 Visibility(
                                   visible: widget.firstTimeScan,
@@ -576,52 +635,6 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   visible: false,
                                   child: Column(
                                     children: [
-                                      MyImagePickerWidget(
-                                        //   setImageFilePath: (numb, theImage) => (){
-                                        //   print("INI NOMOR: $numb");
-                                        //   print("The Path: ${theImage?.path ?? ""}");
-                                        //   context.read<BulkScanScreenCubit>().setFotoPath(theImage?.path ?? "");
-                                        // },
-                                        functionCallbackSetImageFilePath:
-                                            (numb, theImage) async {
-                                          // var size = theImage.runtimeType().toString();
-                                          print("INI NOMOR: $numb");
-                                          print(
-                                              "The Path: ${theImage?.path ?? ""}");
-                                          print(
-                                              "foto size: ${theImage.runtimeType}");
-
-                                          context
-                                              .read<BulkScanScreenCubit>()
-                                              .setFotoPath(
-                                                  theImage?.path ?? "");
-                                        },
-                                        defaultImagePlaceholder: FittedBox(
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.all(sizeBig),
-                                            child: RoundedContainer(
-                                              sizeNormal,
-                                              height:
-                                                  widthScreen(context) * 0.4,
-                                              width: widthScreen(context) * 0.4,
-                                              boxDecoration:
-                                                  const BoxDecoration(
-                                                      color: Colors.grey),
-                                              child: const Center(
-                                                child: FittedBox(
-                                                  child: CustomText(
-                                                    "No Picture",
-                                                    color: Colors.white,
-                                                    size: sizeBig,
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,

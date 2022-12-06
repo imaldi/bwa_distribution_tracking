@@ -17,10 +17,8 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:number_pagination/number_pagination.dart';
 
 import '../../core/resources/consts/colors.dart';
-import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../../core/resources/media_query/media_query_helpers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -56,9 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var textValue = "003SPJ22-MERANTI00098-0002";
     var controller = TextEditingController();
-    var selectedPageNumber = 3;
     return Scaffold(
         body: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
           listener: (context, state) {
@@ -303,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: const EdgeInsets.only(top: sizeMedium),
                           padding: const EdgeInsets.all(sizeNormal),
                           child: suratJalanState.isLoading
-                              ? CircularProgressIndicator(
+                              ? const CircularProgressIndicator(
                                   color: primaryGreen,
                                 )
                               : ListView.builder(
@@ -542,34 +538,50 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottomNavigationBar: ConvexAppBar(
           /// Fixme for landscape orientation
-          onTap: (index){
+          onTap: (index) {
             myToast("index: $index");
           },
-          height: heightScreen(context)/12,
-          curveSize: widthScreen(context)/3,
+          height: heightScreen(context) / 12,
+          curveSize: widthScreen(context) / 3,
           style: TabStyle.fixedCircle,
           backgroundColor: Colors.white,
           color: primaryGreen,
           elevation: 2,
           activeColor: primaryBlue,
           items: [
-            TabItem(
+            const TabItem(
               title: "Logout",
               icon: Icon(Icons.logout),
-              isIconBlend:true,
+              isIconBlend: true,
+            ),
+            const TabItem(
+              title: "Logout",
+              icon: Icon(Icons.notifications_active_outlined),
+              isIconBlend: true,
             ),
             TabItem(
               icon:
-              // UnconstrainedBox(child: SizedBox(height: sizeMedium,width: sizeMedium,child: Container(color: Colors.white,),)),
-              UnconstrainedBox(child: SvgPicture.asset("assets/images/home_icon_outlined.svg",width: sizeBig,height: sizeBig,)),
+                  // UnconstrainedBox(child: SizedBox(height: sizeMedium,width: sizeMedium,child: Container(color: Colors.white,),)),
+                  UnconstrainedBox(
+                      child: SvgPicture.asset(
+                "assets/images/home_icon_outlined.svg",
+                width: sizeBig,
+                height: sizeBig,
+              )),
               // FloatingActionButton(
               //     backgroundColor: primaryColor,
               //     onPressed:null,elevation:0,child: SvgPicture.asset("assets/images/home_icon_outlined.svg")),
               isIconBlend: true,
             ),
-            TabItem(
-              icon: Icon(Icons.home),
-              isIconBlend:true,
+            const TabItem(
+              title: "Notif",
+              icon: Icon(Icons.notifications_active_outlined),
+              isIconBlend: true,
+            ),
+            const TabItem(
+              title: "Profile",
+              icon: Icon(Icons.person_outline),
+              isIconBlend: true,
             ),
           ],
         )
