@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
+import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_text_field/my_text_field.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,7 @@ class RiwayatSuratJalanScreen extends StatelessWidget {
                           // context.router.push(BulkScanRoute(
                           //     qrScanBloc: qrBloc,
                           //     firstTimeScan: false));
+                          context.router.push(DetailPengirimanRoute());
                         },
                         child: Stack(
                           alignment: Alignment.topRight,
@@ -63,7 +66,7 @@ class RiwayatSuratJalanScreen extends StatelessWidget {
                                       FittedBox(
                                           child: CustomText(
                                         // "003/SPJ/22-MERANTI00098-000${i + 1}",
-                                        "sadasdsa $i",
+                                        "003/SPJ/22-MERANTI00098-000$i",
                                         color: primaryColor,
                                         size: sizeMedium+sizeSmall,
                                         weight: FontWeight.bold,
@@ -100,10 +103,10 @@ class RiwayatSuratJalanScreen extends StatelessWidget {
                               ),
                               margin: const EdgeInsets.only(top: sizeNormal),
                               padding: const EdgeInsets.symmetric(horizontal: sizeNormal, vertical: 0),
-                                decoration: const BoxDecoration(color: primaryGreen,
+                                decoration: const BoxDecoration(color: selesaiTagColor,
                                   borderRadius: BorderRadius.only(topLeft: Radius.circular(sizeMedium), bottomLeft: Radius.circular(sizeMedium)),
                                 ),
-                                child: const Center(child: FittedBox(child: CustomText("hey",color: Colors.white,))))
+                                child: const Center(child: FittedBox(child: CustomText("Selesai",color: Colors.white,))))
                           ],
                         ),
                       );

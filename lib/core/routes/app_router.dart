@@ -8,6 +8,7 @@ import 'package:bwa_distribution_tracking/presentation/screens/home_screen.dart'
 import 'package:bwa_distribution_tracking/presentation/screens/login_screen.dart';
 import 'package:bwa_distribution_tracking/presentation/screens/test_dhrive_screen.dart';
 
+import '../../presentation/screens/detail_pengiriman_screen.dart';
 import '../../presentation/screens/riwayat_surat_jalan_screen.dart';
 import '../../presentation/screens/single_scan_screen.dart';
 
@@ -27,6 +28,7 @@ import '../../presentation/screens/single_scan_screen.dart';
     ),
     AutoRoute(page: SingleScanScreen),
     AutoRoute(page: RiwayatSuratJalanScreen),
+    AutoRoute(page: DetailPengirimanScreen),
   ],
 )
 class $AppRouter {}
