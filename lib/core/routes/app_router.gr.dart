@@ -73,9 +73,14 @@ class AppRouter extends _i12.RootStackRouter {
       );
     },
     SingleScanRoute.name: (routeData) {
+      final args = routeData.argsAs<SingleScanRouteArgs>();
       return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i12.WrappedRoute(child: const _i6.SingleScanScreen()),
+        child: _i12.WrappedRoute(
+            child: _i6.SingleScanScreen(
+          qrcodeSj: args.qrcodeSj,
+          key: args.key,
+        )),
       );
     },
     RiwayatSuratJalanRoute.name: (routeData) {
@@ -254,14 +259,36 @@ class HistoryRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.SingleScanScreen]
-class SingleScanRoute extends _i12.PageRouteInfo<void> {
-  const SingleScanRoute()
-      : super(
+class SingleScanRoute extends _i12.PageRouteInfo<SingleScanRouteArgs> {
+  SingleScanRoute({
+    required String qrcodeSj,
+    _i13.Key? key,
+  }) : super(
           SingleScanRoute.name,
           path: '/single-scan-screen',
+          args: SingleScanRouteArgs(
+            qrcodeSj: qrcodeSj,
+            key: key,
+          ),
         );
 
   static const String name = 'SingleScanRoute';
+}
+
+class SingleScanRouteArgs {
+  const SingleScanRouteArgs({
+    required this.qrcodeSj,
+    this.key,
+  });
+
+  final String qrcodeSj;
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return 'SingleScanRouteArgs{qrcodeSj: $qrcodeSj, key: $key}';
+  }
 }
 
 /// generated route for

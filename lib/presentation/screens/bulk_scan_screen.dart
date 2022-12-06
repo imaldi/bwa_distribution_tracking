@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
-import 'package:bwa_distribution_tracking/core/resources/gradients/basic_linear_gradient.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
-import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_model.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
@@ -704,7 +701,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                   InkWell(
                                     onTap: () {
                                       context.router
-                                          .push(const SingleScanRoute());
+                                          .push(SingleScanRoute(qrcodeSj: data?.qrcodeSj ?? "-"));
                                     },
                                     child: RoundedContainer(
                                       sizeMedium,

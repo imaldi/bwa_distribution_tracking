@@ -5,28 +5,41 @@ import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_dropdown_button/my_dropdown_button.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/resources/consts/sizes.dart';
+import '../../injection_container.dart';
+import '../blocs/scan/cubit/bulk_scan_screen_cubit.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_appbar_container/custom_appbar_container.dart';
 import '../widgets/my_text_field/my_text_field.dart';
 import '../widgets/text/custom_text.dart';
 
 class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
-  const SingleScanScreen({super.key});
+  final String qrcodeSj;
+  const SingleScanScreen({required this.qrcodeSj, super.key});
 
   @override
   State<StatefulWidget> createState() => _SingleScanScreenState();
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return
+      MultiBlocProvider(providers: [
+        BlocProvider.value(value: sl<BulkScanScreenCubit>())
+      ], child: this);
   }
 }
 
 class _SingleScanScreenState extends State<SingleScanScreen> {
   var controller = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +96,14 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       label: 'Provinsi',
                     ),
                     // Fixme lebih dari satu baris
-                    const MyTextField(
-                      label: 'Google Address',
+                    Builder(
+                      builder: (context) {
+                        var state = context.watch<BulkScanScreenCubit>().state.address;
+                        return MyTextField(
+                          label: 'Google Address',
+                          controller: TextEditingController(text: state),
+                        );
+                      }
                     ),
                     MyDropdownButton<String>(
                       const ["Dikirim", "Sampai"],
