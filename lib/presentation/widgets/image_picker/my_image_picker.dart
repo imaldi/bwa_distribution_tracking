@@ -103,7 +103,7 @@ class _MyImagePickerWidgetState extends State<MyImagePickerWidget> {
 
     widget.functionCallbackSetImageFilePath?.call(0,_storedImage);
 
-    print("_storedImage path : ${_storedImage?.path}");
+    print("_storedImage path : ${_storedImage.path}");
     FocusScope.of(context).unfocus();
 
     // print("issuerImage from detail page path : ${widget.issuerImage?.path}");

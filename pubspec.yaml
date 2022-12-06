@@ -60,6 +60,7 @@ dependencies:
   json_serializable: ^6.5.4
   freezed: ^2.2.1
   timelines: ^0.1.0
+  convex_bottom_bar: ^3.1.0+1
   #  injectable: ^1.5.3
 
 
