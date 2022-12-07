@@ -9,27 +9,43 @@ class MyTextField extends StatelessWidget {
   final double? borderRadius;
   final TextEditingController? controller;
   final Function(String?)? onSaved;
+  final Function(String?)? onChanged;
   final Function()? onEditingComplete;
   final TextInputType? keyboardType;
   final bool? enabled;
-  const MyTextField({this.enabled, this.onEditingComplete, this.contentPadding, this.keyboardType, this.onSaved, this.controller, this.label, this.borderRadius, Key? key}) : super(key: key);
+
+  const MyTextField(
+      {this.enabled,
+      this.onChanged,
+      this.onEditingComplete,
+      this.contentPadding,
+      this.keyboardType,
+      this.onSaved,
+      this.controller,
+      this.label,
+      this.borderRadius,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var primaryBorder = OutlineInputBorder(
-        borderSide: const BorderSide(color: primaryGreen, style: BorderStyle.solid),
-        borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? sizeNormal)));
+        borderSide:
+            const BorderSide(color: primaryGreen, style: BorderStyle.solid),
+        borderRadius:
+            BorderRadius.all(Radius.circular(borderRadius ?? sizeNormal)));
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         enabled: enabled,
         controller: controller,
-        onSaved: (val){
-          if(onSaved != null){
+        onSaved: (val) {
+          if (onSaved != null) {
             print("VALUE: $val");
             onSaved!(val);
           }
         },
+        onChanged: onChanged,
         onEditingComplete: onEditingComplete,
         keyboardType: keyboardType,
         decoration: InputDecoration(

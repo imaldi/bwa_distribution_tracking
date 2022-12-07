@@ -45,13 +45,27 @@ class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
 
 class _SingleScanScreenState extends State<SingleScanScreen> {
   var controller = ScrollController();
+  final formKey = GlobalKey<FormState>();
+  final dropdownKey = GlobalKey<FormState>();
+  final namaPnrmaCtrl = TextEditingController();
+  final noHpCtrl = TextEditingController();
+  final lembagaCtrl = TextEditingController();
+  final tmptTjnCtrl = TextEditingController();
+  final dtailAlamatCtrl = TextEditingController();
+  final provCtrl = TextEditingController();
+  final kabCtrl = TextEditingController();
+  final kecCtrl = TextEditingController();
+  final kelCtrl = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress();
-    context.read<SingleScanScreenCubit>().updateStoreSelesaiResponse((p0) => p0.copyWith(qrcodeSj: widget.qrcodeSj));
-
+    context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress(
+        callBackAfterFetchLocation: (lat, lng, addres) {
+      context.read<SingleScanScreenCubit>().updateStoreSelesaiResponse((p0) =>
+          p0.copyWith(
+              qrcodeSj: widget.qrcodeSj, latitude: lat, longtitude: lng));
+    });
   }
 
   @override
@@ -86,16 +100,14 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       ],
                     ),
                   )),
-              BlocBuilder<SingleScanScreenCubit,SingleScanScreenCubitState>(builder: (context,state) {
-                var formKey = GlobalKey<FormState>();
-                var dropdownKey = GlobalKey<FormState>();
+              BlocBuilder<SingleScanScreenCubit, SingleScanScreenCubitState>(
+                  builder: (context, state) {
                 var cubit = context.read<SingleScanScreenCubit>();
                 var storeSelesaiState =
                     // context
                     // .watch<SingleScanScreenCubit>()
                     // .
-                state
-                    .storeSelesaiResponse;
+                    state.storeSelesaiResponse;
                 return Form(
                   key: formKey,
                   child: Container(
@@ -109,9 +121,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       children: [
                         MyTextField(
                           label: 'Nama Penerima',
-                          controller: TextEditingController(
-                              text: storeSelesaiState?.header?.namaPenerima),
-                          onSaved: (val) {
+                          controller: namaPnrmaCtrl,
+                          onChanged: (val) {
                             cubit.updateStoreSelesaiResponse(
                                 (p0) => p0.copyWith(namaPenerima: val));
                             // Fixme kenapa kalau di Toast, statenya ga langsung kebaca perubahannya??
@@ -122,54 +133,65 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                         MyTextField(
                             label: 'No Hp',
                             keyboardType: TextInputType.phone,
-                            controller: TextEditingController(
-                                text: storeSelesaiState?.header?.noHp),
-                            onSaved: (val) {
+                            controller: noHpCtrl,
+                            onChanged: (val) {
                               cubit.updateStoreSelesaiResponse(
                                   (p0) => p0.copyWith(noHp: val));
                             }),
 
                         // Fixme (Tidak ada field di JSON)
-                        const MyTextField(
-                          label: 'Nama Lembaga',
-                          // controller: TextEditingController(
-                          //     text: storeSelesaiState?.header?.namaPenerima),
-                          // onSaved: (val) {
-                          //   cubit.updateStoreSelesaiResponse(
-                          //       (p0) => p0.copyWith(namaPenerima: val));
-                          // }
-                        ),
+                        MyTextField(
+                            label: 'Nama Lembaga',
+                            controller: lembagaCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(lembaga: val));
+                            }),
                         // Fixme tidak tau field di JSON
-                        const MyTextField(
-                          label: 'Tempat Tujuan',
-                          // controller: TextEditingController(
-                          //     text: storeSelesaiState?.header?.namaPenerima),
-                          // onSaved: (val) {
-                          //   cubit.updateStoreSelesaiResponse(
-                          //           (p0) => p0.copyWith(namaPenerima: val));}
-                        ),
+                        MyTextField(
+                            label: 'Tempat Tujuan',
+                            controller: tmptTjnCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(nmTempat: val));
+                            }),
                         // Fixme lebih dari 1 baris (freetext)
                         MyTextField(
                             label: 'Detail Alamat',
-                            controller: TextEditingController(
-                                text: storeSelesaiState?.header?.detailTempat),
-                            onSaved: (val) {
+                            controller: dtailAlamatCtrl,
+                            onChanged: (val) {
                               cubit.updateStoreSelesaiResponse(
                                   (p0) => p0.copyWith(detailTempat: val));
                             }),
-                        // Fixme use api
-                        const MyTextField(
-                          label: 'Kelurahan',
-                        ),
-                        const MyTextField(
-                          label: 'Kecamatan',
-                        ),
-                        const MyTextField(
-                          label: 'Kota/Kabupaten',
-                        ),
-                        const MyTextField(
-                          label: 'Provinsi',
-                        ),
+                        // Fixme use api and dropdown
+                        MyTextField(
+                            label: 'Provinsi',
+                            controller: provCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(provinsi: val));
+                            }),
+                        MyTextField(
+                            label: 'Kota/Kabupaten',
+                            controller: kabCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(kabupaten: val));
+                            }),
+                        MyTextField(
+                            label: 'Kecamatan',
+                            controller: kecCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(kecamatan: val));
+                            }),
+                        MyTextField(
+                            label: 'Kelurahan',
+                            controller: kelCtrl,
+                            onChanged: (val) {
+                              cubit.updateStoreSelesaiResponse(
+                                  (p0) => p0.copyWith(kelurahan: val));
+                            }),
                         // Fixme lebih dari satu baris
                         Builder(builder: (context) {
                           var state = context
@@ -195,11 +217,11 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             cubit.updateStoreSelesaiResponse(
                                 (p0) => p0.copyWith(statusPengiriman: val));
                           },
-                          validator: (val){
-                            if(val == null) return "Wajib Isi Woi";
+                          validator: (val) {
+                            if (val == null) return "Wajib Isi Woi";
                             return null;
                           },
-),
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -313,8 +335,9 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             // myToast("Image Path: ${state.storeSelesaiResponse?.header?.foto.toString()}");
                             myToast("Success Choosing Image");
                           },
-                          listenWhen: (before,after){
-                            return before.storeSelesaiResponse?.header?.foto != after.storeSelesaiResponse?.header?.foto;
+                          listenWhen: (before, after) {
+                            return before.storeSelesaiResponse?.header?.foto !=
+                                after.storeSelesaiResponse?.header?.foto;
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -419,26 +442,53 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                         Row(
                           children: [
                             Expanded(
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    if (formKey.currentState?.validate() ?? false) {
-                                        formKey.currentState?.save();
-                                        if(dropdownKey.currentState?.validate() ??
-                                            false){
-                                          dropdownKey.currentState?.save();
-                                          // TODO disini tambahkan event Bloc store selesai
-                                          context.read<SingleScanScreenBloc>().add(SendRequesStoreSelesai(storeSelesaiState ?? StoreSelesaiResponse()));
-                                        } else {
-                                          myToast("Dropdown Status Pengiriman Belum Dipilih");
+                              child: BlocConsumer<SingleScanScreenBloc,
+                                  SingleScanScreenState>(
+                                listener: (contextCons, state) {
+                                  myToast("State: ${state.runtimeType}");
+                                  if (state is SingleScanScreenSuccess) {
+                                    myToast("Success Save Data");
+                                    context.router.replace(const HomeRoute());
+                                  }
+                                },
+                                builder: (ctx, s) {
+                                  return ElevatedButton(
+                                      onPressed: () {
+                                        if (formKey.currentState?.validate() ??
+                                            false) {
+                                          formKey.currentState?.save();
+                                          if (dropdownKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            dropdownKey.currentState?.save();
+                                            // TODO disini tambahkan event Bloc store selesai
+                                            // Future.delayed(const Duration(milliseconds: 100),()async{
+                                            context
+                                                .read<SingleScanScreenBloc>()
+                                                .add(SendRequesStoreSelesai(state
+                                                        .storeSelesaiResponse ??
+                                                    StoreSelesaiResponse()));
+                                            // });
+                                          } else {
+                                            myToast(
+                                                "Dropdown Status Pengiriman Belum Dipilih");
+                                          }
                                         }
-                                    }
 
-                                    // context.router
-                                    //     .push(const RiwayatSuratJalanRoute());
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: primaryColor),
-                                  child: const Text("Simpan")),
+                                        // context.router
+                                        //     .push(const RiwayatSuratJalanRoute());
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: primaryColor),
+                                      child:
+                                      // const Text("Simpan"));
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: s is SingleScanScreenLoading ? FittedBox(child: const CircularProgressIndicator(color: Colors.white,)) : const Text("Simpan"),
+                                      ));
+                                      // s is SingleScanScreenLoading ? const CircularProgressIndicator(color: primaryColor,): const Text("Simpan"));
+                                },
+                              ),
                             ),
                           ],
                         ),

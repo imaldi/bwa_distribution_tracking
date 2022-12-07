@@ -17,18 +17,11 @@ class SingleScanScreenCubit extends Cubit<SingleScanScreenCubitState> {
 
   void updateStoreSelesaiResponse(
       StoreSelesaiHeader Function(StoreSelesaiHeader) callback) {
-    // var a = state.storeSelesaiResponse?.copyWith(success: false);
-    // emit(state.copyWith.storeSelesaiResponse?(header: callback(state.storeSelesaiResponse?.header ?? const StoreSelesaiHeader())));
-    // emit(state.copyWith(
-    //     storeSelesaiResponse: state.storeSelesaiResponse?.copyWith(
-    //         header: callback(state.storeSelesaiResponse?.header ??
-    //             const StoreSelesaiHeader()))));
-
-    /// brati bukan salah disini
     emit(state.copyWith.storeSelesaiResponse!(
         header: callback(
             state.storeSelesaiResponse?.header ?? const StoreSelesaiHeader())));
-    print("nama pengguna: ${state.storeSelesaiResponse?.header?.namaPenerima ?? "koossoongg"}");
-    print("status pengiriman: ${state.storeSelesaiResponse?.header?.statusPengiriman ?? "belum pilih"}");
+    // print("nama pengguna: ${state.storeSelesaiResponse?.header?.namaPenerima ?? "-"}");
+    // print("gambar: ${state.storeSelesaiResponse?.header?.foto ?? "-"}");
+    print("header: ${state.storeSelesaiResponse?.header}");
   }
 }

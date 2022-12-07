@@ -36,7 +36,9 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
     print("model Param: ${model.toJson().toString()}");
     var bodyMap = <String,String>{}..addAll(
       model.header?.toJson().map((key, value) => MapEntry<String,String>(key, value.toString())) ?? <String,String>{}
-    )..remove("foto");
+    )
+      // ..remove("foto")
+    ;
     print("bodyMap: $bodyMap");
 
     request.fields.addAll(bodyMap);

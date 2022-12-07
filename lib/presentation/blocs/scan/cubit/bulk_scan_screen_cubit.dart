@@ -18,7 +18,7 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
     emit(state.copyWith(sendScanDataModel: changeCallback(state.sendScanDataModel)));
   }
 
-  getCurrentCoordinateAndAddress() async {
+  getCurrentCoordinateAndAddress({Function(String lat, String lng, String address)? callBackAfterFetchLocation}) async {
     var eitherPositionOrFailure = await _getCurrentPositionUseCase(NoParams());
     var newSendScanDataModel = eitherPositionOrFailure.fold(
         (l) => state.sendScanDataModel.copyWith(latitude: "", longtitude: ""),
@@ -28,6 +28,9 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
     emit(BulkScanScreenState(newSendScanDataModel));
     _getAddress(double.parse(state.sendScanDataModel.latitude ?? "0"), double.parse(state.sendScanDataModel.latitude ?? "0"));
     print("LATITUDE FROM CUBIT: ${state.sendScanDataModel.latitude}");
+    if(callBackAfterFetchLocation != null){
+      callBackAfterFetchLocation(state.sendScanDataModel.latitude ?? "", state.sendScanDataModel.longtitude ?? "", state.address ?? "");
+    }
   }
 
   _getAddress(double lat, double long) async {
