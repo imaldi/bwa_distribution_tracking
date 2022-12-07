@@ -448,7 +448,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                   myToast("State: ${state.runtimeType}");
                                   if (state is SingleScanScreenSuccess) {
                                     myToast("Success Save Data");
-                                    context.router.replace(const HomeRoute());
+                                    contextCons.router.replace(const HomeRoute());
                                   }
                                 },
                                 builder: (ctx, s) {
