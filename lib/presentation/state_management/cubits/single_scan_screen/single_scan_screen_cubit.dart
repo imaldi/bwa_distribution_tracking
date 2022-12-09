@@ -4,7 +4,9 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/qr_scan/dus_list_response/store_selesai_header.dart';
+import '../../../../data/models/qr_scan/dus_list_response/store_selesai_header.dart';
+
+
 
 part 'single_scan_screen_cubit.freezed.dart';
 

@@ -5,8 +5,9 @@ import 'package:bwa_distribution_tracking/core/params/store_selesai_param.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/error/failures.dart';
-import '../../../domain/usecases/scan_qr/scan_dus/send_reques_store_selesai_use_case.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../domain/usecases/scan_qr/scan_dus/send_reques_store_selesai_use_case.dart';
+
 
 part 'single_scan_screen_event.dart';
 part 'single_scan_screen_state.dart';

@@ -1,7 +1,7 @@
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_model.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/cubit/history_scan_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/history_scan/history_scan_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/history_scan/history_scan_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/list_tile/history_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

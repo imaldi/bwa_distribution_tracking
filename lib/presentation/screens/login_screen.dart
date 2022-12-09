@@ -1,18 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
-import 'package:bwa_distribution_tracking/injection_container.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
-import 'package:bwa_distribution_tracking/presentation/widgets/custom_expanded/single_child_expanded_row.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../core/resources/gradients/basic_linear_gradient.dart';
 import '../widgets/text_form_field/no_underline_text_form_field.dart';

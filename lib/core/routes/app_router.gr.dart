@@ -14,7 +14,6 @@
 import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:flutter/material.dart' as _i13;
 
-import '../../presentation/blocs/scan/qr_scan_bloc.dart' as _i14;
 import '../../presentation/screens/bulk_scan_screen.dart' as _i3;
 import '../../presentation/screens/detail_pengiriman_screen.dart' as _i8;
 import '../../presentation/screens/history_children_screen/all_history_screen.dart'
@@ -29,6 +28,8 @@ import '../../presentation/screens/login_screen.dart' as _i1;
 import '../../presentation/screens/riwayat_surat_jalan_screen.dart' as _i7;
 import '../../presentation/screens/single_scan_screen.dart' as _i6;
 import '../../presentation/screens/test_dhrive_screen.dart' as _i4;
+import '../../presentation/state_management/blocs/scan/qr_scan_bloc.dart'
+    as _i14;
 
 class AppRouter extends _i12.RootStackRouter {
   AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])

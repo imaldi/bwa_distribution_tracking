@@ -1,10 +1,8 @@
-import 'package:bwa_distribution_tracking/core/platform/network_info.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/internet_connection/internet_connection_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'injection_container.dart' as di;

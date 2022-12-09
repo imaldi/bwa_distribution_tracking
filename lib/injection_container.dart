@@ -8,9 +8,11 @@ import 'package:bwa_distribution_tracking/data/models/auth/login_response.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/token.dart';
 import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_response.dart';
+import 'package:bwa_distribution_tracking/data/repositories/api_wilayah_indonesia_repository.dart';
 import 'package:bwa_distribution_tracking/data/repositories/auth_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/geolocator_repository_impl.dart';
 import 'package:bwa_distribution_tracking/data/repositories/scan_repository_impl.dart';
+import 'package:bwa_distribution_tracking/domain/repositories/api_wilayah_indonesia.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/auth_repository.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/geolocator_repository.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/scan_repository.dart';
@@ -26,14 +28,15 @@ import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_user_scan_
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/scan_dus/send_reques_store_selesai_use_case.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/send_qr_scan.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/surat_jalan/get_surat_jalan_per_page.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/internet_connection/internet_connection_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/scan/cubit/bulk_scan_screen_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/scan/qr_scan_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/single_scan_screen_bloc/single_scan_screen_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/single_scan_screen_cubit/single_scan_screen_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/surat_jalan/surat_jalan_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/history_scan/history_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/internet_connection/internet_connection_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/bulk_scan/bulk_scan_screen_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/scan/qr_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/single_scan_screen_bloc/single_scan_screen_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/single_scan_screen/single_scan_screen_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/wilayah_indonesia/wilayah_indonesia_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -95,6 +98,11 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerFactory(
+    () => WilayahIndonesiaCubit(sl()
+    ),
+  );
+
   sl.registerFactory(() => SuratJalanCubit(sl<GetSuratJalanPerPageUseCase>()));
 
   /// Data sources
@@ -141,6 +149,7 @@ Future<void> init() async {
   );
   sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(sl<SuratJalanRemoteDataSource>(), sl<NetworkInfo>()));
   sl.registerFactory<SingleScanRepository>(() => SingleScanRepositoryImpl(sl<SingleScanRemoteDataSource>(), sl<NetworkInfo>()));
+  sl.registerFactory<ApiWilayahIndonesiaRepository>(() => ApiWilayahIndonesiaRepositoryImpl());
 
 
 

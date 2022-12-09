@@ -3,7 +3,8 @@ import 'package:bwa_distribution_tracking/core/params/surat_jalan_per_page_param
 import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_response.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/usecases/surat_jalan/get_surat_jalan_per_page.dart';
+import '../../../../domain/usecases/surat_jalan/get_surat_jalan_per_page.dart';
+
 
 part 'surat_jalan_state.dart';
 

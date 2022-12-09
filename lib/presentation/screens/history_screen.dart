@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:bwa_distribution_tracking/injection_container.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/cubit/history_scan_cubit.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/history_scan/history_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/history_scan/history_scan_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/history_scan/history_scan_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

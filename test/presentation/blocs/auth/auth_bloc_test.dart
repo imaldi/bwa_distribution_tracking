@@ -6,7 +6,7 @@ import 'package:bwa_distribution_tracking/data/models/auth/user_model.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
-import 'package:bwa_distribution_tracking/presentation/blocs/auth/auth_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/blocs/auth/auth_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
