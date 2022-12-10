@@ -66,7 +66,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
     }).toList();
     var primaryBorder = const OutlineInputBorder(
         borderSide: BorderSide(color: primaryGreen,style: BorderStyle.solid),
-        borderRadius: BorderRadius.all(Radius.circular(sizeMedium)));
+        borderRadius: BorderRadius.all(Radius.circular(sizeNormal)));
     return DropdownButtonFormField<T>(
       items: items,
       isExpanded: true,

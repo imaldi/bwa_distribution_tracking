@@ -6,12 +6,12 @@ import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/blocs/single_scan_screen_bloc/single_scan_screen_bloc.dart';
-import 'package:bwa_distribution_tracking/presentation/state_management/cubits/single_scan_screen_cubit/single_scan_screen_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/single_scan_screen/single_scan_screen_cubit.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/wilayah_indonesia/wilayah_indonesia_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/my_dropdown_button/my_dropdown_button.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../core/resources/consts/sizes.dart';
@@ -38,6 +38,7 @@ class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
         MultiBlocProvider(providers: [
       BlocProvider.value(value: sl<BulkScanScreenCubit>()),
       BlocProvider.value(value: sl<SingleScanScreenCubit>()),
+      BlocProvider.value(value: sl<WilayahIndonesiaCubit>()),
       BlocProvider.value(value: sl<SingleScanScreenBloc>()),
     ], child: this);
   }
@@ -60,12 +61,15 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
   @override
   void initState() {
     super.initState();
+    // get coordinate, after done, update screen cubit state with the location data
     context.read<BulkScanScreenCubit>().getCurrentCoordinateAndAddress(
         callBackAfterFetchLocation: (lat, lng, addres) {
       context.read<SingleScanScreenCubit>().updateStoreSelesaiResponse((p0) =>
           p0.copyWith(
               qrcodeSj: widget.qrcodeSj, latitude: lat, longtitude: lng));
     });
+    // get list of province from api
+    context.read<WilayahIndonesiaCubit>().initProvince();
   }
 
   @override
@@ -171,6 +175,34 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               cubit.updateStoreSelesaiResponse(
                                   (p0) => p0.copyWith(provinsi: val));
                             }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+                          child: Builder(
+                            builder: (context) {
+                              var blabla = 0.0;
+
+                              return Padding(
+                                padding: EdgeInsets.all(blabla),
+                                child: MyDropdownButton<String>(
+                                  ["Dropship", "Pengiriman"],
+                                      (v) => v,
+                                  onItemTapped: (val) {
+                                    context
+                                        .read<BulkScanScreenCubit>()
+                                        .updateModelState((dataModel) {
+                                      return dataModel.copyWith(
+                                          statusPengiriman: val);
+                                    });
+                                  },
+                                  hint: const Text(
+                                    "Status Pengiriman",
+                                    style: TextStyle(color: primaryGreen),
+                                  ),
+                                ),
+                              );
+                            }
+                          ),
+                        ),
                         MyTextField(
                             label: 'Kota/Kabupaten',
                             controller: kabCtrl,
@@ -448,7 +480,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                   myToast("State: ${state.runtimeType}");
                                   if (state is SingleScanScreenSuccess) {
                                     myToast("Success Save Data");
-                                    contextCons.router.replace(const HomeRoute());
+                                    contextCons.router
+                                        .replace(const HomeRoute());
                                   }
                                 },
                                 builder: (ctx, s) {
@@ -481,12 +514,18 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: primaryColor),
                                       child:
-                                      // const Text("Simpan"));
-                                      Padding(
+                                          // const Text("Simpan"));
+                                          Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: s is SingleScanScreenLoading ? FittedBox(child: const CircularProgressIndicator(color: Colors.white,)) : const Text("Simpan"),
+                                        child: s is SingleScanScreenLoading
+                                            ? FittedBox(
+                                                child:
+                                                    const CircularProgressIndicator(
+                                                color: Colors.white,
+                                              ))
+                                            : const Text("Simpan"),
                                       ));
-                                      // s is SingleScanScreenLoading ? const CircularProgressIndicator(color: primaryColor,): const Text("Simpan"));
+                                  // s is SingleScanScreenLoading ? const CircularProgressIndicator(color: primaryColor,): const Text("Simpan"));
                                 },
                               ),
                             ),
