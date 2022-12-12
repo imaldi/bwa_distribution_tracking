@@ -26,7 +26,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
       );
       if (response.statusCode == 200) {
         var theResponse =
-            kabupatenKotaResponseFromJson(jsonDecode(response.body));
+            kabupatenKotaResponseFromJson(response.body);
         var isResponseDataNull = theResponse.isEmpty;
         if (isResponseDataNull) {
           throw ServerException();
@@ -52,7 +52,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
       );
       if (response.statusCode == 200) {
         var theResponse =
-        kecamatanResponseFromJson(jsonDecode(response.body));
+        kecamatanResponseFromJson(response.body);
         var isResponseDataNull = theResponse.isEmpty;
         if (isResponseDataNull) {
           throw ServerException();
@@ -78,7 +78,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
       );
       if (response.statusCode == 200) {
         var theResponse =
-        kelurahanResponseFromJson(jsonDecode(response.body));
+        kelurahanResponseFromJson(response.body);
         var isResponseDataNull = theResponse.length == 0;
         if (isResponseDataNull) {
           throw ServerException();
@@ -95,7 +95,8 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
   @override
   Future<Either<Failure, List<ProvinceResponse>>> getProvinsi() async {
     try {
-      var url = Uri.https(baseWilayahApi, provinceUrl);
+      var url = Uri.http(baseWilayahApi, provinceUrl);
+      print("url province: ${url}");
       var response = await http.get(
         url,
         headers: {
@@ -104,7 +105,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
       );
       if (response.statusCode == 200) {
         var theResponse =
-        provinceResponseFromJson(jsonDecode(response.body));
+        provinceResponseFromJson(response.body);
         var isResponseDataNull = theResponse.length == 0;
         if (isResponseDataNull) {
           throw ServerException();

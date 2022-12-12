@@ -1,10 +1,10 @@
 part of 'wilayah_indonesia_cubit.dart';
 
 class WilayahIndonesiaState extends Equatable {
-  ProvinceResponse? provinceResponse;
-  KabupatenKotaResponse? kabupatenKotaResponse;
-  KecamatanResponse? kecamatanResponse;
-  KelurahanResponse? kelurahanResponse;
+  List<ProvinceResponse>? provinceResponse;
+  List<KabupatenKotaResponse>? kabupatenKotaResponse;
+  List<KecamatanResponse>? kecamatanResponse;
+  List<KelurahanResponse>? kelurahanResponse;
 
   WilayahIndonesiaState({
     this.provinceResponse,

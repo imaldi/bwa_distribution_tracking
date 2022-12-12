@@ -5,6 +5,10 @@ import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
+import 'package:bwa_distribution_tracking/data/models/wilayah_indonesia_api/kabupaten_kota_model.dart';
+import 'package:bwa_distribution_tracking/data/models/wilayah_indonesia_api/kecamatan_model.dart';
+import 'package:bwa_distribution_tracking/data/models/wilayah_indonesia_api/kelurahan_model.dart';
+import 'package:bwa_distribution_tracking/data/models/wilayah_indonesia_api/province_model.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/blocs/single_scan_screen_bloc/single_scan_screen_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/single_scan_screen/single_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/wilayah_indonesia/wilayah_indonesia_cubit.dart';
@@ -53,10 +57,6 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
   final lembagaCtrl = TextEditingController();
   final tmptTjnCtrl = TextEditingController();
   final dtailAlamatCtrl = TextEditingController();
-  final provCtrl = TextEditingController();
-  final kabCtrl = TextEditingController();
-  final kecCtrl = TextEditingController();
-  final kelCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -167,63 +167,117 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               cubit.updateStoreSelesaiResponse(
                                   (p0) => p0.copyWith(detailTempat: val));
                             }),
-                        // Fixme use api and dropdown
-                        MyTextField(
-                            label: 'Provinsi',
-                            controller: provCtrl,
-                            onChanged: (val) {
-                              cubit.updateStoreSelesaiResponse(
-                                  (p0) => p0.copyWith(provinsi: val));
-                            }),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: sizeNormal),
                           child: Builder(
                             builder: (context) {
-                              var blabla = 0.0;
+                              var provinceResp = context.watch<WilayahIndonesiaCubit>().state.provinceResponse;
+                              var provinceList = (provinceResp ?? <ProvinceResponse>[]).map((e) => e.name ?? "null").toList();
+                              print("provinceList: $provinceList");
+                              print("provinceResp: $provinceResp");
 
-                              return Padding(
-                                padding: EdgeInsets.all(blabla),
-                                child: MyDropdownButton<String>(
-                                  ["Dropship", "Pengiriman"],
-                                      (v) => v,
-                                  onItemTapped: (val) {
-                                    context
-                                        .read<BulkScanScreenCubit>()
-                                        .updateModelState((dataModel) {
-                                      return dataModel.copyWith(
-                                          statusPengiriman: val);
-                                    });
-                                  },
-                                  hint: const Text(
-                                    "Status Pengiriman",
-                                    style: TextStyle(color: primaryGreen),
-                                  ),
+                              return MyDropdownButton<String>(
+                                // ["Dropship", "Pengiriman"]
+                                []..addAll(provinceList)
+                                ,
+                                    (v) => v,
+                                onItemTapped: (val) {
+                                  context
+                                      .read<WilayahIndonesiaCubit>()
+                                      .fetchKabupaten(int.parse(provinceResp?.firstWhere((element) => element.name == val).id ?? "0"));
+                                  cubit.updateStoreSelesaiResponse(
+                                          (p0) => p0.copyWith(provinsi: val));
+                                },
+                                hint: const Text(
+                                  "Provinsi",
+                                  style: TextStyle(color: primaryGreen),
                                 ),
                               );
                             }
                           ),
                         ),
-                        MyTextField(
-                            label: 'Kota/Kabupaten',
-                            controller: kabCtrl,
-                            onChanged: (val) {
-                              cubit.updateStoreSelesaiResponse(
-                                  (p0) => p0.copyWith(kabupaten: val));
-                            }),
-                        MyTextField(
-                            label: 'Kecamatan',
-                            controller: kecCtrl,
-                            onChanged: (val) {
-                              cubit.updateStoreSelesaiResponse(
-                                  (p0) => p0.copyWith(kecamatan: val));
-                            }),
-                        MyTextField(
-                            label: 'Kelurahan',
-                            controller: kelCtrl,
-                            onChanged: (val) {
-                              cubit.updateStoreSelesaiResponse(
-                                  (p0) => p0.copyWith(kelurahan: val));
-                            }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+                          child: Builder(
+                              builder: (context) {
+                                var resp = context.watch<WilayahIndonesiaCubit>().state.kabupatenKotaResponse;
+                                var theList = (resp ?? <KabupatenKotaResponse>[]).map((e) => e.name ?? "null").toList();
+                                print("kab/kota: $resp");
+                                print("kan/kota list: $theList");
+
+                                return MyDropdownButton<String>(
+                                  // ["Dropship", "Pengiriman"]
+                                  []..addAll(theList),
+                                      (v) => v,
+                                  onItemTapped: (val) {
+                                    context
+                                        .read<WilayahIndonesiaCubit>()
+                                        .fetchKecamatan(int.parse(resp?.firstWhere((element) => element.name == val).id ?? "0"));
+                                    cubit.updateStoreSelesaiResponse(
+                                            (p0) => p0.copyWith(kabupaten: val));
+                                  },
+                                  hint: const Text(
+                                    "Kabupaten / Kota",
+                                    style: TextStyle(color: primaryGreen),
+                                  ),
+                                );
+                              }
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+                          child: Builder(
+                              builder: (context) {
+                                var resp = context.watch<WilayahIndonesiaCubit>().state.kecamatanResponse;
+                                var theList = (resp ?? <KecamatanResponse>[]).map((e) => e.name ?? "null").toList();
+                                print("resp: $resp");
+                                print("list: $theList");
+
+                                return MyDropdownButton<String>(
+                                  // ["Dropship", "Pengiriman"]
+                                  []..addAll(theList),
+                                      (v) => v,
+                                  onItemTapped: (val) {
+                                    context
+                                        .read<WilayahIndonesiaCubit>()
+                                        .fetchKelurahan(int.parse(resp?.firstWhere((element) => element.name == val).id ?? "0"));
+                                    cubit.updateStoreSelesaiResponse(
+                                            (p0) => p0.copyWith(kecamatan: val));
+                                  },
+                                  hint: const Text(
+                                    "Kecamatan",
+                                    style: TextStyle(color: primaryGreen),
+                                  ),
+                                );
+                              }
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+                          child: Builder(
+                              builder: (context) {
+                                var resp = context.watch<WilayahIndonesiaCubit>().state.kelurahanResponse;
+                                var theList = (resp ?? <KelurahanResponse>[]).map((e) => e.name ?? "null").toList();
+                                print("resp: $resp");
+                                print("resp list: $theList");
+
+                                return MyDropdownButton<String>(
+                                  // ["Dropship", "Pengiriman"]
+                                  []..addAll(theList),
+                                      (v) => v,
+                                  onItemTapped: (val) {
+                                    cubit.updateStoreSelesaiResponse(
+                                            (p0) => p0.copyWith(kelurahan: val));
+                                  },
+                                  hint: const Text(
+                                    "Kelurahan",
+                                    style: TextStyle(color: primaryGreen),
+                                  ),
+                                );
+                              }
+                          ),
+                        ),
+
                         // Fixme lebih dari satu baris
                         Builder(builder: (context) {
                           var state = context

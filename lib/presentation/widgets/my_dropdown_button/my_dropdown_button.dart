@@ -18,8 +18,9 @@ class MyDropdownButton<T> extends StatefulWidget {
     this.textInCenter = false,
     this.defaultChoiceFunction,
     this.hint,
-        this.padding,
-        this.margin,
+    this.padding,
+    this.margin,
+    this.onTap,
   }) : super(key: key);
 
   // Function defaultOnItemTapped;
@@ -36,6 +37,7 @@ class MyDropdownButton<T> extends StatefulWidget {
   Widget? hint;
   EdgeInsets? padding;
   EdgeInsets? margin;
+  Function()? onTap;
 
   // final DropdownButton<T> myDropdownButton;
 
@@ -65,7 +67,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
               : Text(textValue(e)));
     }).toList();
     var primaryBorder = const OutlineInputBorder(
-        borderSide: BorderSide(color: primaryGreen,style: BorderStyle.solid),
+        borderSide: BorderSide(color: primaryGreen, style: BorderStyle.solid),
         borderRadius: BorderRadius.all(Radius.circular(sizeNormal)));
     return DropdownButtonFormField<T>(
       items: items,
@@ -74,6 +76,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
       value: selectedValue ?? widget.value,
       // style: TextStyle(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTap: widget.onTap,
       style: TextStyle(color: primaryGreen),
       decoration: InputDecoration(
         focusColor: Colors.white,
@@ -105,7 +108,9 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
         child: Container(
             color: Colors.white,
             padding: widget.padding,
-            margin: widget.margin ?? const EdgeInsets.symmetric(vertical: sizeMedium,horizontal: sizeNormal),
+            margin: widget.margin ??
+                const EdgeInsets.symmetric(
+                    vertical: sizeMedium, horizontal: sizeNormal),
             child: _myDropdownButton<T>(widget.values, widget.textValue)));
   }
 }

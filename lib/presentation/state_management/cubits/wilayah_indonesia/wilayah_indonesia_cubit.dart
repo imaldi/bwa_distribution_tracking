@@ -14,13 +14,21 @@ class WilayahIndonesiaCubit extends Cubit<WilayahIndonesiaState> {
   WilayahIndonesiaCubit(this.repository) : super(WilayahIndonesiaState());
   
   initProvince() async {
-      var provinceList = await repository.getProvinsi();
+      var failureOrResult = await repository.getProvinsi();
+      var provinceList = failureOrResult.fold((l) => <ProvinceResponse>[], (r) => r);
       emit(state.copyWith(provinceResponse: provinceList));
   }
 
   fetchKabupaten(int id) async {
-    var kabupatenList = await repository.getKabupaten(id);
+    var failureOrResult = await repository.getKabupaten(id);
+    var kabupatenList = failureOrResult.fold((l) => <KabupatenKotaResponse>[], (r) => r);
     emit(state.copyWith(kabupatenKotaResponse: kabupatenList));
+    print("Province List: ${
+        state.provinceResponse
+    }");
+    print("Kabupaten List: ${
+      state.kabupatenKotaResponse
+    }");
   }
 
   fetchKecamatan(int id) async {

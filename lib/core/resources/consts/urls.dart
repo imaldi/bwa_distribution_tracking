@@ -13,8 +13,8 @@ const storeSelesaiUrl = "$apiUrl/store_selesai";
 /// API Wilayah
 const jsonEndingPrefix = ".json";
 const baseWilayahApi = "www.emsifa.com";
-const apiWilayahUrl = "$baseWilayahApi/api-wilayah-indonesia/api";
-const provinceUrl = "provinces$jsonEndingPrefix";
-const kabupatenKotaUrl = "/regencies";
-const kecamatanUrl = "/districts";
-const kelurahanUrl = "/villages";
+const apiWilayahUrl = "/api-wilayah-indonesia/api";
+const provinceUrl = "$apiWilayahUrl/provinces$jsonEndingPrefix";
+const kabupatenKotaUrl = "$apiWilayahUrl/regencies";
+const kecamatanUrl = "$apiWilayahUrl/districts";
+const kelurahanUrl = "$apiWilayahUrl/villages";
