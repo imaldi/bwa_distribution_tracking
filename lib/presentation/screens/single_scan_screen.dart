@@ -25,6 +25,7 @@ import '../state_management/cubits/bulk_scan/bulk_scan_screen_cubit.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_appbar_container/custom_appbar_container.dart';
 import '../widgets/my_text_field/my_text_field.dart';
+import '../widgets/scan_dus_and_choose_picture_widget/scan_dus_and_choose_picture_widget.dart';
 import '../widgets/text/custom_text.dart';
 
 class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -308,57 +309,9 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             return null;
                           },
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                // context.router.push(
-                                //     const TestDhriveRoute()
-                                // );
-                                await BarcodeScanner.scan()
-                                    .then((ScanResult bulkDetail) {
-                                  if (bulkDetail.rawContent.isNotEmpty) {
-                                    myToast(bulkDetail.rawContent);
-                                    // var qrBloc =
-                                    // context.read<QRScanBloc>();
-                                    // print(
-                                    //     "bulkDetail ${bulkDetail.rawContent}");
-                                    // qrBloc.add(BulkQRScanEvent(
-                                    //     bulkDetail.rawContent));
-                                    // context.router.push(BulkScanRoute(
-                                    //     qrScanBloc: qrBloc));
-                                  }
-                                });
-                              },
-                              child: const RoundedContainer(
-                                sizeMedium,
-                                padding: EdgeInsets.all(sizeBig),
-                                margin: EdgeInsets.only(
-                                    right: sizeMedium,
-                                    left: sizeMedium,
-                                    top: sizeMedium,
-                                    bottom: sizeNormal),
-                                boxDecoration:
-                                    BoxDecoration(color: primaryColor),
-                                child: Icon(
-                                  Icons.qr_code_2,
-                                  color: Colors.white,
-                                  size: sizeHuge,
-                                ),
-                                // SvgPicture.asset(
-                                //     "assets/images/camera_white.svg"),
-                              ),
-                            ),
-                            const CustomText(
-                              "Surat Jalan",
-                              textAlign: TextAlign.center,
-                              color: primaryColor,
-                            )
-                          ]..map((e) => FittedBox(
-                                child: e,
-                              )),
-                        ),
+                        ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(qrCode, theFile){
+
+                        }),
                         Container(
                           height: 200,
                           clipBehavior: Clip.antiAlias,

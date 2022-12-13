@@ -7,6 +7,7 @@ class SingleScanScreenCubitState with _$SingleScanScreenCubitState{
   const factory SingleScanScreenCubitState({
     DusListResponse? dusListResponse,
     DusScanResponse? dusScanResponse,
+    Map<String, String>? qrCodeAndPhotoPathMap,
     @Default(StoreSelesaiResponse()) StoreSelesaiResponse? storeSelesaiResponse,
   }) = _SingleScanScreenState;
 

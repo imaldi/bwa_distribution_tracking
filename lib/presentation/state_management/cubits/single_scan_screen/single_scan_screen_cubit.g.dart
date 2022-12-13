@@ -17,6 +17,10 @@ _$_SingleScanScreenState _$$_SingleScanScreenStateFromJson(
           ? null
           : DusScanResponse.fromJson(
               json['dusScanResponse'] as Map<String, dynamic>),
+      qrCodeAndPhotoPathMap:
+          (json['qrCodeAndPhotoPathMap'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
       storeSelesaiResponse: json['storeSelesaiResponse'] == null
           ? const StoreSelesaiResponse()
           : StoreSelesaiResponse.fromJson(
@@ -28,5 +32,6 @@ Map<String, dynamic> _$$_SingleScanScreenStateToJson(
     <String, dynamic>{
       'dusListResponse': instance.dusListResponse,
       'dusScanResponse': instance.dusScanResponse,
+      'qrCodeAndPhotoPathMap': instance.qrCodeAndPhotoPathMap,
       'storeSelesaiResponse': instance.storeSelesaiResponse,
     };

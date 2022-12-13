@@ -32,11 +32,13 @@ class WilayahIndonesiaCubit extends Cubit<WilayahIndonesiaState> {
   }
 
   fetchKecamatan(int id) async {
-    var kecamatanList = await repository.getKecamatan(id);
+    var failureOrResult = await repository.getKecamatan(id);
+    var kecamatanList = failureOrResult.fold((l) => <KecamatanResponse>[], (r) => r);
     emit(state.copyWith(kecamatanResponse: kecamatanList));
   }
   fetchKelurahan(int id) async {
-    var kelurahanList = await repository.getKelurahan(id);
-    emit(state.copyWith(kabupatenKotaResponse: kelurahanList));
+    var failuterOrResult = await repository.getKelurahan(id);
+    var kelurahanList = failuterOrResult.fold((l) => <KelurahanResponse>[], (r) => r);
+    emit(state.copyWith(kelurahanResponse: kelurahanList));
   }
 }

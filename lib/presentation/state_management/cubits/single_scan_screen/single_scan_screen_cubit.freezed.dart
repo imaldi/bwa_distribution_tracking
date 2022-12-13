@@ -23,6 +23,8 @@ SingleScanScreenCubitState _$SingleScanScreenCubitStateFromJson(
 mixin _$SingleScanScreenCubitState {
   DusListResponse? get dusListResponse => throw _privateConstructorUsedError;
   DusScanResponse? get dusScanResponse => throw _privateConstructorUsedError;
+  Map<String, String>? get qrCodeAndPhotoPathMap =>
+      throw _privateConstructorUsedError;
   StoreSelesaiResponse? get storeSelesaiResponse =>
       throw _privateConstructorUsedError;
 
@@ -42,6 +44,7 @@ abstract class $SingleScanScreenCubitStateCopyWith<$Res> {
   $Res call(
       {DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
+      Map<String, String>? qrCodeAndPhotoPathMap,
       StoreSelesaiResponse? storeSelesaiResponse});
 
   $DusListResponseCopyWith<$Res>? get dusListResponse;
@@ -65,6 +68,7 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
   $Res call({
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
+    Object? qrCodeAndPhotoPathMap = freezed,
     Object? storeSelesaiResponse = freezed,
   }) {
     return _then(_value.copyWith(
@@ -76,6 +80,10 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
           ? _value.dusScanResponse
           : dusScanResponse // ignore: cast_nullable_to_non_nullable
               as DusScanResponse?,
+      qrCodeAndPhotoPathMap: freezed == qrCodeAndPhotoPathMap
+          ? _value.qrCodeAndPhotoPathMap
+          : qrCodeAndPhotoPathMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       storeSelesaiResponse: freezed == storeSelesaiResponse
           ? _value.storeSelesaiResponse
           : storeSelesaiResponse // ignore: cast_nullable_to_non_nullable
@@ -132,6 +140,7 @@ abstract class _$$_SingleScanScreenStateCopyWith<$Res>
   $Res call(
       {DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
+      Map<String, String>? qrCodeAndPhotoPathMap,
       StoreSelesaiResponse? storeSelesaiResponse});
 
   @override
@@ -156,6 +165,7 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
+    Object? qrCodeAndPhotoPathMap = freezed,
     Object? storeSelesaiResponse = freezed,
   }) {
     return _then(_$_SingleScanScreenState(
@@ -167,6 +177,10 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
           ? _value.dusScanResponse
           : dusScanResponse // ignore: cast_nullable_to_non_nullable
               as DusScanResponse?,
+      qrCodeAndPhotoPathMap: freezed == qrCodeAndPhotoPathMap
+          ? _value._qrCodeAndPhotoPathMap
+          : qrCodeAndPhotoPathMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       storeSelesaiResponse: freezed == storeSelesaiResponse
           ? _value.storeSelesaiResponse
           : storeSelesaiResponse // ignore: cast_nullable_to_non_nullable
@@ -181,7 +195,9 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   const _$_SingleScanScreenState(
       {this.dusListResponse,
       this.dusScanResponse,
-      this.storeSelesaiResponse = const StoreSelesaiResponse()});
+      final Map<String, String>? qrCodeAndPhotoPathMap,
+      this.storeSelesaiResponse = const StoreSelesaiResponse()})
+      : _qrCodeAndPhotoPathMap = qrCodeAndPhotoPathMap;
 
   factory _$_SingleScanScreenState.fromJson(Map<String, dynamic> json) =>
       _$$_SingleScanScreenStateFromJson(json);
@@ -190,13 +206,22 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   final DusListResponse? dusListResponse;
   @override
   final DusScanResponse? dusScanResponse;
+  final Map<String, String>? _qrCodeAndPhotoPathMap;
+  @override
+  Map<String, String>? get qrCodeAndPhotoPathMap {
+    final value = _qrCodeAndPhotoPathMap;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   @JsonKey()
   final StoreSelesaiResponse? storeSelesaiResponse;
 
   @override
   String toString() {
-    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, storeSelesaiResponse: $storeSelesaiResponse)';
+    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, qrCodeAndPhotoPathMap: $qrCodeAndPhotoPathMap, storeSelesaiResponse: $storeSelesaiResponse)';
   }
 
   @override
@@ -208,6 +233,8 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
                 other.dusListResponse == dusListResponse) &&
             (identical(other.dusScanResponse, dusScanResponse) ||
                 other.dusScanResponse == dusScanResponse) &&
+            const DeepCollectionEquality()
+                .equals(other._qrCodeAndPhotoPathMap, _qrCodeAndPhotoPathMap) &&
             (identical(other.storeSelesaiResponse, storeSelesaiResponse) ||
                 other.storeSelesaiResponse == storeSelesaiResponse));
   }
@@ -215,7 +242,11 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, dusListResponse, dusScanResponse, storeSelesaiResponse);
+      runtimeType,
+      dusListResponse,
+      dusScanResponse,
+      const DeepCollectionEquality().hash(_qrCodeAndPhotoPathMap),
+      storeSelesaiResponse);
 
   @JsonKey(ignore: true)
   @override
@@ -236,6 +267,7 @@ abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   const factory _SingleScanScreenState(
           {final DusListResponse? dusListResponse,
           final DusScanResponse? dusScanResponse,
+          final Map<String, String>? qrCodeAndPhotoPathMap,
           final StoreSelesaiResponse? storeSelesaiResponse}) =
       _$_SingleScanScreenState;
 
@@ -246,6 +278,8 @@ abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   DusListResponse? get dusListResponse;
   @override
   DusScanResponse? get dusScanResponse;
+  @override
+  Map<String, String>? get qrCodeAndPhotoPathMap;
   @override
   StoreSelesaiResponse? get storeSelesaiResponse;
   @override
