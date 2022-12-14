@@ -94,7 +94,7 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => SingleScanScreenCubit(
+    () => SingleScanScreenCubit(sl<SingleScanRepository>()
     ),
   );
 

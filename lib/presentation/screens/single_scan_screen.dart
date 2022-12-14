@@ -295,7 +295,10 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           const ["Dikirim", "Sampai"],
                           (v) => v,
                           formKey: dropdownKey,
-                          value: storeSelesaiState?.header?.statusPengiriman,
+                          isEnabled: false,
+                          value:
+                          "Dikirim",
+                          // storeSelesaiState?.header?.statusPengiriman,
                           hint: const CustomText("Status Pengiriman",
                               color: primaryGreen),
                           margin:
@@ -309,8 +312,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             return null;
                           },
                         ),
-                        ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(qrCode, theFile){
-
+                        ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(nodus, theFile){
+                          context.read<SingleScanScreenCubit>().sendRequestScanDus(nodus,theFile?.path ?? "");
                         }),
                         Container(
                           height: 200,

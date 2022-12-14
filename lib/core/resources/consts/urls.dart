@@ -9,6 +9,8 @@ const historyUser = "$apiUrl/historyUser";
 const historyAll = "$apiUrl/historyAll";
 const suratJalanUrl = "$apiUrl/summarysj";
 const storeSelesaiUrl = "$apiUrl/store_selesai";
+const scanInsertDusUrl = "$apiUrl/scan_insertdus";
+const loopDusUrl = "$apiUrl/loopDusDetail";
 
 /// API Wilayah
 const jsonEndingPrefix = ".json";
