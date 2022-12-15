@@ -205,7 +205,7 @@ mixin _$DusData {
   @JsonKey(name: 'qrcode_sj')
   String? get qrcodeSj => throw _privateConstructorUsedError;
   String? get nodus => throw _privateConstructorUsedError;
-  String? get foto => throw _privateConstructorUsedError;
+  Object? get foto => throw _privateConstructorUsedError;
   @JsonKey(name: 'id_location')
   String? get idLocation => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
@@ -232,7 +232,7 @@ abstract class $DusDataCopyWith<$Res> {
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nodus,
-      String? foto,
+      Object? foto,
       @JsonKey(name: 'id_location') String? idLocation,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'updated_by') String? updatedBy,
@@ -281,10 +281,7 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
           ? _value.nodus
           : nodus // ignore: cast_nullable_to_non_nullable
               as String?,
-      foto: freezed == foto
-          ? _value.foto
-          : foto // ignore: cast_nullable_to_non_nullable
-              as String?,
+      foto: freezed == foto ? _value.foto : foto,
       idLocation: freezed == idLocation
           ? _value.idLocation
           : idLocation // ignore: cast_nullable_to_non_nullable
@@ -321,7 +318,7 @@ abstract class _$$_DusDataCopyWith<$Res> implements $DusDataCopyWith<$Res> {
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nodus,
-      String? foto,
+      Object? foto,
       @JsonKey(name: 'id_location') String? idLocation,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'updated_by') String? updatedBy,
@@ -367,10 +364,7 @@ class __$$_DusDataCopyWithImpl<$Res>
           ? _value.nodus
           : nodus // ignore: cast_nullable_to_non_nullable
               as String?,
-      foto: freezed == foto
-          ? _value.foto
-          : foto // ignore: cast_nullable_to_non_nullable
-              as String?,
+      foto: freezed == foto ? _value.foto : foto,
       idLocation: freezed == idLocation
           ? _value.idLocation
           : idLocation // ignore: cast_nullable_to_non_nullable
@@ -423,7 +417,7 @@ class _$_DusData implements _DusData {
   @override
   final String? nodus;
   @override
-  final String? foto;
+  final Object? foto;
   @override
   @JsonKey(name: 'id_location')
   final String? idLocation;
@@ -455,7 +449,7 @@ class _$_DusData implements _DusData {
             (identical(other.qrcodeSj, qrcodeSj) ||
                 other.qrcodeSj == qrcodeSj) &&
             (identical(other.nodus, nodus) || other.nodus == nodus) &&
-            (identical(other.foto, foto) || other.foto == foto) &&
+            const DeepCollectionEquality().equals(other.foto, foto) &&
             (identical(other.idLocation, idLocation) ||
                 other.idLocation == idLocation) &&
             (identical(other.createdBy, createdBy) ||
@@ -470,8 +464,18 @@ class _$_DusData implements _DusData {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nosj, qrcodeSj, nodus, foto,
-      idLocation, createdBy, updatedBy, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nosj,
+      qrcodeSj,
+      nodus,
+      const DeepCollectionEquality().hash(foto),
+      idLocation,
+      createdBy,
+      updatedBy,
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -493,7 +497,7 @@ abstract class _DusData implements DusData {
       final String? nosj,
       @JsonKey(name: 'qrcode_sj') final String? qrcodeSj,
       final String? nodus,
-      final String? foto,
+      final Object? foto,
       @JsonKey(name: 'id_location') final String? idLocation,
       @JsonKey(name: 'created_by') final String? createdBy,
       @JsonKey(name: 'updated_by') final String? updatedBy,
@@ -512,7 +516,7 @@ abstract class _DusData implements DusData {
   @override
   String? get nodus;
   @override
-  String? get foto;
+  Object? get foto;
   @override
   @JsonKey(name: 'id_location')
   String? get idLocation;

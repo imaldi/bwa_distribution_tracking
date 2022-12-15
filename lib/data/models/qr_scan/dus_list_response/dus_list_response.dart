@@ -22,7 +22,7 @@ class DusData with _$DusData {
     String? nosj,
     @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
     String? nodus,
-    String? foto,
+    Object? foto,
     @JsonKey(name: 'id_location') String? idLocation,
     @JsonKey(name: 'created_by') String? createdBy,
     @JsonKey(name: 'updated_by') String? updatedBy,

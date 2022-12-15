@@ -11,6 +11,7 @@ abstract class SingleScanRepository {
   Future<Either<Failure, DusScanResponse>> sendRequestScanSingleDusInsert(
     String nodus,
     String filePath,
+    int currentDusNumber,
     // StoreSelesaiResponse wholeFormData
   );
 // Future<Either<Failure, StoreSelesaiResponse>> fetchScannedDusList(StoreSelesaiResponse qrcodeSj);

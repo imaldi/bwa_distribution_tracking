@@ -9,7 +9,7 @@ part 'dus_scan_response.g.dart';
 @freezed
 class DusScanResponse with _$DusScanResponse{
   const factory DusScanResponse({
-    bool? success,
+    @Default(false) bool success,
     String? message,
     @JsonKey(name: "data_dus") DusData? dataDus,
   }) = _DusScanResponse;

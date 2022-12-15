@@ -313,7 +313,10 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           },
                         ),
                         ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(nodus, theFile){
-                          context.read<SingleScanScreenCubit>().sendRequestScanDus(nodus,theFile?.path ?? "");
+                          context.read<SingleScanScreenCubit>().sendRequestScanDus(
+                              // widget.qrcodeSj
+                              nodus
+                              ,theFile?.path ?? "");
                         }),
                         Container(
                           height: 200,

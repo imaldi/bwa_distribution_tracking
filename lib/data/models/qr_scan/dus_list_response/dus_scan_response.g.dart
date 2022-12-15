@@ -8,7 +8,7 @@ part of 'dus_scan_response.dart';
 
 _$_DusScanResponse _$$_DusScanResponseFromJson(Map<String, dynamic> json) =>
     _$_DusScanResponse(
-      success: json['success'] as bool?,
+      success: json['success'] as bool? ?? false,
       message: json['message'] as String?,
       dataDus: json['data_dus'] == null
           ? null

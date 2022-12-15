@@ -30,11 +30,13 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
 
   @override
   Future<Either<Failure, DusScanResponse>> sendRequestScanSingleDusInsert(String nodus, String imagePath,
+      int currentDusNumber,
       // StoreSelesaiResponse wholeFormData
       ) async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
     try{
       final response = await singleScanRemoteDataSource.sendRequestScanSingleDusInsert(nodus, imagePath,
+          currentDusNumber
           // wholeFormData
       );
 

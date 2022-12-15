@@ -17,6 +17,7 @@ import '../../models/auth/login_response.dart';
 abstract class SingleScanRemoteDataSource {
   Future<StoreSelesaiResponse> sendRequestStoreSelesai(StoreSelesaiResponse model);
   Future<DusScanResponse> sendRequestScanSingleDusInsert(String nodus, String imagePath,
+      int currentDusNumber,
       // StoreSelesaiResponse wholeFormData
       );
   // Future<DusListResponse> fetchScannedDusList();
@@ -71,8 +72,10 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
 
   @override
   Future<DusScanResponse> sendRequestScanSingleDusInsert(String nodus, String imagePath,
+      int currentDusNumber,
       // StoreSelesaiResponse wholeFormData
       ) async {
+    // final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus-$currentDusNumber");
     final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus");
     print("sendRequestScanSingleDusInsert Url: $url");
     // final box = Hive.box(authBoxKey);

@@ -536,6 +536,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
+        // todo make this a widget that is given in every corresponding screen
         bottomNavigationBar: ConvexAppBar(
           /// Fixme for landscape orientation
           onTap: (index) {

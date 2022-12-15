@@ -23,6 +23,7 @@ SingleScanScreenCubitState _$SingleScanScreenCubitStateFromJson(
 mixin _$SingleScanScreenCubitState {
   DusListResponse? get dusListResponse => throw _privateConstructorUsedError;
   DusScanResponse? get dusScanResponse => throw _privateConstructorUsedError;
+  int get currentDusNumber => throw _privateConstructorUsedError;
   Map<String, String>? get qrCodeAndPhotoPathMap =>
       throw _privateConstructorUsedError;
   StoreSelesaiResponse? get storeSelesaiResponse =>
@@ -44,6 +45,7 @@ abstract class $SingleScanScreenCubitStateCopyWith<$Res> {
   $Res call(
       {DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
+      int currentDusNumber,
       Map<String, String>? qrCodeAndPhotoPathMap,
       StoreSelesaiResponse? storeSelesaiResponse});
 
@@ -68,6 +70,7 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
   $Res call({
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
+    Object? currentDusNumber = null,
     Object? qrCodeAndPhotoPathMap = freezed,
     Object? storeSelesaiResponse = freezed,
   }) {
@@ -80,6 +83,10 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
           ? _value.dusScanResponse
           : dusScanResponse // ignore: cast_nullable_to_non_nullable
               as DusScanResponse?,
+      currentDusNumber: null == currentDusNumber
+          ? _value.currentDusNumber
+          : currentDusNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       qrCodeAndPhotoPathMap: freezed == qrCodeAndPhotoPathMap
           ? _value.qrCodeAndPhotoPathMap
           : qrCodeAndPhotoPathMap // ignore: cast_nullable_to_non_nullable
@@ -140,6 +147,7 @@ abstract class _$$_SingleScanScreenStateCopyWith<$Res>
   $Res call(
       {DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
+      int currentDusNumber,
       Map<String, String>? qrCodeAndPhotoPathMap,
       StoreSelesaiResponse? storeSelesaiResponse});
 
@@ -165,6 +173,7 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
+    Object? currentDusNumber = null,
     Object? qrCodeAndPhotoPathMap = freezed,
     Object? storeSelesaiResponse = freezed,
   }) {
@@ -177,6 +186,10 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
           ? _value.dusScanResponse
           : dusScanResponse // ignore: cast_nullable_to_non_nullable
               as DusScanResponse?,
+      currentDusNumber: null == currentDusNumber
+          ? _value.currentDusNumber
+          : currentDusNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       qrCodeAndPhotoPathMap: freezed == qrCodeAndPhotoPathMap
           ? _value._qrCodeAndPhotoPathMap
           : qrCodeAndPhotoPathMap // ignore: cast_nullable_to_non_nullable
@@ -195,6 +208,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   const _$_SingleScanScreenState(
       {this.dusListResponse,
       this.dusScanResponse,
+      this.currentDusNumber = 1,
       final Map<String, String>? qrCodeAndPhotoPathMap,
       this.storeSelesaiResponse = const StoreSelesaiResponse()})
       : _qrCodeAndPhotoPathMap = qrCodeAndPhotoPathMap;
@@ -206,6 +220,9 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   final DusListResponse? dusListResponse;
   @override
   final DusScanResponse? dusScanResponse;
+  @override
+  @JsonKey()
+  final int currentDusNumber;
   final Map<String, String>? _qrCodeAndPhotoPathMap;
   @override
   Map<String, String>? get qrCodeAndPhotoPathMap {
@@ -221,7 +238,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
 
   @override
   String toString() {
-    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, qrCodeAndPhotoPathMap: $qrCodeAndPhotoPathMap, storeSelesaiResponse: $storeSelesaiResponse)';
+    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, currentDusNumber: $currentDusNumber, qrCodeAndPhotoPathMap: $qrCodeAndPhotoPathMap, storeSelesaiResponse: $storeSelesaiResponse)';
   }
 
   @override
@@ -233,6 +250,8 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
                 other.dusListResponse == dusListResponse) &&
             (identical(other.dusScanResponse, dusScanResponse) ||
                 other.dusScanResponse == dusScanResponse) &&
+            (identical(other.currentDusNumber, currentDusNumber) ||
+                other.currentDusNumber == currentDusNumber) &&
             const DeepCollectionEquality()
                 .equals(other._qrCodeAndPhotoPathMap, _qrCodeAndPhotoPathMap) &&
             (identical(other.storeSelesaiResponse, storeSelesaiResponse) ||
@@ -245,6 +264,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
       runtimeType,
       dusListResponse,
       dusScanResponse,
+      currentDusNumber,
       const DeepCollectionEquality().hash(_qrCodeAndPhotoPathMap),
       storeSelesaiResponse);
 
@@ -267,6 +287,7 @@ abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   const factory _SingleScanScreenState(
           {final DusListResponse? dusListResponse,
           final DusScanResponse? dusScanResponse,
+          final int currentDusNumber,
           final Map<String, String>? qrCodeAndPhotoPathMap,
           final StoreSelesaiResponse? storeSelesaiResponse}) =
       _$_SingleScanScreenState;
@@ -278,6 +299,8 @@ abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   DusListResponse? get dusListResponse;
   @override
   DusScanResponse? get dusScanResponse;
+  @override
+  int get currentDusNumber;
   @override
   Map<String, String>? get qrCodeAndPhotoPathMap;
   @override

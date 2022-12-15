@@ -27,7 +27,7 @@ _$_DusData _$$_DusDataFromJson(Map<String, dynamic> json) => _$_DusData(
       nosj: json['nosj'] as String?,
       qrcodeSj: json['qrcode_sj'] as String?,
       nodus: json['nodus'] as String?,
-      foto: json['foto'] as String?,
+      foto: json['foto'],
       idLocation: json['id_location'] as String?,
       createdBy: json['created_by'] as String?,
       updatedBy: json['updated_by'] as String?,

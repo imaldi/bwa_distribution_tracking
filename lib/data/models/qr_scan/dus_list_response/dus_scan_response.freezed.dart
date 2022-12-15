@@ -20,7 +20,7 @@ DusScanResponse _$DusScanResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DusScanResponse {
-  bool? get success => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   @JsonKey(name: "data_dus")
   DusData? get dataDus => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $DusScanResponseCopyWith<$Res> {
       _$DusScanResponseCopyWithImpl<$Res, DusScanResponse>;
   @useResult
   $Res call(
-      {bool? success,
+      {bool success,
       String? message,
       @JsonKey(name: "data_dus") DusData? dataDus});
 
@@ -58,15 +58,15 @@ class _$DusScanResponseCopyWithImpl<$Res, $Val extends DusScanResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? success = freezed,
+    Object? success = null,
     Object? message = freezed,
     Object? dataDus = freezed,
   }) {
     return _then(_value.copyWith(
-      success: freezed == success
+      success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$_DusScanResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool? success,
+      {bool success,
       String? message,
       @JsonKey(name: "data_dus") DusData? dataDus});
 
@@ -119,15 +119,15 @@ class __$$_DusScanResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? success = freezed,
+    Object? success = null,
     Object? message = freezed,
     Object? dataDus = freezed,
   }) {
     return _then(_$_DusScanResponse(
-      success: freezed == success
+      success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -144,13 +144,16 @@ class __$$_DusScanResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DusScanResponse implements _DusScanResponse {
   const _$_DusScanResponse(
-      {this.success, this.message, @JsonKey(name: "data_dus") this.dataDus});
+      {this.success = false,
+      this.message,
+      @JsonKey(name: "data_dus") this.dataDus});
 
   factory _$_DusScanResponse.fromJson(Map<String, dynamic> json) =>
       _$$_DusScanResponseFromJson(json);
 
   @override
-  final bool? success;
+  @JsonKey()
+  final bool success;
   @override
   final String? message;
   @override
@@ -192,7 +195,7 @@ class _$_DusScanResponse implements _DusScanResponse {
 
 abstract class _DusScanResponse implements DusScanResponse {
   const factory _DusScanResponse(
-      {final bool? success,
+      {final bool success,
       final String? message,
       @JsonKey(name: "data_dus") final DusData? dataDus}) = _$_DusScanResponse;
 
@@ -200,7 +203,7 @@ abstract class _DusScanResponse implements DusScanResponse {
       _$_DusScanResponse.fromJson;
 
   @override
-  bool? get success;
+  bool get success;
   @override
   String? get message;
   @override

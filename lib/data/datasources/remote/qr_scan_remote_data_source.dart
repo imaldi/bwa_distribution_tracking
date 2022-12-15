@@ -63,9 +63,9 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
-    print("status_pengiriman: ${ model.statusPengiriman ?? "asdsa"}");
-    print("latitude di data source: ${ model.latitude ?? "asdsa"}");
-    print("longtitude di data source: ${ model.longtitude ?? "asdsa"}");
+    print("status_pengiriman: ${ model.statusPengiriman ?? ""}");
+    print("latitude di data source: ${ model.latitude ?? ""}");
+    print("longtitude di data source: ${ model.longtitude ?? ""}");
     print("latitude from sendScan in remote data source: ${model.latitude}");
     var bodyMap = {
       "nosj": model.nosj ?? "-",

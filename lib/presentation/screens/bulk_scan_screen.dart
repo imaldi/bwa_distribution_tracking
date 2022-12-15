@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../data/models/qr_scan/bulk_q_r_scan_model.dart';
+
 class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
   final QRScanBloc qrScanBloc;
   final bool firstTimeScan;
@@ -43,6 +45,8 @@ class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _BulkScanScreenState extends State<BulkScanScreen> {
+  BulkQRScanModel? model;
+
   @override
   void initState() {
     super.initState();
@@ -69,7 +73,15 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                 if (state is SendScanSuccess) {
                   myToast("Send Scan Success");
                   // context.router.pop();
-                  context.router.replace(const HomeRoute());
+                  // model = state.bulkScanResponse.data?.first;
+
+                  if(model?.qrcodeSj != null){
+                  context.router.replace(
+                    HomeRoute()
+                      // SingleScanRoute(qrcodeSj: model?.qrcodeSj ?? "-")
+                );
+
+                  }
                 }
               },
               builder: (context, state) {
@@ -92,193 +104,194 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                 }
                 if (state is QRBulkScanSuccess) {
                   // response = state.bulkScanResponse;
-                  var headerData = state.bulkScanResponse.header?[0];
+                  // var headerData = state.bulkScanResponse.header?[0];
                   var data = state.bulkScanResponse.data?.first;
+                  model = state.bulkScanResponse.data?.first;
                   var details = state.bulkScanResponse.detail;
                   var dataPerPage = details?.data;
                   var textColor = primaryColor;
                   return Column(
                     children: [
-                      Container(
-                        // width: orientedWidthScreen(context,
-                        //     portraitRatio: 1, landscapeRatio: 1),
-                        padding: const EdgeInsets.all(sizeMedium),
-                        decoration: const BoxDecoration(
-                          // gradient: basicDiagonalGradient(),
-                          color: primaryColor,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                            image:
-                                AssetImage("assets/images/background_main.png"),
-                          ),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(sizeBig),
-                              bottomRight: Radius.circular(sizeBig)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(alignment: Alignment.centerLeft, children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Center(
-                                      child: CustomText(
-                                    "Detail Barang",
-                                    color: Colors.white,
-                                    size: sizeMedium,
-                                  ))
-                                ],
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  context.router.pop();
-                                },
-                                child: const Icon(
-                                  Icons.keyboard_arrow_left_outlined,
-                                  color: Colors.white,
-                                  size: sizeBig,
-                                ),
-                              ),
-                            ]),
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: sizeMedium,
-                                        bottom: sizeMedium,
-                                        right: sizeMedium),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const FittedBox(
-                                            child: CustomText(
-                                          "Total Al-Quran Keseluruhan",
-                                          color: Colors.white,
-                                          size: sizeMedium,
-                                        )),
-                                        FittedBox(
-                                            child: CustomText(
-                                          "${headerData?.total ?? 0}",
-                                          color: Colors.white,
-                                          size: sizeHuge - 10,
-                                          weight: FontWeight.bold,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Table(
-                                    children: [
-                                      const TableRow(children: [
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran diproses",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran Selesai",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
-                                      TableRow(children: [
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  "${headerData?.onproses ?? 0}",
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  "${headerData?.selesai ?? 0}",
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
-                                    ],
-                                  ),
-                                  // Row(
-                                  //   children: [
-                                  //     Flexible(
-                                  //       child: Padding(
-                                  //         padding: EdgeInsets.all(sizeMedium),
-                                  //         child: Column(
-                                  //           crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             const FittedBox(
-                                  //                 child: ),
-                                  //             FittedBox(
-                                  //                 child: ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //     Flexible(
-                                  //       child: Padding(
-                                  //         padding: EdgeInsets.all(sizeMedium),
-                                  //         child: Column(
-                                  //           crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             const FittedBox(
-                                  //                 child: ),
-                                  //             FittedBox(
-                                  //                 child: ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   // width: orientedWidthScreen(context,
+                      //   //     portraitRatio: 1, landscapeRatio: 1),
+                      //   padding: const EdgeInsets.all(sizeMedium),
+                      //   decoration: const BoxDecoration(
+                      //     // gradient: basicDiagonalGradient(),
+                      //     color: primaryColor,
+                      //     image: DecorationImage(
+                      //       fit: BoxFit.cover,
+                      //       alignment: Alignment.center,
+                      //       image:
+                      //           AssetImage("assets/images/background_main.png"),
+                      //     ),
+                      //     borderRadius: BorderRadius.only(
+                      //         bottomLeft: Radius.circular(sizeBig),
+                      //         bottomRight: Radius.circular(sizeBig)),
+                      //   ),
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Stack(alignment: Alignment.centerLeft, children: [
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           crossAxisAlignment: CrossAxisAlignment.center,
+                      //           children: const [
+                      //             Center(
+                      //                 child: CustomText(
+                      //               "Detail Barang",
+                      //               color: Colors.white,
+                      //               size: sizeMedium,
+                      //             ))
+                      //           ],
+                      //         ),
+                      //         InkWell(
+                      //           onTap: () {
+                      //             context.router.pop();
+                      //           },
+                      //           child: const Icon(
+                      //             Icons.keyboard_arrow_left_outlined,
+                      //             color: Colors.white,
+                      //             size: sizeBig,
+                      //           ),
+                      //         ),
+                      //       ]),
+                      //       Container(
+                      //         child: Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             Padding(
+                      //               padding: const EdgeInsets.only(
+                      //                   top: sizeMedium,
+                      //                   bottom: sizeMedium,
+                      //                   right: sizeMedium),
+                      //               child: Column(
+                      //                 crossAxisAlignment:
+                      //                     CrossAxisAlignment.start,
+                      //                 children: [
+                      //                   const FittedBox(
+                      //                       child: CustomText(
+                      //                     "Total Al-Quran Keseluruhan",
+                      //                     color: Colors.white,
+                      //                     size: sizeMedium,
+                      //                   )),
+                      //                   FittedBox(
+                      //                       child: CustomText(
+                      //                     "${headerData?.total ?? 0}",
+                      //                     color: Colors.white,
+                      //                     size: sizeHuge - 10,
+                      //                     weight: FontWeight.bold,
+                      //                   )),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //             Table(
+                      //               children: [
+                      //                 const TableRow(children: [
+                      //                   Align(
+                      //                     alignment: Alignment.centerLeft,
+                      //                     child: UnconstrainedBox(
+                      //                       child: FittedBox(
+                      //                         child: CustomText(
+                      //                           "Al-Quran diproses",
+                      //                           color: Colors.white,
+                      //                           size: sizeMedium,
+                      //                         ),
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                   Align(
+                      //                     alignment: Alignment.centerLeft,
+                      //                     child: UnconstrainedBox(
+                      //                       child: FittedBox(
+                      //                         child: CustomText(
+                      //                           "Al-Quran Selesai",
+                      //                           color: Colors.white,
+                      //                           size: sizeMedium,
+                      //                         ),
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                 ]),
+                      //                 TableRow(children: [
+                      //                   Align(
+                      //                     alignment: Alignment.centerLeft,
+                      //                     child: UnconstrainedBox(
+                      //                       child: Padding(
+                      //                         padding: const EdgeInsets.only(
+                      //                             right: 8.0),
+                      //                         child: FittedBox(
+                      //                           child: CustomText(
+                      //                             "${headerData?.onproses ?? 0}",
+                      //                             color: Colors.white,
+                      //                             size: sizeBig + sizeMedium,
+                      //                             weight: FontWeight.bold,
+                      //                           ),
+                      //                         ),
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                   Align(
+                      //                     alignment: Alignment.centerLeft,
+                      //                     child: UnconstrainedBox(
+                      //                       child: Padding(
+                      //                         padding: const EdgeInsets.only(
+                      //                             right: 8.0),
+                      //                         child: FittedBox(
+                      //                           child: CustomText(
+                      //                             "${headerData?.selesai ?? 0}",
+                      //                             color: Colors.white,
+                      //                             size: sizeBig + sizeMedium,
+                      //                             weight: FontWeight.bold,
+                      //                           ),
+                      //                         ),
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                 ]),
+                      //               ],
+                      //             ),
+                      //             // Row(
+                      //             //   children: [
+                      //             //     Flexible(
+                      //             //       child: Padding(
+                      //             //         padding: EdgeInsets.all(sizeMedium),
+                      //             //         child: Column(
+                      //             //           crossAxisAlignment:
+                      //             //           CrossAxisAlignment.start,
+                      //             //           children: [
+                      //             //             const FittedBox(
+                      //             //                 child: ),
+                      //             //             FittedBox(
+                      //             //                 child: ),
+                      //             //           ],
+                      //             //         ),
+                      //             //       ),
+                      //             //     ),
+                      //             //     Flexible(
+                      //             //       child: Padding(
+                      //             //         padding: EdgeInsets.all(sizeMedium),
+                      //             //         child: Column(
+                      //             //           crossAxisAlignment:
+                      //             //           CrossAxisAlignment.start,
+                      //             //           children: [
+                      //             //             const FittedBox(
+                      //             //                 child: ),
+                      //             //             FittedBox(
+                      //             //                 child: ),
+                      //             //           ],
+                      //             //         ),
+                      //             //       ),
+                      //             //     ),
+                      //             //   ],
+                      //             // ),
+                      //           ],
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(sizeMedium),
                         child: Column(
@@ -584,7 +597,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(sizeMedium),
                                 child: MyDropdownButton<String>(
-                                  ["Dropship", "Pengiriman"],
+                                  ["Diterima", "Terkirim"],
                                   (v) => v,
                                   onItemTapped: (val) {
                                     context
