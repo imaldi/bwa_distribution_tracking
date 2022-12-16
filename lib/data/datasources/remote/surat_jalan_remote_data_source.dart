@@ -12,7 +12,7 @@ import '../../models/surat_jalan/surat_jalan_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class SuratJalanRemoteDataSource {
-  Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber);
+  Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber, String statusPengiriman);
 }
 
 class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
@@ -21,8 +21,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
 
   SuratJalanRemoteDataSourceImpl(this.client, this.authBox);
   @override
-  Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber) async {
-    final url = Uri.https(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
+  Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber, String statusPengiriman) async {
+    final url = Uri.https(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString(),"status_pengiriman": statusPengiriman});
     print("Surat Jalan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";

@@ -15,11 +15,11 @@ class SuratJalanRepositoryImpl extends SuratJalanRepository{
 
   SuratJalanRepositoryImpl(this.remoteDataSource,this.networkInfo);
   @override
-  Future<Either<Failure, SuratJalanResponse>> getSuratJalanPerPage(int pageNumber) async {
+  Future<Either<Failure, SuratJalanResponse>> getSuratJalanPerPage(int pageNumber,String statusPengiriman) async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
 
     try{
-      final result = await remoteDataSource.getSuratJalanPerPage(pageNumber);
+      final result = await remoteDataSource.getSuratJalanPerPage(pageNumber, statusPengiriman);
       return Right(result);
     } on ServerException{
       return Left(ServerFailure());

@@ -56,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var controller = TextEditingController();
     return WillPopScope(
       onWillPop: () async {
-        myToast("Heey");
+        // myToast("Heey");
+        context.read<SuratJalanCubit>().resetStatusPengiriman();
         return false;
       },
       child: Scaffold(
