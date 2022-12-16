@@ -12,11 +12,15 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
   final GetSuratJalanPerPageUseCase _getSuratJalanUseCase;
   SuratJalanCubit(this._getSuratJalanUseCase) : super(SuratJalanState());
 
-  void getSuratJalanPerPage(int pageNumber) async {
+  void getSuratJalanPerPage(int pageNumber,String statusPengiriman) async {
     emit(state.copyWith(isLoading: true));
-    var resultOrFailed = await _getSuratJalanUseCase(SuratJalanPerPageParams(pageNumber));
+    var resultOrFailed = await _getSuratJalanUseCase(SuratJalanPerPageParams(pageNumber,statusPengiriman));
     var newResponse = resultOrFailed.fold((l) => const SuratJalanResponse(), (r) => r);
-    emit(state.copyWith(isLoading: false, suratJalanResponse: newResponse));
+    emit(state.copyWith(isLoading: false, suratJalanResponse: newResponse,statusPengiriman: statusPengiriman));
     print("surat Jalan total page: ${state.suratJalanResponse?.data?.total}");
+  }
+
+  void resetStatusPengiriman(){
+    emit(state.copyWith(statusPengiriman: ""));
   }
 }

@@ -27,15 +27,16 @@ class LoginScreen extends StatefulWidget
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var phone = "08121212";
-  // var phone = "085780907168";
-  var password = "bwa123Password";
+  // var phone = "08121212";
+  var phone = "";
+  var password = "";
   late TextEditingController phoneTEC;
   late TextEditingController passwordTEC;
   @override
   void initState() {
     super.initState();
-    phone = "081234567";
+    // phone = "081234567";
+    phone = "085780907168";
     password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
     passwordTEC = TextEditingController(text: password);

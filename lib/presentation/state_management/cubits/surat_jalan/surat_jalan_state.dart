@@ -3,11 +3,13 @@ part of 'surat_jalan_cubit.dart';
 class SuratJalanState extends Equatable {
   bool isLoading;
   bool isFailed;
+  String statusPengiriman;
   SuratJalanResponse? suratJalanResponse;
 
   SuratJalanState(
       {this.isLoading = false,
       this.isFailed = false,
+        this.statusPengiriman = "",
       this.suratJalanResponse});
 
   @override
@@ -15,17 +17,20 @@ class SuratJalanState extends Equatable {
         isLoading,
         isFailed,
         suratJalanResponse,
+    statusPengiriman
       ];
 
   SuratJalanState copyWith({
     bool? isLoading,
     bool? isFailed,
     SuratJalanResponse? suratJalanResponse,
+    String? statusPengiriman,
   }) {
     return SuratJalanState(
       isLoading: isLoading ?? this.isLoading,
       isFailed: isFailed ?? this.isFailed,
       suratJalanResponse: suratJalanResponse ?? this.suratJalanResponse,
+      statusPengiriman: statusPengiriman ?? this.statusPengiriman
     );
   }
 }

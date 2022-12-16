@@ -32,7 +32,6 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
-    print("token: $token");
     final response = await client.get(
       url,
       headers: {
@@ -51,6 +50,8 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
         throw ServerException();
       }
       return theResponse;
+    } if(response.statusCode == 404){
+      throw DataNotFoundException();
     } else {
       throw ServerException();
     }
@@ -68,6 +69,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     print("longtitude di data source: ${ model.longtitude ?? ""}");
     print("latitude from sendScan in remote data source: ${model.latitude}");
     var bodyMap = {
+      // "qrcode_sj": model. ?? "-",
       "nosj": model.nosj ?? "-",
       "latitude": model.latitude ?? "-",
       "longtitude": model.longtitude ?? "-",
