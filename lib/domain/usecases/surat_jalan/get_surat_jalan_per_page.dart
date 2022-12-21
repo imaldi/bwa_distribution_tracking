@@ -11,7 +11,7 @@ class GetSuratJalanPerPageUseCase extends UseCase<SuratJalanResponse,SuratJalanP
   GetSuratJalanPerPageUseCase(this._suratJalanRepository);
   @override
   Future<Either<Failure, SuratJalanResponse>> call(params) async {
-    return _suratJalanRepository.getSuratJalanPerPage(params.pageNumber,params.statusPengiriman);
+    return _suratJalanRepository.getSuratJalanPerPage(params.pageNumber);
   }
 
 }

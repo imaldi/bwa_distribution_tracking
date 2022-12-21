@@ -286,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 TableRow(children: [
                                   InkWell(
                                     onTap:(){
-                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1,"Terkirim");
+                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
                                     },
                                     child: RoundedContainer(sizeMedium,
                                         padding: const EdgeInsets.all(0),
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   InkWell(
                                     onTap: (){
-                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1,"Diterima");
+                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
                                     },
                                     child: RoundedContainer(sizeMedium,
                                         padding: const EdgeInsets.all(0),
@@ -340,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     SvgPicture.asset(
                                                         "assets/images/diterima_icon.svg"),
                                                     CustomText(
-                                                      "Pengiriman",
+                                                      "Penerimaan",
                                                       color: Colors.white,
                                                     )
                                                   ],
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 TableRow(children: [
                                   InkWell(
                                     onTap: (){
-                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1,"Selesai");
+                                      context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
                                     },
                                     child: RoundedContainer(sizeMedium,
                                         padding: const EdgeInsets.all(0),
@@ -374,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     SvgPicture.asset(
                                                         "assets/images/distribution_icon.svg"),
                                                     CustomText(
-                                                      "Pengiriman",
+                                                      "Distribusi",
                                                       color: Colors.white,
                                                     )
                                                   ],
@@ -402,7 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   SvgPicture.asset(
                                                       "assets/images/laporan_icon.svg"),
                                                   CustomText(
-                                                    "Pengiriman",
+                                                    "Laporan",
                                                     color: Colors.white,
                                                   )
                                                 ],
@@ -595,7 +595,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                      onPageChanged: (index) {
                                        context
                                            .read<SuratJalanCubit>()
-                                           .getSuratJalanPerPage(index + 1,suratJalanCubitState.statusPengiriman);
+                                           .getSuratJalanPerPage(index + 1);
                                        myToast("Index: $index");
                                      },
                                    );
@@ -626,7 +626,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                    print(
                                                        "bulkDetail ${bulkDetail.rawContent}");
                                                    qrBloc.add(BulkQRScanEvent(
-                                                     "003SPJ34-JATIMPARK0213232-0002-1",
+                                                     "003SPJ34-JATIMPARK0213232-0002",
                                                      // bulkDetail.rawContent
                                                    ));
                                                    context.router.push(BulkScanRoute(

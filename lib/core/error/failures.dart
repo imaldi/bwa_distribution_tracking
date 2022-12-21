@@ -14,3 +14,4 @@ class CacheFailure extends Failure {}
 class LocationServiceDisabledFailure extends Failure {}
 
 class PermissionDeniedFailure extends Failure {}
+class DataNotFoundFailure extends Failure {}

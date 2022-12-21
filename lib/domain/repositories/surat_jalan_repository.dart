@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 import '../../core/error/failures.dart';
 
 abstract class SuratJalanRepository {
-  Future<Either<Failure, SuratJalanResponse>> getSuratJalanPerPage(int pageNumber, String statusPengiriman);
+  Future<Either<Failure, SuratJalanResponse>> getSuratJalanPerPage(int pageNumber);
 }

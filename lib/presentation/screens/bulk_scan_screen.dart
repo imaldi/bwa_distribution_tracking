@@ -83,6 +83,11 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
 
                   }
                 }
+
+                if (state is QRScanFailed) {
+                  myToast("${state.failure.runtimeType}");
+                  context.router.pop();
+                }
               },
               builder: (context, state) {
                 // var response;
@@ -97,11 +102,11 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                     ),
                   );
                 }
-                if (state is QRScanFailed) {
-                  // response = "null";
-                  myToast("Mohon maaf, ada kesalahan");
-                  context.router.pop();
-                }
+                // if (state is QRScanFailed) {
+                //   // response = "null";
+                //   myToast("Mohon maaf, ada kesalahan");
+                //   context.router.pop();
+                // }
                 if (state is QRBulkScanSuccess) {
                   // response = state.bulkScanResponse;
                   // var headerData = state.bulkScanResponse.header?[0];

@@ -27,6 +27,8 @@ class ScanRepositoryImpl extends ScanRepository {
       return Right(response);
     } on ServerException {
       return Left(ServerFailure());
+    } on DataNotFoundException {
+      return Left(DataNotFoundFailure());
     }
   }
 
