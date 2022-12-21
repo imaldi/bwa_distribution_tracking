@@ -24,6 +24,7 @@ class SendScanDataModel with _$SendScanDataModel {
     @HiveField(10) @JsonKey(name: 'updated_by') String? updatedBy,
     @HiveField(11) @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @HiveField(12) @JsonKey(name: 'created_at') DateTime? createdAt,
+    @HiveField(13) @JsonKey(name: 'qrcode_sj') String? qrCodeSJ,
   }) = _SendScanDataModel;
 
   factory SendScanDataModel.fromJson(Map<String, Object?> json) =>

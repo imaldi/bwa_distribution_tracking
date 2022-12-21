@@ -26,6 +26,21 @@ mixin _$UserModel {
   String? get name => throw _privateConstructorUsedError;
   @HiveField(2)
   String? get phone => throw _privateConstructorUsedError;
+  @HiveField(3)
+  String? get foto => throw _privateConstructorUsedError; // ayolah oi
+  @HiveField(4)
+  String? get role => throw _privateConstructorUsedError;
+  @HiveField(5)
+  String? get ttd => throw _privateConstructorUsedError;
+  @JsonKey(name: "api_token")
+  @HiveField(6)
+  String? get apiToken => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  @HiveField(7)
+  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
+  @HiveField(8)
+  String? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +56,13 @@ abstract class $UserModelCopyWith<$Res> {
   $Res call(
       {@HiveField(0) int? id,
       @HiveField(1) String? name,
-      @HiveField(2) String? phone});
+      @HiveField(2) String? phone,
+      @HiveField(3) String? foto,
+      @HiveField(4) String? role,
+      @HiveField(5) String? ttd,
+      @JsonKey(name: "api_token") @HiveField(6) String? apiToken,
+      @JsonKey(name: "created_at") @HiveField(7) String? createdAt,
+      @JsonKey(name: "updated_at") @HiveField(8) String? updatedAt});
 }
 
 /// @nodoc
@@ -60,6 +81,12 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = freezed,
     Object? name = freezed,
     Object? phone = freezed,
+    Object? foto = freezed,
+    Object? role = freezed,
+    Object? ttd = freezed,
+    Object? apiToken = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -73,6 +100,30 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ttd: freezed == ttd
+          ? _value.ttd
+          : ttd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      apiToken: freezed == apiToken
+          ? _value.apiToken
+          : apiToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -88,7 +139,13 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   $Res call(
       {@HiveField(0) int? id,
       @HiveField(1) String? name,
-      @HiveField(2) String? phone});
+      @HiveField(2) String? phone,
+      @HiveField(3) String? foto,
+      @HiveField(4) String? role,
+      @HiveField(5) String? ttd,
+      @JsonKey(name: "api_token") @HiveField(6) String? apiToken,
+      @JsonKey(name: "created_at") @HiveField(7) String? createdAt,
+      @JsonKey(name: "updated_at") @HiveField(8) String? updatedAt});
 }
 
 /// @nodoc
@@ -105,6 +162,12 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? phone = freezed,
+    Object? foto = freezed,
+    Object? role = freezed,
+    Object? ttd = freezed,
+    Object? apiToken = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_UserModel(
       id: freezed == id
@@ -119,6 +182,30 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ttd: freezed == ttd
+          ? _value.ttd
+          : ttd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      apiToken: freezed == apiToken
+          ? _value.apiToken
+          : apiToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -130,7 +217,13 @@ class _$_UserModel implements _UserModel {
   const _$_UserModel(
       {@HiveField(0) this.id,
       @HiveField(1) this.name,
-      @HiveField(2) this.phone});
+      @HiveField(2) this.phone,
+      @HiveField(3) this.foto,
+      @HiveField(4) this.role,
+      @HiveField(5) this.ttd,
+      @JsonKey(name: "api_token") @HiveField(6) this.apiToken,
+      @JsonKey(name: "created_at") @HiveField(7) this.createdAt,
+      @JsonKey(name: "updated_at") @HiveField(8) this.updatedAt});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -144,10 +237,32 @@ class _$_UserModel implements _UserModel {
   @override
   @HiveField(2)
   final String? phone;
+  @override
+  @HiveField(3)
+  final String? foto;
+// ayolah oi
+  @override
+  @HiveField(4)
+  final String? role;
+  @override
+  @HiveField(5)
+  final String? ttd;
+  @override
+  @JsonKey(name: "api_token")
+  @HiveField(6)
+  final String? apiToken;
+  @override
+  @JsonKey(name: "created_at")
+  @HiveField(7)
+  final String? createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  @HiveField(8)
+  final String? updatedAt;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, phone: $phone)';
+    return 'UserModel(id: $id, name: $name, phone: $phone, foto: $foto, role: $role, ttd: $ttd, apiToken: $apiToken, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -157,12 +272,22 @@ class _$_UserModel implements _UserModel {
             other is _$_UserModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.phone, phone) || other.phone == phone));
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.foto, foto) || other.foto == foto) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.ttd, ttd) || other.ttd == ttd) &&
+            (identical(other.apiToken, apiToken) ||
+                other.apiToken == apiToken) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, phone);
+  int get hashCode => Object.hash(runtimeType, id, name, phone, foto, role, ttd,
+      apiToken, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -180,9 +305,16 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {@HiveField(0) final int? id,
-      @HiveField(1) final String? name,
-      @HiveField(2) final String? phone}) = _$_UserModel;
+          {@HiveField(0) final int? id,
+          @HiveField(1) final String? name,
+          @HiveField(2) final String? phone,
+          @HiveField(3) final String? foto,
+          @HiveField(4) final String? role,
+          @HiveField(5) final String? ttd,
+          @JsonKey(name: "api_token") @HiveField(6) final String? apiToken,
+          @JsonKey(name: "created_at") @HiveField(7) final String? createdAt,
+          @JsonKey(name: "updated_at") @HiveField(8) final String? updatedAt}) =
+      _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -196,6 +328,27 @@ abstract class _UserModel implements UserModel {
   @override
   @HiveField(2)
   String? get phone;
+  @override
+  @HiveField(3)
+  String? get foto;
+  @override // ayolah oi
+  @HiveField(4)
+  String? get role;
+  @override
+  @HiveField(5)
+  String? get ttd;
+  @override
+  @JsonKey(name: "api_token")
+  @HiveField(6)
+  String? get apiToken;
+  @override
+  @JsonKey(name: "created_at")
+  @HiveField(7)
+  String? get createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  @HiveField(8)
+  String? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

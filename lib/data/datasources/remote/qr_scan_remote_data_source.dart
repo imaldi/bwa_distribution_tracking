@@ -71,6 +71,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     var bodyMap = {
       // "qrcode_sj": model. ?? "-",
       "nosj": model.nosj ?? "-",
+      "qrcode_sj": model.qrCodeSJ ?? "-",
       "latitude": model.latitude ?? "-",
       "longtitude": model.longtitude ?? "-",
       "alamat": model.alamat ?? "-",

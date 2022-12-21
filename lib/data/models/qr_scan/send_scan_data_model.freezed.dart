@@ -51,6 +51,9 @@ mixin _$SendScanDataModel {
   @HiveField(12)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @HiveField(13)
+  @JsonKey(name: 'qrcode_sj')
+  String? get qrCodeSJ => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -95,7 +98,10 @@ abstract class $SendScanDataModelCopyWith<$Res> {
           DateTime? updatedAt,
       @HiveField(12)
       @JsonKey(name: 'created_at')
-          DateTime? createdAt});
+          DateTime? createdAt,
+      @HiveField(13)
+      @JsonKey(name: 'qrcode_sj')
+          String? qrCodeSJ});
 }
 
 /// @nodoc
@@ -124,6 +130,7 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
     Object? updatedBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
+    Object? qrCodeSJ = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -178,6 +185,10 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      qrCodeSJ: freezed == qrCodeSJ
+          ? _value.qrCodeSJ
+          : qrCodeSJ // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -221,7 +232,10 @@ abstract class _$$_SendScanDataModelCopyWith<$Res>
           DateTime? updatedAt,
       @HiveField(12)
       @JsonKey(name: 'created_at')
-          DateTime? createdAt});
+          DateTime? createdAt,
+      @HiveField(13)
+      @JsonKey(name: 'qrcode_sj')
+          String? qrCodeSJ});
 }
 
 /// @nodoc
@@ -248,6 +262,7 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
     Object? updatedBy = freezed,
     Object? updatedAt = freezed,
     Object? createdAt = freezed,
+    Object? qrCodeSJ = freezed,
   }) {
     return _then(_$_SendScanDataModel(
       id: freezed == id
@@ -302,6 +317,10 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      qrCodeSJ: freezed == qrCodeSJ
+          ? _value.qrCodeSJ
+          : qrCodeSJ // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -324,7 +343,8 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       @HiveField(9) @JsonKey(name: 'created_by') this.createdBy,
       @HiveField(10) @JsonKey(name: 'updated_by') this.updatedBy,
       @HiveField(11) @JsonKey(name: 'updated_at') this.updatedAt,
-      @HiveField(12) @JsonKey(name: 'created_at') this.createdAt});
+      @HiveField(12) @JsonKey(name: 'created_at') this.createdAt,
+      @HiveField(13) @JsonKey(name: 'qrcode_sj') this.qrCodeSJ});
 
   factory _$_SendScanDataModel.fromJson(Map<String, dynamic> json) =>
       _$$_SendScanDataModelFromJson(json);
@@ -373,10 +393,14 @@ class _$_SendScanDataModel implements _SendScanDataModel {
   @HiveField(12)
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
+  @override
+  @HiveField(13)
+  @JsonKey(name: 'qrcode_sj')
+  final String? qrCodeSJ;
 
   @override
   String toString() {
-    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, foto: $foto, createdBy: $createdBy, updatedBy: $updatedBy, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'SendScanDataModel(id: $id, nosj: $nosj, latitude: $latitude, longtitude: $longtitude, alamat: $alamat, kota: $kota, keterangan: $keterangan, statusPengiriman: $statusPengiriman, foto: $foto, createdBy: $createdBy, updatedBy: $updatedBy, updatedAt: $updatedAt, createdAt: $createdAt, qrCodeSJ: $qrCodeSJ)';
   }
 
   @override
@@ -404,7 +428,9 @@ class _$_SendScanDataModel implements _SendScanDataModel {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.qrCodeSJ, qrCodeSJ) ||
+                other.qrCodeSJ == qrCodeSJ));
   }
 
   @JsonKey(ignore: true)
@@ -423,7 +449,8 @@ class _$_SendScanDataModel implements _SendScanDataModel {
       createdBy,
       updatedBy,
       updatedAt,
-      createdAt);
+      createdAt,
+      qrCodeSJ);
 
   @JsonKey(ignore: true)
   @override
@@ -472,7 +499,10 @@ abstract class _SendScanDataModel implements SendScanDataModel {
           final DateTime? updatedAt,
       @HiveField(12)
       @JsonKey(name: 'created_at')
-          final DateTime? createdAt}) = _$_SendScanDataModel;
+          final DateTime? createdAt,
+      @HiveField(13)
+      @JsonKey(name: 'qrcode_sj')
+          final String? qrCodeSJ}) = _$_SendScanDataModel;
 
   factory _SendScanDataModel.fromJson(Map<String, dynamic> json) =
       _$_SendScanDataModel.fromJson;
@@ -521,6 +551,10 @@ abstract class _SendScanDataModel implements SendScanDataModel {
   @HiveField(12)
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
+  @override
+  @HiveField(13)
+  @JsonKey(name: 'qrcode_sj')
+  String? get qrCodeSJ;
   @override
   @JsonKey(ignore: true)
   _$$_SendScanDataModelCopyWith<_$_SendScanDataModel> get copyWith =>

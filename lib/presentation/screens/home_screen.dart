@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async {
         // myToast("Heey");
-        context.read<SuratJalanCubit>().resetStatusPengiriman();
+        context.read<SuratJalanCubit>().resetStateViewList();
         return false;
       },
       child: Scaffold(
@@ -240,14 +240,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             .read<QRScanBloc>();
                                                         // var isNewScan
                                                         qrBloc.add(
-                                                            const BulkQRScanEvent(
+                                                            BulkQRScanEvent(
                                                                 // textValue
-                                                                // controller.text
-                                                                "003SPJ22-MERANTI00098-0002"));
+                                                                controller.text
+                                                                // "003SPJ22-MERANTI00098-0002"
+                                                            ));
                                                         context.router.push(
                                                             BulkScanRoute(
                                                                 qrScanBloc:
-                                                                    qrBloc));
+                                                                    qrBloc,
+                                                                qrCode: controller.text
+                                                            ));
                                                       }
                                                       FocusManager
                                                           .instance.primaryFocus
@@ -278,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             )),
                         Visibility(
-                          visible: context.watch<SuratJalanCubit>().state.statusPengiriman.isEmpty,
+                          visible: !context.watch<SuratJalanCubit>().state.isFetchingList,
                           child: Padding(
                             padding: const EdgeInsets.all(sizeMedium),
                             child: Table(
@@ -418,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                          builder: (context) {
                            var suratJalanCubitState = context.watch<SuratJalanCubit>().state;
                            return Visibility(
-                               visible: suratJalanCubitState.statusPengiriman.isNotEmpty,
+                               visible: suratJalanCubitState.isFetchingList,
                                child: Column(children: [
                              Builder(builder: (context) {
                                var suratJalanState =
@@ -462,14 +465,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                        return InkWell(
                                          onTap: () {
                                            var qrBloc = context.read<QRScanBloc>();
-                                           myToast("${listSJ?[i].qrcodeSj}");
+                                           // myToast("${listSJ?[i].qrcodeSj}");
                                            qrBloc.add(BulkQRScanEvent(
                                              // textValue
                                              // controller.text
                                                "${listSJ?[i].qrcodeSj}"));
                                            context.router.push(BulkScanRoute(
                                                qrScanBloc: qrBloc,
-                                               firstTimeScan: false));
+                                               firstTimeScan: false,
+                                              qrCode: listSJ?[i].qrcodeSj ?? "-",
+                                           ));
                                          },
                                          child: Card(
                                              color: Colors.white,
@@ -513,7 +518,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                    ),
                                                                  ),
                                                                  CustomText(
-                                                                   "${listSJ?[i].onproses}",
+                                                                   "${int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0") }",
                                                                    color: primaryColor,
                                                                    weight:
                                                                    FontWeight.bold,
@@ -534,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                    ),
                                                                  ),
                                                                  CustomText(
-                                                                   "${listSJ?[i].selesai}",
+                                                                   "${listSJ?[i].selesai ?? 0}",
                                                                    color: primaryColor,
                                                                    weight:
                                                                    FontWeight.bold,
@@ -552,7 +557,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                    color: primaryColor,
                                                                  ),
                                                                  CustomText(
-                                                                   "${listSJ?[i].total}",
+                                                                   "${listSJ?[i].total ?? 0}",
                                                                    color: primaryColor,
                                                                    weight:
                                                                    FontWeight.bold,
@@ -626,11 +631,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                    print(
                                                        "bulkDetail ${bulkDetail.rawContent}");
                                                    qrBloc.add(BulkQRScanEvent(
-                                                     "003SPJ34-JATIMPARK0213232-0002",
-                                                     // bulkDetail.rawContent
+                                                     // "003SPJ34-JATIMPARK0213232-0002",
+                                                     bulkDetail.rawContent
                                                    ));
                                                    context.router.push(BulkScanRoute(
-                                                       qrScanBloc: qrBloc));
+                                                       qrScanBloc: qrBloc,
+                                                     qrCode: bulkDetail
+                                                         .rawContent ?? "-",
+                                                   ));
                                                  }
                                                });
                                              },
