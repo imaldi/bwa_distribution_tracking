@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class ScanRepository {
   Future<Either<Failure, BulkScanResponse>> bulkScan(String qrcodeSj);
-  Future<Either<Failure, SendScanResponse>> sendScan(SendScanDataModel model);
+  Future<Either<Failure, SendScanResponse>> sendScan(SendScanDataModel model, int total);
   Future<Either<Failure, ScanUserHistoryResponse>> getUserScanHistory();
   Future<Either<Failure, ScanUserHistoryResponse>> getAllScanHistory();
 }

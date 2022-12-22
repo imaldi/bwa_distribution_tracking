@@ -33,11 +33,11 @@ class ScanRepositoryImpl extends ScanRepository {
   }
 
   @override
-  Future<Either<Failure, SendScanResponse>> sendScan(SendScanDataModel model) async {
+  Future<Either<Failure, SendScanResponse>> sendScan(SendScanDataModel model, int total) async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
 
     try{
-      final response = await qrScanRemoteDataSource.sendScan(model);
+      final response = await qrScanRemoteDataSource.sendScan(model, total);
 
       return Right(response);
     } on ServerException {

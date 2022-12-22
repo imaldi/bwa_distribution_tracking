@@ -35,7 +35,7 @@ class QRScanBloc extends Bloc<QRScanEvent, QRScanState> {
     on<SendScanEvent>((event, emit) async {
       emit(QRScanLoading());
 
-      var failOrLoaded = await _sendScanUseCase(SendScanParams(event.model));
+      var failOrLoaded = await _sendScanUseCase(SendScanParams(event.model,event.total));
 
       var currentState = failOrLoaded.fold((failure) => QRScanFailed(failure),
           (sendScanResponse) => SendScanSuccess(sendScanResponse));

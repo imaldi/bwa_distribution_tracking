@@ -11,7 +11,7 @@ class SendScanUseCase extends UseCase<SendScanResponse,SendScanParams>{
   SendScanUseCase(this.scanRepository);
   @override
   Future<Either<Failure, SendScanResponse>> call(SendScanParams params)  {
-    return scanRepository.sendScan(params.model);
+    return scanRepository.sendScan(params.model, params.total);
   }
 
 }

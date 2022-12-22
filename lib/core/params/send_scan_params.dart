@@ -3,9 +3,10 @@ import 'package:equatable/equatable.dart';
 
 class SendScanParams extends Equatable {
   final SendScanDataModel model;
+  final int total;
 
-  const SendScanParams(this.model);
+  const SendScanParams(this.model,this.total);
 
   @override
-  List<Object?> get props => [model];
+  List<Object?> get props => [model, total];
 }

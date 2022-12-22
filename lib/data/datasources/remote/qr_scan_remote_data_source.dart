@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 
 abstract class QRScanRemoteDataSource {
   Future<BulkScanResponse> bulkScan(String qrcodeSj);
-  Future<SendScanResponse> sendScan(SendScanDataModel model);
+  Future<SendScanResponse> sendScan(SendScanDataModel model, int total);
   Future<ScanUserHistoryResponse> getUserScanHistory();
   Future<ScanUserHistoryResponse> getAllScanHistory();
 }
@@ -59,7 +59,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   // FIXME ada error kalau ngambil foto dua kali atau ganti orientasi layar
   @override
-  Future<SendScanResponse> sendScan(SendScanDataModel model) async {
+  Future<SendScanResponse> sendScan(SendScanDataModel model,int total) async {
     final url = Uri.https(baseUrl, storeUrl);
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
@@ -77,6 +77,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
       "alamat": model.alamat ?? "-",
       "kota": model.kota ?? "-",
       "keterangan": model.keterangan ?? "-",
+      "total": total.toString(),
       // "foto": "asdasd",
       "status_pengiriman": model.statusPengiriman ?? "-",
     };

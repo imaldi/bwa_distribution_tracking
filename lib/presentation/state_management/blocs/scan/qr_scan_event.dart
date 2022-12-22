@@ -13,9 +13,10 @@ class BulkQRScanEvent extends QRScanEvent {
 
 class SendScanEvent extends QRScanEvent {
   final SendScanDataModel model;
-  const SendScanEvent(this.model);
+  final int total;
+  const SendScanEvent(this.model,this.total);
   @override
-  List<Object?> get props => [model];
+  List<Object?> get props => [model, total];
 }
 
 class MunculkanToastEvent extends QRScanEvent{
