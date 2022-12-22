@@ -7,6 +7,7 @@ const scanUrl = "$apiUrl/scan_sj";
 const storeUrl = "$scanUrl/store";
 const historyUser = "$apiUrl/historyUser";
 const historyAll = "$apiUrl/historyAll";
+const historyPerId = "$apiUrl/historyPerId";
 const suratJalanUrl = "$apiUrl/summarysj";
 const storeSelesaiUrl = "$apiUrl/store_selesai";
 const scanInsertDusUrl = "$apiUrl/scan_insertdus";

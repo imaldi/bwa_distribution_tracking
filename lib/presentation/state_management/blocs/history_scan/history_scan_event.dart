@@ -17,3 +17,12 @@ class GetAllScanHistoryEvent extends HistoryScanEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GetHistoryPerIdEvent extends HistoryScanEvent {
+  final String qrCode;
+  GetHistoryPerIdEvent(this.qrCode);
+
+  @override
+  List<Object?> get props => [qrCode];
+
+}

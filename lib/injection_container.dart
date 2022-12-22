@@ -49,6 +49,7 @@ import 'data/datasources/remote/single_scan_remote_data_source.dart';
 import 'data/datasources/remote/surat_jalan_remote_data_source.dart';
 import 'data/repositories/single_scan_repository_impl.dart';
 import 'data/repositories/surat_jalan_repository_impl.dart';
+import 'domain/usecases/scan_qr/get_history_per_id.dart';
 
 
 final sl = GetIt.instance;
@@ -74,7 +75,7 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-        () => HistoryScanBloc(sl<GetUserScanHistoryUseCase>(),sl<GetAllScanHistoryUseCase>()),
+        () => HistoryScanBloc(sl<GetUserScanHistoryUseCase>(),sl<GetAllScanHistoryUseCase>(), sl<GetHistoryPerIdUseCase>()),
   );
 
   sl.registerFactory(
@@ -161,6 +162,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SendScanUseCase(sl()));
   sl.registerLazySingleton(() => GetUserScanHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAllScanHistoryUseCase(sl()));
+  sl.registerLazySingleton(() => GetHistoryPerIdUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
   sl.registerLazySingleton(() => SendRequesStoreSelesaiUseCase(sl()));
   sl.registerFactory<GetSuratJalanPerPageUseCase>(() => GetSuratJalanPerPageUseCase(sl()));

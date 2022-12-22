@@ -1,19 +1,24 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
-import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
-import 'package:bwa_distribution_tracking/presentation/widgets/my_text_field/my_text_field.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
-import '../widgets/custom_appbar_container/custom_appbar_container.dart';
+import '../../injection_container.dart';
+import '../state_management/blocs/history_scan/history_scan_bloc.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
 import '../widgets/text/custom_text.dart';
 
-class RiwayatSuratJalanScreen extends StatelessWidget {
+class RiwayatSuratJalanScreen extends StatefulWidget{
   const RiwayatSuratJalanScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RiwayatSuratJalanScreen> createState() => _RiwayatSuratJalanScreenState();
+}
+
+class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +50,8 @@ class RiwayatSuratJalanScreen extends StatelessWidget {
                           // context.router.push(BulkScanRoute(
                           //     qrScanBloc: qrBloc,
                           //     firstTimeScan: false));
-                          context.router.push(DetailPengirimanRoute());
+                          // Fixme beri qr code dari item listnya ya nanti
+                          context.router.push(DetailPengirimanRoute(qrCode: "QR DEFAULT DULU"));
                         },
                         child: Stack(
                           alignment: Alignment.topRight,

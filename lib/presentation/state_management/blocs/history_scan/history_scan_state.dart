@@ -33,6 +33,15 @@ class AllHistoryScanLoaded extends HistoryScanState {
   List<Object?> get props => [scanAllHistoryResponse];
 }
 
+class HistoryPerIdLoaded extends HistoryScanState {
+  final BulkScanResponse historyPerIdResponse;
+  const HistoryPerIdLoaded(
+      this.historyPerIdResponse
+      );
+  @override
+  List<Object?> get props => [historyPerIdResponse];
+}
+
 class HistoryScanFailed extends HistoryScanState {
   @override
   List<Object?> get props => [];

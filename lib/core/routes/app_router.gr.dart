@@ -92,9 +92,14 @@ class AppRouter extends _i12.RootStackRouter {
       );
     },
     DetailPengirimanRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailPengirimanRouteArgs>();
       return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.DetailPengirimanScreen(),
+        child: _i12.WrappedRoute(
+            child: _i8.DetailPengirimanScreen(
+          qrCode: args.qrCode,
+          key: args.key,
+        )),
       );
     },
     AllHistoryRoute.name: (routeData) {
@@ -312,14 +317,37 @@ class RiwayatSuratJalanRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.DetailPengirimanScreen]
-class DetailPengirimanRoute extends _i12.PageRouteInfo<void> {
-  const DetailPengirimanRoute()
-      : super(
+class DetailPengirimanRoute
+    extends _i12.PageRouteInfo<DetailPengirimanRouteArgs> {
+  DetailPengirimanRoute({
+    required String qrCode,
+    _i13.Key? key,
+  }) : super(
           DetailPengirimanRoute.name,
           path: '/detail-pengiriman-screen',
+          args: DetailPengirimanRouteArgs(
+            qrCode: qrCode,
+            key: key,
+          ),
         );
 
   static const String name = 'DetailPengirimanRoute';
+}
+
+class DetailPengirimanRouteArgs {
+  const DetailPengirimanRouteArgs({
+    required this.qrCode,
+    this.key,
+  });
+
+  final String qrCode;
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return 'DetailPengirimanRouteArgs{qrCode: $qrCode, key: $key}';
+  }
 }
 
 /// generated route for
