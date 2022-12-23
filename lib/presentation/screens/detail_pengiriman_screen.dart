@@ -34,6 +34,8 @@ class DetailPengirimanScreen extends StatefulWidget
 
 class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
   var textColor = Colors.white;
+  var controller = ScrollController();
+
 
   @override
   void initState() {
@@ -59,7 +61,10 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
               var nosjhistoryStatusPengirimanList = (response.nosjhistory ?? [])
                   .map((e) => e.statusPengiriman ?? "")
                   .toList();
+              var nosjHistory = response.nosjhistory ?? [];
+              // var dusHistory = response.dus
               return SingleChildScrollView(
+                controller: controller,
                 child: Column(
                   children: [
                     CustomAppbarContainer(
@@ -207,11 +212,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                      .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Terkirim")
-                                      ? AssetImage(
-                                      "assets/images/background_main.png") : null,
+                                              .isNotEmpty &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Terkirim")
+                                      ? const AssetImage(
+                                          "assets/images/background_main.png")
+                                      : null,
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -250,11 +256,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             child: Center(
                                 child: CustomText(
                               'Dropping',
-                              color: nosjhistoryStatusPengirimanList
-                                  .isNotEmpty &&
-                                  nosjhistoryStatusPengirimanList
-                                      .contains("Diterima")
-                                  ? primaryColor : Colors.grey,
+                              color:
+                                  nosjhistoryStatusPengirimanList.isNotEmpty &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Diterima")
+                                      ? primaryColor
+                                      : Colors.grey,
                             )),
                           ),
                           node: TimelineNode(
@@ -266,11 +273,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                      .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Diterima")
+                                              .isNotEmpty &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Diterima")
                                       ? const AssetImage(
-                                      "assets/images/background_main.png") : null,
+                                          "assets/images/background_main.png")
+                                      : null,
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -307,15 +315,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 child: CustomText(
                               'Pengiriman',
                               color: nosjhistoryStatusPengirimanList
-                                  .isNotEmpty &&
-                                  nosjhistoryStatusPengirimanList
-                                      .contains("Diterima") &&
-                                  nosjhistoryStatusPengirimanList
-                                      .contains("Terkirim") &&
-                                  (int.parse(header?.total ?? "0") !=
-                                      int.parse(
-                                          header?.selesai ?? "-1"))
-                                  ? primaryColor : Colors.grey,
+                                          .isNotEmpty &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Diterima") &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Terkirim") &&
+                                      (int.parse(header?.total ?? "0") !=
+                                          int.parse(header?.selesai ?? "-1"))
+                                  ? primaryColor
+                                  : Colors.grey,
                             )),
                           ),
                           node: TimelineNode(
@@ -327,16 +335,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                      .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Diterima") &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Terkirim") &&
-                                      (int.parse(header?.total ?? "0") !=
-                                          int.parse(
-                                              header?.selesai ?? "-1"))
+                                              .isNotEmpty &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Diterima") &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Terkirim") &&
+                                          (int.parse(header?.total ?? "0") !=
+                                              int.parse(
+                                                  header?.selesai ?? "-1"))
                                       ? const AssetImage(
-                                      "assets/images/background_main.png") : null,
+                                          "assets/images/background_main.png")
+                                      : null,
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -372,15 +381,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 child: CustomText(
                               'Diterima',
                               color: nosjhistoryStatusPengirimanList
-                                  .isNotEmpty &&
-                                  nosjhistoryStatusPengirimanList
-                                      .contains("Diterima") &&
-                                  nosjhistoryStatusPengirimanList
-                                      .contains("Terkirim") &&
-                                  (int.parse(header?.total ?? "0") !=
-                                      int.parse(
-                                          header?.selesai ?? "-1"))
-                                  ? primaryColor : Colors.grey,
+                                          .isNotEmpty &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Diterima") &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Terkirim") &&
+                                      (int.parse(header?.total ?? "0") !=
+                                          int.parse(header?.selesai ?? "-1"))
+                                  ? primaryColor
+                                  : Colors.grey,
                             )),
                           ),
                           node: TimelineNode(
@@ -392,16 +401,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                      .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Diterima") &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Terkirim") &&
-                                      (int.parse(header?.total ?? "0") !=
-                                          int.parse(
-                                              header?.selesai ?? "-1"))
+                                              .isNotEmpty &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Diterima") &&
+                                          nosjhistoryStatusPengirimanList
+                                              .contains("Terkirim") &&
+                                          (int.parse(header?.total ?? "0") !=
+                                              int.parse(
+                                                  header?.selesai ?? "-1"))
                                       ? const AssetImage(
-                                      "assets/images/background_main.png") : null,
+                                          "assets/images/background_main.png")
+                                      : null,
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -419,168 +429,91 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: sizeBig),
-                      child: TimelineTile(
-                        nodeAlign: TimelineNodeAlign.start,
-                        oppositeContents: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CustomText(
-                            'opposite\ncontents',
-                            color: Colors.white,
-                          ),
-                        ),
-                        contents: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const ListTile(
-                              contentPadding: EdgeInsets.only(
-                                  left: sizeNormal, right: sizeNormal),
-                              title: FittedBox(
-                                  child: CustomText(
-                                "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
-                                weight: FontWeight.bold,
-                                color: primaryColor,
-                              )),
-                              subtitle: CustomText(
-                                "Paket Selesai Di Packing",
-                                color: primaryColor,
-                              ),
-                            )
-                            // Text('contents\ncontents\ncontents\ncontents'),
-                            ),
-                        node: const TimelineNode(
-                          indicator: DotIndicator(
-                            color: primaryColor,
-                          ),
-                          endConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: sizeBig),
-                      child: TimelineTile(
-                        nodeAlign: TimelineNodeAlign.start,
-                        oppositeContents: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CustomText(
-                            'opposite\ncontents',
-                            color: Colors.white,
-                          ),
-                        ),
-                        contents: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const ListTile(
-                              contentPadding: EdgeInsets.only(
-                                  left: sizeNormal, right: sizeNormal),
-                              title: FittedBox(
-                                  child: CustomText(
-                                "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
-                                weight: FontWeight.bold,
-                                color: primaryColor,
-                              )),
-                              subtitle: CustomText(
-                                "Paket Selesai Di Packing",
-                                color: primaryColor,
-                              ),
-                            )
-                            // Text('contents\ncontents\ncontents\ncontents'),
-                            ),
-                        node: const TimelineNode(
-                          indicator: DotIndicator(
-                            color: primaryColor,
-                          ),
-                          startConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                          endConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: sizeBig),
-                      child: TimelineTile(
-                        nodeAlign: TimelineNodeAlign.start,
-                        oppositeContents: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CustomText(
-                            'opposite\ncontents',
-                            color: Colors.white,
-                          ),
-                        ),
-                        contents: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const ListTile(
-                              contentPadding: EdgeInsets.only(
-                                  left: sizeNormal, right: sizeNormal),
-                              title: FittedBox(
-                                  child: CustomText(
-                                "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
-                                weight: FontWeight.bold,
-                                color: primaryColor,
-                              )),
-                              subtitle: CustomText(
-                                "Paket Selesai Di Packing",
-                                color: primaryColor,
-                              ),
-                            )
-                            // Text('contents\ncontents\ncontents\ncontents'),
-                            ),
-                        node: const TimelineNode(
-                          indicator: DotIndicator(
-                            color: primaryColor,
-                          ),
-                          startConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                          endConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: sizeBig),
-                      child: TimelineTile(
-                        nodeAlign: TimelineNodeAlign.start,
-                        oppositeContents: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CustomText(
-                            'opposite\ncontents',
-                            color: Colors.white,
-                          ),
-                        ),
-                        contents: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const ListTile(
-                              contentPadding: EdgeInsets.only(
-                                  left: sizeNormal, right: sizeNormal),
-                              title: FittedBox(
-                                  child: CustomText(
-                                "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
-                                weight: FontWeight.bold,
-                                color: primaryColor,
-                              )),
-                              subtitle: CustomText(
-                                "Paket Selesai Di Packing",
-                                color: primaryColor,
-                              ),
-                            )
-                            // Text('contents\ncontents\ncontents\ncontents'),
-                            ),
-                        node: const TimelineNode(
-                          indicator: DotIndicator(
-                            color: primaryColor,
-                          ),
-                          startConnector: SolidLineConnector(
-                            color: primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
+                    Builder(builder: (c) {
+                      return Container(
+                          margin: const EdgeInsets.symmetric(vertical: sizeMedium),
+                          height: 400,
+                          child: NotificationListener<OverscrollNotification>(
+                            onNotification: (OverscrollNotification value) {
+                              if (value.overscroll < 0 &&
+                                  controller.offset + value.overscroll <= 0) {
+                                if (controller.offset != 0)
+                                  controller.jumpTo(0);
+                                return true;
+                              }
+                              if (controller.offset + value.overscroll >=
+                                  controller.position.maxScrollExtent) {
+                                if (controller.offset !=
+                                    controller.position.maxScrollExtent) {
+                                  controller.jumpTo(
+                                      controller.position.maxScrollExtent);
+                                }
+                                return true;
+                              }
+                              controller
+                                  .jumpTo(controller.offset + value.overscroll);
+                              return true;
+                            },
+                            child: ListView.builder(
+                                itemCount: nosjHistory.length,
+                                physics: const ClampingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (c, i) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: sizeBig),
+                                    child: TimelineTile(
+                                      nodeAlign: TimelineNodeAlign.start,
+                                      oppositeContents: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: CustomText(
+                                          'opposite\ncontents',
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      contents: Container(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: const ListTile(
+                                            contentPadding: EdgeInsets.only(
+                                                left: sizeNormal,
+                                                right: sizeNormal),
+                                            title: FittedBox(
+                                                child: CustomText(
+                                              "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
+                                              weight: FontWeight.bold,
+                                              color: primaryColor,
+                                            )),
+                                            subtitle: CustomText(
+                                              "Paket Selesai Di Packing",
+                                              color: primaryColor,
+                                            ),
+                                          )
+                                          // Text('contents\ncontents\ncontents\ncontents'),
+                                          ),
+                                      node: TimelineNode(
+                                        indicator: const DotIndicator(
+                                          color: primaryColor,
+                                        ),
+                                        startConnector: i != 0
+                                            ? const SolidLineConnector(
+                                                color: primaryColor,
+                                              )
+                                            : null,
+                                        endConnector:
+                                            i != (nosjHistory.length - 1)
+                                                ? const SolidLineConnector(
+                                                    color: primaryColor,
+                                                  )
+                                                : null,
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          )
+
+
+                          );
+                    }),
                     RoundedContainer(sizeNormal,
                         width: 200,
                         height: 200,
