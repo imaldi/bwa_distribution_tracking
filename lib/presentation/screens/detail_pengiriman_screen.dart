@@ -7,6 +7,7 @@ import 'package:bwa_distribution_tracking/presentation/widgets/custom_appbar_con
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:timelines/timelines.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
@@ -234,7 +235,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               ],
                             ),
                             // startConnector: SolidLineConnector(),
-                            endConnector: const SolidLineConnector(),
+                            endConnector: const SolidLineConnector(color: primaryColor,),
                           ),
                         ),
                         TimelineTile(
@@ -291,8 +292,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 // Icon(Icons.home,color: Colors.white,)
                               ],
                             ),
-                            startConnector: const SolidLineConnector(),
-                            endConnector: const SolidLineConnector(),
+                            startConnector: const SolidLineConnector(color: primaryColor,),
+                            endConnector: const SolidLineConnector(color: primaryColor,),
                           ),
                         ),
                         TimelineTile(
@@ -357,8 +358,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 )
                               ],
                             ),
-                            startConnector: const SolidLineConnector(),
-                            endConnector: const SolidLineConnector(),
+                            startConnector: const SolidLineConnector(color: primaryColor,),
+                            endConnector: const SolidLineConnector(color: primaryColor,),
                           ),
                         ),
                         TimelineTile(
@@ -423,7 +424,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 )
                               ],
                             ),
-                            startConnector: const SolidLineConnector(),
+                            startConnector: const SolidLineConnector(color: primaryColor,),
                             // endConnector: SolidLineConnector(),
                           ),
                         ),
@@ -473,18 +474,21 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       ),
                                       contents: Container(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: const ListTile(
+                                          constraints: const BoxConstraints(maxWidth: 400),
+                                          child: ListTile(
                                             contentPadding: EdgeInsets.only(
                                                 left: sizeNormal,
                                                 right: sizeNormal),
-                                            title: FittedBox(
-                                                child: CustomText(
-                                              "Drop Point 1 (Jam: 12.00 | 05-09-2022)",
-                                              weight: FontWeight.bold,
-                                              color: primaryColor,
-                                            )),
+                                            title: Container(
+                                              child: FittedBox(
+                                                  child: CustomText(
+                                                "Drop Point ${nosjHistory.length - i} (Jam: ${DateFormat("HH:mm | dd-MM-yyyy").format(nosjHistory[i].createdAt ?? DateTime(2022))})",
+                                                weight: FontWeight.bold,
+                                                color: primaryColor,
+                                              )),
+                                            ),
                                             subtitle: CustomText(
-                                              "Paket Selesai Di Packing",
+                                              "${nosjHistory[i].keterangan}",
                                               color: primaryColor,
                                             ),
                                           )
