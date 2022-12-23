@@ -20,6 +20,9 @@ _$_BulkScanResponse _$$_BulkScanResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : BulkScanQrDetailPerPage.fromJson(
               json['detail'] as Map<String, dynamic>),
+      nosjhistory: (json['nosjhistory'] as List<dynamic>?)
+          ?.map((e) => SendScanDataModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_BulkScanResponseToJson(_$_BulkScanResponse instance) =>
@@ -29,4 +32,5 @@ Map<String, dynamic> _$$_BulkScanResponseToJson(_$_BulkScanResponse instance) =>
       'header': instance.header?.map((e) => e.toJson()).toList(),
       'data': instance.data?.map((e) => e.toJson()).toList(),
       'detail': instance.detail?.toJson(),
+      'nosjhistory': instance.nosjhistory?.map((e) => e.toJson()).toList(),
     };

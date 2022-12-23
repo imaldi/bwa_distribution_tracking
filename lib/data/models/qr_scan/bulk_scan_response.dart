@@ -1,5 +1,6 @@
 import 'package:bwa_distribution_tracking/data/models/qr_scan/box_q_r_scan_model.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_q_r_scan_model.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../surat_jalan/surat_jalan_model.dart';
@@ -19,6 +20,7 @@ class BulkScanResponse with _$BulkScanResponse{
     List<SuratJalanModel>? header,
     List<BulkQRScanModel>? data,
     BulkScanQrDetailPerPage? detail,
+    List<SendScanDataModel>? nosjhistory,
   }) = _BulkScanResponse;
 
   factory BulkScanResponse.fromJson(Map<String, Object?> json)
