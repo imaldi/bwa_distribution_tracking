@@ -121,48 +121,48 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              BlocBuilder<AuthBloc, AuthState>(
-                                                  builder: (bc, authState) {
-                                                return BlocListener<AuthBloc,
-                                                    AuthState>(
-                                                  listener: (BuildContext context,
-                                                      state) {
-                                                    if (state is AuthLoggedOut) {
-                                                      context.router.replace(
-                                                          const LoginRoute());
-                                                    }
-                                                  },
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      bc.read<AuthBloc>().add(
-                                                          const UserLogoutAuthEvent());
-                                                    },
-                                                    // backgroundColor: primaryBlue,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: const [
-                                                        Icon(
-                                                          Icons.logout,
-                                                          color: Colors.white,
-                                                          size: sizeBig,
-                                                        ),
-                                                        CustomText(
-                                                          "Logout",
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                            ],
-                                          ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.end,
+                                          //   children: [
+                                          //     BlocBuilder<AuthBloc, AuthState>(
+                                          //         builder: (bc, authState) {
+                                          //       return BlocListener<AuthBloc,
+                                          //           AuthState>(
+                                          //         listener: (BuildContext context,
+                                          //             state) {
+                                          //           if (state is AuthLoggedOut) {
+                                          //             context.router.replace(
+                                          //                 const LoginRoute());
+                                          //           }
+                                          //         },
+                                          //         child: InkWell(
+                                          //           onTap: () {
+                                          //             bc.read<AuthBloc>().add(
+                                          //                 const UserLogoutAuthEvent());
+                                          //           },
+                                          //           // backgroundColor: primaryBlue,
+                                          //           child: Column(
+                                          //             crossAxisAlignment:
+                                          //                 CrossAxisAlignment
+                                          //                     .center,
+                                          //             children: const [
+                                          //               Icon(
+                                          //                 Icons.logout,
+                                          //                 color: Colors.white,
+                                          //                 size: sizeBig,
+                                          //               ),
+                                          //               CustomText(
+                                          //                 "Logout",
+                                          //                 color: Colors.white,
+                                          //               )
+                                          //             ],
+                                          //           ),
+                                          //         ),
+                                          //       );
+                                          //     }),
+                                          //   ],
+                                          // ),
                                           Container(
                                             // color: primaryGreen,
                                             height: orientedHeightScreen(context,
@@ -715,7 +715,15 @@ class _HomeScreenState extends State<HomeScreen> {
           bottomNavigationBar: ConvexAppBar(
             /// Fixme for landscape orientation
             onTap: (index) {
-              myToast("index: $index");
+              // myToast("index: $index");
+              if(index == 0){
+                context.read<AuthBloc>().add(
+                    const UserLogoutAuthEvent());
+              }
+              if(index == 3){
+                context.router.push(RiwayatSuratJalanRoute());
+              }
+
             },
             height: heightScreen(context) / 12,
             curveSize: widthScreen(context) / 3,
@@ -725,13 +733,24 @@ class _HomeScreenState extends State<HomeScreen> {
             elevation: 2,
             activeColor: primaryBlue,
             items: [
-              const TabItem(
+              TabItem(
                 title: "Logout",
-                icon: Icon(Icons.logout),
+                icon: BlocConsumer<AuthBloc, AuthState>(
+                  listener: (BuildContext context,
+                                  state) {
+                                if (state is AuthLoggedOut) {
+                                  context.router.replace(
+                                      const LoginRoute());
+                                }
+                              },
+  builder: (context, state) {
+    return Icon(Icons.logout);
+  },
+),
                 isIconBlend: true,
               ),
               const TabItem(
-                title: "Logout",
+                title: "Notifikasi",
                 icon: Icon(Icons.notifications_active_outlined),
                 isIconBlend: true,
               ),
@@ -750,8 +769,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 isIconBlend: true,
               ),
               const TabItem(
-                title: "Notif",
-                icon: Icon(Icons.notifications_active_outlined),
+                title: "Riwayat",
+                icon: Icon(Icons.history),
                 isIconBlend: true,
               ),
               const TabItem(

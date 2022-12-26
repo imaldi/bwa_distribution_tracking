@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,7 @@ import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../injection_container.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
+import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
 
 class RiwayatSuratJalanScreen extends StatefulWidget implements AutoRouteWrapper{
@@ -45,7 +49,14 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
               SingleChildScrollView(
                 child: Builder(
                   builder: (context) {
-                    var state = context.read<SuratJalanCubit>().state;
+                    var state = context.watch<SuratJalanCubit>().state;
+                    var suratJalanResponseList = state.suratJalanResponse?.data?.data ?? [];
+                    log("suratJalanResponseList hal riwayat $suratJalanResponseList");
+                    if(state.isLoading) {
+                      return Padding(
+                          padding: EdgeInsets.only(top: heightScreen(context)/2),
+                          child: Center(child: CircularProgressIndicator(color: primaryColor,),));
+                    }
                     return ListView.builder(
                         // padding: EdgeInsets.only(
                         //     top: orientedHeightScreen(context,
@@ -53,7 +64,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: 15+1,
+                        itemCount: suratJalanResponseList.length + 1,
                         itemBuilder: (c, i) {
                           if(i == 0) {
                             return RiwayatScreenAppbarAndSearchbar();
@@ -111,17 +122,11 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                         ],
                                       ),
                                     )),
-                                Container(
-                                  constraints: const BoxConstraints(
-                                      minWidth: sizeHuge+sizeNormal,
-                                      maxWidth: sizeHuge+sizeNormal,
-                                  ),
-                                  margin: const EdgeInsets.only(top: sizeNormal),
-                                  padding: const EdgeInsets.symmetric(horizontal: sizeNormal, vertical: 0),
-                                    decoration: const BoxDecoration(color: selesaiTagColor,
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(sizeMedium), bottomLeft: Radius.circular(sizeMedium)),
-                                    ),
-                                    child: const Center(child: FittedBox(child: CustomText("Selesai",color: Colors.white,))))
+                                SummaryStatusTagWidget(
+                                  total: suratJalanResponseList[i-1].total ?? "0",
+                                  onProses: suratJalanResponseList[i-1].onproses ?? "0",
+                                  selesai: suratJalanResponseList[i-1].selesai ?? "0",
+                                )
                               ],
                             ),
                           );
