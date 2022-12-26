@@ -23,7 +23,7 @@ Map<String, dynamic> _$$_DusListResponseToJson(_$_DusListResponse instance) =>
     };
 
 _$_DusData _$$_DusDataFromJson(Map<String, dynamic> json) => _$_DusData(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       nosj: json['nosj'] as String?,
       qrcodeSj: json['qrcode_sj'] as String?,
       nodus: json['nodus'] as String?,

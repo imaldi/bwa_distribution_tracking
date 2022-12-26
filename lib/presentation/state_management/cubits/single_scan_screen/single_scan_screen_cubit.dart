@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_list_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_scan_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
@@ -45,7 +46,12 @@ class SingleScanScreenCubit extends Cubit<SingleScanScreenCubitState> {
     print("Dus Scan Response from cubit: ${state.dusScanResponse}");
   }
 
-  void fetchScannedDusList(){
-
+  void fetchScannedDusList() async {
+    var resultOrFailure = await repository.fetchScannedDusList();
+    var response = resultOrFailure.fold((l) => const DusListResponse(), (r) {
+      return r;
+    });
+    emit(state.copyWith(dusListResponse: response));
+    print("Dus list Response from cubit: ${state.dusListResponse}");
   }
 }

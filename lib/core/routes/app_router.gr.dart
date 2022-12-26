@@ -89,7 +89,7 @@ class AppRouter extends _i12.RootStackRouter {
     RiwayatSuratJalanRoute.name: (routeData) {
       return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i7.RiwayatSuratJalanScreen(),
+        child: _i12.WrappedRoute(child: const _i7.RiwayatSuratJalanScreen()),
       );
     },
     DetailPengirimanRoute.name: (routeData) {

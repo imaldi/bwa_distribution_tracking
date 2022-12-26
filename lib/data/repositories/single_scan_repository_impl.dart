@@ -1,4 +1,5 @@
 import 'package:bwa_distribution_tracking/core/error/failures.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_list_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_scan_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
 import 'package:bwa_distribution_tracking/domain/repositories/single_scan_repository.dart';
@@ -46,11 +47,17 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
     }
   }
 
-  // @override
-  // Future<Either<Failure, StoreSelesaiResponse>> fetchScannedDusList(StoreSelesaiResponse qrcodeSj) {
-  //   // TODO: implement fetchScannedDusList
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<Either<Failure, DusListResponse>> fetchScannedDusList() async {
+    if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
+    try{
+      final response = await singleScanRemoteDataSource.fetchScannedDusList();
+
+      return Right(response);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
 
 

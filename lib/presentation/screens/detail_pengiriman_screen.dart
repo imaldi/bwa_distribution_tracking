@@ -67,13 +67,13 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                   .toList();
               var nosjHistory = response.nosjhistory ?? [].toList();
               var dusHistory =
-                  // response.dushistory ??
+                  response.dushistory ??
                   [
-                DusData(nosj: "ASJKNA"),
-                DusData(nosj: "aABJBN"),
+                // DusData(nosj: "ASJKNA"),
+                // DusData(nosj: "aABJBN"),
               ].toList();
               var listAll = []..toList()
-                ..addAll(dusHistory)
+                // ..addAll(dusHistory)
                 ..addAll(nosjHistory)
               ;
               log("list all: ${listAll}");
@@ -335,16 +335,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             child: Center(
                                 child: CustomText(
                               'Pengiriman',
-                              color: nosjhistoryStatusPengirimanList
-                                          .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Diterima") &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Terkirim") &&
+                              color: dusHistory
+                                          .isNotEmpty
+                                  &&
+                                      // listAll
+                                      //     .contains("Diterima") &&
+                                      // listAll
+                                      //     .contains("Terkirim") &&
                                       (int.parse(header?.total ?? "0") !=
                                           int.parse(header?.selesai ?? "-1"))
-                                  ? primaryColor
-                                  : Colors.grey,
+                                  ? Colors.grey
+                                  : primaryColor,
                             )),
                           ),
                           node: TimelineNode(
@@ -355,18 +356,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 CircleAvatar(
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: nosjhistoryStatusPengirimanList
+                                  backgroundImage: dusHistory
                                               .isNotEmpty &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Diterima") &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Terkirim") &&
+                                          // listAll
+                                          //     .contains("Diterima") &&
+                                          // listAll
+                                          //     .contains("Terkirim") &&
                                           (int.parse(header?.total ?? "0") !=
                                               int.parse(
                                                   header?.selesai ?? "-1"))
-                                      ? const AssetImage(
+                                      ?
+                                  null
+                                      :
+                                  const AssetImage(
                                           "assets/images/background_main.png")
-                                      : null,
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -405,13 +408,13 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             child: Center(
                                 child: CustomText(
                               'Diterima',
-                              color: nosjhistoryStatusPengirimanList
+                              color: dusHistory
                                           .isNotEmpty &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Diterima") &&
-                                      nosjhistoryStatusPengirimanList
-                                          .contains("Terkirim") &&
-                                      (int.parse(header?.total ?? "0") !=
+                                      // listAll
+                                      //     .contains("Diterima") &&
+                                      // listAll
+                                      //     .contains("Terkirim") &&
+                                      (int.parse(header?.total ?? "0") ==
                                           int.parse(header?.selesai ?? "-1"))
                                   ? primaryColor
                                   : Colors.grey,
@@ -425,13 +428,13 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 CircleAvatar(
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: nosjhistoryStatusPengirimanList
+                                  backgroundImage: listAll
                                               .isNotEmpty &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Diterima") &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Terkirim") &&
-                                          (int.parse(header?.total ?? "0") !=
+                                          // listAll
+                                          //     .contains("Diterima") &&
+                                          // listAll
+                                          //     .contains("Terkirim") &&
+                                          (int.parse(header?.total ?? "0") ==
                                               int.parse(
                                                   header?.selesai ?? "-1"))
                                       ? const AssetImage(

@@ -200,7 +200,7 @@ DusData _$DusDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DusData {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
   @JsonKey(name: 'qrcode_sj')
   String? get qrcodeSj => throw _privateConstructorUsedError;
@@ -247,7 +247,7 @@ abstract class $DusDataCopyWith<$Res> {
       _$DusDataCopyWithImpl<$Res, DusData>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nodus,
@@ -313,7 +313,7 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -411,7 +411,7 @@ abstract class _$$_DusDataCopyWith<$Res> implements $DusDataCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? nosj,
       @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
       String? nodus,
@@ -474,7 +474,7 @@ class __$$_DusDataCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -596,7 +596,7 @@ class _$_DusData implements _DusData {
       _$$_DusDataFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? nosj;
   @override
@@ -751,7 +751,7 @@ class _$_DusData implements _DusData {
 
 abstract class _DusData implements DusData {
   const factory _DusData(
-      {final int? id,
+      {final String? id,
       final String? nosj,
       @JsonKey(name: 'qrcode_sj') final String? qrcodeSj,
       final String? nodus,
@@ -778,7 +778,7 @@ abstract class _DusData implements DusData {
   factory _DusData.fromJson(Map<String, dynamic> json) = _$_DusData.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get nosj;
   @override

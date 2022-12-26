@@ -1,3 +1,4 @@
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_list_response.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
 import 'package:dartz/dartz.dart';
 
@@ -14,5 +15,5 @@ abstract class SingleScanRepository {
     int currentDusNumber,
     // StoreSelesaiResponse wholeFormData
   );
-// Future<Either<Failure, StoreSelesaiResponse>> fetchScannedDusList(StoreSelesaiResponse qrcodeSj);
+Future<Either<Failure, DusListResponse>> fetchScannedDusList();
 }

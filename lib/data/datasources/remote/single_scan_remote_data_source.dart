@@ -20,7 +20,7 @@ abstract class SingleScanRemoteDataSource {
       int currentDusNumber,
       // StoreSelesaiResponse wholeFormData
       );
-  // Future<DusListResponse> fetchScannedDusList();
+  Future<DusListResponse> fetchScannedDusList();
 }
 
 class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
@@ -116,34 +116,32 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
     }
   }
 
-  // @override
-  // Future<DusListResponse> fetchScannedDusList() async {
-  //   final url = Uri.https(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
-  //   print("Surat Jalan Url: $url");
-  //   // final box = Hive.box(authBoxKey);
-  //   final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
-  //   print("token: $token");
-  //   final response = await http.get(
-  //     url,
-  //     headers: {
-  //       'Authorization': 'Bearer $token',
-  //       'Accept': 'application/json',
-  //     },
-  //   );
-  //   print("Bulk Scan response code: ${response.statusCode.toString()}");
-  //   log("Bulk Scan response body: ${response.body.toString()}");
-  //
-  //   // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
-  //   if (response.statusCode == 200) {
-  //     var theResponse = SuratJalanResponse.fromJson(jsonDecode(response.body));
-  //     var isResponseDataNull = theResponse.data == null;
-  //     if (isResponseDataNull) {
-  //       throw ServerException();
-  //     }
-  //     return theResponse;
-  //   } else {
-  //     throw ServerException();
-  //   }
-  // }
+  @override
+  Future<DusListResponse> fetchScannedDusList() async {
+    final url = Uri.https(baseUrl, "$loopDusUrl",);
+    print("Dus List Url: $url");
+    final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    print("Dus List response code: ${response.statusCode.toString()}");
+    log("Dus List response body: ${response.body.toString()}");
+
+    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
+    if (response.statusCode == 200) {
+      var theResponse = DusListResponse.fromJson(jsonDecode(response.body));
+      var isResponseDataNull = theResponse.data == null;
+      if (isResponseDataNull) {
+        throw ServerException();
+      }
+      return theResponse;
+    } else {
+      throw ServerException();
+    }
+  }
 
 }
