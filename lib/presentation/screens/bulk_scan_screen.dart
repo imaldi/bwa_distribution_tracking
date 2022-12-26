@@ -27,10 +27,12 @@ class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
   final QRScanBloc qrScanBloc;
   final String qrCode;
   final bool firstTimeScan;
+  final bool willScanDus;
 
   const BulkScanScreen(
       {required this.qrScanBloc,
       this.firstTimeScan = true,
+      this.willScanDus = false,
       required this.qrCode,
       Key? key})
       : super(key: key);
@@ -659,8 +661,9 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               builder: (context, state) {
                                 if (state is AuthSuccess) {
                                   return Visibility(
-                                    visible: state.loginResponse.user?.role ==
-                                            "Petugas" &&
+                                    visible:
+                                    // state.loginResponse.user?.role ==
+                                    //         "Kurir" &&
                                         widget.firstTimeScan,
                                     child: MyTextField(
                                       label: 'Keterangan',
@@ -780,9 +783,10 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               builder: (context, state) {
                                 if (state is AuthSuccess) {
                                   return Visibility(
-                                    visible: state.loginResponse.user?.role !=
-                                            "Petugas" &&
-                                        !widget.firstTimeScan,
+                                    visible:
+                                    state.loginResponse.user?.role ==
+                                            "Kurir" &&
+                                        widget.willScanDus,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,

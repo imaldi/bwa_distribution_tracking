@@ -21,7 +21,12 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
     print("is viewing list: ${state.isFetchingList}");
   }
 
+  void setWillScanDus(){
+    emit(state.copyWith(willScanDus: true));
+    print("state.willScanDus: ${state.willScanDus}");
+  }
+
   void resetStateViewList(){
-    emit(state.copyWith(isFetchingList: false));
+    emit(state.copyWith(isFetchingList: false,willScanDus: false));
   }
 }

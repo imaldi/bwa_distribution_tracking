@@ -57,6 +57,7 @@ class AppRouter extends _i12.RootStackRouter {
             child: _i3.BulkScanScreen(
           qrScanBloc: args.qrScanBloc,
           firstTimeScan: args.firstTimeScan,
+          willScanDus: args.willScanDus,
           qrCode: args.qrCode,
           key: args.key,
         )),
@@ -206,6 +207,7 @@ class BulkScanRoute extends _i12.PageRouteInfo<BulkScanRouteArgs> {
   BulkScanRoute({
     required _i14.QRScanBloc qrScanBloc,
     bool firstTimeScan = true,
+    bool willScanDus = false,
     required String qrCode,
     _i13.Key? key,
   }) : super(
@@ -214,6 +216,7 @@ class BulkScanRoute extends _i12.PageRouteInfo<BulkScanRouteArgs> {
           args: BulkScanRouteArgs(
             qrScanBloc: qrScanBloc,
             firstTimeScan: firstTimeScan,
+            willScanDus: willScanDus,
             qrCode: qrCode,
             key: key,
           ),
@@ -226,6 +229,7 @@ class BulkScanRouteArgs {
   const BulkScanRouteArgs({
     required this.qrScanBloc,
     this.firstTimeScan = true,
+    this.willScanDus = false,
     required this.qrCode,
     this.key,
   });
@@ -234,13 +238,15 @@ class BulkScanRouteArgs {
 
   final bool firstTimeScan;
 
+  final bool willScanDus;
+
   final String qrCode;
 
   final _i13.Key? key;
 
   @override
   String toString() {
-    return 'BulkScanRouteArgs{qrScanBloc: $qrScanBloc, firstTimeScan: $firstTimeScan, qrCode: $qrCode, key: $key}';
+    return 'BulkScanRouteArgs{qrScanBloc: $qrScanBloc, firstTimeScan: $firstTimeScan, willScanDus: $willScanDus, qrCode: $qrCode, key: $key}';
   }
 }
 

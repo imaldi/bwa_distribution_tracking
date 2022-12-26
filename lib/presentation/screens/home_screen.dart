@@ -356,6 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: (){
                                       context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
+                                      context.read<SuratJalanCubit>().setWillScanDus();
                                     },
                                     child: RoundedContainer(sizeMedium,
                                         padding: const EdgeInsets.all(0),
@@ -473,6 +474,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                            context.router.push(BulkScanRoute(
                                                qrScanBloc: qrBloc,
                                                firstTimeScan: false,
+                                              willScanDus: suratJalanCubitState.willScanDus,
                                               qrCode: listSJ?[i].qrcodeSj ?? "-",
                                            ));
                                          },
