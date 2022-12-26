@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_q_r_scan_model.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/dus_list_response.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_model.dart';
 import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_model.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/custom_appbar_container/custom_appbar_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
@@ -37,7 +41,6 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
   var textColor = Colors.white;
   var controller = ScrollController();
 
-
   @override
   void initState() {
     super.initState();
@@ -62,8 +65,19 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
               var nosjhistoryStatusPengirimanList = (response.nosjhistory ?? [])
                   .map((e) => e.statusPengiriman ?? "")
                   .toList();
-              var nosjHistory = response.nosjhistory ?? [];
-              // var dusHistory = response.dus
+              var nosjHistory = response.nosjhistory ?? [].toList();
+              var dusHistory =
+                  // response.dushistory ??
+                  [
+                DusData(nosj: "ASJKNA"),
+                DusData(nosj: "aABJBN"),
+              ].toList();
+              var listAll = []..toList()
+                ..addAll(dusHistory)
+                ..addAll(nosjHistory)
+              ;
+              log("list all: ${listAll}");
+              log("list dus: ${dusHistory}");
               return SingleChildScrollView(
                 controller: controller,
                 child: Column(
@@ -235,7 +249,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               ],
                             ),
                             // startConnector: SolidLineConnector(),
-                            endConnector: const SolidLineConnector(color: primaryColor,),
+                            endConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
                           ),
                         ),
                         TimelineTile(
@@ -292,8 +308,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 // Icon(Icons.home,color: Colors.white,)
                               ],
                             ),
-                            startConnector: const SolidLineConnector(color: primaryColor,),
-                            endConnector: const SolidLineConnector(color: primaryColor,),
+                            startConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
+                            endConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
                           ),
                         ),
                         TimelineTile(
@@ -358,8 +378,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 )
                               ],
                             ),
-                            startConnector: const SolidLineConnector(color: primaryColor,),
-                            endConnector: const SolidLineConnector(color: primaryColor,),
+                            startConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
+                            endConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
                           ),
                         ),
                         TimelineTile(
@@ -424,7 +448,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 )
                               ],
                             ),
-                            startConnector: const SolidLineConnector(color: primaryColor,),
+                            startConnector: const SolidLineConnector(
+                              color: primaryColor,
+                            ),
                             // endConnector: SolidLineConnector(),
                           ),
                         ),
@@ -432,7 +458,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                     ),
                     Builder(builder: (c) {
                       return Container(
-                          margin: const EdgeInsets.symmetric(vertical: sizeMedium),
+                          margin:
+                              const EdgeInsets.symmetric(vertical: sizeMedium),
                           height: 400,
                           child: NotificationListener<OverscrollNotification>(
                             onNotification: (OverscrollNotification value) {
@@ -456,67 +483,63 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               return true;
                             },
                             child: ListView.builder(
-                                itemCount: nosjHistory.length,
+                                // itemCount: nosjHistory.length,
+                                itemCount: listAll.length,
                                 physics: const ClampingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemBuilder: (c, i) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(left: sizeBig),
-                                    child: TimelineTile(
-                                      nodeAlign: TimelineNodeAlign.start,
-                                      oppositeContents: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: CustomText(
-                                          'opposite\ncontents',
-                                          color: Colors.white,
-                                        ),
+                                  return TimelineTile(
+                                    nodeAlign: TimelineNodeAlign.basic,
+                                    nodePosition: 0.3,
+                                    oppositeContents: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: CustomText(
+                                        "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).createdAt : (listAll[i] as DusData).createdAt ?? "No Date"}",
+                                      color: Colors.grey,
                                       ),
-                                      contents: Container(
-                                          padding: const EdgeInsets.all(8.0),
-                                          constraints: const BoxConstraints(maxWidth: 400),
-                                          child: ListTile(
-                                            contentPadding: EdgeInsets.only(
-                                                left: sizeNormal,
-                                                right: sizeNormal),
-                                            title: Container(
-                                              child: FittedBox(
-                                                  child: CustomText(
-                                                "Drop Point ${nosjHistory.length - i} (Jam: ${DateFormat("HH:mm | dd-MM-yyyy").format(nosjHistory[i].createdAt ?? DateTime(2022))})",
-                                                weight: FontWeight.bold,
-                                                color: primaryColor,
-                                              )),
-                                            ),
-                                            subtitle: CustomText(
-                                              "${nosjHistory[i].keterangan}",
+                                    ),
+                                    contents: Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        constraints: const BoxConstraints(
+                                            maxWidth: 400),
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.only(
+                                              left: sizeNormal,
+                                              right: sizeNormal),
+                                          title: Container(
+                                            child: CustomText(
+                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "selesai"}",
+                                              weight: FontWeight.bold,
                                               color: primaryColor,
                                             ),
-                                          )
-                                          // Text('contents\ncontents\ncontents\ncontents'),
                                           ),
-                                      node: TimelineNode(
-                                        indicator: const DotIndicator(
-                                          color: primaryColor,
+                                          subtitle: CustomText(
+                                            "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : (listAll[i] as DusData).namaPenerima ?? "No Keterangan"}",
+                                            color: primaryColor,
+                                          ),
+                                        )
+                                        // Text('contents\ncontents\ncontents\ncontents'),
                                         ),
-                                        startConnector: i != 0
-                                            ? const SolidLineConnector(
-                                                color: primaryColor,
-                                              )
-                                            : null,
-                                        endConnector:
-                                            i != (nosjHistory.length - 1)
-                                                ? const SolidLineConnector(
-                                                    color: primaryColor,
-                                                  )
-                                                : null,
+                                    node: TimelineNode(
+                                      indicator: const DotIndicator(
+                                        color: primaryColor,
                                       ),
+                                      startConnector: i != 0
+                                          ? const SolidLineConnector(
+                                              color: primaryColor,
+                                            )
+                                          : null,
+                                      endConnector:
+                                          i != (listAll.length - 1)
+                                              ? const SolidLineConnector(
+                                                  color: primaryColor,
+                                                )
+                                              : null,
                                     ),
                                   );
                                 }),
-                          )
-
-
-                          );
+                          ));
                     }),
                     RoundedContainer(sizeNormal,
                         width: 200,

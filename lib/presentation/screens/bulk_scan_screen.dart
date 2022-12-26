@@ -656,30 +656,29 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               ),
                             ),
                             BlocBuilder<AuthBloc, AuthState>(
-  builder: (context, state) {
-    if(state is AuthSuccess){
-      return Visibility(
-        visible: state
-            .loginResponse
-            .user
-            ?.role ==
-            "Petugas" && widget.firstTimeScan,
-        child: MyTextField(
-          label: 'Keterangan',
-          controller: keteranganCtrl,
-          onChanged: (val) {
-            context
-                .read<BulkScanScreenCubit>()
-                .updateModelState((dataModel) {
-              return dataModel.copyWith(keterangan: val);
-            });
-          },
-        ),
-      );
-    } return Container();
-
-  },
-),
+                              builder: (context, state) {
+                                if (state is AuthSuccess) {
+                                  return Visibility(
+                                    visible: state.loginResponse.user?.role ==
+                                            "Petugas" &&
+                                        widget.firstTimeScan,
+                                    child: MyTextField(
+                                      label: 'Keterangan',
+                                      controller: keteranganCtrl,
+                                      onChanged: (val) {
+                                        context
+                                            .read<BulkScanScreenCubit>()
+                                            .updateModelState((dataModel) {
+                                          return dataModel.copyWith(
+                                              keterangan: val);
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                                return Container();
+                              },
+                            ),
                             Visibility(
                               visible: widget.firstTimeScan,
                               child: MyImagePickerWidget(
@@ -718,7 +717,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               visible: widget.firstTimeScan,
                               child: BlocBuilder<AuthBloc, AuthState>(
                                 builder: (context, state) {
-                                  if(state is AuthSuccess){
+                                  if (state is AuthSuccess) {
                                     return ElevatedButton(
                                         onPressed: () {
                                           var model = context
@@ -726,22 +725,23 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                               .state
                                               .sendScanDataModel
                                               .copyWith(
-                                              statusPengiriman: state
-                                                  .loginResponse
-                                                  .user
-                                                  ?.role ==
-                                                  "Petugas"
-                                                  ? "Terkirim"
-                                                  : "Diterima",
-                                          );
-                                          context
-                                              .read<QRScanBloc>()
-                                              .add(SendScanEvent(model,int.parse(data?.total ?? "0")));
+                                                statusPengiriman: state
+                                                            .loginResponse
+                                                            .user
+                                                            ?.role ==
+                                                        "Petugas"
+                                                    ? "Terkirim"
+                                                    : "Diterima",
+                                              );
+                                          context.read<QRScanBloc>().add(
+                                              SendScanEvent(
+                                                  model,
+                                                  int.parse(
+                                                      data?.total ?? "0")));
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: primaryColor),
                                         child: const Text("Simpan"));
-
                                   }
                                   return Container();
                                 },
@@ -777,51 +777,51 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               ),
                             ),
                             BlocBuilder<AuthBloc, AuthState>(
-  builder: (context, state) {
-    if(state is AuthSuccess){
-      return Visibility(
-        visible: state
-            .loginResponse
-            .user
-            ?.role !=
-            "Petugas" && !widget.firstTimeScan,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                context.router.push(SingleScanRoute(
-                    qrcodeSj: data?.qrcodeSj ?? "-"));
-              },
-              child: RoundedContainer(
-                sizeMedium,
-                padding: const EdgeInsets.all(sizeBig),
-                margin: const EdgeInsets.only(
-                    right: sizeMedium,
-                    left: sizeMedium,
-                    top: sizeMedium,
-                    bottom: sizeNormal),
-                boxDecoration: const BoxDecoration(
-                    color: primaryColor),
-                child: SvgPicture.asset(
-                    "assets/images/camera_white.svg"),
-              ),
-            ),
-            const CustomText(
-              "Scan Dus",
-              textAlign: TextAlign.center,
-              color: primaryColor,
-            )
-          ]..map((e) => FittedBox(
-            child: e,
-          )),
-        ),
-      );
-
-    }
-    return Container();
-  },
-)
+                              builder: (context, state) {
+                                if (state is AuthSuccess) {
+                                  return Visibility(
+                                    visible: state.loginResponse.user?.role !=
+                                            "Petugas" &&
+                                        !widget.firstTimeScan,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            context.router.push(SingleScanRoute(
+                                                qrcodeSj:
+                                                    data?.qrcodeSj ?? "-"));
+                                          },
+                                          child: RoundedContainer(
+                                            sizeMedium,
+                                            padding:
+                                                const EdgeInsets.all(sizeBig),
+                                            margin: const EdgeInsets.only(
+                                                right: sizeMedium,
+                                                left: sizeMedium,
+                                                top: sizeMedium,
+                                                bottom: sizeNormal),
+                                            boxDecoration: const BoxDecoration(
+                                                color: primaryColor),
+                                            child: SvgPicture.asset(
+                                                "assets/images/camera_white.svg"),
+                                          ),
+                                        ),
+                                        const CustomText(
+                                          "Scan Dus",
+                                          textAlign: TextAlign.center,
+                                          color: primaryColor,
+                                        )
+                                      ]..map((e) => FittedBox(
+                                            child: e,
+                                          )),
+                                    ),
+                                  );
+                                }
+                                return Container();
+                              },
+                            )
                           ],
                         ),
                       )

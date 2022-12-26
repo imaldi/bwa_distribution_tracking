@@ -23,6 +23,9 @@ _$_BulkScanResponse _$$_BulkScanResponseFromJson(Map<String, dynamic> json) =>
       nosjhistory: (json['nosjhistory'] as List<dynamic>?)
           ?.map((e) => SendScanDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      dushistory: (json['dushistory'] as List<dynamic>?)
+          ?.map((e) => DusData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_BulkScanResponseToJson(_$_BulkScanResponse instance) =>
@@ -33,4 +36,5 @@ Map<String, dynamic> _$$_BulkScanResponseToJson(_$_BulkScanResponse instance) =>
       'data': instance.data?.map((e) => e.toJson()).toList(),
       'detail': instance.detail?.toJson(),
       'nosjhistory': instance.nosjhistory?.map((e) => e.toJson()).toList(),
+      'dushistory': instance.dushistory?.map((e) => e.toJson()).toList(),
     };

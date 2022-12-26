@@ -208,6 +208,25 @@ mixin _$DusData {
   Object? get foto => throw _privateConstructorUsedError;
   @JsonKey(name: 'id_location')
   String? get idLocation => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_id')
+  String? get locationId => throw _privateConstructorUsedError;
+  String? get latitude => throw _privateConstructorUsedError;
+  String? get longitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nama_penerima')
+  String? get namaPenerima => throw _privateConstructorUsedError;
+  @JsonKey(name: 'no_hp')
+  String? get noHp => throw _privateConstructorUsedError;
+  String? get lembaga => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nm_tempat')
+  String? get nmTempat => throw _privateConstructorUsedError;
+  @JsonKey(name: 'detail_tempat')
+  String? get detailTempat => throw _privateConstructorUsedError;
+  String? get kelurahan => throw _privateConstructorUsedError;
+  String? get kecamatan => throw _privateConstructorUsedError;
+  String? get kabupaten => throw _privateConstructorUsedError;
+  String? get provinsi => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status_pengiriman')
+  String? get statusPengiriman => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
   String? get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_by')
@@ -234,6 +253,19 @@ abstract class $DusDataCopyWith<$Res> {
       String? nodus,
       Object? foto,
       @JsonKey(name: 'id_location') String? idLocation,
+      @JsonKey(name: 'location_id') String? locationId,
+      String? latitude,
+      String? longitude,
+      @JsonKey(name: 'nama_penerima') String? namaPenerima,
+      @JsonKey(name: 'no_hp') String? noHp,
+      String? lembaga,
+      @JsonKey(name: 'nm_tempat') String? nmTempat,
+      @JsonKey(name: 'detail_tempat') String? detailTempat,
+      String? kelurahan,
+      String? kecamatan,
+      String? kabupaten,
+      String? provinsi,
+      @JsonKey(name: 'status_pengiriman') String? statusPengiriman,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'updated_by') String? updatedBy,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -259,6 +291,19 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
     Object? nodus = freezed,
     Object? foto = freezed,
     Object? idLocation = freezed,
+    Object? locationId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? namaPenerima = freezed,
+    Object? noHp = freezed,
+    Object? lembaga = freezed,
+    Object? nmTempat = freezed,
+    Object? detailTempat = freezed,
+    Object? kelurahan = freezed,
+    Object? kecamatan = freezed,
+    Object? kabupaten = freezed,
+    Object? provinsi = freezed,
+    Object? statusPengiriman = freezed,
     Object? createdBy = freezed,
     Object? updatedBy = freezed,
     Object? createdAt = freezed,
@@ -285,6 +330,58 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
       idLocation: freezed == idLocation
           ? _value.idLocation
           : idLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationId: freezed == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      namaPenerima: freezed == namaPenerima
+          ? _value.namaPenerima
+          : namaPenerima // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noHp: freezed == noHp
+          ? _value.noHp
+          : noHp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lembaga: freezed == lembaga
+          ? _value.lembaga
+          : lembaga // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nmTempat: freezed == nmTempat
+          ? _value.nmTempat
+          : nmTempat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailTempat: freezed == detailTempat
+          ? _value.detailTempat
+          : detailTempat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kelurahan: freezed == kelurahan
+          ? _value.kelurahan
+          : kelurahan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kecamatan: freezed == kecamatan
+          ? _value.kecamatan
+          : kecamatan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kabupaten: freezed == kabupaten
+          ? _value.kabupaten
+          : kabupaten // ignore: cast_nullable_to_non_nullable
+              as String?,
+      provinsi: freezed == provinsi
+          ? _value.provinsi
+          : provinsi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusPengiriman: freezed == statusPengiriman
+          ? _value.statusPengiriman
+          : statusPengiriman // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
@@ -320,6 +417,19 @@ abstract class _$$_DusDataCopyWith<$Res> implements $DusDataCopyWith<$Res> {
       String? nodus,
       Object? foto,
       @JsonKey(name: 'id_location') String? idLocation,
+      @JsonKey(name: 'location_id') String? locationId,
+      String? latitude,
+      String? longitude,
+      @JsonKey(name: 'nama_penerima') String? namaPenerima,
+      @JsonKey(name: 'no_hp') String? noHp,
+      String? lembaga,
+      @JsonKey(name: 'nm_tempat') String? nmTempat,
+      @JsonKey(name: 'detail_tempat') String? detailTempat,
+      String? kelurahan,
+      String? kecamatan,
+      String? kabupaten,
+      String? provinsi,
+      @JsonKey(name: 'status_pengiriman') String? statusPengiriman,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'updated_by') String? updatedBy,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -342,6 +452,19 @@ class __$$_DusDataCopyWithImpl<$Res>
     Object? nodus = freezed,
     Object? foto = freezed,
     Object? idLocation = freezed,
+    Object? locationId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? namaPenerima = freezed,
+    Object? noHp = freezed,
+    Object? lembaga = freezed,
+    Object? nmTempat = freezed,
+    Object? detailTempat = freezed,
+    Object? kelurahan = freezed,
+    Object? kecamatan = freezed,
+    Object? kabupaten = freezed,
+    Object? provinsi = freezed,
+    Object? statusPengiriman = freezed,
     Object? createdBy = freezed,
     Object? updatedBy = freezed,
     Object? createdAt = freezed,
@@ -368,6 +491,58 @@ class __$$_DusDataCopyWithImpl<$Res>
       idLocation: freezed == idLocation
           ? _value.idLocation
           : idLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationId: freezed == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      namaPenerima: freezed == namaPenerima
+          ? _value.namaPenerima
+          : namaPenerima // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noHp: freezed == noHp
+          ? _value.noHp
+          : noHp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lembaga: freezed == lembaga
+          ? _value.lembaga
+          : lembaga // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nmTempat: freezed == nmTempat
+          ? _value.nmTempat
+          : nmTempat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailTempat: freezed == detailTempat
+          ? _value.detailTempat
+          : detailTempat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kelurahan: freezed == kelurahan
+          ? _value.kelurahan
+          : kelurahan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kecamatan: freezed == kecamatan
+          ? _value.kecamatan
+          : kecamatan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kabupaten: freezed == kabupaten
+          ? _value.kabupaten
+          : kabupaten // ignore: cast_nullable_to_non_nullable
+              as String?,
+      provinsi: freezed == provinsi
+          ? _value.provinsi
+          : provinsi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusPengiriman: freezed == statusPengiriman
+          ? _value.statusPengiriman
+          : statusPengiriman // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
@@ -399,6 +574,19 @@ class _$_DusData implements _DusData {
       this.nodus,
       this.foto,
       @JsonKey(name: 'id_location') this.idLocation,
+      @JsonKey(name: 'location_id') this.locationId,
+      this.latitude,
+      this.longitude,
+      @JsonKey(name: 'nama_penerima') this.namaPenerima,
+      @JsonKey(name: 'no_hp') this.noHp,
+      this.lembaga,
+      @JsonKey(name: 'nm_tempat') this.nmTempat,
+      @JsonKey(name: 'detail_tempat') this.detailTempat,
+      this.kelurahan,
+      this.kecamatan,
+      this.kabupaten,
+      this.provinsi,
+      @JsonKey(name: 'status_pengiriman') this.statusPengiriman,
       @JsonKey(name: 'created_by') this.createdBy,
       @JsonKey(name: 'updated_by') this.updatedBy,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -422,6 +610,38 @@ class _$_DusData implements _DusData {
   @JsonKey(name: 'id_location')
   final String? idLocation;
   @override
+  @JsonKey(name: 'location_id')
+  final String? locationId;
+  @override
+  final String? latitude;
+  @override
+  final String? longitude;
+  @override
+  @JsonKey(name: 'nama_penerima')
+  final String? namaPenerima;
+  @override
+  @JsonKey(name: 'no_hp')
+  final String? noHp;
+  @override
+  final String? lembaga;
+  @override
+  @JsonKey(name: 'nm_tempat')
+  final String? nmTempat;
+  @override
+  @JsonKey(name: 'detail_tempat')
+  final String? detailTempat;
+  @override
+  final String? kelurahan;
+  @override
+  final String? kecamatan;
+  @override
+  final String? kabupaten;
+  @override
+  final String? provinsi;
+  @override
+  @JsonKey(name: 'status_pengiriman')
+  final String? statusPengiriman;
+  @override
   @JsonKey(name: 'created_by')
   final String? createdBy;
   @override
@@ -436,7 +656,7 @@ class _$_DusData implements _DusData {
 
   @override
   String toString() {
-    return 'DusData(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, nodus: $nodus, foto: $foto, idLocation: $idLocation, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DusData(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, nodus: $nodus, foto: $foto, idLocation: $idLocation, locationId: $locationId, latitude: $latitude, longitude: $longitude, namaPenerima: $namaPenerima, noHp: $noHp, lembaga: $lembaga, nmTempat: $nmTempat, detailTempat: $detailTempat, kelurahan: $kelurahan, kecamatan: $kecamatan, kabupaten: $kabupaten, provinsi: $provinsi, statusPengiriman: $statusPengiriman, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -452,6 +672,30 @@ class _$_DusData implements _DusData {
             const DeepCollectionEquality().equals(other.foto, foto) &&
             (identical(other.idLocation, idLocation) ||
                 other.idLocation == idLocation) &&
+            (identical(other.locationId, locationId) ||
+                other.locationId == locationId) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.namaPenerima, namaPenerima) ||
+                other.namaPenerima == namaPenerima) &&
+            (identical(other.noHp, noHp) || other.noHp == noHp) &&
+            (identical(other.lembaga, lembaga) || other.lembaga == lembaga) &&
+            (identical(other.nmTempat, nmTempat) ||
+                other.nmTempat == nmTempat) &&
+            (identical(other.detailTempat, detailTempat) ||
+                other.detailTempat == detailTempat) &&
+            (identical(other.kelurahan, kelurahan) ||
+                other.kelurahan == kelurahan) &&
+            (identical(other.kecamatan, kecamatan) ||
+                other.kecamatan == kecamatan) &&
+            (identical(other.kabupaten, kabupaten) ||
+                other.kabupaten == kabupaten) &&
+            (identical(other.provinsi, provinsi) ||
+                other.provinsi == provinsi) &&
+            (identical(other.statusPengiriman, statusPengiriman) ||
+                other.statusPengiriman == statusPengiriman) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.updatedBy, updatedBy) ||
@@ -464,18 +708,32 @@ class _$_DusData implements _DusData {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      nosj,
-      qrcodeSj,
-      nodus,
-      const DeepCollectionEquality().hash(foto),
-      idLocation,
-      createdBy,
-      updatedBy,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        nosj,
+        qrcodeSj,
+        nodus,
+        const DeepCollectionEquality().hash(foto),
+        idLocation,
+        locationId,
+        latitude,
+        longitude,
+        namaPenerima,
+        noHp,
+        lembaga,
+        nmTempat,
+        detailTempat,
+        kelurahan,
+        kecamatan,
+        kabupaten,
+        provinsi,
+        statusPengiriman,
+        createdBy,
+        updatedBy,
+        createdAt,
+        updatedAt
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -499,6 +757,19 @@ abstract class _DusData implements DusData {
       final String? nodus,
       final Object? foto,
       @JsonKey(name: 'id_location') final String? idLocation,
+      @JsonKey(name: 'location_id') final String? locationId,
+      final String? latitude,
+      final String? longitude,
+      @JsonKey(name: 'nama_penerima') final String? namaPenerima,
+      @JsonKey(name: 'no_hp') final String? noHp,
+      final String? lembaga,
+      @JsonKey(name: 'nm_tempat') final String? nmTempat,
+      @JsonKey(name: 'detail_tempat') final String? detailTempat,
+      final String? kelurahan,
+      final String? kecamatan,
+      final String? kabupaten,
+      final String? provinsi,
+      @JsonKey(name: 'status_pengiriman') final String? statusPengiriman,
       @JsonKey(name: 'created_by') final String? createdBy,
       @JsonKey(name: 'updated_by') final String? updatedBy,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
@@ -520,6 +791,38 @@ abstract class _DusData implements DusData {
   @override
   @JsonKey(name: 'id_location')
   String? get idLocation;
+  @override
+  @JsonKey(name: 'location_id')
+  String? get locationId;
+  @override
+  String? get latitude;
+  @override
+  String? get longitude;
+  @override
+  @JsonKey(name: 'nama_penerima')
+  String? get namaPenerima;
+  @override
+  @JsonKey(name: 'no_hp')
+  String? get noHp;
+  @override
+  String? get lembaga;
+  @override
+  @JsonKey(name: 'nm_tempat')
+  String? get nmTempat;
+  @override
+  @JsonKey(name: 'detail_tempat')
+  String? get detailTempat;
+  @override
+  String? get kelurahan;
+  @override
+  String? get kecamatan;
+  @override
+  String? get kabupaten;
+  @override
+  String? get provinsi;
+  @override
+  @JsonKey(name: 'status_pengiriman')
+  String? get statusPengiriman;
   @override
   @JsonKey(name: 'created_by')
   String? get createdBy;

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../surat_jalan/surat_jalan_model.dart';
 import 'bulk_scan_qr_detail_per_page.dart';
+import 'dus_list_response/dus_list_response.dart';
 
 part 'bulk_scan_response.freezed.dart';
 part 'bulk_scan_response.g.dart';
@@ -21,6 +22,7 @@ class BulkScanResponse with _$BulkScanResponse{
     List<BulkQRScanModel>? data,
     BulkScanQrDetailPerPage? detail,
     List<SendScanDataModel>? nosjhistory,
+    List<DusData>? dushistory,
   }) = _BulkScanResponse;
 
   factory BulkScanResponse.fromJson(Map<String, Object?> json)
