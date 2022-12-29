@@ -10,6 +10,7 @@ import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_user_scan_
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../../../domain/usecases/scan_qr/get_history_per_id.dart';
 
@@ -42,7 +43,12 @@ class HistoryScanBloc extends Bloc<HistoryScanEvent, HistoryScanState> {
       emit(HistoryScanLoading());
       var failOrLoaded =
       await _getHistoryPerId(BulkScanParams(event.qrCode));
-      var currentState = failOrLoaded.fold((l) => HistoryScanFailed(), (r) => HistoryPerIdLoaded(r));
+      var currentState = failOrLoaded.fold((l) {
+        if(l is DataNotFoundFailure){
+          return HistoryPerIdNotFound();
+        }
+        return HistoryScanFailed();
+      }, (r) => HistoryPerIdLoaded(r));
       emit(currentState);
     });
 

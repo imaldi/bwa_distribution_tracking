@@ -9,6 +9,7 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/send_scan_data_mod
 import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_model.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/custom_appbar_container/custom_appbar_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
+import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -51,7 +52,13 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<HistoryScanBloc, HistoryScanState>(
+        child: BlocConsumer<HistoryScanBloc, HistoryScanState>(
+          listener: (context, state){
+            if(state is HistoryPerIdNotFound){
+              myToast("Data Surat Jalan Tidak Ditemukan");
+              context.router.pop();
+            }
+          },
           builder: (context, state) {
             if (state is HistoryPerIdLoaded) {
               BulkScanResponse response = state.historyPerIdResponse;

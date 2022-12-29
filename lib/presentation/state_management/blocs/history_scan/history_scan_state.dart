@@ -42,6 +42,11 @@ class HistoryPerIdLoaded extends HistoryScanState {
   List<Object?> get props => [historyPerIdResponse];
 }
 
+class HistoryPerIdNotFound extends HistoryScanState {
+  @override
+  List<Object?> get props => [];
+}
+
 class HistoryScanFailed extends HistoryScanState {
   @override
   List<Object?> get props => [];

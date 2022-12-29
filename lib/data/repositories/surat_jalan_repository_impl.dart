@@ -34,7 +34,11 @@ class SuratJalanRepositoryImpl extends SuratJalanRepository{
     try{
       final result = await remoteDataSource.getHistoryPerId(qrCode);
       return Right(result);
-    } on ServerException{
+    }
+    on DataNotFoundException {
+      return Left(DataNotFoundFailure());
+    }
+    on ServerException{
       return Left(ServerFailure());
     }
   }
