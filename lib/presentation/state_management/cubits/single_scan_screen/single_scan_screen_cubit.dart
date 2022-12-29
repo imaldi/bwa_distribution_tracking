@@ -31,6 +31,7 @@ class SingleScanScreenCubit extends Cubit<SingleScanScreenCubitState> {
   }
 
   Future<void> sendRequestScanDus(String nodus, String filePath) async {
+    emit(state.copyWith(isLoading: true));
     var resultOrFailure = await repository.sendRequestScanSingleDusInsert(nodus, filePath,
         state.currentDusNumber,
         // state.storeSelesaiResponse ?? const StoreSelesaiResponse()
@@ -42,16 +43,17 @@ class SingleScanScreenCubit extends Cubit<SingleScanScreenCubitState> {
     //   emit(state.copyWith(currentDusNumber: state.currentDusNumber + 1));
     //
     // }
-    emit(state.copyWith(dusScanResponse: response));
+    emit(state.copyWith(dusScanResponse: response, isLoading: false));
     print("Dus Scan Response from cubit: ${state.dusScanResponse}");
   }
 
-  void fetchScannedDusList() async {
+  Future<void> fetchScannedDusList() async {
+    emit(state.copyWith(isLoading: true));
     var resultOrFailure = await repository.fetchScannedDusList();
     var response = resultOrFailure.fold((l) => const DusListResponse(), (r) {
       return r;
     });
-    emit(state.copyWith(dusListResponse: response));
+    emit(state.copyWith(dusListResponse: response,isLoading: false));
     print("Dus list Response from cubit: ${state.dusListResponse}");
   }
 }

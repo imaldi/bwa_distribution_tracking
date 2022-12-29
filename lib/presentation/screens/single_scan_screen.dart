@@ -323,18 +323,25 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             return null;
                           },
                         ),
-                        ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(nodus, theFile){
-                          context.read<SingleScanScreenCubit>()..sendRequestScanDus(
+                        ScanDusAndChoosePictureWidget(functionCallbackSetImageFilePath:(nodus, theFile) async {
+                          await context.read<SingleScanScreenCubit>().sendRequestScanDus(
                               // widget.qrcodeSj
                               nodus
-                              ,theFile?.path ?? "")..fetchScannedDusList();
+                              ,theFile?.path ?? "").then((value) async {
+                                await context.read<SingleScanScreenCubit>().fetchScannedDusList();
+                                myToast("Success Scan Dus");
+                              });
+
                         }),
                         Builder(
                           builder: (context) {
-                            var dusList = context.watch<SingleScanScreenCubit>().state.dusListResponse?.data ?? [];
+                            var dusState = context.watch<SingleScanScreenCubit>().state;
+                            var dusList = dusState.dusListResponse?.data ?? [];
+                            var isLoading = dusState.isLoading;
                             print("dusList $dusList");
                             return Container(
                               height: 200,
+                              constraints: const BoxConstraints(maxHeight: 200),
                               clipBehavior: Clip.antiAlias,
                               margin: const EdgeInsets.only(bottom: sizeBig),
                               decoration: const BoxDecoration(
@@ -342,51 +349,59 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                   // gradient: basicDiagonalGradient(),
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(sizeMedium))),
-                              child: NotificationListener<OverscrollNotification>(
-                                onNotification: (OverscrollNotification value) {
-                                  if (value.overscroll < 0 &&
-                                      controller.offset + value.overscroll <= 0) {
-                                    if (controller.offset != 0)
-                                      controller.jumpTo(0);
-                                    return true;
-                                  }
-                                  if (controller.offset + value.overscroll >=
-                                      controller.position.maxScrollExtent) {
-                                    if (controller.offset !=
-                                        controller.position.maxScrollExtent) {
-                                      controller.jumpTo(
-                                          controller.position.maxScrollExtent);
-                                    }
-                                    return true;
-                                  }
-                                  controller
-                                      .jumpTo(controller.offset + value.overscroll);
-                                  return true;
-                                },
-                                child: ListView.builder(
-                                  physics: const ClampingScrollPhysics(),
-                                  // padding: const EdgeInsets.all(sizeNormal),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: dusList.length,
-                                  itemBuilder: (cont, ind) {
-                                    return Container(
-                                      color:
-                                          ind % 2 == 0 ? null : primaryDarkerColor,
-                                      child: ListTile(
-                                          title: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0),
-                                        child: FittedBox(
-                                            child: CustomText(
-                                              "No Dus: ${dusList[ind].nodus}",
-                                          // "$ind No Dus: 003SJPJ22 - MERANTI00098-0002-$ind",
-                                          color: Colors.white,
-                                        )),
-                                      )),
-                                    );
-                                  },
-                                ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  NotificationListener<OverscrollNotification>(
+                                    onNotification: (OverscrollNotification value) {
+                                      if (value.overscroll < 0 &&
+                                          controller.offset + value.overscroll <= 0) {
+                                        if (controller.offset != 0)
+                                          controller.jumpTo(0);
+                                        return true;
+                                      }
+                                      if (controller.offset + value.overscroll >=
+                                          controller.position.maxScrollExtent) {
+                                        if (controller.offset !=
+                                            controller.position.maxScrollExtent) {
+                                          controller.jumpTo(
+                                              controller.position.maxScrollExtent);
+                                        }
+                                        return true;
+                                      }
+                                      controller
+                                          .jumpTo(controller.offset + value.overscroll);
+                                      return true;
+                                    },
+                                    child: ListView.builder(
+                                      physics: const ClampingScrollPhysics(),
+                                      // padding: const EdgeInsets.all(sizeNormal),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: dusList.length,
+                                      itemBuilder: (cont, ind) {
+                                        return Container(
+                                          color:
+                                              ind % 2 == 0 ? null : primaryDarkerColor,
+                                          child: ListTile(
+                                              title: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child: FittedBox(
+                                                child: CustomText(
+                                                  "No Dus: ${dusList[ind].nodus}",
+                                              // "$ind No Dus: 003SJPJ22 - MERANTI00098-0002-$ind",
+                                              color: Colors.white,
+                                            )),
+                                          )),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Visibility(
+                                      visible:isLoading,
+                                      child: const CircularProgressIndicator(color: Colors.white,)),
+                                ],
                               ),
                             );
                           }
@@ -508,7 +523,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               child: BlocConsumer<SingleScanScreenBloc,
                                   SingleScanScreenState>(
                                 listener: (contextCons, state) {
-                                  myToast("State: ${state.runtimeType}");
+                                  // myToast("State: ${state.runtimeType}");
                                   if (state is SingleScanScreenSuccess) {
                                     myToast("Success Save Data");
                                     // FIXME check udah bener belum bernilai qrCOdenya

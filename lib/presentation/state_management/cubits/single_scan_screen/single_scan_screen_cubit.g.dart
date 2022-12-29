@@ -9,6 +9,7 @@ part of 'single_scan_screen_cubit.dart';
 _$_SingleScanScreenState _$$_SingleScanScreenStateFromJson(
         Map<String, dynamic> json) =>
     _$_SingleScanScreenState(
+      isLoading: json['isLoading'] as bool? ?? false,
       dusListResponse: json['dusListResponse'] == null
           ? null
           : DusListResponse.fromJson(
@@ -31,6 +32,7 @@ _$_SingleScanScreenState _$$_SingleScanScreenStateFromJson(
 Map<String, dynamic> _$$_SingleScanScreenStateToJson(
         _$_SingleScanScreenState instance) =>
     <String, dynamic>{
+      'isLoading': instance.isLoading,
       'dusListResponse': instance.dusListResponse,
       'dusScanResponse': instance.dusScanResponse,
       'currentDusNumber': instance.currentDusNumber,

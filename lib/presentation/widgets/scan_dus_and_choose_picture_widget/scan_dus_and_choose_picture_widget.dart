@@ -147,7 +147,7 @@ class _ScanDusAndChoosePictureWidgetState
                 ),
               ),
               const CustomText(
-                "Surat Jalan",
+                "QR Code Dus",
                 textAlign: TextAlign.center,
                 color: primaryColor,
               )

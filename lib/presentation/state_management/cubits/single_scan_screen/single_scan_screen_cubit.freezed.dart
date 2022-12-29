@@ -21,6 +21,7 @@ SingleScanScreenCubitState _$SingleScanScreenCubitStateFromJson(
 
 /// @nodoc
 mixin _$SingleScanScreenCubitState {
+  bool get isLoading => throw _privateConstructorUsedError;
   DusListResponse? get dusListResponse => throw _privateConstructorUsedError;
   DusScanResponse? get dusScanResponse => throw _privateConstructorUsedError;
   int get currentDusNumber => throw _privateConstructorUsedError;
@@ -43,7 +44,8 @@ abstract class $SingleScanScreenCubitStateCopyWith<$Res> {
           SingleScanScreenCubitState>;
   @useResult
   $Res call(
-      {DusListResponse? dusListResponse,
+      {bool isLoading,
+      DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
       int currentDusNumber,
       Map<String, String>? qrCodeAndPhotoPathMap,
@@ -68,6 +70,7 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
     Object? currentDusNumber = null,
@@ -75,6 +78,10 @@ class _$SingleScanScreenCubitStateCopyWithImpl<$Res,
     Object? storeSelesaiResponse = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       dusListResponse: freezed == dusListResponse
           ? _value.dusListResponse
           : dusListResponse // ignore: cast_nullable_to_non_nullable
@@ -145,7 +152,8 @@ abstract class _$$_SingleScanScreenStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DusListResponse? dusListResponse,
+      {bool isLoading,
+      DusListResponse? dusListResponse,
       DusScanResponse? dusScanResponse,
       int currentDusNumber,
       Map<String, String>? qrCodeAndPhotoPathMap,
@@ -171,6 +179,7 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? dusListResponse = freezed,
     Object? dusScanResponse = freezed,
     Object? currentDusNumber = null,
@@ -178,6 +187,10 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
     Object? storeSelesaiResponse = freezed,
   }) {
     return _then(_$_SingleScanScreenState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       dusListResponse: freezed == dusListResponse
           ? _value.dusListResponse
           : dusListResponse // ignore: cast_nullable_to_non_nullable
@@ -206,7 +219,8 @@ class __$$_SingleScanScreenStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SingleScanScreenState implements _SingleScanScreenState {
   const _$_SingleScanScreenState(
-      {this.dusListResponse,
+      {this.isLoading = false,
+      this.dusListResponse,
       this.dusScanResponse,
       this.currentDusNumber = 1,
       final Map<String, String>? qrCodeAndPhotoPathMap,
@@ -216,6 +230,9 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   factory _$_SingleScanScreenState.fromJson(Map<String, dynamic> json) =>
       _$$_SingleScanScreenStateFromJson(json);
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   final DusListResponse? dusListResponse;
   @override
@@ -238,7 +255,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
 
   @override
   String toString() {
-    return 'SingleScanScreenCubitState(dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, currentDusNumber: $currentDusNumber, qrCodeAndPhotoPathMap: $qrCodeAndPhotoPathMap, storeSelesaiResponse: $storeSelesaiResponse)';
+    return 'SingleScanScreenCubitState(isLoading: $isLoading, dusListResponse: $dusListResponse, dusScanResponse: $dusScanResponse, currentDusNumber: $currentDusNumber, qrCodeAndPhotoPathMap: $qrCodeAndPhotoPathMap, storeSelesaiResponse: $storeSelesaiResponse)';
   }
 
   @override
@@ -246,6 +263,8 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SingleScanScreenState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.dusListResponse, dusListResponse) ||
                 other.dusListResponse == dusListResponse) &&
             (identical(other.dusScanResponse, dusScanResponse) ||
@@ -262,6 +281,7 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      isLoading,
       dusListResponse,
       dusScanResponse,
       currentDusNumber,
@@ -285,7 +305,8 @@ class _$_SingleScanScreenState implements _SingleScanScreenState {
 
 abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   const factory _SingleScanScreenState(
-          {final DusListResponse? dusListResponse,
+          {final bool isLoading,
+          final DusListResponse? dusListResponse,
           final DusScanResponse? dusScanResponse,
           final int currentDusNumber,
           final Map<String, String>? qrCodeAndPhotoPathMap,
@@ -295,6 +316,8 @@ abstract class _SingleScanScreenState implements SingleScanScreenCubitState {
   factory _SingleScanScreenState.fromJson(Map<String, dynamic> json) =
       _$_SingleScanScreenState.fromJson;
 
+  @override
+  bool get isLoading;
   @override
   DusListResponse? get dusListResponse;
   @override

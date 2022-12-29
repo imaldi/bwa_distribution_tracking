@@ -5,6 +5,7 @@ part of 'single_scan_screen_cubit.dart';
 @freezed
 class SingleScanScreenCubitState with _$SingleScanScreenCubitState{
   const factory SingleScanScreenCubitState({
+    @Default(false) bool isLoading,
     DusListResponse? dusListResponse,
     DusScanResponse? dusScanResponse,
     @Default(1) int currentDusNumber,
