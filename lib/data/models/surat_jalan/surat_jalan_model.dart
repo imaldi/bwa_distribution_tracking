@@ -7,7 +7,7 @@ part 'surat_jalan_model.g.dart';
 class SuratJalanModel with _$SuratJalanModel {
   @JsonSerializable(explicitToJson: true)
   const factory SuratJalanModel({
-    String? id,
+    int? id,
     String? nosj,
     @JsonKey(name: "qrcode_sj")
     String? qrcodeSj,

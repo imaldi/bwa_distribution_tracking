@@ -21,7 +21,7 @@ SendScanDataModel _$SendScanDataModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SendScanDataModel {
   @HiveField(0)
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError; // ini loh
   @HiveField(1)
   String? get nosj => throw _privateConstructorUsedError;
   @HiveField(2)
@@ -69,7 +69,7 @@ abstract class $SendScanDataModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0)
-          String? id,
+          int? id,
       @HiveField(1)
           String? nosj,
       @HiveField(2)
@@ -136,7 +136,7 @@ class _$SendScanDataModelCopyWithImpl<$Res, $Val extends SendScanDataModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -203,7 +203,7 @@ abstract class _$$_SendScanDataModelCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0)
-          String? id,
+          int? id,
       @HiveField(1)
           String? nosj,
       @HiveField(2)
@@ -268,7 +268,7 @@ class __$$_SendScanDataModelCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -351,7 +351,8 @@ class _$_SendScanDataModel implements _SendScanDataModel {
 
   @override
   @HiveField(0)
-  final String? id;
+  final int? id;
+// ini loh
   @override
   @HiveField(1)
   final String? nosj;
@@ -470,7 +471,7 @@ class _$_SendScanDataModel implements _SendScanDataModel {
 abstract class _SendScanDataModel implements SendScanDataModel {
   const factory _SendScanDataModel(
       {@HiveField(0)
-          final String? id,
+          final int? id,
       @HiveField(1)
           final String? nosj,
       @HiveField(2)
@@ -509,8 +510,8 @@ abstract class _SendScanDataModel implements SendScanDataModel {
 
   @override
   @HiveField(0)
-  String? get id;
-  @override
+  int? get id;
+  @override // ini loh
   @HiveField(1)
   String? get nosj;
   @override

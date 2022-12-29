@@ -36,8 +36,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         'Accept': 'application/json',
       },
     );
-    print("Bulk Scan response code: ${response.statusCode.toString()}");
-    log("Bulk Scan response body: ${response.body.toString()}");
+    print("Surat Jalan Riwayat response code: ${response.statusCode.toString()}");
+    log("Surat Jalan Riwayat scan response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     if (response.statusCode == 200) {
@@ -67,8 +67,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         'Accept': 'application/json',
       },
     );
-    print("Bulk Scan response code: ${response.statusCode.toString()}");
-    log("Bulk Scan response body: ${response.body.toString()}");
+    print("get history per id response code: ${response.statusCode.toString()}");
+    log("get history per id response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     if (response.statusCode == 200) {

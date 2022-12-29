@@ -9,6 +9,7 @@ const primaryGreenTransparent = Color(0xBB00BD9B);
 const hintTextColor = Color(0xFFC5C5C5);
 const listColorLight = Color(0xFF01A2AD);
 const listColorDark = Color(0xFF11828A);
+const dikirimTagColor = Color(0xFFFCC201);
 const selesaiTagColor = Color(0xFF95D310);
 
 Map<int, Color> customPrimarySwatch = {

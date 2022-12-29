@@ -4,12 +4,6 @@ import '../../../core/resources/consts/colors.dart';
 import '../../../core/resources/consts/sizes.dart';
 import '../text/custom_text.dart';
 
-enum StatusSJ{
-  Selesai,
-  OnProses,
-  Diterima,
-  Terkirim
-}
 class SummaryStatusTagWidget extends StatefulWidget {
   final String total;
   final String onProses;
@@ -25,7 +19,7 @@ class SummaryStatusTagWidget extends StatefulWidget {
 }
 
 class _SummaryStatusTagWidgetState extends State<SummaryStatusTagWidget> {
-  String status = "Terkirim";
+  String status = "Dikirim";
   @override
   void initState() {
     super.initState();
@@ -34,7 +28,7 @@ class _SummaryStatusTagWidgetState extends State<SummaryStatusTagWidget> {
     int total = int.tryParse(widget.total) ?? 0;
 
     /// FIXME masih harus tanya soal ini
-    if(total != 0) status = "Diterima";
+    if(onProses!=total&&selesai!=total) status = "On Proses";
     if(selesai == total) status = "Selesai";
   }
   @override
@@ -46,8 +40,8 @@ class _SummaryStatusTagWidgetState extends State<SummaryStatusTagWidget> {
         ),
         margin: const EdgeInsets.only(top: sizeNormal),
         padding: const EdgeInsets.symmetric(horizontal: sizeNormal, vertical: 0),
-        decoration: const BoxDecoration(color: selesaiTagColor,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(sizeMedium), bottomLeft: Radius.circular(sizeMedium)),
+        decoration: BoxDecoration(color: status == "Selesai" ? selesaiTagColor : dikirimTagColor,
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(sizeMedium), bottomLeft: Radius.circular(sizeMedium)),
         ),
         child: Center(child: FittedBox(child: CustomText(status,color: Colors.white,))));
   }

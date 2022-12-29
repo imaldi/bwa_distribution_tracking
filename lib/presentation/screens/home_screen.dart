@@ -22,6 +22,8 @@ import '../../core/resources/consts/colors.dart';
 import '../../core/resources/media_query/media_query_helpers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
+
 //test push
 class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
@@ -433,9 +435,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                    .watch<InternetConnectionCubit>()
                                    .state
                                    .isOnline;
-                               var listTotal =
-                                   suratJalanState.suratJalanResponse?.data?.total ??
-                                       0;
+                               var suratJalanResponseList = suratJalanState.suratJalanResponse?.data?.data ?? [];
+
                                log("listSJ: $listSJ");
                                if (!internetConnection) {
                                  return const Center(
@@ -478,100 +479,110 @@ class _HomeScreenState extends State<HomeScreen> {
                                               qrCode: listSJ?[i].qrcodeSj ?? "-",
                                            ));
                                          },
-                                         child: Card(
-                                             color: Colors.white,
-                                             // i % 2 == 0 ? listColorLight : listColorDark,
-                                             child: Padding(
-                                               padding: const EdgeInsets.all(8.0),
-                                               child: Column(
-                                                 crossAxisAlignment:
-                                                 CrossAxisAlignment.center,
-                                                 children: [
-                                                   const CustomText(
-                                                     "Kode Surat Jalan",
-                                                     color: Colors.white,
+                                         child: Stack(
+                                           alignment: Alignment.topRight,
+                                           children: [
+                                             Card(
+                                                 color: Colors.white,
+                                                 // i % 2 == 0 ? listColorLight : listColorDark,
+                                                 child: Padding(
+                                                   padding: const EdgeInsets.all(8.0),
+                                                   child: Column(
+                                                     crossAxisAlignment:
+                                                     CrossAxisAlignment.center,
+                                                     children: [
+                                                       const CustomText(
+                                                         "Kode Surat Jalan",
+                                                         color: Colors.white,
+                                                       ),
+                                                       FittedBox(
+                                                           child: CustomText(
+                                                             // "003/SPJ/22-MERANTI00098-000${i + 1}",
+                                                             "${listSJ?[i].nosj}",
+                                                             color: primaryColor,
+                                                             weight: FontWeight.bold,
+                                                           )),
+                                                       Container(
+                                                         margin: const EdgeInsets.only(
+                                                             top: sizeNormal),
+                                                         child: Row(
+                                                           mainAxisAlignment:
+                                                           MainAxisAlignment
+                                                               .spaceEvenly,
+                                                           children: [
+                                                             Flexible(
+                                                                 child: Column(
+                                                                   crossAxisAlignment:
+                                                                   CrossAxisAlignment
+                                                                       .center,
+                                                                   children: [
+                                                                     const FittedBox(
+                                                                       child: CustomText(
+                                                                         "Dalam Proses",
+                                                                         color:
+                                                                         primaryColor,
+                                                                       ),
+                                                                     ),
+                                                                     CustomText(
+                                                                       "${int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0") }",
+                                                                       color: primaryColor,
+                                                                       weight:
+                                                                       FontWeight.bold,
+                                                                     ),
+                                                                   ],
+                                                                 )),
+                                                             Flexible(
+                                                                 child: Column(
+                                                                   crossAxisAlignment:
+                                                                   CrossAxisAlignment
+                                                                       .center,
+                                                                   children: [
+                                                                     const FittedBox(
+                                                                       child: CustomText(
+                                                                         "Selesai Diterima",
+                                                                         color:
+                                                                         primaryColor,
+                                                                       ),
+                                                                     ),
+                                                                     CustomText(
+                                                                       "${listSJ?[i].selesai ?? 0}",
+                                                                       color: primaryColor,
+                                                                       weight:
+                                                                       FontWeight.bold,
+                                                                     ),
+                                                                   ],
+                                                                 )),
+                                                             Flexible(
+                                                                 child: Column(
+                                                                   crossAxisAlignment:
+                                                                   CrossAxisAlignment
+                                                                       .center,
+                                                                   children: [
+                                                                     const CustomText(
+                                                                       "Total",
+                                                                       color: primaryColor,
+                                                                     ),
+                                                                     CustomText(
+                                                                       "${listSJ?[i].total ?? 0}",
+                                                                       color: primaryColor,
+                                                                       weight:
+                                                                       FontWeight.bold,
+                                                                     ),
+                                                                   ],
+                                                                 )),
+                                                           ],
+                                                         ),
+                                                       )
+                                                     ],
                                                    ),
-                                                   FittedBox(
-                                                       child: CustomText(
-                                                         // "003/SPJ/22-MERANTI00098-000${i + 1}",
-                                                         "${listSJ?[i].nosj}",
-                                                         color: primaryColor,
-                                                         weight: FontWeight.bold,
-                                                       )),
-                                                   Container(
-                                                     margin: const EdgeInsets.only(
-                                                         top: sizeNormal),
-                                                     child: Row(
-                                                       mainAxisAlignment:
-                                                       MainAxisAlignment
-                                                           .spaceEvenly,
-                                                       children: [
-                                                         Flexible(
-                                                             child: Column(
-                                                               crossAxisAlignment:
-                                                               CrossAxisAlignment
-                                                                   .center,
-                                                               children: [
-                                                                 const FittedBox(
-                                                                   child: CustomText(
-                                                                     "Dalam Proses",
-                                                                     color:
-                                                                     primaryColor,
-                                                                   ),
-                                                                 ),
-                                                                 CustomText(
-                                                                   "${int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0") }",
-                                                                   color: primaryColor,
-                                                                   weight:
-                                                                   FontWeight.bold,
-                                                                 ),
-                                                               ],
-                                                             )),
-                                                         Flexible(
-                                                             child: Column(
-                                                               crossAxisAlignment:
-                                                               CrossAxisAlignment
-                                                                   .center,
-                                                               children: [
-                                                                 const FittedBox(
-                                                                   child: CustomText(
-                                                                     "Selesai Diterima",
-                                                                     color:
-                                                                     primaryColor,
-                                                                   ),
-                                                                 ),
-                                                                 CustomText(
-                                                                   "${listSJ?[i].selesai ?? 0}",
-                                                                   color: primaryColor,
-                                                                   weight:
-                                                                   FontWeight.bold,
-                                                                 ),
-                                                               ],
-                                                             )),
-                                                         Flexible(
-                                                             child: Column(
-                                                               crossAxisAlignment:
-                                                               CrossAxisAlignment
-                                                                   .center,
-                                                               children: [
-                                                                 const CustomText(
-                                                                   "Total",
-                                                                   color: primaryColor,
-                                                                 ),
-                                                                 CustomText(
-                                                                   "${listSJ?[i].total ?? 0}",
-                                                                   color: primaryColor,
-                                                                   weight:
-                                                                   FontWeight.bold,
-                                                                 ),
-                                                               ],
-                                                             )),
-                                                       ],
-                                                     ),
-                                                   )
-                                                 ],
-                                               ),
-                                             )),
+                                                 )),
+                                             SummaryStatusTagWidget(
+                                               total: suratJalanResponseList[i].total ?? "0",
+                                               onProses: suratJalanResponseList[i].onproses ?? "0",
+                                               selesai: suratJalanResponseList[i].selesai ?? "0",
+                                             )
+                                           ],
+                                         ),
                                        );
                                      }),
                                );

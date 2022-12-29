@@ -8,7 +8,7 @@ part of 'surat_jalan_model.dart';
 
 _$_SuratJalanModel _$$_SuratJalanModelFromJson(Map<String, dynamic> json) =>
     _$_SuratJalanModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       nosj: json['nosj'] as String?,
       qrcodeSj: json['qrcode_sj'] as String?,
       total: json['total'] as String?,

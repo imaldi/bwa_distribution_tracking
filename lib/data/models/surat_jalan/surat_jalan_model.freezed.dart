@@ -20,7 +20,7 @@ SuratJalanModel _$SuratJalanModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SuratJalanModel {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
   @JsonKey(name: "qrcode_sj")
   String? get qrcodeSj => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $SuratJalanModelCopyWith<$Res> {
       _$SuratJalanModelCopyWithImpl<$Res, SuratJalanModel>;
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
       String? nosj,
       @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? total,
@@ -89,7 +89,7 @@ class _$SuratJalanModelCopyWithImpl<$Res, $Val extends SuratJalanModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ abstract class _$$_SuratJalanModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
       String? nosj,
       @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? total,
@@ -177,7 +177,7 @@ class __$$_SuratJalanModelCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       nosj: freezed == nosj
           ? _value.nosj
           : nosj // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class _$_SuratJalanModel implements _SuratJalanModel {
       _$$_SuratJalanModelFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? nosj;
   @override
@@ -312,7 +312,7 @@ class _$_SuratJalanModel implements _SuratJalanModel {
 
 abstract class _SuratJalanModel implements SuratJalanModel {
   const factory _SuratJalanModel(
-          {final String? id,
+          {final int? id,
           final String? nosj,
           @JsonKey(name: "qrcode_sj") final String? qrcodeSj,
           final String? total,
@@ -328,7 +328,7 @@ abstract class _SuratJalanModel implements SuratJalanModel {
       _$_SuratJalanModel.fromJson;
 
   @override
-  String? get id;
+  int? get id;
   @override
   String? get nosj;
   @override

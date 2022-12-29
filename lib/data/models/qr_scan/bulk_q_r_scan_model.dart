@@ -9,7 +9,7 @@ class BulkQRScanModel with _$BulkQRScanModel{
   // test
   // test
   const factory BulkQRScanModel({
-  String? id,
+  int? id,
   String? nosj,
   @JsonKey(name: 'qrcode_sj')
   String? qrcodeSj,

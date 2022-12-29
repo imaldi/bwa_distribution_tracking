@@ -18,7 +18,7 @@ class DusListResponse with _$DusListResponse {
 @freezed
 class DusData with _$DusData {
   const factory DusData({
-    String? id,
+    int? id,
     String? nosj,
     @JsonKey(name: 'qrcode_sj') String? qrcodeSj,
     String? nodus,

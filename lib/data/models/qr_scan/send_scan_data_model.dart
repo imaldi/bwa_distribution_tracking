@@ -11,7 +11,7 @@ class SendScanDataModel with _$SendScanDataModel {
   @HiveType(
       typeId: sendScanDataModelTypeId, adapterName: 'SendScanDataModelAdapter')
   const factory SendScanDataModel({
-    @HiveField(0) String? id,
+    @HiveField(0) int? id, // ini loh
     @HiveField(1) String? nosj,
     @HiveField(2) String? latitude,
     @HiveField(3) String? longtitude,

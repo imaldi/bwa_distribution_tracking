@@ -7,7 +7,7 @@ part 'box_q_r_scan_model.g.dart';
 class BoxQRScanModel with _$BoxQRScanModel {
   // @HiveType(typeId: boxQRScanModelTypeId,adapterName: 'BoxQRScanModelAdapter')
   const factory BoxQRScanModel({
-    String? id,
+    int? id,
     String? notrans,
     String? nosj,
     @JsonKey(name: 'kode_batch') String? kodeBatch,
