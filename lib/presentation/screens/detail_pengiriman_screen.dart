@@ -512,10 +512,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     nodeAlign: TimelineNodeAlign.basic,
                                     nodePosition: 0.3,
                                     oppositeContents: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: CustomText(
-                                        "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).createdAt : (listAll[i] as DusData).createdAt ?? "No Date"}",
-                                        color: Colors.grey,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          CustomText(
+                                            listAll[i] is SendScanDataModel ? DateFormat("dd MMM yyyy", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("dd MMM yyyy", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
+                                            color: Colors.grey,
+                                          ),
+                                          CustomText(
+                                            listAll[i] is SendScanDataModel ? DateFormat("hh:mm", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("hh:mm", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
+                                            color: Colors.grey,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     contents: Container(
@@ -528,7 +538,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               right: sizeNormal),
                                           title: Container(
                                             child: CustomText(
-                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "Selesai - Lokasi ${dusHistory.indexOf(listAll[i]) + 1}"
+                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "Selesai - Lokasi ${(listAll.length - 1) - (dusHistory.indexOf(listAll[i]) + 1)}"
                                               // "Selesai"
 
                                               }",

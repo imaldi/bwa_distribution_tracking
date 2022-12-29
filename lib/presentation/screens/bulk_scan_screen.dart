@@ -23,6 +23,7 @@ import 'package:intl/intl.dart';
 import '../../core/resources/helper/number_formatter.dart';
 import '../../data/models/qr_scan/bulk_q_r_scan_model.dart';
 import '../state_management/blocs/auth/auth_bloc.dart';
+import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/my_text_field/my_text_field.dart';
 
 class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -233,37 +234,33 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                       TableRow(children: [
                                         Align(
                                           alignment: Alignment.center,
-                                          child: UnconstrainedBox(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  // fixme kalau angkanya besar jadi overflow
-                                                  indonesianNumberFormat(
-                                                      headerData.onproses),
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                // fixme kalau angkanya besar jadi overflow
+                                                indonesianNumberFormat(
+                                                    headerData.onproses),
+                                                color: Colors.white,
+                                                size: sizeBig + sizeMedium,
+                                                weight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
                                         ),
                                         Align(
                                           alignment: Alignment.center,
-                                          child: UnconstrainedBox(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  indonesianNumberFormat(
-                                                      headerData.selesai),
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                indonesianNumberFormat(
+                                                    headerData.selesai),
+                                                color: Colors.white,
+                                                size: sizeBig + sizeMedium,
+                                                weight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
@@ -817,6 +814,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
           return Container();
         },
       ),
+      bottomNavigationBar: const CustomBottomNavbar(),
     );
   }
 }
