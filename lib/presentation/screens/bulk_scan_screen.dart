@@ -180,7 +180,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             ]),
                             Container(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -189,7 +189,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         right: sizeMedium),
                                     child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         const FittedBox(
                                             child: CustomText(
@@ -199,6 +199,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         )),
                                         FittedBox(
                                             child: CustomText(
+                                              // TODO format
                                           "${data?.total ?? 0}",
                                           color: Colors.white,
                                           size: sizeHuge - 10,
@@ -237,14 +238,15 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                       ]),
                                       TableRow(children: [
                                         Align(
-                                          alignment: Alignment.centerLeft,
+                                          alignment: Alignment.center,
                                           child: UnconstrainedBox(
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 8.0),
                                               child: FittedBox(
                                                 child: CustomText(
-                                                  "${headerData?.onproses ?? 0}",
+                                                  // fixme kalau angkanya besar jadi overflow
+                                                  "${headerData.onproses ?? 0}",
                                                   color: Colors.white,
                                                   size: sizeBig + sizeMedium,
                                                   weight: FontWeight.bold,
@@ -254,14 +256,14 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           ),
                                         ),
                                         Align(
-                                          alignment: Alignment.centerLeft,
+                                          alignment: Alignment.center,
                                           child: UnconstrainedBox(
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 8.0),
                                               child: FittedBox(
                                                 child: CustomText(
-                                                  "${headerData?.selesai ?? 0}",
+                                                  "${headerData.selesai ?? 0}",
                                                   color: Colors.white,
                                                   size: sizeBig + sizeMedium,
                                                   weight: FontWeight.bold,
@@ -353,7 +355,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         )),
                                         Expanded(
                                             child: CustomText(
-                                          ": ${data?.tanggal}",
+                                          ": ${(data?.tanggal)}",
                                           color: textColor,
                                         )),
                                       ],
@@ -417,7 +419,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         )),
                                         Expanded(
                                             child: CustomText(
-                                          ": 05-09-2022",
+                                          ": ${data?.nmPengemudi}",
                                           color: textColor,
                                         )),
                                       ],

@@ -368,7 +368,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                             vertical: 8.0),
                                         child: FittedBox(
                                             child: CustomText(
-                                              "${dusList[ind].nodus}",
+                                              "No Dus: ${dusList[ind].nodus}",
                                           // "$ind No Dus: 003SJPJ22 - MERANTI00098-0002-$ind",
                                           color: Colors.white,
                                         )),

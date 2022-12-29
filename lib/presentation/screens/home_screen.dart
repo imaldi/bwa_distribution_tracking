@@ -499,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                            child: CustomText(
                                                              // "003/SPJ/22-MERANTI00098-000${i + 1}",
                                                              "${listSJ?[i].nosj}",
-                                                             color: primaryColor,
+                                                             // color: primaryColor,
                                                              weight: FontWeight.bold,
                                                            )),
                                                        Container(
@@ -519,13 +519,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                      const FittedBox(
                                                                        child: CustomText(
                                                                          "Dalam Proses",
-                                                                         color:
-                                                                         primaryColor,
+                                                                         // color:
+                                                                         // primaryColor,
                                                                        ),
                                                                      ),
                                                                      CustomText(
                                                                        "${int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0") }",
-                                                                       color: primaryColor,
+                                                                       // color: primaryColor,
                                                                        weight:
                                                                        FontWeight.bold,
                                                                      ),
@@ -540,13 +540,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                      const FittedBox(
                                                                        child: CustomText(
                                                                          "Selesai Diterima",
-                                                                         color:
-                                                                         primaryColor,
+                                                                         // color:
+                                                                         // primaryColor,
                                                                        ),
                                                                      ),
                                                                      CustomText(
                                                                        "${listSJ?[i].selesai ?? 0}",
-                                                                       color: primaryColor,
+                                                                       // color: primaryColor,
                                                                        weight:
                                                                        FontWeight.bold,
                                                                      ),
@@ -560,11 +560,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                    children: [
                                                                      const CustomText(
                                                                        "Total",
-                                                                       color: primaryColor,
+                                                                       // color: primaryColor,
                                                                      ),
                                                                      CustomText(
                                                                        "${listSJ?[i].total ?? 0}",
-                                                                       color: primaryColor,
+                                                                       // color: primaryColor,
                                                                        weight:
                                                                        FontWeight.bold,
                                                                      ),
@@ -599,7 +599,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                if((state.suratJalanResponse?.data?.total ?? 0) == 0){
                                  return Column(
                                    children: [
-                                     const CustomText("Data Belum Tersedia",color: primaryColor,size: sizeMedium,),
+                                     const CustomText("Data Belum Tersedia",
+                                       // color: primaryColor,
+                                       size: sizeMedium,),
                                      const CustomText("Mohon Lakukan Scan Terlebih dahulu",),
                                    ],
                                  );
@@ -672,7 +674,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                            const CustomText(
                                              "Surat Jalan",
                                              textAlign: TextAlign.center,
-                                             color: primaryColor,
+                                             // color: primaryColor,
                                            )
                                          ]..map((e) => FittedBox(
                                            child: e,

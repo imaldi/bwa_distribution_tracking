@@ -80,7 +80,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                 // DusData(nosj: "aABJBN"),
               ].toList();
               var listAll = []..toList()
-                // ..addAll(dusHistory)
+                ..addAll(dusHistory)
                 ..addAll(nosjHistory)
               ;
               log("list all: ${listAll}");
@@ -341,7 +341,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             // padding: EdgeInsets.all(8.0),
                             child: Center(
                                 child: CustomText(
-                              'Pengiriman',
+                              'Distribusi',
                               color: dusHistory
                                           .isNotEmpty
                                   &&
@@ -349,10 +349,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       //     .contains("Diterima") &&
                                       // listAll
                                       //     .contains("Terkirim") &&
-                                      (int.parse(header?.total ?? "0") !=
-                                          int.parse(header?.selesai ?? "-1"))
-                                  ? Colors.grey
-                                  : primaryColor,
+                                      ((int.parse(header?.total ?? "0") !=
+                                          int.parse(header?.selesai ?? "-1")) && (int.parse(header?.total ?? "0") !=
+                                  int.parse(header?.onproses ?? "-1"))) || (int.parse(header?.total ?? "0") ==
+                                  int.parse(header?.selesai ?? "-1"))
+                                  ? primaryColor
+                                  : Colors.grey,
                             )),
                           ),
                           node: TimelineNode(
@@ -369,14 +371,16 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                           //     .contains("Diterima") &&
                                           // listAll
                                           //     .contains("Terkirim") &&
-                                          (int.parse(header?.total ?? "0") !=
-                                              int.parse(
-                                                  header?.selesai ?? "-1"))
+                                      ((int.parse(header?.total ?? "0") !=
+                                          int.parse(header?.selesai ?? "-1")) && (int.parse(header?.total ?? "0") !=
+                                      int.parse(header?.onproses ?? "-1")))  || (int.parse(header?.total ?? "0") ==
+                                      int.parse(header?.selesai ?? "-1"))
+
                                       ?
-                                  null
-                                      :
                                   const AssetImage(
-                                          "assets/images/background_main.png")
+                                      "assets/images/background_main.png")
+                                      :
+                                  null
                                 ),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -414,7 +418,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             // padding: EdgeInsets.all(8.0),
                             child: Center(
                                 child: CustomText(
-                              'Diterima',
+                              'Selesai',
                               color: dusHistory
                                           .isNotEmpty &&
                                       // listAll
@@ -519,13 +523,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               right: sizeNormal),
                                           title: Container(
                                             child: CustomText(
-                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "selesai"}",
+                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman :
+                                              "Selesai - Lokasi ${dusHistory.indexOf(listAll[i]) + 1}"
+                                              // "Selesai"
+
+                                              }",
                                               weight: FontWeight.bold,
                                               color: primaryColor,
                                             ),
                                           ),
                                           subtitle: CustomText(
-                                            "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : (listAll[i] as DusData).namaPenerima ?? "No Keterangan"}",
+                                            "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Nama Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nNama Tempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}\nLihatDetail"}",
                                             color: primaryColor,
                                           ),
                                         )
@@ -551,15 +559,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 }),
                           ));
                     }),
-                    RoundedContainer(sizeNormal,
-                        width: 200,
-                        height: 200,
-                        padding: const EdgeInsets.all(0),
-                        clipBehavior: Clip.antiAlias,
-                        child: Image.asset(
-                          "assets/images/photo_example.png",
-                          fit: BoxFit.cover,
-                        ))
+                    // RoundedContainer(sizeNormal,
+                    //     width: 200,
+                    //     height: 200,
+                    //     padding: const EdgeInsets.all(0),
+                    //     clipBehavior: Clip.antiAlias,
+                    //     child: Image.asset(
+                    //       "assets/images/photo_example.png",
+                    //       fit: BoxFit.cover,
+                    //     ))
                   ],
                 ),
               );
