@@ -40,6 +40,7 @@ import 'package:bwa_distribution_tracking/presentation/state_management/cubits/w
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -59,6 +60,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  initializeDateFormatting('id');
 
   /// Features - Number Trivia
   //Bloc

@@ -21,6 +21,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/helper/file_compressor.dart';
 import '../../injection_container.dart';
+import '../state_management/blocs/auth/auth_bloc.dart';
 import '../state_management/cubits/bulk_scan/bulk_scan_screen_cubit.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_appbar_container/custom_appbar_container.dart';
@@ -98,10 +99,20 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           color: Colors.white,
                         ),
                         // Fixme pakai data user disini
-                        CustomText(
-                          "Mamat Untung",
-                          color: Colors.white,
-                        ),
+                        FittedBox(child: BlocBuilder<
+                            AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            /// FIXME ada bug nama null kalau di hot restart, why??
+                            return CustomText(
+                              (state is AuthSuccess)
+                                  ? "${state.loginResponse.user?.name}"
+                                  : "Guest User",
+                              color: Colors.white,
+                              size: sizeBig,
+                            );
+                          },
+                        )),
+
                       ],
                     ),
                   )),

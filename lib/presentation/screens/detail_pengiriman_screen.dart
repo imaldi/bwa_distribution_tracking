@@ -19,6 +19,7 @@ import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/history_scan/history_scan_bloc.dart';
 import '../widgets/container/rounded_container.dart';
+import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 
 class DetailPengirimanScreen extends StatefulWidget
     implements AutoRouteWrapper {
@@ -53,8 +54,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<HistoryScanBloc, HistoryScanState>(
-          listener: (context, state){
-            if(state is HistoryPerIdNotFound){
+          listener: (context, state) {
+            if (state is HistoryPerIdNotFound) {
               myToast("Data Surat Jalan Tidak Ditemukan");
               context.router.pop();
             }
@@ -73,16 +74,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                   .map((e) => e.statusPengiriman ?? "")
                   .toList();
               var nosjHistory = response.nosjhistory ?? [].toList();
-              var dusHistory =
-                  response.dushistory ??
+              var dusHistory = response.dushistory ??
                   [
-                // DusData(nosj: "ASJKNA"),
-                // DusData(nosj: "aABJBN"),
-              ].toList();
-              var listAll = []..toList()
+                    // DusData(nosj: "ASJKNA"),
+                    // DusData(nosj: "aABJBN"),
+                  ].toList();
+              var listAll = []
+                ..toList()
                 ..addAll(dusHistory)
-                ..addAll(nosjHistory)
-              ;
+                ..addAll(nosjHistory);
               log("list all: ${listAll}");
               log("list dus: ${dusHistory}");
               return SingleChildScrollView(
@@ -342,17 +342,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             child: Center(
                                 child: CustomText(
                               'Distribusi',
-                              color: dusHistory
-                                          .isNotEmpty
-                                  &&
-                                      // listAll
-                                      //     .contains("Diterima") &&
-                                      // listAll
-                                      //     .contains("Terkirim") &&
-                                      ((int.parse(header?.total ?? "0") !=
-                                          int.parse(header?.selesai ?? "-1")) && (int.parse(header?.total ?? "0") !=
-                                  int.parse(header?.onproses ?? "-1"))) || (int.parse(header?.total ?? "0") ==
-                                  int.parse(header?.selesai ?? "-1"))
+                              color: dusHistory.isNotEmpty &&
+                                          // listAll
+                                          //     .contains("Diterima") &&
+                                          // listAll
+                                          //     .contains("Terkirim") &&
+                                          ((int.parse(header?.total ?? "0") !=
+                                                  int.parse(header?.selesai ??
+                                                      "-1")) &&
+                                              (int.parse(
+                                                      header?.total ?? "0") !=
+                                                  int.parse(header?.onproses ??
+                                                      "-1"))) ||
+                                      (int.parse(header?.total ?? "0") ==
+                                          int.parse(header?.selesai ?? "-1"))
                                   ? primaryColor
                                   : Colors.grey,
                             )),
@@ -363,25 +366,29 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               alignment: Alignment.center,
                               children: [
                                 CircleAvatar(
-                                  radius: sizeBig, // Image radius
-                                  backgroundColor: Colors.grey,
-                                  backgroundImage: dusHistory
-                                              .isNotEmpty &&
-                                          // listAll
-                                          //     .contains("Diterima") &&
-                                          // listAll
-                                          //     .contains("Terkirim") &&
-                                      ((int.parse(header?.total ?? "0") !=
-                                          int.parse(header?.selesai ?? "-1")) && (int.parse(header?.total ?? "0") !=
-                                      int.parse(header?.onproses ?? "-1")))  || (int.parse(header?.total ?? "0") ==
-                                      int.parse(header?.selesai ?? "-1"))
-
-                                      ?
-                                  const AssetImage(
-                                      "assets/images/background_main.png")
-                                      :
-                                  null
-                                ),
+                                    radius: sizeBig, // Image radius
+                                    backgroundColor: Colors.grey,
+                                    backgroundImage: dusHistory.isNotEmpty &&
+                                                // listAll
+                                                //     .contains("Diterima") &&
+                                                // listAll
+                                                //     .contains("Terkirim") &&
+                                                ((int.parse(header?.total ??
+                                                            "0") !=
+                                                        int.parse(
+                                                            header?.selesai ??
+                                                                "-1")) &&
+                                                    (int.parse(header?.total ??
+                                                            "0") !=
+                                                        int.parse(
+                                                            header?.onproses ??
+                                                                "-1"))) ||
+                                            (int.parse(header?.total ?? "0") ==
+                                                int.parse(
+                                                    header?.selesai ?? "-1"))
+                                        ? const AssetImage(
+                                            "assets/images/background_main.png")
+                                        : null),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
                                   width: sizeMedium + sizeNormal,
@@ -419,8 +426,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             child: Center(
                                 child: CustomText(
                               'Selesai',
-                              color: dusHistory
-                                          .isNotEmpty &&
+                              color: dusHistory.isNotEmpty &&
                                       // listAll
                                       //     .contains("Diterima") &&
                                       // listAll
@@ -439,8 +445,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 CircleAvatar(
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: listAll
-                                              .isNotEmpty &&
+                                  backgroundImage: listAll.isNotEmpty &&
                                           // listAll
                                           //     .contains("Diterima") &&
                                           // listAll
@@ -510,21 +515,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       padding: EdgeInsets.all(8.0),
                                       child: CustomText(
                                         "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).createdAt : (listAll[i] as DusData).createdAt ?? "No Date"}",
-                                      color: Colors.grey,
+                                        color: Colors.grey,
                                       ),
                                     ),
                                     contents: Container(
                                         padding: const EdgeInsets.all(8.0),
-                                        constraints: const BoxConstraints(
-                                            maxWidth: 400),
+                                        constraints:
+                                            const BoxConstraints(maxWidth: 400),
                                         child: ListTile(
                                           contentPadding: EdgeInsets.only(
                                               left: sizeNormal,
                                               right: sizeNormal),
                                           title: Container(
                                             child: CustomText(
-                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman :
-                                              "Selesai - Lokasi ${dusHistory.indexOf(listAll[i]) + 1}"
+                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "Selesai - Lokasi ${dusHistory.indexOf(listAll[i]) + 1}"
                                               // "Selesai"
 
                                               }",
@@ -548,12 +552,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               color: primaryColor,
                                             )
                                           : null,
-                                      endConnector:
-                                          i != (listAll.length - 1)
-                                              ? const SolidLineConnector(
-                                                  color: primaryColor,
-                                                )
-                                              : null,
+                                      endConnector: i != (listAll.length - 1)
+                                          ? const SolidLineConnector(
+                                              color: primaryColor,
+                                            )
+                                          : null,
                                     ),
                                   );
                                 }),
@@ -575,8 +578,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
             if (state is HistoryScanLoading) {
               return const Center(
                 child: SizedBox(
-                  width: sizeHuge,
-                  height: sizeHuge,
+                  width: sizeBig,
+                  height: sizeBig,
                   child: CircularProgressIndicator(
                     color: primaryColor,
                   ),
@@ -592,6 +595,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
           },
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavbar(),
     );
   }
 }

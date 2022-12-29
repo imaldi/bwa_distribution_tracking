@@ -18,7 +18,9 @@ import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
+import '../../core/resources/helper/number_formatter.dart';
 import '../../data/models/qr_scan/bulk_q_r_scan_model.dart';
 import '../state_management/blocs/auth/auth_bloc.dart';
 import '../widgets/my_text_field/my_text_field.dart';
@@ -73,65 +75,57 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            child: BlocConsumer<QRScanBloc, QRScanState>(
-              listener: (context, state) {
-                if (state is QRBulkScanSuccess) {
-                  context.read<BulkScanScreenCubit>().updateModelState(
-                      (model) => model.copyWith(
-                          nosj: state.bulkScanResponse.data?.first.nosj));
-                }
+      body: BlocConsumer<QRScanBloc, QRScanState>(
+        listener: (context, state) {
+          if (state is QRBulkScanSuccess) {
+            context.read<BulkScanScreenCubit>().updateModelState((model) =>
+                model.copyWith(nosj: state.bulkScanResponse.data?.first.nosj));
+          }
 
-                if (state is SendScanSuccess) {
-                  myToast("Send Scan Success");
-                  // context.router.pop();
-                  // model = state.bulkScanResponse.data?.first;
+          if (state is SendScanSuccess) {
+            myToast("Send Scan Success");
+            // context.router.pop();
+            // model = state.bulkScanResponse.data?.first;
 
-                  if (model?.qrcodeSj != null) {
-                    context.router.replace(DetailPengirimanRoute(
-                        qrCode: model?.qrcodeSj ?? "null"));
-                  }
-                }
+            if (model?.qrcodeSj != null) {
+              context.router.replace(
+                  DetailPengirimanRoute(qrCode: model?.qrcodeSj ?? "null"));
+            }
+          }
 
-                if (state is QRScanFailed) {
-                  if (state.failure is DataNotFoundFailure) {
-                    myToast("Maaf, data tidak ditemukan");
-                  }
-                  context.router.pop();
-                }
-              },
-              builder: (context, state) {
-                if (state is QRScanLoading) {
-                  return SizedBox(
-                    height: heightScreen(context) / 4,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: primaryGreen,
-                      ),
-                    ),
-                  );
-                }
-                // if (state is QRScanFailed) {
-                //   // response = "null";
-                //   myToast("Mohon maaf, ada kesalahan");
-                //   context.router.pop();
-                // }
-                if (state is QRBulkScanSuccess) {
-                  // response = state.bulkScanResponse;
-                  var headerDataList = state.bulkScanResponse.header;
-                  var headerData = const SuratJalanModel();
-                  if (headerDataList != null &&
-                      (headerDataList.length ?? 0) > 0) {
-                    headerData = headerDataList[0];
-                  }
-                  var data = state.bulkScanResponse.data?.first;
-                  model = state.bulkScanResponse.data?.first;
-                  var details = state.bulkScanResponse.detail;
-                  var dataPerPage = details?.data;
-                  var textColor = primaryColor;
-                  return Column(
+          if (state is QRScanFailed) {
+            if (state.failure is DataNotFoundFailure) {
+              myToast("Maaf, data tidak ditemukan");
+            }
+            context.router.pop();
+          }
+        },
+        builder: (context, state) {
+          if (state is QRScanLoading) {
+            return Container(
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: primaryGreen,
+                ),
+              ),
+            );
+          }
+          if (state is QRBulkScanSuccess) {
+            // response = state.bulkScanResponse;
+            var headerDataList = state.bulkScanResponse.header;
+            var headerData = const SuratJalanModel();
+            if (headerDataList != null && (headerDataList.length ?? 0) > 0) {
+              headerData = headerDataList[0];
+            }
+            var data = state.bulkScanResponse.data?.first;
+            model = state.bulkScanResponse.data?.first;
+            var details = state.bulkScanResponse.detail;
+            var dataPerPage = details?.data;
+            var textColor = primaryColor;
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  child: Column(
                     children: [
                       Container(
                         // width: orientedWidthScreen(context,
@@ -199,8 +193,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         )),
                                         FittedBox(
                                             child: CustomText(
-                                              // TODO format
-                                          "${data?.total ?? 0}",
+                                          indonesianNumberFormat(
+                                              data?.total ?? ""),
                                           color: Colors.white,
                                           size: sizeHuge - 10,
                                           weight: FontWeight.bold,
@@ -246,7 +240,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                               child: FittedBox(
                                                 child: CustomText(
                                                   // fixme kalau angkanya besar jadi overflow
-                                                  "${headerData.onproses ?? 0}",
+                                                  indonesianNumberFormat(
+                                                      headerData.onproses),
                                                   color: Colors.white,
                                                   size: sizeBig + sizeMedium,
                                                   weight: FontWeight.bold,
@@ -263,7 +258,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                   right: 8.0),
                                               child: FittedBox(
                                                 child: CustomText(
-                                                  "${headerData.selesai ?? 0}",
+                                                  indonesianNumberFormat(
+                                                      headerData.selesai),
                                                   color: Colors.white,
                                                   size: sizeBig + sizeMedium,
                                                   weight: FontWeight.bold,
@@ -355,7 +351,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         )),
                                         Expanded(
                                             child: CustomText(
-                                          ": ${(data?.tanggal)}",
+                                          ": ${DateFormat("dd MMM yyyy", 'id').format(DateFormat("yyyy-MM-dd").parse(data?.tanggal ?? "1998-12-23"))}",
                                           color: textColor,
                                         )),
                                       ],
@@ -616,7 +612,6 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               },
                             ),
                             Visibility(
-                              visible: widget.firstTimeScan,
                               child: BlocConsumer<AuthBloc, AuthState>(
                                 listener: (c, state) {
                                   myToast("State Auth: ${state.runtimeType}");
@@ -630,123 +625,105 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 },
                                 builder: (context, state) {
                                   if (state is AuthSuccess) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(sizeMedium),
-                                      child: MyDropdownButton<String>(
-                                        const ["Terkirim", "Diterima"],
-                                        (v) => v,
-                                        onItemTapped: (val) {
-                                          context
-                                              .read<BulkScanScreenCubit>()
-                                              .updateModelState((dataModel) {
-                                            return dataModel.copyWith(
-                                                statusPengiriman: val);
-                                          });
-                                        },
-                                        value: state.loginResponse.user?.role ==
-                                                "Petugas"
-                                            ? "Terkirim"
-                                            : "Diterima",
-                                        isEnabled: false,
-                                        hint: const Text(
-                                          "Status Pengiriman",
-                                          style: TextStyle(color: primaryGreen),
-                                        ),
+                                    return Visibility(
+                                      visible: widget.firstTimeScan && !(state.loginResponse.user?.role ==
+                                          "Kurir" &&
+                                          widget.willScanDus),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(sizeMedium),
+                                            child: MyDropdownButton<String>(
+                                              const ["Terkirim", "Diterima"],
+                                              (v) => v,
+                                              onItemTapped: (val) {
+                                                context
+                                                    .read<BulkScanScreenCubit>()
+                                                    .updateModelState((dataModel) {
+                                                  return dataModel.copyWith(
+                                                      statusPengiriman: val);
+                                                });
+                                              },
+                                              value: state.loginResponse.user?.role ==
+                                                      "Petugas"
+                                                  ? "Terkirim"
+                                                  : "Diterima",
+                                              isEnabled: false,
+                                              hint: const Text(
+                                                "Status Pengiriman",
+                                                style: TextStyle(color: primaryGreen),
+                                              ),
+                                            ),
+                                          ),
+                                          MyTextField(
+                                            label: 'Keterangan',
+                                            controller: keteranganCtrl,
+                                            onChanged: (val) {
+                                              context
+                                                  .read<BulkScanScreenCubit>()
+                                                  .updateModelState((dataModel) {
+                                                return dataModel.copyWith(
+                                                    keterangan: val);
+                                              });
+                                            },
+                                          ),
+                                          MyImagePickerWidget(
+                                            functionCallbackSetImageFilePath:
+                                                (numb, theImage) async {
+                                              context
+                                                  .read<BulkScanScreenCubit>()
+                                                  .setFotoPath(theImage?.path ?? "");
+                                            },
+                                            defaultImagePlaceholder: FittedBox(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(sizeBig),
+                                                child: RoundedContainer(
+                                                  sizeNormal,
+                                                  height: widthScreen(context) * 0.4,
+                                                  width: widthScreen(context) * 0.4,
+                                                  boxDecoration: const BoxDecoration(
+                                                      color: Colors.grey),
+                                                  child: const Center(
+                                                    child: FittedBox(
+                                                      child: CustomText(
+                                                        "No Picture",
+                                                        color: Colors.white,
+                                                        size: sizeBig,
+                                                        textAlign: TextAlign.center,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                var model = context
+                                                    .read<BulkScanScreenCubit>()
+                                                    .state
+                                                    .sendScanDataModel
+                                                    .copyWith(
+                                                  statusPengiriman: state
+                                                      .loginResponse
+                                                      .user
+                                                      ?.role ==
+                                                      "Petugas"
+                                                      ? "Terkirim"
+                                                      : "Diterima",
+                                                );
+                                                context.read<QRScanBloc>().add(
+                                                    SendScanEvent(
+                                                        model,
+                                                        int.parse(
+                                                            data?.total ?? "0")));
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: primaryColor),
+                                              child: const Text("Simpan")),
+                                        ],
                                       ),
                                     );
-                                  }
-                                  return Container();
-                                },
-                              ),
-                            ),
-                            BlocBuilder<AuthBloc, AuthState>(
-                              builder: (context, state) {
-                                if (state is AuthSuccess) {
-                                  return Visibility(
-                                    visible:
-                                    // state.loginResponse.user?.role ==
-                                    //         "Kurir" &&
-                                        widget.firstTimeScan,
-                                    child: MyTextField(
-                                      label: 'Keterangan',
-                                      controller: keteranganCtrl,
-                                      onChanged: (val) {
-                                        context
-                                            .read<BulkScanScreenCubit>()
-                                            .updateModelState((dataModel) {
-                                          return dataModel.copyWith(
-                                              keterangan: val);
-                                        });
-                                      },
-                                    ),
-                                  );
-                                }
-                                return Container();
-                              },
-                            ),
-                            Visibility(
-                              visible: widget.firstTimeScan,
-                              child: MyImagePickerWidget(
-                                functionCallbackSetImageFilePath:
-                                    (numb, theImage) async {
-                                  context
-                                      .read<BulkScanScreenCubit>()
-                                      .setFotoPath(theImage?.path ?? "");
-                                },
-                                defaultImagePlaceholder: FittedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(sizeBig),
-                                    child: RoundedContainer(
-                                      sizeNormal,
-                                      height: widthScreen(context) * 0.4,
-                                      width: widthScreen(context) * 0.4,
-                                      boxDecoration: const BoxDecoration(
-                                          color: Colors.grey),
-                                      child: const Center(
-                                        child: FittedBox(
-                                          child: CustomText(
-                                            "No Picture",
-                                            color: Colors.white,
-                                            size: sizeBig,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            Visibility(
-                              visible: widget.firstTimeScan,
-                              child: BlocBuilder<AuthBloc, AuthState>(
-                                builder: (context, state) {
-                                  if (state is AuthSuccess) {
-                                    return ElevatedButton(
-                                        onPressed: () {
-                                          var model = context
-                                              .read<BulkScanScreenCubit>()
-                                              .state
-                                              .sendScanDataModel
-                                              .copyWith(
-                                                statusPengiriman: state
-                                                            .loginResponse
-                                                            .user
-                                                            ?.role ==
-                                                        "Petugas"
-                                                    ? "Terkirim"
-                                                    : "Diterima",
-                                              );
-                                          context.read<QRScanBloc>().add(
-                                              SendScanEvent(
-                                                  model,
-                                                  int.parse(
-                                                      data?.total ?? "0")));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: primaryColor),
-                                        child: const Text("Simpan"));
                                   }
                                   return Container();
                                 },
@@ -785,8 +762,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                               builder: (context, state) {
                                 if (state is AuthSuccess) {
                                   return Visibility(
-                                    visible:
-                                    state.loginResponse.user?.role ==
+                                    visible: state.loginResponse.user?.role ==
                                             "Kurir" &&
                                         widget.willScanDus,
                                     child: Column(
@@ -832,13 +808,14 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                         ),
                       )
                     ],
-                  );
-                }
-                return Container();
-              },
-            ),
-          ),
-        ),
+                  ),
+                ),
+              ),
+            );
+          }
+
+          return Container();
+        },
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../injection_container.dart';
+import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
@@ -42,25 +43,24 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              SingleChildScrollView(
-                child: Builder(
-                  builder: (context) {
-                    var state = context.watch<SuratJalanCubit>().state;
-                    var suratJalanResponseList = state.suratJalanResponse?.data?.data ?? [];
-                    log("suratJalanResponseList hal riwayat $suratJalanResponseList");
-                    if(state.isLoading) {
-                      return Padding(
-                          padding: EdgeInsets.only(top: heightScreen(context)/2),
-                          child: Center(child: CircularProgressIndicator(color: primaryColor,),));
-                    }
-                    return ListView.builder(
-                        // padding: EdgeInsets.only(
-                        //     top: orientedHeightScreen(context,
-                        //         portraitRatio: 0.15, landscapeRatio: 0.15)),
+        child: Builder(
+          builder: (context) {
+            var state = context.watch<SuratJalanCubit>().state;
+            var suratJalanResponseList = state.suratJalanResponse?.data?.data ?? [];
+            log("suratJalanResponseList hal riwayat $suratJalanResponseList");
+            if(state.isLoading) {
+              return Container(
+                  child: Center(child: CircularProgressIndicator(color: primaryColor,),));
+            }
+            return Container(
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  SingleChildScrollView(
+                    child: ListView.builder(
+                      // padding: EdgeInsets.only(
+                      //     top: orientedHeightScreen(context,
+                      //         portraitRatio: 0.15, landscapeRatio: 0.15)),
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -93,28 +93,28 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                           FittedBox(
                                               child: CustomText(
                                                 state.suratJalanResponse?.data?.data?[i-1].nosj ?? "-",
-                                            color: primaryColor,
-                                            size: sizeMedium+sizeSmall,
-                                            weight: FontWeight.bold,
-                                          )),
+                                                color: primaryColor,
+                                                size: sizeMedium+sizeSmall,
+                                                weight: FontWeight.bold,
+                                              )),
                                           Container(
                                             margin:
-                                                const EdgeInsets.only(top: sizeNormal),
+                                            const EdgeInsets.only(top: sizeNormal),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               children: const [
                                                 Flexible(
-                                                    child:CustomText(
-                                            "21 Oct 2022 . 16.00 | ",
-                                              color: primaryColor,
-                                            ),
-                                          ),
+                                                  child:CustomText(
+                                                    "21 Oct 2022 . 16.00 | ",
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
                                                 Flexible(
-                                                    child: CustomText(
-                                                      "Total 200",
-                                                      color: primaryColor,
-                                                    ),
+                                                  child: CustomText(
+                                                    "Total 200",
+                                                    color: primaryColor,
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -130,19 +130,20 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                               ],
                             ),
                           );
-                        });
-                  }
-                ),
+                        }),
+                  ),
+                  IntrinsicHeight(
+                    child: Container(
+                        color: Colors.white,
+                        child: RiwayatScreenAppbarAndSearchbar()),
+                  ),
+                ],
               ),
-              IntrinsicHeight(
-                child: Container(
-                    color: Colors.white,
-                    child: RiwayatScreenAppbarAndSearchbar()),
-              ),
-            ],
-          ),
+            );
+          }
         ),
       ),
+      // bottomNavigationBar: const CustomBottomNavbar(),
     );
   }
 }
