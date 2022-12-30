@@ -21,6 +21,7 @@ import 'package:bwa_distribution_tracking/domain/repositories/surat_jalan_reposi
 import 'package:bwa_distribution_tracking/domain/usecases/auth/check_user_login_status.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_login.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/auth/user_logout.dart';
+import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_address.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/geolocator/get_current_position.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/bulk_qr_scan.dart';
 import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/get_all_scan_history.dart';
@@ -93,6 +94,7 @@ Future<void> init() async {
   sl.registerFactory(
     () => BulkScanScreenCubit(
       sl<GetCurrentPositionUseCase>(),
+      sl<GetCurrentAddressUseCase>(),
     ),
   );
 
@@ -144,8 +146,8 @@ Future<void> init() async {
       qrScanRemoteDataSource: sl(),
     ),
   );
-  sl.registerLazySingleton<GeolocatorRepository>(
-    () => GeolocatorRepositoryImpl(
+  sl.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(
       networkInfo: sl(),
       currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
     ),
@@ -166,6 +168,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAllScanHistoryUseCase(sl()));
   sl.registerLazySingleton(() => GetHistoryPerIdUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
+  sl.registerLazySingleton(() => GetCurrentAddressUseCase(sl()));
   sl.registerLazySingleton(() => SendRequesStoreSelesaiUseCase(sl()));
   sl.registerFactory<GetSuratJalanPerPageUseCase>(() => GetSuratJalanPerPageUseCase(sl()));
 

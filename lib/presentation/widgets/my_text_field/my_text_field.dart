@@ -13,6 +13,7 @@ class MyTextField extends StatelessWidget {
   final Function()? onEditingComplete;
   final TextInputType? keyboardType;
   final bool? enabled;
+  final int? maxLines;
 
   const MyTextField(
       {this.enabled,
@@ -24,6 +25,7 @@ class MyTextField extends StatelessWidget {
       this.controller,
       this.label,
       this.borderRadius,
+      this.maxLines,
       Key? key})
       : super(key: key);
 
@@ -57,6 +59,7 @@ class MyTextField extends StatelessWidget {
           enabledBorder: primaryBorder,
           disabledBorder: primaryBorder,
         ),
+        maxLines: maxLines,
       ),
     );
   }

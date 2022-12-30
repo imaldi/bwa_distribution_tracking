@@ -300,6 +300,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             enabled: false,
                             label: 'Google Address',
                             controller: TextEditingController(text: state),
+                            maxLines: 3,
                           );
                         }),
                         MyDropdownButton<String>(

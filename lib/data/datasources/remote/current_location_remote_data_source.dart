@@ -1,7 +1,14 @@
+import 'dart:convert';
+
+import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import '../../models/open_street_map/open_street_map_response.dart';
 
 abstract class CurrentLocationRemoteDataSource {
   Future<Position> getCurrentLocation();
+  // Future<Position> getCurrentLocation();
+  Future<OpenStreetMapResponse> getCurrentAddress(double lat, double lon);
 }
 
 class CurrentLocationRemoteDataSourceImpl
@@ -46,5 +53,21 @@ class CurrentLocationRemoteDataSourceImpl
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
+  }
+
+  @override
+  Future<OpenStreetMapResponse> getCurrentAddress(double lat, double lon) async {
+    print("lat: $lat");
+    print("lon: $lon");
+      var result = await http.get(Uri.https("nominatim.openstreetmap.org","/reverse",{
+        "format": "jsonv2",
+        "lat": lat.toString(),
+        "lon": lon.toString(),
+      }));
+      print("addres status code: ${result.statusCode}");
+      print("addres response: ${result.body}");
+      if(result.statusCode != 200) throw ServerException();
+      return OpenStreetMapResponse.fromJson(jsonDecode(result.body));
+
   }
 }

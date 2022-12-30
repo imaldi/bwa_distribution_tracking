@@ -7,7 +7,7 @@ import 'package:geolocator/geolocator.dart';
 
 
 class GetCurrentPositionUseCase extends UseCase<Position, NoParams>{
-  GeolocatorRepository repository;
+  LocationRepository repository;
   GetCurrentPositionUseCase(this.repository);
   @override
   Future<Either<Failure, Position>> call(NoParams params) async {
