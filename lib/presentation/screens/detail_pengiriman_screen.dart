@@ -522,7 +522,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                             color: Colors.grey,
                                           ),
                                           CustomText(
-                                            listAll[i] is SendScanDataModel ? DateFormat("hh:mm", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("hh:mm", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
+                                            listAll[i] is SendScanDataModel ? DateFormat("HH:mm", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("HH:mm", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
                                             color: Colors.grey,
                                           ),
                                         ],
@@ -546,9 +546,29 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               color: primaryColor,
                                             ),
                                           ),
-                                          subtitle: CustomText(
-                                            "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Nama Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nNama Tempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}\nLihatDetail"}",
-                                            color: primaryColor,
+                                          subtitle: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              CustomText(
+                                                "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nTempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}"}",
+                                                color: primaryColor,
+                                              ),
+                                              InkWell(
+                                                onTap:()async{
+                                                  await showDialog(context: context, builder: (c){
+                                                    return RoundedContainer(
+                                                        sizeMedium,
+                                                        boxDecoration: const BoxDecoration(color: Colors.white,),
+                                                        margin: const EdgeInsets.symmetric(horizontal: sizeMedium,vertical: sizeHuge),
+                                                        child: Text("Disini nanti detail dus dan map"));
+                                                  });
+                                                },
+                                                child: const RoundedContainer(sizeMedium,
+                                                boxDecoration: BoxDecoration(color: primaryGreen),
+                                                padding: EdgeInsets.symmetric(horizontal: sizeNormal),
+                                                child: Center(child: CustomText("Lihat Detail",color:Colors.white))),
+                                              )
+                                            ],
                                           ),
                                         )
                                         // Text('contents\ncontents\ncontents\ncontents'),
