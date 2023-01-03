@@ -209,70 +209,83 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         // Image.asset("assets/images/foto_profil_dummy.png"),
 
-                                        Container(
-                                          // color: Colors.green,
-                                          height: orientedHeightScreen(context,
-                                              portraitRatio: 0.15,
-                                              landscapeRatio: 0.15),
-                                          padding:
-                                              const EdgeInsets.all(sizeNormal),
-                                          child: Column(
-                                            children: [
-                                              const CustomText(
-                                                "Masukkan Nomor Surat Jalan",
-                                                color: Colors.white,
-                                              ),
-                                              RoundedContainer(
-                                                sizeMedium,
-                                                boxDecoration: BoxDecoration(
-                                                  color: Colors.transparent,
-                                                  border: Border.all(
-                                                      width: 3.0,
-                                                      color: Colors.white),
-                                                  // borderRadius: BorderRadius.all(Radius.circular(sizeBig)),
+                                        InkWell(
+                                          onTap: (){
+                                            myToast("HEEYY HEEYY");
+                                          },
+                                          child: Container(
+                                            // color: Colors.green,
+                                            height: orientedHeightScreen(context,
+                                                portraitRatio: 0.15,
+                                                landscapeRatio: 0.15),
+                                            padding:
+                                                const EdgeInsets.all(sizeNormal),
+                                            child: Column(
+                                              children: [
+                                                const CustomText(
+                                                  "Masukkan Nomor Surat Jalan",
+                                                  color: Colors.white,
                                                 ),
-                                                child: NoUnderlineTextFormField(
-                                                  controller: controller,
-                                                  onEditingComplete: () {
-                                                    var state = context
-                                                        .read<AuthBloc>()
-                                                        .state;
-                                                    if (state is AuthSuccess) {
-                                                      // textValue = controller.text;
-                                                      var qrBloc = context
-                                                          .read<QRScanBloc>();
-                                                      // var isNewScan
-                                                      qrBloc.add(BulkQRScanEvent(
-                                                          // textValue
-                                                          controller.text
-                                                          // "003SPJ22-MERANTI00098-0002"
-                                                          ));
-                                                      context.router.push(
-                                                          BulkScanRoute(
-                                                              qrScanBloc:
-                                                                  qrBloc,
-                                                              qrCode: controller
-                                                                  .text));
-                                                    }
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                          // label: Center(child: CustomText("Kode UPC",color: Colors.white,)),
-                                                          hintStyle: TextStyle(
-                                                            color: Colors.white,
-                                                          ),
-                                                          // filled: true,
-                                                          hintText:
-                                                              "Nomor Surat Jalan"),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: RoundedContainer(
+                                                        sizeMedium,
+                                                        boxDecoration: BoxDecoration(
+                                                          color: Colors.transparent,
+                                                          border: Border.all(
+                                                              width: 3.0,
+                                                              color: Colors.white),
+                                                          // borderRadius: BorderRadius.all(Radius.circular(sizeBig)),
+                                                        ),
+                                                        child:
+                                                        Center(child: CustomText("Shipping Code", color: Colors.white,)),
+                                                        // NoUnderlineTextFormField(
+                                                        //   controller: controller,
+                                                        //   onEditingComplete: () {
+                                                        //     var state = context
+                                                        //         .read<AuthBloc>()
+                                                        //         .state;
+                                                        //     if (state is AuthSuccess) {
+                                                        //       // textValue = controller.text;
+                                                        //       var qrBloc = context
+                                                        //           .read<QRScanBloc>();
+                                                        //       // var isNewScan
+                                                        //       qrBloc.add(BulkQRScanEvent(
+                                                        //           // textValue
+                                                        //           controller.text
+                                                        //           // "003SPJ22-MERANTI00098-0002"
+                                                        //           ));
+                                                        //       context.router.push(
+                                                        //           BulkScanRoute(
+                                                        //               qrScanBloc:
+                                                        //                   qrBloc,
+                                                        //               qrCode: controller
+                                                        //                   .text));
+                                                        //     }
+                                                        //     FocusManager
+                                                        //         .instance.primaryFocus
+                                                        //         ?.unfocus();
+                                                        //   },
+                                                        //   textAlign: TextAlign.center,
+                                                        //   style: const TextStyle(
+                                                        //       color: Colors.white),
+                                                        //   decoration:
+                                                        //       const InputDecoration(
+                                                        //           // label: Center(child: CustomText("Kode UPC",color: Colors.white,)),
+                                                        //           hintStyle: TextStyle(
+                                                        //             color: Colors.white,
+                                                        //           ),
+                                                        //           // filled: true,
+                                                        //           hintText:
+                                                        //               "Nomor Surat Jalan"),
+                                                        // ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ]

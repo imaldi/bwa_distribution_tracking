@@ -6,6 +6,7 @@ import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
@@ -103,16 +104,16 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                             child: Row(
                                               mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Flexible(
                                                   child:CustomText(
-                                                    "21 Oct 2022 . 16.00 | ",
+                                                    "${DateFormat("dd MMM yyyy . HH.mm", 'id').format(state.suratJalanResponse?.data?.data?[i-1].createdAt ?? DateTime(2000))} | ",
                                                     color: primaryColor,
                                                   ),
                                                 ),
                                                 Flexible(
                                                   child: CustomText(
-                                                    "Total 200",
+                                                    "Total ${state.suratJalanResponse?.data?.data?[i-1].total ?? "-"}",
                                                     color: primaryColor,
                                                   ),
                                                 ),
