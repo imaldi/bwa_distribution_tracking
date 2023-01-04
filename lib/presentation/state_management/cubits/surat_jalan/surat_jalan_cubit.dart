@@ -12,11 +12,11 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
   final GetSuratJalanPerPageUseCase _getSuratJalanUseCase;
   SuratJalanCubit(this._getSuratJalanUseCase) : super(SuratJalanState());
 
-  void getSuratJalanPerPage(int pageNumber) async {
+  void getSuratJalanPerPage(int pageNumber,{String? menuStatusForTitle}) async {
     emit(state.copyWith(isLoading: true));
     var resultOrFailed = await _getSuratJalanUseCase(SuratJalanPerPageParams(pageNumber));
     var newResponse = resultOrFailed.fold((l) => const SuratJalanResponse(), (r) => r);
-    emit(state.copyWith(isLoading: false, suratJalanResponse: newResponse, isFetchingList: true));
+    emit(state.copyWith(isLoading: false, suratJalanResponse: newResponse, isFetchingList: true, menuStatusForTitle: menuStatusForTitle));
     print("surat Jalan total page: ${state.suratJalanResponse?.data?.total}");
     print("is viewing list: ${state.isFetchingList}");
   }
@@ -27,6 +27,6 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
   }
 
   void resetStateViewList(){
-    emit(state.copyWith(isFetchingList: false,willScanDus: false));
+    emit(state.copyWith(isFetchingList: false,willScanDus: false,menuStatusForTitle: "-"));
   }
 }

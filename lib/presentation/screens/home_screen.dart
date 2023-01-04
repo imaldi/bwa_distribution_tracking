@@ -19,13 +19,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 
 import '../../core/resources/consts/colors.dart';
+import '../../core/resources/consts/strings.dart';
+import '../../core/resources/helper/number_formatter.dart';
 import '../../core/resources/media_query/media_query_helpers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 
-//test push
+
+/// menu status for pengiriman
+const constPengiriman = "Pengiriman";
+const constPenerimaan = "Penerimaan";
+const constDistribusi = "Distribusi";
+const constLaporan = "Laporan";
+
+
 class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -166,6 +175,44 @@ class _HomeScreenState extends State<HomeScreen> {
                                         //     }),
                                         //   ],
                                         // ),
+                                        Builder(
+                                          builder: (context) {
+                                            var appBarTitle = context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "-";
+
+                                            return Visibility(
+                                              visible: appBarTitle != "-",
+                                              child: Stack(alignment: Alignment.centerLeft, children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    Center(
+                                                        child: Builder(
+                                                          builder: (context) {
+                                                            return CustomText(
+                                                              appBarTitle,
+                                                              color: Colors.white,
+                                                              size: sizeMedium,
+                                                            );
+                                                          }
+                                                        ))
+                                                  ],
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    context.router.pop();
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.keyboard_arrow_left_outlined,
+                                                    color: Colors.white,
+                                                    size: sizeBig,
+                                                  ),
+                                                ),
+                                              ]),
+                                            );
+                                          }
+                                        ),
+
                                         Container(
                                           // color: primaryGreen,
                                           height: orientedHeightScreen(context,
@@ -309,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1);
+                                        .getSuratJalanPerPage(1,menuStatusForTitle: constPengiriman);
                                   },
                                   child: RoundedContainer(sizeMedium,
                                       padding: const EdgeInsets.all(0),
@@ -330,8 +377,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                       "assets/images/iconoir_delivery_truck.svg"),
-                                                  CustomText(
-                                                    "Pengiriman",
+                                                  const CustomText(
+                                                    constPengiriman,
                                                     color: Colors.white,
                                                   )
                                                 ],
@@ -343,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1);
+                                        .getSuratJalanPerPage(1,menuStatusForTitle: constPenerimaan);
                                   },
                                   child: RoundedContainer(sizeMedium,
                                       padding: const EdgeInsets.all(0),
@@ -364,8 +411,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                       "assets/images/diterima_icon.svg"),
-                                                  CustomText(
-                                                    "Penerimaan",
+                                                  const CustomText(
+                                                    constPenerimaan,
                                                     color: Colors.white,
                                                   )
                                                 ],
@@ -379,7 +426,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1);
+                                        .getSuratJalanPerPage(1,menuStatusForTitle: constDistribusi);
                                     context
                                         .read<SuratJalanCubit>()
                                         .setWillScanDus();
@@ -403,8 +450,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SvgPicture.asset(
                                                       "assets/images/distribution_icon.svg"),
-                                                  CustomText(
-                                                    "Distribusi",
+                                                  const CustomText(
+                                                    constDistribusi,
                                                     color: Colors.white,
                                                   )
                                                 ],
@@ -431,8 +478,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               children: [
                                                 SvgPicture.asset(
                                                     "assets/images/laporan_icon.svg"),
-                                                CustomText(
-                                                  "Laporan",
+                                                const CustomText(
+                                                  constLaporan,
                                                   color: Colors.white,
                                                 )
                                               ],
@@ -576,7 +623,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           ),
                                                                         ),
                                                                         CustomText(
-                                                                          "${int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0")}",
+                                                                          indonesianNumberFormat((int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0")).toString()),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,
@@ -599,7 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           ),
                                                                         ),
                                                                         CustomText(
-                                                                          "${listSJ?[i].selesai ?? 0}",
+                                                                          indonesianNumberFormat(listSJ?[i].selesai ?? "0"),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,
@@ -618,7 +665,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           // color: primaryColor,
                                                                         ),
                                                                         CustomText(
-                                                                          "${listSJ?[i].total ?? 0}",
+                                                                          indonesianNumberFormat(listSJ?[i].total ?? "0"),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,

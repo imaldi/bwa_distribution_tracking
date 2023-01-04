@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 
 import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
+import '../../core/resources/helper/number_formatter.dart';
 import '../../injection_container.dart';
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
@@ -113,7 +114,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                                 ),
                                                 Flexible(
                                                   child: CustomText(
-                                                    "Total ${state.suratJalanResponse?.data?.data?[i-1].total ?? "-"}",
+                                                    "Total ${indonesianNumberFormat(state.suratJalanResponse?.data?.data?[i-1].total ?? "0")}",
                                                     color: primaryColor,
                                                   ),
                                                 ),

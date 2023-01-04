@@ -13,7 +13,9 @@ import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:timelines/timelines.dart';
+import 'package:flutter_map/flutter_map.dart'; // Suitable for most situations
 import '../../core/resources/consts/sizes.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
@@ -42,6 +44,7 @@ class DetailPengirimanScreen extends StatefulWidget
 class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
   var textColor = Colors.white;
   var controller = ScrollController();
+  final _mapController = MapController();
 
   @override
   void initState() {
@@ -73,7 +76,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
               var nosjhistoryStatusPengirimanList = (response.nosjhistory ?? [])
                   .map((e) => e.statusPengiriman ?? "")
                   .toList();
-              var nosjHistory = response.nosjhistory ?? [].toList();
+              var nosjHistory =
+                  response.nosjhistory ?? <SendScanDataModel>[].toList();
               var dusHistory = response.dushistory ??
                   [
                     // DusData(nosj: "ASJKNA"),
@@ -112,7 +116,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       Expanded(
                                           child: CustomText(
                                         // Fixme fix with date formatting helper
-                                        ": ${data?.createdAt}",
+                                        ": ${DateFormat("dd MMM yyyy", 'id').format(data?.createdAt ?? DateTime(2000))}",
                                         color: textColor,
                                       )),
                                     ],
@@ -514,15 +518,39 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     oppositeContents: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           CustomText(
-                                            listAll[i] is SendScanDataModel ? DateFormat("dd MMM yyyy", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("dd MMM yyyy", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
+                                            listAll[i] is SendScanDataModel
+                                                ? DateFormat(
+                                                        "dd MMM yyyy", 'id')
+                                                    .format((listAll[i]
+                                                                as SendScanDataModel)
+                                                            .createdAt ??
+                                                        DateTime(2022))
+                                                : DateFormat(
+                                                        "dd MMM yyyy", 'id')
+                                                    .format(
+                                                        (listAll[i] as DusData)
+                                                                .createdAt ??
+                                                            DateTime(2022)),
                                             color: Colors.grey,
                                           ),
                                           CustomText(
-                                            listAll[i] is SendScanDataModel ? DateFormat("HH:mm", 'id').format((listAll[i] as SendScanDataModel).createdAt ?? DateTime(2022)) : DateFormat("HH:mm", 'id').format((listAll[i] as DusData).createdAt ?? DateTime(2022)),
+                                            listAll[i] is SendScanDataModel
+                                                ? DateFormat("HH:mm", 'id')
+                                                    .format((listAll[i]
+                                                                as SendScanDataModel)
+                                                            .createdAt ??
+                                                        DateTime(2022))
+                                                : DateFormat("HH:mm", 'id')
+                                                    .format(
+                                                        (listAll[i] as DusData)
+                                                                .createdAt ??
+                                                            DateTime(2022)),
                                             color: Colors.grey,
                                           ),
                                         ],
@@ -547,26 +575,50 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                             ),
                                           ),
                                           subtitle: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
                                                 "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nTempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}"}",
                                                 color: primaryColor,
                                               ),
                                               InkWell(
-                                                onTap:()async{
-                                                  await showDialog(context: context, builder: (c){
-                                                    return RoundedContainer(
-                                                        sizeMedium,
-                                                        boxDecoration: const BoxDecoration(color: Colors.white,),
-                                                        margin: const EdgeInsets.symmetric(horizontal: sizeMedium,vertical: sizeHuge),
-                                                        child: Text("Disini nanti detail dus dan map"));
-                                                  });
+                                                onTap: () async {
+                                                  await showDialog(
+                                                      context: context,
+                                                      builder: (c) {
+                                                        return RoundedContainer(
+                                                            sizeMedium,
+                                                            boxDecoration:
+                                                                const BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            margin: const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    sizeMedium,
+                                                                vertical:
+                                                                    sizeHuge),
+                                                            child: Text(
+                                                                "Disini nanti detail dus dan map"));
+                                                      });
                                                 },
-                                                child: const RoundedContainer(sizeMedium,
-                                                boxDecoration: BoxDecoration(color: primaryGreen),
-                                                padding: EdgeInsets.symmetric(horizontal: sizeNormal),
-                                                child: Center(child: CustomText("Lihat Detail",color:Colors.white))),
+                                                child: const RoundedContainer(
+                                                    sizeMedium,
+                                                    boxDecoration:
+                                                        BoxDecoration(
+                                                            color:
+                                                                primaryGreen),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal:
+                                                                sizeNormal),
+                                                    child: Center(
+                                                        child: CustomText(
+                                                            "Lihat Detail",
+                                                            color:
+                                                                Colors.white))),
                                               )
                                             ],
                                           ),
@@ -592,6 +644,41 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                 }),
                           ));
                     }),
+                    Container(
+                        margin: const EdgeInsets.only(bottom: sizeHuge),
+                        // height: 300,
+                        // clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: [
+                            Text("Latitude: ${nosjHistory.first.latitude}"),
+                            Text("Longitude: ${nosjHistory.first.longtitude}"),
+                      // FlutterMap(
+                      //   mapController: _mapController,
+                      //   options: MapOptions(),
+                      //   children: [],
+                      //   nonRotatedChildren: [],
+                      // )
+                      //       FlutterMap(
+                      //         options: MapOptions(
+                      //           center: LatLng(double.parse(nosjHistory.first.latitude ?? "0.0"), double.parse(nosjHistory.first.longtitude ?? "0.0")),
+                      //           zoom: 9.0,
+                      //         ),
+                      //         nonRotatedChildren: [
+                      //           AttributionWidget.defaultWidget(
+                      //             source: 'OpenStreetMap contributors',
+                      //             onSourceTapped: (){},
+                      //           ),
+                      //         ],
+                      //         children: [
+                      //           TileLayer(
+                      //             urlTemplate:
+                      //                 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      //             userAgentPackageName: 'com.example.app',
+                      //           ),
+                      //         ],
+                      //       )
+                          ],
+                        ))
                     // RoundedContainer(sizeNormal,
                     //     width: 200,
                     //     height: 200,
