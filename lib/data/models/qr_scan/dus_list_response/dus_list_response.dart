@@ -26,7 +26,7 @@ class DusData with _$DusData {
     @JsonKey(name: 'id_location') String? idLocation,
     @JsonKey(name: 'location_id') String? locationId,
     String? latitude,
-    String? longitude,
+    String? longtitude,
     @JsonKey(name: 'nama_penerima') String? namaPenerima,
     @JsonKey(name: 'no_hp') String? noHp,
     String? lembaga,

@@ -67,9 +67,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
             if (state is HistoryPerIdLoaded) {
               BulkScanResponse response = state.historyPerIdResponse;
               var header =
-                  (response.header != null && response.header!.isNotEmpty)
-                      ? response.header?.first
-                      : const SuratJalanModel();
+              (response.header != null && response.header!.isNotEmpty)
+                  ? response.header?.first
+                  : const SuratJalanModel();
               var data = (response.data != null && response.data!.isNotEmpty)
                   ? response.data?.first
                   : const BulkQRScanModel();
@@ -85,8 +85,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                   ].toList();
               var listAll = []
                 ..toList()
-                ..addAll(dusHistory)
-                ..addAll(nosjHistory);
+                ..addAll(dusHistory)..addAll(nosjHistory);
               log("list all: ${listAll}");
               log("list dus: ${dusHistory}");
               return SingleChildScrollView(
@@ -99,106 +98,108 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                           child: RoundedContainer(sizeMedium,
                               padding: const EdgeInsets.all(sizeMedium),
                               margin:
-                                  const EdgeInsets.symmetric(vertical: sizeBig),
+                              const EdgeInsets.symmetric(vertical: sizeBig),
                               boxDecoration: const BoxDecoration(
                                   color: Colors.transparent),
                               child: Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "Tanggal",
-                                        color: textColor,
-                                      )),
+                                            "Tanggal",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        // Fixme fix with date formatting helper
-                                        ": ${DateFormat("dd MMM yyyy", 'id').format(data?.createdAt ?? DateTime(2000))}",
-                                        color: textColor,
-                                      )),
+                                            // Fixme fix with date formatting helper
+                                            ": ${DateFormat("dd MMM yyyy", 'id')
+                                                .format(data?.createdAt ??
+                                                DateTime(2000))}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "Nomor PC/PO",
-                                        color: textColor,
-                                      )),
+                                            "Nomor PC/PO",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        ": ${data?.nopc}",
-                                        color: textColor,
-                                      )),
+                                            ": ${data?.nopc}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "No Polisi",
-                                        color: textColor,
-                                      )),
+                                            "No Polisi",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        ": ${data?.nopol}",
-                                        color: textColor,
-                                      )),
+                                            ": ${data?.nopol}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "Nama Ekspedisi",
-                                        color: textColor,
-                                      )),
+                                            "Nama Ekspedisi",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        ": ${data?.dikirimBy}",
-                                        color: textColor,
-                                      )),
+                                            ": ${data?.dikirimBy}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "Nama Pengemudi",
-                                        color: textColor,
-                                      )),
+                                            "Nama Pengemudi",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        ": ${data?.nmPengemudi}",
-                                        color: textColor,
-                                      )),
+                                            ": ${data?.nmPengemudi}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                     children: [
                                       Expanded(
                                           child: CustomText(
-                                        "Alamat Pengirimiman",
-                                        color: textColor,
-                                      )),
+                                            "Alamat Pengirimiman",
+                                            color: textColor,
+                                          )),
                                       Expanded(
                                           child: CustomText(
-                                        ": ${data?.alamat}",
-                                        color: textColor,
-                                      )),
+                                            ": ${data?.alamat}",
+                                            color: textColor,
+                                          )),
                                     ],
                                   ),
                                 ],
@@ -215,9 +216,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             color: Colors.transparent,
                             child: const FittedBox(
                                 child: CustomText(
-                              "hmm",
-                              color: Colors.transparent,
-                            )),
+                                  "hmm",
+                                  color: Colors.transparent,
+                                )),
                           ),
                           contents: Container(
                             height: 100,
@@ -225,9 +226,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             padding: const EdgeInsets.only(left: sizeNormal),
                             child: const FittedBox(
                                 child: CustomText(
-                              'Wakaf Logistik',
-                              color: primaryColor,
-                            )),
+                                  'Wakaf Logistik',
+                                  color: primaryColor,
+                                )),
                           ),
                           node: TimelineNode(
                             // direction: Axis.horizontal,
@@ -238,11 +239,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                              .isNotEmpty &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Terkirim")
+                                      .isNotEmpty &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Terkirim")
                                       ? const AssetImage(
-                                          "assets/images/background_main.png")
+                                      "assets/images/background_main.png")
                                       : null,
                                 ),
                                 SizedBox(
@@ -273,9 +274,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             color: Colors.transparent,
                             child: const FittedBox(
                                 child: CustomText(
-                              "hmm",
-                              color: Colors.transparent,
-                            )),
+                                  "hmm",
+                                  color: Colors.transparent,
+                                )),
                           ),
                           contents: Container(
                             height: 100,
@@ -283,14 +284,14 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             // padding: EdgeInsets.all(8.0),
                             child: Center(
                                 child: CustomText(
-                              'Dropping',
-                              color:
+                                  'Dropping',
+                                  color:
                                   nosjhistoryStatusPengirimanList.isNotEmpty &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Diterima")
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Diterima")
                                       ? primaryColor
                                       : Colors.grey,
-                            )),
+                                )),
                           ),
                           node: TimelineNode(
                             // direction: Axis.horizontal,
@@ -301,11 +302,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: nosjhistoryStatusPengirimanList
-                                              .isNotEmpty &&
-                                          nosjhistoryStatusPengirimanList
-                                              .contains("Diterima")
+                                      .isNotEmpty &&
+                                      nosjhistoryStatusPengirimanList
+                                          .contains("Diterima")
                                       ? const AssetImage(
-                                          "assets/images/background_main.png")
+                                      "assets/images/background_main.png")
                                       : null,
                                 ),
                                 SizedBox(
@@ -335,9 +336,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             color: Colors.transparent,
                             child: const FittedBox(
                                 child: CustomText(
-                              "hmm",
-                              color: Colors.transparent,
-                            )),
+                                  "hmm",
+                                  color: Colors.transparent,
+                                )),
                           ),
                           contents: Container(
                             height: 100,
@@ -345,24 +346,24 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             // padding: EdgeInsets.all(8.0),
                             child: Center(
                                 child: CustomText(
-                              'Distribusi',
-                              color: dusHistory.isNotEmpty &&
-                                          // listAll
-                                          //     .contains("Diterima") &&
-                                          // listAll
-                                          //     .contains("Terkirim") &&
-                                          ((int.parse(header?.total ?? "0") !=
-                                                  int.parse(header?.selesai ??
-                                                      "-1")) &&
-                                              (int.parse(
-                                                      header?.total ?? "0") !=
-                                                  int.parse(header?.onproses ??
-                                                      "-1"))) ||
+                                  'Distribusi',
+                                  color: dusHistory.isNotEmpty &&
+                                      // listAll
+                                      //     .contains("Diterima") &&
+                                      // listAll
+                                      //     .contains("Terkirim") &&
+                                      ((int.parse(header?.total ?? "0") !=
+                                          int.parse(header?.selesai ??
+                                              "-1")) &&
+                                          (int.parse(
+                                              header?.total ?? "0") !=
+                                              int.parse(header?.onproses ??
+                                                  "-1"))) ||
                                       (int.parse(header?.total ?? "0") ==
                                           int.parse(header?.selesai ?? "-1"))
-                                  ? primaryColor
-                                  : Colors.grey,
-                            )),
+                                      ? primaryColor
+                                      : Colors.grey,
+                                )),
                           ),
                           node: TimelineNode(
                             // direction: Axis.horizontal,
@@ -373,25 +374,25 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     radius: sizeBig, // Image radius
                                     backgroundColor: Colors.grey,
                                     backgroundImage: dusHistory.isNotEmpty &&
-                                                // listAll
-                                                //     .contains("Diterima") &&
-                                                // listAll
-                                                //     .contains("Terkirim") &&
-                                                ((int.parse(header?.total ??
-                                                            "0") !=
-                                                        int.parse(
-                                                            header?.selesai ??
-                                                                "-1")) &&
-                                                    (int.parse(header?.total ??
-                                                            "0") !=
-                                                        int.parse(
-                                                            header?.onproses ??
-                                                                "-1"))) ||
-                                            (int.parse(header?.total ?? "0") ==
+                                        // listAll
+                                        //     .contains("Diterima") &&
+                                        // listAll
+                                        //     .contains("Terkirim") &&
+                                        ((int.parse(header?.total ??
+                                            "0") !=
+                                            int.parse(
+                                                header?.selesai ??
+                                                    "-1")) &&
+                                            (int.parse(header?.total ??
+                                                "0") !=
                                                 int.parse(
-                                                    header?.selesai ?? "-1"))
+                                                    header?.onproses ??
+                                                        "-1"))) ||
+                                        (int.parse(header?.total ?? "0") ==
+                                            int.parse(
+                                                header?.selesai ?? "-1"))
                                         ? const AssetImage(
-                                            "assets/images/background_main.png")
+                                        "assets/images/background_main.png")
                                         : null),
                                 SizedBox(
                                   height: sizeMedium + sizeNormal,
@@ -419,9 +420,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             color: Colors.transparent,
                             child: const FittedBox(
                                 child: CustomText(
-                              "hmm",
-                              color: Colors.transparent,
-                            )),
+                                  "hmm",
+                                  color: Colors.transparent,
+                                )),
                           ),
                           contents: Container(
                             height: 100,
@@ -429,17 +430,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             // padding: EdgeInsets.all(8.0),
                             child: Center(
                                 child: CustomText(
-                              'Selesai',
-                              color: dusHistory.isNotEmpty &&
+                                  'Selesai',
+                                  color: dusHistory.isNotEmpty &&
                                       // listAll
                                       //     .contains("Diterima") &&
                                       // listAll
                                       //     .contains("Terkirim") &&
                                       (int.parse(header?.total ?? "0") ==
                                           int.parse(header?.selesai ?? "-1"))
-                                  ? primaryColor
-                                  : Colors.grey,
-                            )),
+                                      ? primaryColor
+                                      : Colors.grey,
+                                )),
                           ),
                           node: TimelineNode(
                             // direction: Axis.horizontal,
@@ -450,15 +451,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   radius: sizeBig, // Image radius
                                   backgroundColor: Colors.grey,
                                   backgroundImage: listAll.isNotEmpty &&
-                                          // listAll
-                                          //     .contains("Diterima") &&
-                                          // listAll
-                                          //     .contains("Terkirim") &&
-                                          (int.parse(header?.total ?? "0") ==
-                                              int.parse(
-                                                  header?.selesai ?? "-1"))
+                                      // listAll
+                                      //     .contains("Diterima") &&
+                                      // listAll
+                                      //     .contains("Terkirim") &&
+                                      (int.parse(header?.total ?? "0") ==
+                                          int.parse(
+                                              header?.selesai ?? "-1"))
                                       ? const AssetImage(
-                                          "assets/images/background_main.png")
+                                      "assets/images/background_main.png")
                                       : null,
                                 ),
                                 SizedBox(
@@ -482,7 +483,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                     Builder(builder: (c) {
                       return Container(
                           margin:
-                              const EdgeInsets.symmetric(vertical: sizeMedium),
+                          const EdgeInsets.symmetric(vertical: sizeMedium),
                           height: 400,
                           child: NotificationListener<OverscrollNotification>(
                             onNotification: (OverscrollNotification value) {
@@ -506,7 +507,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               return true;
                             },
                             child: ListView.builder(
-                                // itemCount: nosjHistory.length,
+                              // itemCount: nosjHistory.length,
                                 itemCount: listAll.length,
                                 physics: const ClampingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
@@ -519,38 +520,38 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                        CrossAxisAlignment.end,
                                         children: [
                                           CustomText(
                                             listAll[i] is SendScanDataModel
                                                 ? DateFormat(
-                                                        "dd MMM yyyy", 'id')
-                                                    .format((listAll[i]
-                                                                as SendScanDataModel)
-                                                            .createdAt ??
-                                                        DateTime(2022))
+                                                "dd MMM yyyy", 'id')
+                                                .format((listAll[i]
+                                            as SendScanDataModel)
+                                                .createdAt ??
+                                                DateTime(2022))
                                                 : DateFormat(
-                                                        "dd MMM yyyy", 'id')
-                                                    .format(
-                                                        (listAll[i] as DusData)
-                                                                .createdAt ??
-                                                            DateTime(2022)),
+                                                "dd MMM yyyy", 'id')
+                                                .format(
+                                                (listAll[i] as DusData)
+                                                    .createdAt ??
+                                                    DateTime(2022)),
                                             color: Colors.grey,
                                           ),
                                           CustomText(
                                             listAll[i] is SendScanDataModel
                                                 ? DateFormat("HH:mm", 'id')
-                                                    .format((listAll[i]
-                                                                as SendScanDataModel)
-                                                            .createdAt ??
-                                                        DateTime(2022))
+                                                .format((listAll[i]
+                                            as SendScanDataModel)
+                                                .createdAt ??
+                                                DateTime(2022))
                                                 : DateFormat("HH:mm", 'id')
-                                                    .format(
-                                                        (listAll[i] as DusData)
-                                                                .createdAt ??
-                                                            DateTime(2022)),
+                                                .format(
+                                                (listAll[i] as DusData)
+                                                    .createdAt ??
+                                                    DateTime(2022)),
                                             color: Colors.grey,
                                           ),
                                         ],
@@ -559,14 +560,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     contents: Container(
                                         padding: const EdgeInsets.all(8.0),
                                         constraints:
-                                            const BoxConstraints(maxWidth: 400),
+                                        const BoxConstraints(maxWidth: 400),
                                         child: ListTile(
                                           contentPadding: EdgeInsets.only(
                                               left: sizeNormal,
                                               right: sizeNormal),
                                           title: Container(
                                             child: CustomText(
-                                              "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).statusPengiriman : "Selesai - Lokasi ${(listAll.length - 1) - (dusHistory.indexOf(listAll[i]) + 1)}"
+                                              "${listAll[i] is SendScanDataModel
+                                                  ? (listAll[i] as SendScanDataModel)
+                                                  .statusPengiriman
+                                                  : "Selesai - Lokasi ${(listAll
+                                                  .length - 1) -
+                                                  (dusHistory.indexOf(
+                                                      listAll[i]) + 1)}"
                                               // "Selesai"
 
                                               }",
@@ -576,69 +583,205 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                           ),
                                           subtitle: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                                "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nTempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}"}",
+                                                "${listAll[i] is SendScanDataModel
+                                                    ? (listAll[i] as SendScanDataModel)
+                                                    .keterangan
+                                                    : "Penerima: ${(listAll[i] as DusData)
+                                                    .namaPenerima ??
+                                                    "No Receiver"} \nTempat: ${(listAll[i] as DusData)
+                                                    .nmTempat ??
+                                                    "No Address"}"}",
                                                 color: primaryColor,
                                               ),
-                                              SizedBox(height: sizeNormal,),
+                                              SizedBox(
+                                                height: sizeNormal,
+                                              ),
                                               InkWell(
                                                 onTap: () async {
                                                   await showDialog(
                                                       context: context,
                                                       builder: (c) {
-                                                        return const RoundedContainer(
-                                                            sizeMedium,
-                                                            boxDecoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            margin: EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
+                                                        // var _rotation =
+                                                        //     _mapController
+                                                        //         .rotation;
+                                                        return RoundedContainer(
+                                                          sizeMedium,
+                                                          margin: EdgeInsets
+                                                              .symmetric(
+                                                              horizontal:
+                                                              sizeMedium,
+                                                              vertical:
+                                                              sizeHuge),
+                                                          child:
+                                                          SingleChildScrollView(
+                                                            child: Column(
+                                                              children: [
+                                                                RoundedContainer(
                                                                     sizeMedium,
-                                                                vertical:
-                                                                    sizeHuge),
-                                                            child: Text(
-                                                                "Disini nanti detail dus dan map"));
+                                                                    boxDecoration:
+                                                                    BoxDecoration(
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    constraints:
+                                                                    const BoxConstraints(
+                                                                        maxHeight:
+                                                                        200),
+                                                                    child:
+                                                                    FlutterMap(
+                                                                      options:
+                                                                      MapOptions(
+                                                                        // onPositionChanged:
+                                                                        //     (mapPosition,
+                                                                        //         _) {
+                                                                        //   setState(
+                                                                        //       () {
+                                                                        //     _rotation =
+                                                                        //         _mapController.rotation;
+                                                                        //   });
+                                                                        // },
+                                                                        center: LatLng(
+                                                                            (listAll[i] is DusData
+                                                                                ? double
+                                                                                .parse(
+                                                                                (listAll[i] as DusData)
+                                                                                    .latitude ??
+                                                                                    "0.0")
+                                                                                : (double
+                                                                                .parse(
+                                                                                (listAll[i] as SendScanDataModel)
+                                                                                    .latitude ??
+                                                                                    "0.0"))),
+                                                                            (listAll[i] is DusData
+                                                                                ? double
+                                                                                .parse(
+                                                                                (listAll[i] as DusData)
+                                                                                    .longtitude ??
+                                                                                    "0.0")
+                                                                                : (double
+                                                                                .parse(
+                                                                                (listAll[i] as SendScanDataModel)
+                                                                                    .longtitude ??
+                                                                                    "0.0")))),
+                                                                        zoom:
+                                                                        17.0,
+                                                                        maxZoom:
+                                                                        18.0,
+                                                                      ),
+                                                                      nonRotatedChildren: [
+                                                                        AttributionWidget
+                                                                            .defaultWidget(
+                                                                          source:
+                                                                          'OpenStreetMap contributors',
+                                                                          onSourceTapped:
+                                                                              () {},
+                                                                        ),
+                                                                      ],
+                                                                      children: [
+                                                                        TileLayer(
+                                                                          urlTemplate:
+                                                                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                                          userAgentPackageName:
+                                                                          'com.example.app',
+                                                                        ),
+                                                                        MarkerLayer(
+                                                                            markers: [
+                                                                              Marker(
+                                                                                width: 80,
+                                                                                height: 80,
+                                                                                rotate: true,
+                                                                                point: LatLng(
+                                                                                    (listAll[i] is DusData
+                                                                                        ? double
+                                                                                        .parse(
+                                                                                        (listAll[i] as DusData)
+                                                                                            .latitude ??
+                                                                                            "0.0")
+                                                                                        : (double
+                                                                                        .parse(
+                                                                                        (listAll[i] as SendScanDataModel)
+                                                                                            .latitude ??
+                                                                                            "0.0"))),
+                                                                                    (listAll[i] is DusData
+                                                                                        ? double
+                                                                                        .parse(
+                                                                                        (listAll[i] as DusData)
+                                                                                            .longtitude ??
+                                                                                            "0.0")
+                                                                                        : (double
+                                                                                        .parse(
+                                                                                        (listAll[i] as SendScanDataModel)
+                                                                                            .longtitude ??
+                                                                                            "0.0")))),
+                                                                                builder: (
+                                                                                    ctx) =>
+                                                                                const Icon(
+                                                                                  Icons
+                                                                                      .location_on_rounded,
+                                                                                  color: primaryGreen,
+                                                                                ),
+                                                                                // FlutterLogo(
+                                                                                //   textColor: Colors.blue,
+                                                                                //   key: ObjectKey(Colors.blue),
+                                                                                // ),
+                                                                              )
+                                                                            ]),
+                                                                      ],
+                                                                    )
+                                                                  // Column(
+                                                                  //   children: [
+                                                                  //     Text(
+                                                                  //         "Disini nanti detail dus dan map"),
+                                                                  //     Text('Lat: ${(listAll[i] is DusData ? (listAll[i] as DusData).latitude : (listAll[i] as SendScanDataModel).latitude )}'),
+                                                                  //     Text('Long: ${(listAll[i] is DusData ? (listAll[i] as DusData).longtitude : (listAll[i] as SendScanDataModel).longtitude )}'),
+                                                                  //   ],
+                                                                  // )
+                                                                ),
+                                                                Text(
+                                                                    "Romeo and Cinderella"),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
                                                       });
                                                 },
                                                 child: const RoundedContainer(
                                                     sizeMedium,
                                                     boxDecoration:
-                                                        BoxDecoration(
-                                                            color:
-                                                                primaryGreen),
+                                                    BoxDecoration(
+                                                        color:
+                                                        primaryGreen),
                                                     padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                sizeSmall),
+                                                    EdgeInsets.symmetric(
+                                                        horizontal:
+                                                        sizeSmall),
                                                     child: Center(
                                                         child: CustomText(
                                                             "Lihat Detail",
                                                             color:
-                                                                Colors.white))),
+                                                            Colors.white))),
                                               )
                                             ],
                                           ),
                                         )
-                                        // Text('contents\ncontents\ncontents\ncontents'),
-                                        ),
+                                      // Text('contents\ncontents\ncontents\ncontents'),
+                                    ),
                                     node: TimelineNode(
                                       indicator: const DotIndicator(
                                         color: primaryColor,
                                       ),
                                       startConnector: i != 0
                                           ? const SolidLineConnector(
-                                              color: primaryColor,
-                                            )
+                                        color: primaryColor,
+                                      )
                                           : null,
                                       endConnector: i != (listAll.length - 1)
                                           ? const SolidLineConnector(
-                                              color: primaryColor,
-                                            )
+                                        color: primaryColor,
+                                      )
                                           : null,
                                     ),
                                   );
@@ -653,31 +796,31 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                           children: [
                             Text("Latitude: ${nosjHistory.first.latitude}"),
                             Text("Longitude: ${nosjHistory.first.longtitude}"),
-                      // FlutterMap(
-                      //   mapController: _mapController,
-                      //   options: MapOptions(),
-                      //   children: [],
-                      //   nonRotatedChildren: [],
-                      // )
-                      //       FlutterMap(
-                      //         options: MapOptions(
-                      //           center: LatLng(double.parse(nosjHistory.first.latitude ?? "0.0"), double.parse(nosjHistory.first.longtitude ?? "0.0")),
-                      //           zoom: 9.0,
-                      //         ),
-                      //         nonRotatedChildren: [
-                      //           AttributionWidget.defaultWidget(
-                      //             source: 'OpenStreetMap contributors',
-                      //             onSourceTapped: (){},
-                      //           ),
-                      //         ],
-                      //         children: [
-                      //           TileLayer(
-                      //             urlTemplate:
-                      //                 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      //             userAgentPackageName: 'com.example.app',
-                      //           ),
-                      //         ],
-                      //       )
+                            // FlutterMap(
+                            //   mapController: _mapController,
+                            //   options: MapOptions(),
+                            //   children: [],
+                            //   nonRotatedChildren: [],
+                            // )
+                            //       FlutterMap(
+                            //         options: MapOptions(
+                            //           center: LatLng(double.parse(nosjHistory.first.latitude ?? "0.0"), double.parse(nosjHistory.first.longtitude ?? "0.0")),
+                            //           zoom: 9.0,
+                            //         ),
+                            //         nonRotatedChildren: [
+                            //           AttributionWidget.defaultWidget(
+                            //             source: 'OpenStreetMap contributors',
+                            //             onSourceTapped: (){},
+                            //           ),
+                            //         ],
+                            //         children: [
+                            //           TileLayer(
+                            //             urlTemplate:
+                            //                 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            //             userAgentPackageName: 'com.example.app',
+                            //           ),
+                            //         ],
+                            //       )
                           ],
                         ))
                     // RoundedContainer(sizeNormal,

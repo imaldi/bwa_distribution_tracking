@@ -211,7 +211,7 @@ mixin _$DusData {
   @JsonKey(name: 'location_id')
   String? get locationId => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
-  String? get longitude => throw _privateConstructorUsedError;
+  String? get longtitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'nama_penerima')
   String? get namaPenerima => throw _privateConstructorUsedError;
   @JsonKey(name: 'no_hp')
@@ -255,7 +255,7 @@ abstract class $DusDataCopyWith<$Res> {
       @JsonKey(name: 'id_location') String? idLocation,
       @JsonKey(name: 'location_id') String? locationId,
       String? latitude,
-      String? longitude,
+      String? longtitude,
       @JsonKey(name: 'nama_penerima') String? namaPenerima,
       @JsonKey(name: 'no_hp') String? noHp,
       String? lembaga,
@@ -293,7 +293,7 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
     Object? idLocation = freezed,
     Object? locationId = freezed,
     Object? latitude = freezed,
-    Object? longitude = freezed,
+    Object? longtitude = freezed,
     Object? namaPenerima = freezed,
     Object? noHp = freezed,
     Object? lembaga = freezed,
@@ -339,9 +339,9 @@ class _$DusDataCopyWithImpl<$Res, $Val extends DusData>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as String?,
-      longitude: freezed == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
+      longtitude: freezed == longtitude
+          ? _value.longtitude
+          : longtitude // ignore: cast_nullable_to_non_nullable
               as String?,
       namaPenerima: freezed == namaPenerima
           ? _value.namaPenerima
@@ -419,7 +419,7 @@ abstract class _$$_DusDataCopyWith<$Res> implements $DusDataCopyWith<$Res> {
       @JsonKey(name: 'id_location') String? idLocation,
       @JsonKey(name: 'location_id') String? locationId,
       String? latitude,
-      String? longitude,
+      String? longtitude,
       @JsonKey(name: 'nama_penerima') String? namaPenerima,
       @JsonKey(name: 'no_hp') String? noHp,
       String? lembaga,
@@ -454,7 +454,7 @@ class __$$_DusDataCopyWithImpl<$Res>
     Object? idLocation = freezed,
     Object? locationId = freezed,
     Object? latitude = freezed,
-    Object? longitude = freezed,
+    Object? longtitude = freezed,
     Object? namaPenerima = freezed,
     Object? noHp = freezed,
     Object? lembaga = freezed,
@@ -500,9 +500,9 @@ class __$$_DusDataCopyWithImpl<$Res>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as String?,
-      longitude: freezed == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
+      longtitude: freezed == longtitude
+          ? _value.longtitude
+          : longtitude // ignore: cast_nullable_to_non_nullable
               as String?,
       namaPenerima: freezed == namaPenerima
           ? _value.namaPenerima
@@ -576,7 +576,7 @@ class _$_DusData implements _DusData {
       @JsonKey(name: 'id_location') this.idLocation,
       @JsonKey(name: 'location_id') this.locationId,
       this.latitude,
-      this.longitude,
+      this.longtitude,
       @JsonKey(name: 'nama_penerima') this.namaPenerima,
       @JsonKey(name: 'no_hp') this.noHp,
       this.lembaga,
@@ -615,7 +615,7 @@ class _$_DusData implements _DusData {
   @override
   final String? latitude;
   @override
-  final String? longitude;
+  final String? longtitude;
   @override
   @JsonKey(name: 'nama_penerima')
   final String? namaPenerima;
@@ -656,7 +656,7 @@ class _$_DusData implements _DusData {
 
   @override
   String toString() {
-    return 'DusData(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, nodus: $nodus, foto: $foto, idLocation: $idLocation, locationId: $locationId, latitude: $latitude, longitude: $longitude, namaPenerima: $namaPenerima, noHp: $noHp, lembaga: $lembaga, nmTempat: $nmTempat, detailTempat: $detailTempat, kelurahan: $kelurahan, kecamatan: $kecamatan, kabupaten: $kabupaten, provinsi: $provinsi, statusPengiriman: $statusPengiriman, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DusData(id: $id, nosj: $nosj, qrcodeSj: $qrcodeSj, nodus: $nodus, foto: $foto, idLocation: $idLocation, locationId: $locationId, latitude: $latitude, longtitude: $longtitude, namaPenerima: $namaPenerima, noHp: $noHp, lembaga: $lembaga, nmTempat: $nmTempat, detailTempat: $detailTempat, kelurahan: $kelurahan, kecamatan: $kecamatan, kabupaten: $kabupaten, provinsi: $provinsi, statusPengiriman: $statusPengiriman, createdBy: $createdBy, updatedBy: $updatedBy, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -676,8 +676,8 @@ class _$_DusData implements _DusData {
                 other.locationId == locationId) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
+            (identical(other.longtitude, longtitude) ||
+                other.longtitude == longtitude) &&
             (identical(other.namaPenerima, namaPenerima) ||
                 other.namaPenerima == namaPenerima) &&
             (identical(other.noHp, noHp) || other.noHp == noHp) &&
@@ -718,7 +718,7 @@ class _$_DusData implements _DusData {
         idLocation,
         locationId,
         latitude,
-        longitude,
+        longtitude,
         namaPenerima,
         noHp,
         lembaga,
@@ -759,7 +759,7 @@ abstract class _DusData implements DusData {
       @JsonKey(name: 'id_location') final String? idLocation,
       @JsonKey(name: 'location_id') final String? locationId,
       final String? latitude,
-      final String? longitude,
+      final String? longtitude,
       @JsonKey(name: 'nama_penerima') final String? namaPenerima,
       @JsonKey(name: 'no_hp') final String? noHp,
       final String? lembaga,
@@ -797,7 +797,7 @@ abstract class _DusData implements DusData {
   @override
   String? get latitude;
   @override
-  String? get longitude;
+  String? get longtitude;
   @override
   @JsonKey(name: 'nama_penerima')
   String? get namaPenerima;
