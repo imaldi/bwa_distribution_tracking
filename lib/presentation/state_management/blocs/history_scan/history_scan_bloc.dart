@@ -42,7 +42,7 @@ class HistoryScanBloc extends Bloc<HistoryScanEvent, HistoryScanState> {
     on<GetHistoryPerIdEvent>((event, emit) async {
       emit(HistoryScanLoading());
       var failOrLoaded =
-      await _getHistoryPerId(BulkScanParams(event.qrCode));
+      await _getHistoryPerId(SuratJalanParams(event.qrCode));
       var currentState = failOrLoaded.fold((l) {
         if(l is DataNotFoundFailure){
           return HistoryPerIdNotFound();

@@ -26,7 +26,7 @@ class QRScanBloc extends Bloc<QRScanEvent, QRScanState> {
       emit(QRScanLoading());
 
       var failOrLoaded =
-          await _bulkQRScanUseCase(BulkScanParams(event.qrcodeSj));
+          await _bulkQRScanUseCase(SuratJalanParams(event.qrcodeSj));
 
       var currentState = failOrLoaded.fold((failure) => QRScanFailed(failure),
           (bulkScanResponse) => QRBulkScanSuccess(bulkScanResponse));

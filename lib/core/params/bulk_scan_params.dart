@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-class BulkScanParams extends Equatable {
+class SuratJalanParams extends Equatable {
   final String qrcodeSj;
 
-  const BulkScanParams(this.qrcodeSj);
+  const SuratJalanParams(this.qrcodeSj);
 
   @override
   List<Object?> get props => [qrcodeSj];

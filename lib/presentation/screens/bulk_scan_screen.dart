@@ -803,7 +803,8 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                             )
                           ],
                         ),
-                      )
+                      ),
+                      SizedBox(height: sizeHuge,)
                     ],
                   ),
                 ),

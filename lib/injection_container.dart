@@ -108,7 +108,7 @@ Future<void> init() async {
     ),
   );
 
-  sl.registerFactory(() => SuratJalanCubit(sl<GetSuratJalanPerPageUseCase>()));
+  sl.registerFactory(() => SuratJalanCubit(sl<GetSuratJalanPerPageUseCase>(),sl<GetHistoryPerIdUseCase>()));
 
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(

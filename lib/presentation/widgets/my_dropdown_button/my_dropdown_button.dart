@@ -77,7 +77,7 @@ class _MyDropdownButtonState<T> extends State<MyDropdownButton<T>> {
       // style: TextStyle(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onTap: widget.onTap,
-      style: TextStyle(color: primaryGreen),
+      style: TextStyle(color: Colors.grey),
       decoration: InputDecoration(
         focusColor: Colors.white,
         contentPadding: EdgeInsets.all(sizeMedium),

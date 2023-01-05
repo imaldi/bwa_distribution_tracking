@@ -582,19 +582,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                 "${listAll[i] is SendScanDataModel ? (listAll[i] as SendScanDataModel).keterangan : "Penerima: ${(listAll[i] as DusData).namaPenerima ?? "No Receiver"} \nTempat: ${(listAll[i] as DusData).nmTempat ?? "No Address"}"}",
                                                 color: primaryColor,
                                               ),
+                                              SizedBox(height: sizeNormal,),
                                               InkWell(
                                                 onTap: () async {
                                                   await showDialog(
                                                       context: context,
                                                       builder: (c) {
-                                                        return RoundedContainer(
+                                                        return const RoundedContainer(
                                                             sizeMedium,
                                                             boxDecoration:
-                                                                const BoxDecoration(
+                                                                BoxDecoration(
                                                               color:
                                                                   Colors.white,
                                                             ),
-                                                            margin: const EdgeInsets
+                                                            margin: EdgeInsets
                                                                     .symmetric(
                                                                 horizontal:
                                                                     sizeMedium,
@@ -613,7 +614,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                             horizontal:
-                                                                sizeNormal),
+                                                                sizeSmall),
                                                     child: Center(
                                                         child: CustomText(
                                                             "Lihat Detail",

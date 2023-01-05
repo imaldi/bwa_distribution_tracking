@@ -6,12 +6,12 @@ import 'package:dartz/dartz.dart';
 import '../../../core/params/bulk_scan_params.dart';
 import '../../../data/models/qr_scan/bulk_scan_response.dart';
 
-class GetHistoryPerIdUseCase extends UseCase<BulkScanResponse,BulkScanParams>{
+class GetHistoryPerIdUseCase extends UseCase<BulkScanResponse,SuratJalanParams>{
   final SuratJalanRepository repository;
   GetHistoryPerIdUseCase(this.repository);
 
   @override
-  Future<Either<Failure, BulkScanResponse>> call(BulkScanParams params) {
+  Future<Either<Failure, BulkScanResponse>> call(SuratJalanParams params) {
     return repository.getHistoryPerId(params.qrcodeSj);
   }
 

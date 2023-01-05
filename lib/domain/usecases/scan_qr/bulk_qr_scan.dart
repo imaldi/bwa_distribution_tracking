@@ -5,12 +5,12 @@ import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_scan_response
 import 'package:bwa_distribution_tracking/domain/repositories/scan_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class BulkQRScanUseCase extends UseCase<BulkScanResponse,BulkScanParams>{
+class BulkQRScanUseCase extends UseCase<BulkScanResponse,SuratJalanParams>{
   final ScanRepository scanRepository;
 
   BulkQRScanUseCase(this.scanRepository);
   @override
-  Future<Either<Failure, BulkScanResponse>> call(BulkScanParams params) {
+  Future<Either<Failure, BulkScanResponse>> call(SuratJalanParams params) {
     return scanRepository.bulkScan(params.qrcodeSj);
   }
 

@@ -36,9 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     // pak kamal
-    phone = "081234567";
+    // phone = "081288642147";
     // bambang wisnu
-    // phone = "085780907168";
+    phone = "085780907168";
     // kurir 1
     // phone = "08121212";
 
