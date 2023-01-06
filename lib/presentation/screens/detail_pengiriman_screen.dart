@@ -20,6 +20,7 @@ import '../../core/resources/consts/sizes.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/history_scan/history_scan_bloc.dart';
+import '../state_management/cubits/detail_riwayat/detail_riwayat_cubit.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 
@@ -44,7 +45,6 @@ class DetailPengirimanScreen extends StatefulWidget
 class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
   var textColor = Colors.white;
   var controller = ScrollController();
-  final _mapController = MapController();
 
   @override
   void initState() {
@@ -607,143 +607,157 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                         // var _rotation =
                                                         //     _mapController
                                                         //         .rotation;
-                                                        return RoundedContainer(
-                                                          sizeMedium,
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                              horizontal:
-                                                              sizeMedium,
-                                                              vertical:
-                                                              sizeHuge),
-                                                          child:
-                                                          SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                RoundedContainer(
+                                                        return BlocProvider(
+                                                          create: (context) =>
+                                                              sl<
+                                                                  DetailRiwayatCubit>(),
+                                                          child: BlocBuilder<
+                                                              DetailRiwayatCubit,
+                                                              DetailRiwayatState>(
+                                                            builder: (context,
+                                                                state) {
+                                                              var stateDetailDus = state
+                                                                  .dusDetailResponse;
+                                                              return RoundedContainer(
+                                                                sizeMedium,
+                                                                initState: (){
+                                                                  context.read<
+                                                                      DetailRiwayatCubit>()
+                                                                      .getDusDetailResponse(
+                                                                      listAll[i] is DusData
+                                                                          ? "${(listAll[i] as DusData)
+                                                                          .qrcodeSj}" : widget
+                                                                          .qrCode);
+                                                                },
+                                                                margin: EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
                                                                     sizeMedium,
-                                                                    boxDecoration:
-                                                                    BoxDecoration(
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    constraints:
-                                                                    const BoxConstraints(
-                                                                        maxHeight:
-                                                                        200),
-                                                                    child:
-                                                                    FlutterMap(
-                                                                      options:
-                                                                      MapOptions(
-                                                                        // onPositionChanged:
-                                                                        //     (mapPosition,
-                                                                        //         _) {
-                                                                        //   setState(
-                                                                        //       () {
-                                                                        //     _rotation =
-                                                                        //         _mapController.rotation;
-                                                                        //   });
-                                                                        // },
-                                                                        center: LatLng(
-                                                                            (listAll[i] is DusData
-                                                                                ? double
-                                                                                .parse(
-                                                                                (listAll[i] as DusData)
-                                                                                    .latitude ??
-                                                                                    "0.0")
-                                                                                : (double
-                                                                                .parse(
-                                                                                (listAll[i] as SendScanDataModel)
-                                                                                    .latitude ??
-                                                                                    "0.0"))),
-                                                                            (listAll[i] is DusData
-                                                                                ? double
-                                                                                .parse(
-                                                                                (listAll[i] as DusData)
-                                                                                    .longtitude ??
-                                                                                    "0.0")
-                                                                                : (double
-                                                                                .parse(
-                                                                                (listAll[i] as SendScanDataModel)
-                                                                                    .longtitude ??
-                                                                                    "0.0")))),
-                                                                        zoom:
-                                                                        17.0,
-                                                                        maxZoom:
-                                                                        18.0,
+                                                                    vertical:
+                                                                    sizeHuge),
+                                                                child:
+                                                                SingleChildScrollView(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      RoundedContainer(
+                                                                          sizeMedium,
+                                                                          boxDecoration:
+                                                                          BoxDecoration(
+                                                                            color: Colors
+                                                                                .white,
+                                                                          ),
+                                                                          constraints:
+                                                                          const BoxConstraints(
+                                                                              maxHeight:
+                                                                              300),
+                                                                          child:
+                                                                          FlutterMap(
+                                                                            options:
+                                                                            MapOptions(
+                                                                              // onPositionChanged:
+                                                                              //     (mapPosition,
+                                                                              //         _) {
+                                                                              //   setState(
+                                                                              //       () {
+                                                                              //     _rotation =
+                                                                              //         _mapController.rotation;
+                                                                              //   });
+                                                                              // },
+                                                                              center: LatLng(
+                                                                                  (listAll[i] is DusData
+                                                                                      ? double
+                                                                                      .parse(
+                                                                                      (listAll[i] as DusData)
+                                                                                          .latitude ??
+                                                                                          "0.0")
+                                                                                      : (double
+                                                                                      .parse(
+                                                                                      (listAll[i] as SendScanDataModel)
+                                                                                          .latitude ??
+                                                                                          "0.0"))),
+                                                                                  (listAll[i] is DusData
+                                                                                      ? double
+                                                                                      .parse(
+                                                                                      (listAll[i] as DusData)
+                                                                                          .longtitude ??
+                                                                                          "0.0")
+                                                                                      : (double
+                                                                                      .parse(
+                                                                                      (listAll[i] as SendScanDataModel)
+                                                                                          .longtitude ??
+                                                                                          "0.0")))),
+                                                                              zoom:
+                                                                              17.0,
+                                                                              maxZoom:
+                                                                              18.0,
+                                                                            ),
+                                                                            children: [
+                                                                              TileLayer(
+                                                                                urlTemplate:
+                                                                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                                                userAgentPackageName:
+                                                                                'com.example.app',
+                                                                              ),
+                                                                              MarkerLayer(
+                                                                                  markers: [
+                                                                                    Marker(
+                                                                                      width: 80,
+                                                                                      height: 80,
+                                                                                      rotate: true,
+                                                                                      point: LatLng(
+                                                                                          (listAll[i] is DusData
+                                                                                              ? double
+                                                                                              .parse(
+                                                                                              (listAll[i] as DusData)
+                                                                                                  .latitude ??
+                                                                                                  "0.0")
+                                                                                              : (double
+                                                                                              .parse(
+                                                                                              (listAll[i] as SendScanDataModel)
+                                                                                                  .latitude ??
+                                                                                                  "0.0"))),
+                                                                                          (listAll[i] is DusData
+                                                                                              ? double
+                                                                                              .parse(
+                                                                                              (listAll[i] as DusData)
+                                                                                                  .longtitude ??
+                                                                                                  "0.0")
+                                                                                              : (double
+                                                                                              .parse(
+                                                                                              (listAll[i] as SendScanDataModel)
+                                                                                                  .longtitude ??
+                                                                                                  "0.0")))),
+                                                                                      builder: (
+                                                                                          ctx) =>
+                                                                                      const Icon(
+                                                                                        Icons
+                                                                                            .location_on_rounded,
+                                                                                        color: primaryGreen,
+                                                                                      ),
+                                                                                      // FlutterLogo(
+                                                                                      //   textColor: Colors.blue,
+                                                                                      //   key: ObjectKey(Colors.blue),
+                                                                                      // ),
+                                                                                    )
+                                                                                  ]),
+                                                                            ],
+                                                                          )
+                                                                        // Column(
+                                                                        //   children: [
+                                                                        //     Text(
+                                                                        //         "Disini nanti detail dus dan map"),
+                                                                        //     Text('Lat: ${(listAll[i] is DusData ? (listAll[i] as DusData).latitude : (listAll[i] as SendScanDataModel).latitude )}'),
+                                                                        //     Text('Long: ${(listAll[i] is DusData ? (listAll[i] as DusData).longtitude : (listAll[i] as SendScanDataModel).longtitude )}'),
+                                                                        //   ],
+                                                                        // )
                                                                       ),
-                                                                      nonRotatedChildren: [
-                                                                        AttributionWidget
-                                                                            .defaultWidget(
-                                                                          source:
-                                                                          'OpenStreetMap contributors',
-                                                                          onSourceTapped:
-                                                                              () {},
-                                                                        ),
-                                                                      ],
-                                                                      children: [
-                                                                        TileLayer(
-                                                                          urlTemplate:
-                                                                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                                                          userAgentPackageName:
-                                                                          'com.example.app',
-                                                                        ),
-                                                                        MarkerLayer(
-                                                                            markers: [
-                                                                              Marker(
-                                                                                width: 80,
-                                                                                height: 80,
-                                                                                rotate: true,
-                                                                                point: LatLng(
-                                                                                    (listAll[i] is DusData
-                                                                                        ? double
-                                                                                        .parse(
-                                                                                        (listAll[i] as DusData)
-                                                                                            .latitude ??
-                                                                                            "0.0")
-                                                                                        : (double
-                                                                                        .parse(
-                                                                                        (listAll[i] as SendScanDataModel)
-                                                                                            .latitude ??
-                                                                                            "0.0"))),
-                                                                                    (listAll[i] is DusData
-                                                                                        ? double
-                                                                                        .parse(
-                                                                                        (listAll[i] as DusData)
-                                                                                            .longtitude ??
-                                                                                            "0.0")
-                                                                                        : (double
-                                                                                        .parse(
-                                                                                        (listAll[i] as SendScanDataModel)
-                                                                                            .longtitude ??
-                                                                                            "0.0")))),
-                                                                                builder: (
-                                                                                    ctx) =>
-                                                                                const Icon(
-                                                                                  Icons
-                                                                                      .location_on_rounded,
-                                                                                  color: primaryGreen,
-                                                                                ),
-                                                                                // FlutterLogo(
-                                                                                //   textColor: Colors.blue,
-                                                                                //   key: ObjectKey(Colors.blue),
-                                                                                // ),
-                                                                              )
-                                                                            ]),
-                                                                      ],
-                                                                    )
-                                                                  // Column(
-                                                                  //   children: [
-                                                                  //     Text(
-                                                                  //         "Disini nanti detail dus dan map"),
-                                                                  //     Text('Lat: ${(listAll[i] is DusData ? (listAll[i] as DusData).latitude : (listAll[i] as SendScanDataModel).latitude )}'),
-                                                                  //     Text('Long: ${(listAll[i] is DusData ? (listAll[i] as DusData).longtitude : (listAll[i] as SendScanDataModel).longtitude )}'),
-                                                                  //   ],
-                                                                  // )
+                                                                      Text(
+                                                                          "detail dus: $stateDetailDus"),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                                Text(
-                                                                    "Romeo and Cinderella"),
-                                                              ],
-                                                            ),
+                                                              );
+                                                            },
                                                           ),
                                                         );
                                                       });

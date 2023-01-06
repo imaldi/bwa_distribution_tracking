@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_detail_response.dart';
 import 'package:hive/hive.dart';
 
 import '../../../core/error/exceptions.dart';
@@ -15,6 +16,7 @@ import 'package:http/http.dart' as http;
 abstract class SuratJalanRemoteDataSource {
   Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber);
   Future<BulkScanResponse> getHistoryPerId(String qrcodeSj);
+  Future<DusDetailResponse> getDusDetailByQrCodeSJ(String qrcodeSj);
 }
 
 class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
@@ -77,6 +79,31 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
       if (isResponseDataNull) {
         throw ServerException();
       }
+      return theResponse;
+    } if(response.statusCode == 404){
+      throw DataNotFoundException();
+    } else {
+      throw ServerException();
+    }
+  }
+  @override
+  Future<DusDetailResponse> getDusDetailByQrCodeSJ(String qrcodeSj) async {
+    final url = Uri.https(baseUrl, "$dusDetailPopUp/$qrcodeSj");
+    print("Dus Detail Url: $url");
+
+    final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
+    final response = await client.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    print("dus detail by qrcode response code: ${response.statusCode.toString()}");
+    log("dus detail by qrcode response body: ${response.body.toString()}");
+
+    if (response.statusCode == 200) {
+      var theResponse = DusDetailResponse.fromJson(jsonDecode(response.body));
       return theResponse;
     } if(response.statusCode == 404){
       throw DataNotFoundException();

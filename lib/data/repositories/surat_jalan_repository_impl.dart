@@ -1,6 +1,7 @@
 import 'package:bwa_distribution_tracking/core/error/exceptions.dart';
 import 'package:bwa_distribution_tracking/core/error/failures.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/bulk_scan_response.dart';
+import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_detail_response.dart';
 
 import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_response.dart';
 
@@ -33,6 +34,22 @@ class SuratJalanRepositoryImpl extends SuratJalanRepository{
 
     try{
       final result = await remoteDataSource.getHistoryPerId(qrCode);
+      return Right(result);
+    }
+    on DataNotFoundException {
+      return Left(DataNotFoundFailure());
+    }
+    on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, DusDetailResponse>> getDusDetailByQrCodeSJ(String qrCode) async {
+    if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
+
+    try{
+      final result = await remoteDataSource.getDusDetailByQrCodeSJ(qrCode);
       return Right(result);
     }
     on DataNotFoundException {

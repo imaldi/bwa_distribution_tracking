@@ -31,6 +31,7 @@ import 'package:bwa_distribution_tracking/domain/usecases/scan_qr/send_qr_scan.d
 import 'package:bwa_distribution_tracking/domain/usecases/surat_jalan/get_surat_jalan_per_page.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/blocs/auth/auth_bloc.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/blocs/history_scan/history_scan_bloc.dart';
+import 'package:bwa_distribution_tracking/presentation/state_management/cubits/detail_riwayat/detail_riwayat_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/internet_connection/internet_connection_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/bulk_scan/bulk_scan_screen_cubit.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/blocs/scan/qr_scan_bloc.dart';
@@ -52,7 +53,6 @@ import 'data/datasources/remote/surat_jalan_remote_data_source.dart';
 import 'data/repositories/single_scan_repository_impl.dart';
 import 'data/repositories/surat_jalan_repository_impl.dart';
 import 'domain/usecases/scan_qr/get_history_per_id.dart';
-
 
 final sl = GetIt.instance;
 
@@ -78,11 +78,12 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-        () => HistoryScanBloc(sl<GetUserScanHistoryUseCase>(),sl<GetAllScanHistoryUseCase>(), sl<GetHistoryPerIdUseCase>()),
+    () => HistoryScanBloc(sl<GetUserScanHistoryUseCase>(),
+        sl<GetAllScanHistoryUseCase>(), sl<GetHistoryPerIdUseCase>()),
   );
 
   sl.registerFactory(
-        () => SingleScanScreenBloc(sl<SendRequesStoreSelesaiUseCase>()),
+    () => SingleScanScreenBloc(sl<SendRequesStoreSelesaiUseCase>()),
   );
 
   sl.registerFactory(
@@ -99,16 +100,18 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => SingleScanScreenCubit(sl<SingleScanRepository>()
-    ),
+    () => SingleScanScreenCubit(sl<SingleScanRepository>()),
   );
 
   sl.registerFactory(
-    () => WilayahIndonesiaCubit(sl()
-    ),
+    () => WilayahIndonesiaCubit(sl()),
+  );
+  sl.registerFactory(
+    () => DetailRiwayatCubit(sl<SuratJalanRepository>()),
   );
 
-  sl.registerFactory(() => SuratJalanCubit(sl<GetSuratJalanPerPageUseCase>(),sl<GetHistoryPerIdUseCase>()));
+  sl.registerFactory(() => SuratJalanCubit(
+      sl<GetSuratJalanPerPageUseCase>(), sl<GetHistoryPerIdUseCase>()));
 
   /// Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
@@ -128,9 +131,10 @@ Future<void> init() async {
     () => CurrentLocationRemoteDataSourceImpl(),
   );
 
-  sl.registerFactory<SuratJalanRemoteDataSource>(() => SuratJalanRemoteDataSourceImpl(sl(), sl<Box<LoginResponse>>()));
-  sl.registerFactory<SingleScanRemoteDataSource>(() => SingleScanRemoteDataSourceImpl(sl<Box<LoginResponse>>()));
-
+  sl.registerFactory<SuratJalanRemoteDataSource>(
+      () => SuratJalanRemoteDataSourceImpl(sl(), sl<Box<LoginResponse>>()));
+  sl.registerFactory<SingleScanRemoteDataSource>(
+      () => SingleScanRemoteDataSourceImpl(sl<Box<LoginResponse>>()));
 
   /// Repository
   sl.registerLazySingleton<AuthRepository>(
@@ -152,11 +156,12 @@ Future<void> init() async {
       currentLocationRemoteDataSource: sl<CurrentLocationRemoteDataSource>(),
     ),
   );
-  sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(sl<SuratJalanRemoteDataSource>(), sl<NetworkInfo>()));
-  sl.registerFactory<SingleScanRepository>(() => SingleScanRepositoryImpl(sl<SingleScanRemoteDataSource>(), sl<NetworkInfo>()));
-  sl.registerFactory<ApiWilayahIndonesiaRepository>(() => ApiWilayahIndonesiaRepositoryImpl());
-
-
+  sl.registerFactory<SuratJalanRepository>(() => SuratJalanRepositoryImpl(
+      sl<SuratJalanRemoteDataSource>(), sl<NetworkInfo>()));
+  sl.registerFactory<SingleScanRepository>(() => SingleScanRepositoryImpl(
+      sl<SingleScanRemoteDataSource>(), sl<NetworkInfo>()));
+  sl.registerFactory<ApiWilayahIndonesiaRepository>(
+      () => ApiWilayahIndonesiaRepositoryImpl());
 
   /// Usecase
   sl.registerLazySingleton(() => UserLoginUseCase(sl()));
@@ -170,7 +175,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetCurrentPositionUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentAddressUseCase(sl()));
   sl.registerLazySingleton(() => SendRequesStoreSelesaiUseCase(sl()));
-  sl.registerFactory<GetSuratJalanPerPageUseCase>(() => GetSuratJalanPerPageUseCase(sl()));
+  sl.registerFactory<GetSuratJalanPerPageUseCase>(
+      () => GetSuratJalanPerPageUseCase(sl()));
 
   /// Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -178,6 +184,7 @@ Future<void> init() async {
   /// External
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
+
   /// Kalau ada problem disini habis generate, rollback aja file2 ini:
   /// user_model.g.dart
   /// login_response.g.dart
