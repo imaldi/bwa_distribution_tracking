@@ -29,7 +29,7 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
     emit(state.copyWith(isLoading: true));
     var resultOrFailed = await _getHistoryPerIdUseCase(SuratJalanParams(qrcode_id));
     var newResponse = resultOrFailed.fold((l) => const BulkScanResponse(), (r) => r);
-    emit(state.copyWith(isLoading: false, searchResult: newResponse, isFetchingList: true, isPerId: true));
+    emit(state.copyWith(isLoading: false, searchResult: newResponse, isFetchingList: true, isPerSJ: true));
     print("Search Result: ${state.searchResult}");
   }
 
@@ -40,5 +40,14 @@ class SuratJalanCubit extends Cubit<SuratJalanState> {
 
   void resetStateViewList(){
     emit(state.copyWith(isFetchingList: false,willScanDus: false,menuStatusForTitle: "-"));
+  }
+
+  void setPerScanSJ(){
+    emit(state.copyWith(isPerSJ: true));
+    print("set per sj: ${state.isPerSJ}");
+  }
+
+  void resetToNotPerScanSJ(){
+    emit(state.copyWith(isPerSJ: false));
   }
 }

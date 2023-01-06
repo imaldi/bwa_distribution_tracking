@@ -87,9 +87,15 @@ class AppRouter extends _i12.RootStackRouter {
       );
     },
     RiwayatSuratJalanRoute.name: (routeData) {
+      final args = routeData.argsAs<RiwayatSuratJalanRouteArgs>(
+          orElse: () => const RiwayatSuratJalanRouteArgs());
       return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i12.WrappedRoute(child: const _i7.RiwayatSuratJalanScreen()),
+        child: _i12.WrappedRoute(
+            child: _i7.RiwayatSuratJalanScreen(
+          isLacakPerSJ: args.isLacakPerSJ,
+          key: args.key,
+        )),
       );
     },
     DetailPengirimanRoute.name: (routeData) {
@@ -311,14 +317,37 @@ class SingleScanRouteArgs {
 
 /// generated route for
 /// [_i7.RiwayatSuratJalanScreen]
-class RiwayatSuratJalanRoute extends _i12.PageRouteInfo<void> {
-  const RiwayatSuratJalanRoute()
-      : super(
+class RiwayatSuratJalanRoute
+    extends _i12.PageRouteInfo<RiwayatSuratJalanRouteArgs> {
+  RiwayatSuratJalanRoute({
+    bool isLacakPerSJ = false,
+    _i13.Key? key,
+  }) : super(
           RiwayatSuratJalanRoute.name,
           path: '/riwayat-surat-jalan-screen',
+          args: RiwayatSuratJalanRouteArgs(
+            isLacakPerSJ: isLacakPerSJ,
+            key: key,
+          ),
         );
 
   static const String name = 'RiwayatSuratJalanRoute';
+}
+
+class RiwayatSuratJalanRouteArgs {
+  const RiwayatSuratJalanRouteArgs({
+    this.isLacakPerSJ = false,
+    this.key,
+  });
+
+  final bool isLacakPerSJ;
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return 'RiwayatSuratJalanRouteArgs{isLacakPerSJ: $isLacakPerSJ, key: $key}';
+  }
 }
 
 /// generated route for

@@ -6,6 +6,7 @@ import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/resources/consts/colors.dart';
@@ -18,7 +19,8 @@ import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
 
 class RiwayatSuratJalanScreen extends StatefulWidget implements AutoRouteWrapper{
-  const RiwayatSuratJalanScreen({Key? key}) : super(key: key);
+  final bool isLacakPerSJ;
+  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, Key? key}) : super(key: key);
 
   @override
   State<RiwayatSuratJalanScreen> createState() => _RiwayatSuratJalanScreenState();
@@ -40,6 +42,9 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
   void initState() {
     super.initState();
     context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
+    if(widget.isLacakPerSJ){
+      context.read<SuratJalanCubit>().setPerScanSJ();
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,14 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  SingleChildScrollView(
+                  state.isPerSJ ? Center(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset("assets/images/empty_history.svg"),
+                      // Icon(Icons.home,size: sizeHuge,),
+                      // CustomText("Tidak Ada Riwayat Distribusi",color: primaryGreen,weight: FontWeight.bold,),
+                    ],
+                  )): SingleChildScrollView(
                     child: ListView.builder(
                       // padding: EdgeInsets.only(
                       //     top: orientedHeightScreen(context,
@@ -137,7 +149,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                   IntrinsicHeight(
                     child: Container(
                         color: Colors.white,
-                        child: RiwayatScreenAppbarAndSearchbar()),
+                        child: RiwayatScreenAppbarAndSearchbar(isByQRSJ: widget.isLacakPerSJ,)),
                   ),
                 ],
               ),

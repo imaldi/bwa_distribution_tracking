@@ -5,7 +5,7 @@ class SuratJalanState extends Equatable {
   bool isFailed;
   bool isFetchingList;
   bool willScanDus;
-  bool isPerId;
+  bool isPerSJ;
   String? menuStatusForTitle;
   SuratJalanResponse? suratJalanResponse;
   BulkScanResponse? searchResult;
@@ -15,7 +15,7 @@ class SuratJalanState extends Equatable {
       this.isFailed = false,
       this.isFetchingList = false,
       this.willScanDus = false,
-      this.isPerId = false,
+      this.isPerSJ = false,
       this.menuStatusForTitle,
       this.searchResult,
       this.suratJalanResponse});
@@ -25,7 +25,7 @@ class SuratJalanState extends Equatable {
         isLoading,
         isFailed,
         suratJalanResponse,
-        isPerId,
+        isPerSJ,
         menuStatusForTitle,
         isFetchingList,
         searchResult,
@@ -40,12 +40,12 @@ class SuratJalanState extends Equatable {
     String? menuStatusForTitle,
     BulkScanResponse? searchResult,
     bool? willScanDus,
-    bool? isPerId,
+    bool? isPerSJ,
   }) {
     return SuratJalanState(
         isLoading: isLoading ?? this.isLoading,
         isFailed: isFailed ?? this.isFailed,
-        isPerId: isPerId ?? this.isPerId,
+        isPerSJ: isPerSJ ?? this.isPerSJ,
         menuStatusForTitle: menuStatusForTitle ?? this.menuStatusForTitle,
         searchResult: searchResult ?? this.searchResult,
         willScanDus: willScanDus ?? this.willScanDus,

@@ -633,7 +633,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                       .getDusDetailResponse(
                                                                       listAll[i] is DusData
                                                                           ? "${(listAll[i] as DusData)
-                                                                          .qrcodeSj}"
+                                                                          .locationId}"
                                                                           : widget
                                                                           .qrCode);
                                                                 },
@@ -789,7 +789,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("No SJ"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].nosj
-                                                                                              .toString()}"),
+                                                                                              ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -797,15 +797,14 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("QR Code SJ"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].qrcodeSj
-                                                                                              .toString()}"),
+                                                                                              ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
                                                                                         children: [
                                                                                           Text("Nama Penerima"),
                                                                                           Text(
-                                                                                              ": ${listHeaderDus[index].namaPenerima
-                                                                                              .toString()}"),
+                                                                                              ": ${listHeaderDus[index].namaPenerima ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -813,7 +812,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Lembaga"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].lembaga
-                                                                                              .toString()}"),
+                                                                                              ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -828,7 +827,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Kelurahan"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].kelurahan
-                                                                                              .toString()}"),
+                                                                                              ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -836,7 +835,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Kecamatan"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].kecamatan
-                                                                                              .toString()}"),
+                                                                                                  ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -844,7 +843,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Kabupaten"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].kabupaten
-                                                                                              .toString()}"),
+                                                                                                  ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -852,7 +851,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Provinsi"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].provinsi
-                                                                                              .toString()}"),
+                                                                                                  ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -860,7 +859,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Dibuat Tanggal"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].createdAt
-                                                                                              .toString()}"),
+                                                                                                  ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -868,7 +867,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           Text("Dibuat Oleh"),
                                                                                           Text(
                                                                                               ": ${listHeaderDus[index].createdBy
-                                                                                              .toString()}"),
+                                                                                                  ?? "-"}"),
                                                                                         ],
                                                                                       ),
                                                                                       TableRow(
@@ -897,9 +896,42 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                           itemBuilder: (
                                                                               c,
                                                                               index) {
-                                                                            return Text(
-                                                                                listDetailDus[index]
-                                                                                    .toString());
+                                                                            return
+                                                                              RoundedContainer(
+                                                                                sizeNormal,
+                                                                                boxDecoration: BoxDecoration(
+                                                                                    border: Border
+                                                                                        .all(
+                                                                                        color: primaryGreen)),
+                                                                                child: Table(
+                                                                                    children: [
+                                                                                TableRow(
+                                                                                children: [
+                                                                                Text("No Dus"),
+                                                                                Text(
+                                                                                    ": ${listDetailDus[index].nodus
+                                                                                        ?? "-"}"),
+                                                                                ],
+                                                                              ),
+                                                                                      TableRow(
+                                                                                children: [
+                                                                                Text("Foto"),
+                                                                                Text(
+                                                                                    ": ${listDetailDus[index].foto
+                                                                                        ?? "-"}"),
+                                                                                ],
+                                                                              ),
+                                                                                      const TableRow(
+                                                                                children: [
+                                                                                Text("Quantity"),
+                                                                                Text(
+                                                                                    ": 20"),
+                                                                                ],
+                                                                              ),]));
+
+                                                                              // Text(
+                                                                              //   listDetailDus[index]
+                                                                              //       .toString());
                                                                           }),
                                                                     ],
                                                                   ),

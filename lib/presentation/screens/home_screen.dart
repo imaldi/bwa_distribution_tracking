@@ -258,7 +258,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                         InkWell(
                                           onTap: (){
-                                            myToast("HEEYY HEEYY");
+                                            // myToast("HEEYY HEEYY");
+                                            context.router.push(RiwayatSuratJalanRoute(isLacakPerSJ: true));
                                           },
                                           child: Container(
                                             // color: Colors.green,
