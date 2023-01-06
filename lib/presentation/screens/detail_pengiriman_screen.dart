@@ -23,6 +23,7 @@ import '../state_management/blocs/history_scan/history_scan_bloc.dart';
 import '../state_management/cubits/detail_riwayat/detail_riwayat_cubit.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
+import '../../data/models/qr_scan/dus_detail_response.dart';
 
 class DetailPengirimanScreen extends StatefulWidget
     implements AutoRouteWrapper {
@@ -562,7 +563,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                         constraints:
                                         const BoxConstraints(maxWidth: 400),
                                         child: ListTile(
-                                          contentPadding: EdgeInsets.only(
+                                          contentPadding: const EdgeInsets.only(
                                               left: sizeNormal,
                                               right: sizeNormal),
                                           title: Container(
@@ -596,7 +597,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                     "No Address"}"}",
                                                 color: primaryColor,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: sizeNormal,
                                               ),
                                               InkWell(
@@ -618,18 +619,25 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                 state) {
                                                               var stateDetailDus = state
                                                                   .dusDetailResponse;
+                                                              var listHeaderDus = stateDetailDus
+                                                                  ?.dushead ??
+                                                                  <Dushead>[];
+                                                              var listDetailDus = stateDetailDus
+                                                                  ?.dusdetail ??
+                                                                  <Dusdetail>[];
                                                               return RoundedContainer(
                                                                 sizeMedium,
-                                                                initState: (){
+                                                                initState: () {
                                                                   context.read<
                                                                       DetailRiwayatCubit>()
                                                                       .getDusDetailResponse(
                                                                       listAll[i] is DusData
                                                                           ? "${(listAll[i] as DusData)
-                                                                          .qrcodeSj}" : widget
+                                                                          .qrcodeSj}"
+                                                                          : widget
                                                                           .qrCode);
                                                                 },
-                                                                margin: EdgeInsets
+                                                                margin: const EdgeInsets
                                                                     .symmetric(
                                                                     horizontal:
                                                                     sizeMedium,
@@ -642,7 +650,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                       RoundedContainer(
                                                                           sizeMedium,
                                                                           boxDecoration:
-                                                                          BoxDecoration(
+                                                                          const BoxDecoration(
                                                                             color: Colors
                                                                                 .white,
                                                                           ),
@@ -733,6 +741,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                         Icons
                                                                                             .location_on_rounded,
                                                                                         color: primaryGreen,
+                                                                                        size: sizeHuge,
                                                                                       ),
                                                                                       // FlutterLogo(
                                                                                       //   textColor: Colors.blue,
@@ -751,8 +760,147 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                         //   ],
                                                                         // )
                                                                       ),
-                                                                      Text(
-                                                                          "detail dus: $stateDetailDus"),
+                                                                      // Text(
+                                                                      //     "detail dus: $stateDetailDus"),
+                                                                      const Text(
+                                                                          "Dus Header: "),
+                                                                      ListView
+                                                                          .builder(
+                                                                          itemCount: listHeaderDus
+                                                                              .length,
+                                                                          physics: const ClampingScrollPhysics(),
+                                                                          scrollDirection: Axis
+                                                                              .vertical,
+                                                                          shrinkWrap: true,
+                                                                          itemBuilder: (
+                                                                              c,
+                                                                              index) {
+                                                                            return
+                                                                              RoundedContainer(
+                                                                                  sizeNormal,
+                                                                                  boxDecoration: BoxDecoration(
+                                                                                      border: Border
+                                                                                          .all(
+                                                                                          color: primaryGreen)),
+                                                                                  child: Table(
+                                                                                    children: [
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("No SJ"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].nosj
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("QR Code SJ"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].qrcodeSj
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Nama Penerima"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].namaPenerima
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Lembaga"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].lembaga
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Alamat"),
+                                                                                          Text(
+                                                                                              ": ${"${listHeaderDus[index].nmTempat} ${listHeaderDus[index].detailTempat}"}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Kelurahan"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].kelurahan
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Kecamatan"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].kecamatan
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Kabupaten"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].kabupaten
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Provinsi"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].provinsi
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Dibuat Tanggal"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].createdAt
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Dibuat Oleh"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].createdBy
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                      TableRow(
+                                                                                        children: [
+                                                                                          Text("Foto"),
+                                                                                          Text(
+                                                                                              ": ${listHeaderDus[index].foto
+                                                                                              .toString()}"),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ],)
+                                                                              );
+                                                                          }),
+                                                                      const SizedBox(
+                                                                        height: sizeBig,),
+                                                                      const Text(
+                                                                          "Dus Detail: "),
+                                                                      ListView
+                                                                          .builder(
+                                                                          itemCount: listDetailDus
+                                                                              .length,
+                                                                          physics: const ClampingScrollPhysics(),
+                                                                          scrollDirection: Axis
+                                                                              .vertical,
+                                                                          shrinkWrap: true,
+                                                                          itemBuilder: (
+                                                                              c,
+                                                                              index) {
+                                                                            return Text(
+                                                                                listDetailDus[index]
+                                                                                    .toString());
+                                                                          }),
                                                                     ],
                                                                   ),
                                                                 ),

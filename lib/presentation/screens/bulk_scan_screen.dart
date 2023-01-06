@@ -549,7 +549,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                             secondaryColor: primaryColor,
                                           ),
                                           const CustomText(
-                                            "TOTAL QTY, PACKING DAN BERAT",
+                                            "TOTAL STOCK DAN BERAT",
                                             color: Colors.white,
                                             weight: FontWeight.bold,
                                             decoration:
@@ -557,11 +557,11 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                             size: sizeMedium,
                                           ),
                                           CustomText(
-                                            "QTY: ${data?.total} | Berat: 1270 KG",
+                                            "Berat: ${data?.kg} KG",
                                             color: Colors.white,
                                           ),
-                                          const CustomText(
-                                            "TOTAL STOCK: 30.000",
+                                          CustomText(
+                                            "TOTAL STOCK: ${data?.total}",
                                             color: Colors.white,
                                             weight: FontWeight.bold,
                                             size: sizeMedium,
