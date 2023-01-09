@@ -22,3 +22,5 @@ const provinceUrl = "$apiWilayahUrl/provinces$jsonEndingPrefix";
 const kabupatenKotaUrl = "$apiWilayahUrl/regencies";
 const kecamatanUrl = "$apiWilayahUrl/districts";
 const kelurahanUrl = "$apiWilayahUrl/villages";
+
+const imageResourceUrl = "$baseUrl/webinventory/public/";

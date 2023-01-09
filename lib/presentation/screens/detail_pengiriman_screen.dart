@@ -17,6 +17,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:timelines/timelines.dart';
 import 'package:flutter_map/flutter_map.dart'; // Suitable for most situations
 import '../../core/resources/consts/sizes.dart';
+import '../../core/resources/consts/urls.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/history_scan/history_scan_bloc.dart';
@@ -782,103 +783,137 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                       border: Border
                                                                                           .all(
                                                                                           color: primaryGreen)),
-                                                                                  child: Table(
+                                                                                  child: Column(
                                                                                     children: [
-                                                                                      TableRow(
+                                                                                      Table(
                                                                                         children: [
-                                                                                          Text("No SJ"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].nosj
-                                                                                              ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("QR Code SJ"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].qrcodeSj
-                                                                                              ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Nama Penerima"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].namaPenerima ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Lembaga"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].lembaga
-                                                                                              ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Alamat"),
-                                                                                          Text(
-                                                                                              ": ${"${listHeaderDus[index].nmTempat} ${listHeaderDus[index].detailTempat}"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Kelurahan"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].kelurahan
-                                                                                              ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Kecamatan"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].kecamatan
-                                                                                                  ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Kabupaten"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].kabupaten
-                                                                                                  ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Provinsi"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].provinsi
-                                                                                                  ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Dibuat Tanggal"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].createdAt
-                                                                                                  ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Dibuat Oleh"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].createdBy
-                                                                                                  ?? "-"}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                      TableRow(
-                                                                                        children: [
-                                                                                          Text("Foto"),
-                                                                                          Text(
-                                                                                              ": ${listHeaderDus[index].foto
-                                                                                              .toString()}"),
-                                                                                        ],
-                                                                                      ),
-                                                                                    ],)
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "No SJ"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .nosj
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "QR Code SJ"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .qrcodeSj
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Nama Penerima"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .namaPenerima ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Lembaga"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .lembaga
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Alamat"),
+                                                                                              Text(
+                                                                                                  ": ${"${listHeaderDus[index]
+                                                                                                      .nmTempat} ${listHeaderDus[index]
+                                                                                                      .detailTempat}"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Kelurahan"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .kelurahan
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Kecamatan"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .kecamatan
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Kabupaten"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .kabupaten
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Provinsi"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .provinsi
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Dibuat Tanggal"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .createdAt
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                  "Dibuat Oleh"),
+                                                                                              Text(
+                                                                                                  ": ${listHeaderDus[index]
+                                                                                                      .createdBy
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ],),
+                                                                                      Image.network("https://$imageResourceUrl${listHeaderDus[index]
+                                                                                          .foto ?? "-"}",errorBuilder: (c,o,s){
+                                                                                        return const Text("Image Not Found");
+                                                                                      },)
+
+                                                                                    ],
+                                                                                  )
                                                                               );
                                                                           }),
                                                                       const SizedBox(
@@ -898,40 +933,47 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                               index) {
                                                                             return
                                                                               RoundedContainer(
-                                                                                sizeNormal,
-                                                                                boxDecoration: BoxDecoration(
-                                                                                    border: Border
-                                                                                        .all(
-                                                                                        color: primaryGreen)),
-                                                                                child: Table(
+                                                                                  sizeNormal,
+                                                                                  boxDecoration: BoxDecoration(
+                                                                                      border: Border
+                                                                                          .all(
+                                                                                          color: primaryGreen)),
+                                                                                  child: Column(
                                                                                     children: [
-                                                                                TableRow(
-                                                                                children: [
-                                                                                Text("No Dus"),
-                                                                                Text(
-                                                                                    ": ${listDetailDus[index].nodus
-                                                                                        ?? "-"}"),
-                                                                                ],
-                                                                              ),
-                                                                                      TableRow(
-                                                                                children: [
-                                                                                Text("Foto"),
-                                                                                Text(
-                                                                                    ": ${listDetailDus[index].foto
-                                                                                        ?? "-"}"),
-                                                                                ],
-                                                                              ),
-                                                                                      const TableRow(
-                                                                                children: [
-                                                                                Text("Quantity"),
-                                                                                Text(
-                                                                                    ": 20"),
-                                                                                ],
-                                                                              ),]));
+                                                                                      Table(
+                                                                                          children: [
+                                                                                            TableRow(
+                                                                                              children: [
+                                                                                                Text(
+                                                                                                    "No Dus"),
+                                                                                                Text(
+                                                                                                    ": ${listDetailDus[index]
+                                                                                                        .nodus
+                                                                                                        ??
+                                                                                                        "-"}"),
+                                                                                              ],
+                                                                                            ),
+                                                                                            const TableRow(
+                                                                                              children: [
+                                                                                                Text(
+                                                                                                    "Quantity"),
+                                                                                                Text(
+                                                                                                    ": 20"),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ]),
+                                                                                      Image.network("https://$imageResourceUrl${listDetailDus[index]
+                                                                                          .foto
+                                                                                          ??
+                                                                                          "-"}",errorBuilder: (c,o,s){
+                                                                                        return const Text("Image Not Found");
+                                                                                      },)
+                                                                                    ],
+                                                                                  ));
 
-                                                                              // Text(
-                                                                              //   listDetailDus[index]
-                                                                              //       .toString());
+                                                                            // Text(
+                                                                            //   listDetailDus[index]
+                                                                            //       .toString());
                                                                           }),
                                                                     ],
                                                                   ),
