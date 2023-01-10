@@ -10,11 +10,14 @@ class MyTextField extends StatefulWidget {
   final TextEditingController? controller;
   final Function(String?)? onSaved;
   final Function(String?)? onChanged;
-  final Function()? onEditingComplete;
+  final void Function()? onEditingComplete;
   final TextInputType? keyboardType;
   final bool? enabled;
   final int? maxLines;
   final Key? formKey;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
 
   const MyTextField(
@@ -30,6 +33,9 @@ class MyTextField extends StatefulWidget {
       this.maxLines,
         this.formKey,
         this.validator,
+        this.suffixIcon,
+        this.prefixIcon,
+        this.textInputAction,
       Key? key})
       : super(key: key);
 
@@ -53,6 +59,7 @@ class _MyTextFieldState extends State<MyTextField> {
           // key: key,
           enabled: widget.enabled,
           controller: widget.controller,
+          textInputAction: widget.textInputAction,
           onSaved: (val) {
             if (widget.onSaved != null) {
               print("VALUE: $val");
@@ -67,6 +74,8 @@ class _MyTextFieldState extends State<MyTextField> {
             contentPadding: widget.contentPadding ?? const EdgeInsets.all(sizeMedium),
             labelText: widget.label,
             labelStyle: const TextStyle(color: Colors.grey),
+            suffixIcon: widget.suffixIcon,
+            prefixIcon: widget.prefixIcon,
             border: primaryBorder,
             focusedBorder: primaryBorder,
             enabledBorder: primaryBorder,

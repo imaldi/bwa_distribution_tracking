@@ -18,12 +18,16 @@ import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
 
-class RiwayatSuratJalanScreen extends StatefulWidget implements AutoRouteWrapper{
+class RiwayatSuratJalanScreen extends StatefulWidget
+    implements AutoRouteWrapper {
   final bool isLacakPerSJ;
-  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, Key? key}) : super(key: key);
+
+  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, Key? key})
+      : super(key: key);
 
   @override
-  State<RiwayatSuratJalanScreen> createState() => _RiwayatSuratJalanScreenState();
+  State<RiwayatSuratJalanScreen> createState() =>
+      _RiwayatSuratJalanScreenState();
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -34,128 +38,251 @@ class RiwayatSuratJalanScreen extends StatefulWidget implements AutoRouteWrapper
       ),
     ], child: this);
   }
-
 }
 
 class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
+  var searchController = TextEditingController(text: "PC00012574");
+
   @override
   void initState() {
     super.initState();
     context.read<SuratJalanCubit>().getSuratJalanPerPage(1);
-    if(widget.isLacakPerSJ){
+    if (widget.isLacakPerSJ) {
       context.read<SuratJalanCubit>().setPerScanSJ();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Builder(
-          builder: (context) {
-            var state = context.watch<SuratJalanCubit>().state;
-            var suratJalanResponseList = state.suratJalanResponse?.data?.data ?? [];
-            log("suratJalanResponseList hal riwayat $suratJalanResponseList");
-            if(state.isLoading) {
-              return Container(
-                  child: Center(child: CircularProgressIndicator(color: primaryColor,),));
-            }
+        child: Builder(builder: (context) {
+          var sjCubit = context.read<SuratJalanCubit>();
+          var state = context.watch<SuratJalanCubit>().state;
+          var suratJalanResponseList =
+              state.suratJalanResponse?.data?.data ?? [];
+          log("suratJalanResponseList hal riwayat $suratJalanResponseList");
+          if (state.isLoading) {
             return Container(
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  state.isPerSJ ? Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset("assets/images/empty_history.svg"),
-                      // Icon(Icons.home,size: sizeHuge,),
-                      // CustomText("Tidak Ada Riwayat Distribusi",color: primaryGreen,weight: FontWeight.bold,),
-                    ],
-                  )): SingleChildScrollView(
-                    child: ListView.builder(
-                      // padding: EdgeInsets.only(
-                      //     top: orientedHeightScreen(context,
-                      //         portraitRatio: 0.15, landscapeRatio: 0.15)),
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: suratJalanResponseList.length + 1,
-                        itemBuilder: (c, i) {
-                          if(i == 0) {
-                            return RiwayatScreenAppbarAndSearchbar();
-                          }
-                          return InkWell(
-                            onTap: () {
-                              // Fixme beri qr code dari item listnya ya nanti
-                              context.router.push(DetailPengirimanRoute(qrCode: state.suratJalanResponse?.data?.data?[i-1].qrcodeSj ?? "-"));
-                            },
-                            child: Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                Card(
-                                    color: Colors.white,
-                                    // i % 2 == 0 ? listColorLight : listColorDark,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                child: Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
+            ));
+          }
+          return Container(
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                state.isPerSJ
+                    ? Center(
+                        child: Column(
+                        mainAxisAlignment: state.searchResult?.data != null
+                            ? MainAxisAlignment.start
+                            : MainAxisAlignment.center,
+                        children: [
+                          state.searchResult?.data != null
+                              ? Column(
+                                  children: [
+                                    RiwayatScreenAppbarAndSearchbar(),
+                                    InkWell(
+                                      onTap: () {
+                                        // Fixme beri qr code dari item listnya ya nanti
+                                        context.router.push(
+                                            DetailPengirimanRoute(
+                                                qrCode: state
+                                                        .searchResult
+                                                        ?.header
+                                                        ?.first
+                                                        .qrcodeSj ??
+                                                    "-"));
+                                      },
+                                      child: Stack(
+                                        alignment: Alignment.topRight,
                                         children: [
-                                          const CustomText(
-                                            "Kode Surat Jalan :",
-                                            color: primaryColor,
-                                            size: sizeMedium,
-                                          ),
-                                          FittedBox(
-                                              child: CustomText(
-                                                state.suratJalanResponse?.data?.data?[i-1].nosj ?? "-",
-                                                color: primaryColor,
-                                                size: sizeMedium+sizeSmall,
-                                                weight: FontWeight.bold,
+                                          Card(
+                                              color: Colors.white,
+                                              // i % 2 == 0 ? listColorLight : listColorDark,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const CustomText(
+                                                      "Kode Surat Jalan :",
+                                                      color: primaryColor,
+                                                      size: sizeMedium,
+                                                    ),
+                                                    FittedBox(
+                                                        child: CustomText(
+                                                      state.searchResult?.header
+                                                              ?.first.nosj ??
+                                                          "-",
+                                                      color: primaryColor,
+                                                      size: sizeMedium +
+                                                          sizeSmall,
+                                                      weight: FontWeight.bold,
+                                                    )),
+                                                    Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              top: sizeNormal),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Flexible(
+                                                            child: CustomText(
+                                                              "${DateFormat("dd MMM yyyy . HH.mm", 'id').format(state.searchResult?.header?.first.createdAt ?? DateTime(2000))} | ",
+                                                              color:
+                                                                  primaryColor,
+                                                            ),
+                                                          ),
+                                                          Flexible(
+                                                            child: CustomText(
+                                                              "Total ${indonesianNumberFormat(state.searchResult?.header?.first.total ?? "0")}",
+                                                              color:
+                                                                  primaryColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               )),
-                                          Container(
-                                            margin:
-                                            const EdgeInsets.only(top: sizeNormal),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                              children: [
-                                                Flexible(
-                                                  child:CustomText(
-                                                    "${DateFormat("dd MMM yyyy . HH.mm", 'id').format(state.suratJalanResponse?.data?.data?[i-1].createdAt ?? DateTime(2000))} | ",
-                                                    color: primaryColor,
-                                                  ),
-                                                ),
-                                                Flexible(
-                                                  child: CustomText(
-                                                    "Total ${indonesianNumberFormat(state.suratJalanResponse?.data?.data?[i-1].total ?? "0")}",
-                                                    color: primaryColor,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          SummaryStatusTagWidget(
+                                            total: state.searchResult?.header
+                                                    ?.first.total ??
+                                                "0",
+                                            onProses: state.searchResult?.header
+                                                    ?.first.onproses ??
+                                                "0",
+                                            selesai: state.searchResult?.header
+                                                    ?.first.selesai ??
+                                                "0",
                                           )
                                         ],
                                       ),
-                                    )),
-                                SummaryStatusTagWidget(
-                                  total: suratJalanResponseList[i-1].total ?? "0",
-                                  onProses: suratJalanResponseList[i-1].onproses ?? "0",
-                                  selesai: suratJalanResponseList[i-1].selesai ?? "0",
+                                    ),
+                                  ],
                                 )
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-                  IntrinsicHeight(
-                    child: Container(
-                        color: Colors.white,
-                        child: RiwayatScreenAppbarAndSearchbar(isByQRSJ: widget.isLacakPerSJ,)),
-                  ),
-                ],
-              ),
-            );
-          }
-        ),
+                              // Text("${state.searchResult}")
+                              : SvgPicture.asset(
+                                  "assets/images/empty_history.svg"),
+                          // Icon(Icons.home,size: sizeHuge,),
+                          // CustomText("Tidak Ada Riwayat Distribusi",color: primaryGreen,weight: FontWeight.bold,),
+                        ],
+                      ))
+                    : SingleChildScrollView(
+                        child: ListView.builder(
+                            // padding: EdgeInsets.only(
+                            //     top: orientedHeightScreen(context,
+                            //         portraitRatio: 0.15, landscapeRatio: 0.15)),
+                            physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: suratJalanResponseList.length + 1,
+                            itemBuilder: (c, i) {
+                              if (i == 0) {
+                                return RiwayatScreenAppbarAndSearchbar();
+                              }
+                              return InkWell(
+                                onTap: () {
+                                  // Fixme beri qr code dari item listnya ya nanti
+                                  context.router.push(DetailPengirimanRoute(
+                                      qrCode: state.suratJalanResponse?.data
+                                              ?.data?[i - 1].qrcodeSj ??
+                                          "-"));
+                                },
+                                child: Stack(
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    Card(
+                                        color: Colors.white,
+                                        // i % 2 == 0 ? listColorLight : listColorDark,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              const CustomText(
+                                                "Kode Surat Jalan :",
+                                                color: primaryColor,
+                                                size: sizeMedium,
+                                              ),
+                                              FittedBox(
+                                                  child: CustomText(
+                                                state.suratJalanResponse?.data
+                                                        ?.data?[i - 1].nosj ??
+                                                    "-",
+                                                color: primaryColor,
+                                                size: sizeMedium + sizeSmall,
+                                                weight: FontWeight.bold,
+                                              )),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: sizeNormal),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Flexible(
+                                                      child: CustomText(
+                                                        "${DateFormat("dd MMM yyyy . HH.mm", 'id').format(state.suratJalanResponse?.data?.data?[i - 1].createdAt ?? DateTime(2000))} | ",
+                                                        color: primaryColor,
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: CustomText(
+                                                        "Total ${indonesianNumberFormat(state.suratJalanResponse?.data?.data?[i - 1].total ?? "0")}",
+                                                        color: primaryColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SummaryStatusTagWidget(
+                                      total:
+                                          suratJalanResponseList[i - 1].total ??
+                                              "0",
+                                      onProses: suratJalanResponseList[i - 1]
+                                              .onproses ??
+                                          "0",
+                                      selesai: suratJalanResponseList[i - 1]
+                                              .selesai ??
+                                          "0",
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
+                IntrinsicHeight(
+                  child: Container(
+                      color: Colors.white,
+                      child: RiwayatScreenAppbarAndSearchbar(
+                        isByQRSJ: widget.isLacakPerSJ,
+                        controller: searchController,
+                        onEditingComplete: () {
+                          sjCubit.getSuratJalanPerId(searchController.text);
+                        },
+                        onScanComplete: (noSJ){
+                          sjCubit.getSuratJalanPerId(noSJ);
+                        },
+                      )),
+                ),
+              ],
+            ),
+          );
+        }),
       ),
       // bottomNavigationBar: const CustomBottomNavbar(),
     );
