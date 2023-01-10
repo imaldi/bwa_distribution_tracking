@@ -41,7 +41,7 @@ class RiwayatSuratJalanScreen extends StatefulWidget
 }
 
 class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
-  var searchController = TextEditingController(text: "PC00012574");
+  var searchController = TextEditingController();
 
   @override
   void initState() {
