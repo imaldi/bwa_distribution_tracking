@@ -10,6 +10,7 @@ import 'package:bwa_distribution_tracking/data/models/surat_jalan/surat_jalan_mo
 import 'package:bwa_distribution_tracking/presentation/widgets/custom_appbar_container/custom_appbar_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text/custom_text.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -907,10 +908,19 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ],
                                                                                           ),
                                                                                         ],),
-                                                                                      Image.network("https://$imageResourceUrl${listHeaderDus[index]
-                                                                                          .foto ?? "-"}",errorBuilder: (c,o,s){
-                                                                                        return const Text("Image Not Found");
-                                                                                      },)
+                                                                                      Material(
+                                                                                        child: ExpandablePanel(
+                                                                                          header: Text("Foto"),
+                                                                                          collapsed: Container(),
+                                                                                          expanded: Image.network("https://$imageResourceUrl${listHeaderDus[index]
+                                                                                              .foto ?? "-"}",errorBuilder: (c,o,s){
+                                                                                            return Center(child: const Text("Image Not Found"));
+                                                                                          },),
+                                                                                          // tapHeaderToExpand: true,
+                                                                                          // hasIcon: true,
+                                                                                        ),
+                                                                                      ),
+
 
                                                                                     ],
                                                                                   )
@@ -962,12 +972,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                               ],
                                                                                             ),
                                                                                           ]),
-                                                                                      Image.network("https://$imageResourceUrl${listDetailDus[index]
-                                                                                          .foto
-                                                                                          ??
-                                                                                          "-"}",errorBuilder: (c,o,s){
-                                                                                        return const Text("Image Not Found");
-                                                                                      },)
+                                                                                      Material(
+                                                                                        child: ExpandablePanel(
+                                                                                            header: Text("Foto"),
+                                                                                            collapsed: Container(),
+                                                                                            expanded: Image.network("https://$imageResourceUrl${listDetailDus[index]
+                                                                                            .foto
+                                                                                            ??
+                                                                                            "-"}",errorBuilder: (c,o,s){
+                                                                                          return Center(child: const Text("Image Not Found"));
+                                                                                        },)),
+                                                                                      )
                                                                                     ],
                                                                                   ));
 
