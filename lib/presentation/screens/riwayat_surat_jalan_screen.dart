@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/presentation/state_management/cubits/surat_jalan/surat_jalan_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/helper/number_formatter.dart';
 import '../../injection_container.dart';
-import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
@@ -118,7 +116,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                                     FittedBox(
                                                         child: CustomText(
                                                       state.searchResult?.header
-                                                              ?.first.nosj ??
+                                                              ?.first.qrcodeSj ??
                                                           "-",
                                                       color: primaryColor,
                                                       size: sizeMedium +
@@ -218,7 +216,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                               FittedBox(
                                                   child: CustomText(
                                                 state.suratJalanResponse?.data
-                                                        ?.data?[i - 1].nosj ??
+                                                        ?.data?[i - 1].qrcodeSj ??
                                                     "-",
                                                 color: primaryColor,
                                                 size: sizeMedium + sizeSmall,
@@ -274,8 +272,8 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                         onEditingComplete: () {
                           sjCubit.getSuratJalanPerId(searchController.text);
                         },
-                        onScanComplete: (noSJ){
-                          sjCubit.getSuratJalanPerId(noSJ);
+                        onScanComplete: (qrcodeSJ){
+                          sjCubit.getSuratJalanPerId(qrcodeSJ);
                         },
                       )),
                 ),

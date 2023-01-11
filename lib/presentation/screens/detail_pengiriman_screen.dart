@@ -205,6 +205,39 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                           )),
                                     ],
                                   ),
+
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                          child: CustomText(
+                                            "Kode Project",
+                                            color: textColor,
+                                          )),
+                                      Expanded(
+                                          child: CustomText(
+                                            ": ${data?.kdProject}",
+                                            color: textColor,
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                          child: CustomText(
+                                            "Nama Project",
+                                            color: textColor,
+                                          )),
+                                      Expanded(
+                                          child: CustomText(
+                                            ": ${data?.nmProject}",
+                                            color: textColor,
+                                          )),
+                                    ],
+                                  ),
                                 ],
                               )),
                         )),

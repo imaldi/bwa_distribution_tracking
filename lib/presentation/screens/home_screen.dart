@@ -287,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           // borderRadius: BorderRadius.all(Radius.circular(sizeBig)),
                                                         ),
                                                         child:
-                                                        Center(child: CustomText("Shipping Code", color: Colors.white,)),
+                                                        const Center(child: CustomText("Shipping Code", color: Colors.white,)),
                                                         // NoUnderlineTextFormField(
                                                         //   controller: controller,
                                                         //   onEditingComplete: () {
@@ -592,7 +592,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   child:
                                                                       CustomText(
                                                                 // "003/SPJ/22-MERANTI00098-000${i + 1}",
-                                                                "${listSJ?[i].nosj}",
+                                                                "${listSJ?[i].qrcodeSj}",
                                                                 // color: primaryColor,
                                                                 weight:
                                                                     FontWeight
@@ -750,7 +750,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       portraitRatio: 0.20,
                                       landscapeRatio: 0.20),
                                   margin: const EdgeInsets.only(
-                                      top: sizeMedium, bottom: sizeNormal),
+                                      top: sizeMedium, bottom: sizeHuge*2),
                                   child: FittedBox(
                                     child: Row(
                                       mainAxisAlignment:
@@ -788,20 +788,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     }
                                                   });
                                                 },
-                                                child: RoundedContainer(
+                                                child: const RoundedContainer(
                                                   sizeMedium,
-                                                  padding: const EdgeInsets.all(
+                                                  padding: EdgeInsets.all(
                                                       sizeBig),
-                                                  margin: const EdgeInsets.only(
+                                                  margin: EdgeInsets.only(
                                                       right: sizeMedium,
                                                       left: sizeMedium,
                                                       top: sizeMedium,
                                                       bottom: sizeNormal),
                                                   boxDecoration:
-                                                      const BoxDecoration(
+                                                      BoxDecoration(
                                                           color: primaryColor),
-                                                  child: SvgPicture.asset(
-                                                      "assets/images/camera_white.svg"),
+                                                  child:
+                                                  CustomText("Scan SJ",color: Colors.white,),
+                                                  // SvgPicture.asset(
+                                                  //     "assets/images/camera_white.svg"),
                                                 ),
                                               ),
                                               const CustomText(

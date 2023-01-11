@@ -325,12 +325,12 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                 child: Column(
                                   children: [
                                     const CustomText(
-                                      "NOMOR ID",
+                                      "KODE PAKET",
                                       color: primaryGreen,
                                       weight: FontWeight.bold,
                                     ),
                                     CustomText(
-                                      "${data?.nosj}",
+                                      "${data?.qrcodeSj}",
                                       color: primaryGreen,
                                       weight: FontWeight.bold,
                                     ),
@@ -429,6 +429,38 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                         Expanded(
                                             child: CustomText(
                                           ": ${data?.alamat}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Kode Project",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.kdProject}",
+                                          color: textColor,
+                                        )),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                            child: CustomText(
+                                          "Nama Project",
+                                          color: textColor,
+                                        )),
+                                        Expanded(
+                                            child: CustomText(
+                                          ": ${data?.nmProject}",
                                           color: textColor,
                                         )),
                                       ],
