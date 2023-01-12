@@ -332,6 +332,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     CustomText(
                                       "${data?.qrcodeSj}",
                                       color: primaryGreen,
+                                      size: sizeBig,
                                       weight: FontWeight.bold,
                                     ),
                                     const SizedBox(

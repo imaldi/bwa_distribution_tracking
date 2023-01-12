@@ -30,83 +30,83 @@ Map<String, dynamic> _$$_DusDetailResponseToJson(
 _$_Dusdetail _$$_DusdetailFromJson(Map<String, dynamic> json) => _$_Dusdetail(
       id: json['id'] as int?,
       nosj: json['nosj'] as String?,
-      qrcodeSj: json['qrcodeSj'] as String?,
+      qrcodeSj: json['qrcode_sj'] as String?,
       nodus: json['nodus'] as String?,
       foto: json['foto'] as String?,
-      idLocation: json['idLocation'] as String?,
+      idLocation: json['id_location'] as String?,
       createdBy: json['createdBy'] as String?,
-      updatedBy: json['updatedBy'] as String?,
-      createdAt: json['createdAt'] == null
+      updatedBy: json['updated_by'] as String?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
+          : DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$$_DusdetailToJson(_$_Dusdetail instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nosj': instance.nosj,
-      'qrcodeSj': instance.qrcodeSj,
+      'qrcode_sj': instance.qrcodeSj,
       'nodus': instance.nodus,
       'foto': instance.foto,
-      'idLocation': instance.idLocation,
+      'id_location': instance.idLocation,
       'createdBy': instance.createdBy,
-      'updatedBy': instance.updatedBy,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'updated_by': instance.updatedBy,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 _$_Dushead _$$_DusheadFromJson(Map<String, dynamic> json) => _$_Dushead(
       id: json['id'] as int?,
-      locationId: json['locationId'] as String?,
+      locationId: json['location_id'] as String?,
       nosj: json['nosj'] as String?,
-      qrcodeSj: json['qrcodeSj'] as String?,
+      qrcodeSj: json['qrcode_sj'] as String?,
       latitude: json['latitude'] as String?,
       longtitude: json['longtitude'] as String?,
-      namaPenerima: json['namaPenerima'] as String?,
-      noHp: json['noHp'] as String?,
+      namaPenerima: json['nama_penerima'] as String?,
+      noHp: json['no_hp'] as String?,
       lembaga: json['lembaga'] as String?,
       nmTempat: json['nmTempat'] as String?,
-      detailTempat: json['detailTempat'] as String?,
+      detailTempat: json['detail_tempat'] as String?,
       kelurahan: json['kelurahan'] as String?,
       kecamatan: json['kecamatan'] as String?,
       kabupaten: json['kabupaten'] as String?,
       provinsi: json['provinsi'] as String?,
-      statusPengiriman: json['statusPengiriman'] as String?,
+      statusPengiriman: json['status_pengiriman'] as String?,
       foto: json['foto'] as String?,
       createdBy: json['createdBy'] as String?,
-      updatedBy: json['updatedBy'] as String?,
-      createdAt: json['createdAt'] == null
+      updatedBy: json['updated_by'] as String?,
+      createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
+          : DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$$_DusheadToJson(_$_Dushead instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'locationId': instance.locationId,
+      'location_id': instance.locationId,
       'nosj': instance.nosj,
-      'qrcodeSj': instance.qrcodeSj,
+      'qrcode_sj': instance.qrcodeSj,
       'latitude': instance.latitude,
       'longtitude': instance.longtitude,
-      'namaPenerima': instance.namaPenerima,
-      'noHp': instance.noHp,
+      'nama_penerima': instance.namaPenerima,
+      'no_hp': instance.noHp,
       'lembaga': instance.lembaga,
       'nmTempat': instance.nmTempat,
-      'detailTempat': instance.detailTempat,
+      'detail_tempat': instance.detailTempat,
       'kelurahan': instance.kelurahan,
       'kecamatan': instance.kecamatan,
       'kabupaten': instance.kabupaten,
       'provinsi': instance.provinsi,
-      'statusPengiriman': instance.statusPengiriman,
+      'status_pengiriman': instance.statusPengiriman,
       'foto': instance.foto,
       'createdBy': instance.createdBy,
-      'updatedBy': instance.updatedBy,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'updated_by': instance.updatedBy,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };

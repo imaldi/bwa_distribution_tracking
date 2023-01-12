@@ -29,14 +29,14 @@ class Dusdetail with _$Dusdetail {
   const factory Dusdetail({
     int? id,
     String? nosj,
-    String? qrcodeSj,
+    @JsonKey(name: "qrcode_sj") String? qrcodeSj,
     String? nodus,
     String? foto,
-    String? idLocation,
-    String? createdBy,
-    String? updatedBy,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    @JsonKey(name: "id_location") String? idLocation,
+    @JsonKey(name: "createdBy")  String? createdBy,
+    @JsonKey(name: "updated_by") String? updatedBy,
+    @JsonKey(name: "created_at") DateTime? createdAt,
+    @JsonKey(name: "updated_at") DateTime? updatedAt,
   }) = _Dusdetail;
 
   factory Dusdetail.fromJson(Map<String, dynamic> json) => _$DusdetailFromJson(json);
@@ -46,26 +46,26 @@ class Dusdetail with _$Dusdetail {
 class Dushead with _$Dushead {
   const factory Dushead({
     int? id,
-    String? locationId,
+    @JsonKey(name: "location_id") String? locationId,
     String? nosj,
-    String? qrcodeSj,
+    @JsonKey(name: "qrcode_sj") String? qrcodeSj,
     String? latitude,
     String? longtitude,
-    String? namaPenerima,
-    String? noHp,
+    @JsonKey(name: "nama_penerima") String? namaPenerima,
+    @JsonKey(name: "no_hp") String? noHp,
     String? lembaga,
     String? nmTempat,
-    String? detailTempat,
+    @JsonKey(name: "detail_tempat")String? detailTempat,
     String? kelurahan,
     String? kecamatan,
     String? kabupaten,
     String? provinsi,
-    String? statusPengiriman,
+    @JsonKey(name: "status_pengiriman") String? statusPengiriman,
     String? foto,
-    String? createdBy,
-    String? updatedBy,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    @JsonKey(name: "createdBy") String? createdBy,
+    @JsonKey(name: "updated_by") String? updatedBy,
+    @JsonKey(name: "created_at") DateTime? createdAt,
+    @JsonKey(name: "updated_at") DateTime? updatedAt,
   }) = _Dushead;
 
   factory Dushead.fromJson(Map<String, dynamic> json) => _$DusheadFromJson(json);

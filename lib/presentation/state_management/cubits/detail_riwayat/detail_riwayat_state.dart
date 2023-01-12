@@ -2,11 +2,13 @@ part of 'detail_riwayat_cubit.dart';
 
 class DetailRiwayatState extends Equatable {
   final DusDetailResponse? dusDetailResponse;
-  const DetailRiwayatState(this.dusDetailResponse);
+  final String? address;
 
-  DetailRiwayatState copyWith({DusDetailResponse? dusDetailResponse}){
-    return DetailRiwayatState(dusDetailResponse ?? this.dusDetailResponse);
+  const DetailRiwayatState(this.dusDetailResponse, {this.address});
+
+  DetailRiwayatState copyWith({DusDetailResponse? dusDetailResponse, String? address}){
+    return DetailRiwayatState(dusDetailResponse ?? this.dusDetailResponse, address: address ?? this.address);
   }
   @override
-  List<Object?> get props => [dusDetailResponse];
+  List<Object?> get props => [dusDetailResponse,address];
 }

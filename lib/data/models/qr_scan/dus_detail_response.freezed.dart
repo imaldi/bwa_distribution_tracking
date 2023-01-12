@@ -244,13 +244,19 @@ Dusdetail _$DusdetailFromJson(Map<String, dynamic> json) {
 mixin _$Dusdetail {
   int? get id => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
+  @JsonKey(name: "qrcode_sj")
   String? get qrcodeSj => throw _privateConstructorUsedError;
   String? get nodus => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
+  @JsonKey(name: "id_location")
   String? get idLocation => throw _privateConstructorUsedError;
+  @JsonKey(name: "createdBy")
   String? get createdBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_by")
   String? get updatedBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -267,14 +273,14 @@ abstract class $DusdetailCopyWith<$Res> {
   $Res call(
       {int? id,
       String? nosj,
-      String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? nodus,
       String? foto,
-      String? idLocation,
-      String? createdBy,
-      String? updatedBy,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: "id_location") String? idLocation,
+      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "updated_by") String? updatedBy,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -356,14 +362,14 @@ abstract class _$$_DusdetailCopyWith<$Res> implements $DusdetailCopyWith<$Res> {
   $Res call(
       {int? id,
       String? nosj,
-      String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? nodus,
       String? foto,
-      String? idLocation,
-      String? createdBy,
-      String? updatedBy,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: "id_location") String? idLocation,
+      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "updated_by") String? updatedBy,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -439,14 +445,14 @@ class _$_Dusdetail implements _Dusdetail {
   const _$_Dusdetail(
       {this.id,
       this.nosj,
-      this.qrcodeSj,
+      @JsonKey(name: "qrcode_sj") this.qrcodeSj,
       this.nodus,
       this.foto,
-      this.idLocation,
-      this.createdBy,
-      this.updatedBy,
-      this.createdAt,
-      this.updatedAt});
+      @JsonKey(name: "id_location") this.idLocation,
+      @JsonKey(name: "createdBy") this.createdBy,
+      @JsonKey(name: "updated_by") this.updatedBy,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt});
 
   factory _$_Dusdetail.fromJson(Map<String, dynamic> json) =>
       _$$_DusdetailFromJson(json);
@@ -456,20 +462,26 @@ class _$_Dusdetail implements _Dusdetail {
   @override
   final String? nosj;
   @override
+  @JsonKey(name: "qrcode_sj")
   final String? qrcodeSj;
   @override
   final String? nodus;
   @override
   final String? foto;
   @override
+  @JsonKey(name: "id_location")
   final String? idLocation;
   @override
+  @JsonKey(name: "createdBy")
   final String? createdBy;
   @override
+  @JsonKey(name: "updated_by")
   final String? updatedBy;
   @override
+  @JsonKey(name: "created_at")
   final DateTime? createdAt;
   @override
+  @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
 
   @override
@@ -523,14 +535,14 @@ abstract class _Dusdetail implements Dusdetail {
   const factory _Dusdetail(
       {final int? id,
       final String? nosj,
-      final String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") final String? qrcodeSj,
       final String? nodus,
       final String? foto,
-      final String? idLocation,
-      final String? createdBy,
-      final String? updatedBy,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_Dusdetail;
+      @JsonKey(name: "id_location") final String? idLocation,
+      @JsonKey(name: "createdBy") final String? createdBy,
+      @JsonKey(name: "updated_by") final String? updatedBy,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt}) = _$_Dusdetail;
 
   factory _Dusdetail.fromJson(Map<String, dynamic> json) =
       _$_Dusdetail.fromJson;
@@ -540,20 +552,26 @@ abstract class _Dusdetail implements Dusdetail {
   @override
   String? get nosj;
   @override
+  @JsonKey(name: "qrcode_sj")
   String? get qrcodeSj;
   @override
   String? get nodus;
   @override
   String? get foto;
   @override
+  @JsonKey(name: "id_location")
   String? get idLocation;
   @override
+  @JsonKey(name: "createdBy")
   String? get createdBy;
   @override
+  @JsonKey(name: "updated_by")
   String? get updatedBy;
   @override
+  @JsonKey(name: "created_at")
   DateTime? get createdAt;
   @override
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
@@ -568,25 +586,35 @@ Dushead _$DusheadFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Dushead {
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "location_id")
   String? get locationId => throw _privateConstructorUsedError;
   String? get nosj => throw _privateConstructorUsedError;
+  @JsonKey(name: "qrcode_sj")
   String? get qrcodeSj => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
   String? get longtitude => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_penerima")
   String? get namaPenerima => throw _privateConstructorUsedError;
+  @JsonKey(name: "no_hp")
   String? get noHp => throw _privateConstructorUsedError;
   String? get lembaga => throw _privateConstructorUsedError;
   String? get nmTempat => throw _privateConstructorUsedError;
+  @JsonKey(name: "detail_tempat")
   String? get detailTempat => throw _privateConstructorUsedError;
   String? get kelurahan => throw _privateConstructorUsedError;
   String? get kecamatan => throw _privateConstructorUsedError;
   String? get kabupaten => throw _privateConstructorUsedError;
   String? get provinsi => throw _privateConstructorUsedError;
+  @JsonKey(name: "status_pengiriman")
   String? get statusPengiriman => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
+  @JsonKey(name: "createdBy")
   String? get createdBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_by")
   String? get updatedBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -601,26 +629,26 @@ abstract class $DusheadCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? locationId,
+      @JsonKey(name: "location_id") String? locationId,
       String? nosj,
-      String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? latitude,
       String? longtitude,
-      String? namaPenerima,
-      String? noHp,
+      @JsonKey(name: "nama_penerima") String? namaPenerima,
+      @JsonKey(name: "no_hp") String? noHp,
       String? lembaga,
       String? nmTempat,
-      String? detailTempat,
+      @JsonKey(name: "detail_tempat") String? detailTempat,
       String? kelurahan,
       String? kecamatan,
       String? kabupaten,
       String? provinsi,
-      String? statusPengiriman,
+      @JsonKey(name: "status_pengiriman") String? statusPengiriman,
       String? foto,
-      String? createdBy,
-      String? updatedBy,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "updated_by") String? updatedBy,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -756,26 +784,26 @@ abstract class _$$_DusheadCopyWith<$Res> implements $DusheadCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? locationId,
+      @JsonKey(name: "location_id") String? locationId,
       String? nosj,
-      String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") String? qrcodeSj,
       String? latitude,
       String? longtitude,
-      String? namaPenerima,
-      String? noHp,
+      @JsonKey(name: "nama_penerima") String? namaPenerima,
+      @JsonKey(name: "no_hp") String? noHp,
       String? lembaga,
       String? nmTempat,
-      String? detailTempat,
+      @JsonKey(name: "detail_tempat") String? detailTempat,
       String? kelurahan,
       String? kecamatan,
       String? kabupaten,
       String? provinsi,
-      String? statusPengiriman,
+      @JsonKey(name: "status_pengiriman") String? statusPengiriman,
       String? foto,
-      String? createdBy,
-      String? updatedBy,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "updated_by") String? updatedBy,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -904,26 +932,26 @@ class __$$_DusheadCopyWithImpl<$Res>
 class _$_Dushead implements _Dushead {
   const _$_Dushead(
       {this.id,
-      this.locationId,
+      @JsonKey(name: "location_id") this.locationId,
       this.nosj,
-      this.qrcodeSj,
+      @JsonKey(name: "qrcode_sj") this.qrcodeSj,
       this.latitude,
       this.longtitude,
-      this.namaPenerima,
-      this.noHp,
+      @JsonKey(name: "nama_penerima") this.namaPenerima,
+      @JsonKey(name: "no_hp") this.noHp,
       this.lembaga,
       this.nmTempat,
-      this.detailTempat,
+      @JsonKey(name: "detail_tempat") this.detailTempat,
       this.kelurahan,
       this.kecamatan,
       this.kabupaten,
       this.provinsi,
-      this.statusPengiriman,
+      @JsonKey(name: "status_pengiriman") this.statusPengiriman,
       this.foto,
-      this.createdBy,
-      this.updatedBy,
-      this.createdAt,
-      this.updatedAt});
+      @JsonKey(name: "createdBy") this.createdBy,
+      @JsonKey(name: "updated_by") this.updatedBy,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt});
 
   factory _$_Dushead.fromJson(Map<String, dynamic> json) =>
       _$$_DusheadFromJson(json);
@@ -931,24 +959,29 @@ class _$_Dushead implements _Dushead {
   @override
   final int? id;
   @override
+  @JsonKey(name: "location_id")
   final String? locationId;
   @override
   final String? nosj;
   @override
+  @JsonKey(name: "qrcode_sj")
   final String? qrcodeSj;
   @override
   final String? latitude;
   @override
   final String? longtitude;
   @override
+  @JsonKey(name: "nama_penerima")
   final String? namaPenerima;
   @override
+  @JsonKey(name: "no_hp")
   final String? noHp;
   @override
   final String? lembaga;
   @override
   final String? nmTempat;
   @override
+  @JsonKey(name: "detail_tempat")
   final String? detailTempat;
   @override
   final String? kelurahan;
@@ -959,16 +992,21 @@ class _$_Dushead implements _Dushead {
   @override
   final String? provinsi;
   @override
+  @JsonKey(name: "status_pengiriman")
   final String? statusPengiriman;
   @override
   final String? foto;
   @override
+  @JsonKey(name: "createdBy")
   final String? createdBy;
   @override
+  @JsonKey(name: "updated_by")
   final String? updatedBy;
   @override
+  @JsonKey(name: "created_at")
   final DateTime? createdAt;
   @override
+  @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
 
   @override
@@ -1064,50 +1102,55 @@ class _$_Dushead implements _Dushead {
 abstract class _Dushead implements Dushead {
   const factory _Dushead(
       {final int? id,
-      final String? locationId,
+      @JsonKey(name: "location_id") final String? locationId,
       final String? nosj,
-      final String? qrcodeSj,
+      @JsonKey(name: "qrcode_sj") final String? qrcodeSj,
       final String? latitude,
       final String? longtitude,
-      final String? namaPenerima,
-      final String? noHp,
+      @JsonKey(name: "nama_penerima") final String? namaPenerima,
+      @JsonKey(name: "no_hp") final String? noHp,
       final String? lembaga,
       final String? nmTempat,
-      final String? detailTempat,
+      @JsonKey(name: "detail_tempat") final String? detailTempat,
       final String? kelurahan,
       final String? kecamatan,
       final String? kabupaten,
       final String? provinsi,
-      final String? statusPengiriman,
+      @JsonKey(name: "status_pengiriman") final String? statusPengiriman,
       final String? foto,
-      final String? createdBy,
-      final String? updatedBy,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_Dushead;
+      @JsonKey(name: "createdBy") final String? createdBy,
+      @JsonKey(name: "updated_by") final String? updatedBy,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt}) = _$_Dushead;
 
   factory _Dushead.fromJson(Map<String, dynamic> json) = _$_Dushead.fromJson;
 
   @override
   int? get id;
   @override
+  @JsonKey(name: "location_id")
   String? get locationId;
   @override
   String? get nosj;
   @override
+  @JsonKey(name: "qrcode_sj")
   String? get qrcodeSj;
   @override
   String? get latitude;
   @override
   String? get longtitude;
   @override
+  @JsonKey(name: "nama_penerima")
   String? get namaPenerima;
   @override
+  @JsonKey(name: "no_hp")
   String? get noHp;
   @override
   String? get lembaga;
   @override
   String? get nmTempat;
   @override
+  @JsonKey(name: "detail_tempat")
   String? get detailTempat;
   @override
   String? get kelurahan;
@@ -1118,16 +1161,21 @@ abstract class _Dushead implements Dushead {
   @override
   String? get provinsi;
   @override
+  @JsonKey(name: "status_pengiriman")
   String? get statusPengiriman;
   @override
   String? get foto;
   @override
+  @JsonKey(name: "createdBy")
   String? get createdBy;
   @override
+  @JsonKey(name: "updated_by")
   String? get updatedBy;
   @override
+  @JsonKey(name: "created_at")
   DateTime? get createdAt;
   @override
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

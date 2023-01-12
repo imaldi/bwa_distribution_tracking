@@ -65,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var controller = TextEditingController();
     return WillPopScope(
       onWillPop: () async {
         // myToast("Heey");
@@ -745,109 +744,118 @@ class _HomeScreenState extends State<HomeScreen> {
                                           },
                                         );
                                 }),
-                                Container(
-                                  height: orientedHeightScreen(context,
-                                      portraitRatio: 0.20,
-                                      landscapeRatio: 0.20),
-                                  margin: const EdgeInsets.only(
-                                      top: sizeMedium, bottom: sizeHuge*2),
-                                  child: FittedBox(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        FittedBox(
-                                          child: Column(
+                                Builder(
+                                  builder: (context) {
+                                    var appBarTitle = context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "-";
+
+                                    return Visibility(
+                                      visible: !(appBarTitle == constDistribusi),
+                                      child: Container(
+                                        height: orientedHeightScreen(context,
+                                            portraitRatio: 0.20,
+                                            landscapeRatio: 0.20),
+                                        margin: const EdgeInsets.only(
+                                            top: sizeMedium, bottom: sizeHuge*2),
+                                        child: FittedBox(
+                                          child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              InkWell(
-                                                onTap: () async {
-                                                  // context.router.push(
-                                                  //     const TestDhriveRoute()
-                                                  // );
-                                                  await BarcodeScanner.scan()
-                                                      .then((ScanResult
-                                                          bulkDetail) {
-                                                    if (bulkDetail.rawContent
-                                                        .isNotEmpty) {
-                                                      var qrBloc = context
-                                                          .read<QRScanBloc>();
-                                                      print(
-                                                          "bulkDetail ${bulkDetail.rawContent}");
-                                                      qrBloc.add(BulkQRScanEvent(
-                                                          // "003SPJ34-JATIMPARK0213232-0002",
-                                                          bulkDetail.rawContent));
-                                                      context.router
-                                                          .push(BulkScanRoute(
-                                                        qrScanBloc: qrBloc,
-                                                        qrCode: bulkDetail
-                                                                .rawContent ??
-                                                            "-",
-                                                      ));
-                                                    }
-                                                  });
-                                                },
-                                                child: const RoundedContainer(
-                                                  sizeMedium,
-                                                  padding: EdgeInsets.all(
-                                                      sizeBig),
-                                                  margin: EdgeInsets.only(
-                                                      right: sizeMedium,
-                                                      left: sizeMedium,
-                                                      top: sizeMedium,
-                                                      bottom: sizeNormal),
-                                                  boxDecoration:
-                                                      BoxDecoration(
-                                                          color: primaryColor),
-                                                  child:
-                                                  CustomText("Scan SJ",color: Colors.white,),
-                                                  // SvgPicture.asset(
-                                                  //     "assets/images/camera_white.svg"),
+                                              FittedBox(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        // context.router.push(
+                                                        //     const TestDhriveRoute()
+                                                        // );
+                                                        await BarcodeScanner.scan()
+                                                            .then((ScanResult
+                                                                bulkDetail) {
+                                                          if (bulkDetail.rawContent
+                                                              .isNotEmpty) {
+                                                            var qrBloc = context
+                                                                .read<QRScanBloc>();
+                                                            print(
+                                                                "bulkDetail ${bulkDetail.rawContent}");
+                                                            qrBloc.add(BulkQRScanEvent(
+                                                                // "003SPJ34-JATIMPARK0213232-0002",
+                                                                bulkDetail.rawContent));
+                                                            context.router
+                                                                .push(BulkScanRoute(
+                                                              qrScanBloc: qrBloc,
+                                                              qrCode: bulkDetail
+                                                                      .rawContent ??
+                                                                  "-",
+                                                            ));
+                                                          }
+                                                        });
+                                                      },
+                                                      child: const RoundedContainer(
+                                                        sizeMedium,
+                                                        padding: EdgeInsets.all(
+                                                            sizeBig),
+                                                        margin: EdgeInsets.only(
+                                                            right: sizeMedium,
+                                                            left: sizeMedium,
+                                                            top: sizeMedium,
+                                                            bottom: sizeNormal),
+                                                        boxDecoration:
+                                                            BoxDecoration(
+                                                                color: primaryColor),
+                                                        child:
+                                                        CustomText("Scan SJ",color: Colors.white,),
+                                                        // SvgPicture.asset(
+                                                        //     "assets/images/camera_white.svg"),
+                                                      ),
+                                                    ),
+                                                    const CustomText(
+                                                      "Surat Jalan",
+                                                      textAlign: TextAlign.center,
+                                                      // color: primaryColor,
+                                                    )
+                                                  ]..map((e) => FittedBox(
+                                                        child: e,
+                                                      )),
                                                 ),
                                               ),
-                                              const CustomText(
-                                                "Surat Jalan",
-                                                textAlign: TextAlign.center,
-                                                // color: primaryColor,
-                                              )
-                                            ]..map((e) => FittedBox(
-                                                  child: e,
-                                                )),
+                                              // FittedBox(
+                                              //   child: Column(
+                                              //     children: [
+                                              //       InkWell(
+                                              //         onTap: () {
+                                              //
+                                              //         },
+                                              //         child: RoundedContainer(
+                                              //           sizeMedium,
+                                              //           padding: const EdgeInsets.all(sizeBig),
+                                              //           margin: const EdgeInsets.only(
+                                              //               right: sizeMedium,
+                                              //               left: sizeMedium,
+                                              //               top: sizeMedium,
+                                              //               bottom: sizeNormal),
+                                              //           boxDecoration: const BoxDecoration(
+                                              //               color: primaryGreen),
+                                              //           child: SvgPicture.asset(
+                                              //               "assets/images/camera_white.svg"),
+                                              //         ),
+                                              //       ),
+                                              //       const CustomText(
+                                              //         "Dus",
+                                              //         textAlign: TextAlign.center,
+                                              //         color: primaryGreen,
+                                              //       )
+                                              //     ]..map((e) => FittedBox(child: e)),
+                                              //   ),
+                                              // ),
+                                            ],
                                           ),
                                         ),
-                                        // FittedBox(
-                                        //   child: Column(
-                                        //     children: [
-                                        //       InkWell(
-                                        //         onTap: () {
-                                        //
-                                        //         },
-                                        //         child: RoundedContainer(
-                                        //           sizeMedium,
-                                        //           padding: const EdgeInsets.all(sizeBig),
-                                        //           margin: const EdgeInsets.only(
-                                        //               right: sizeMedium,
-                                        //               left: sizeMedium,
-                                        //               top: sizeMedium,
-                                        //               bottom: sizeNormal),
-                                        //           boxDecoration: const BoxDecoration(
-                                        //               color: primaryGreen),
-                                        //           child: SvgPicture.asset(
-                                        //               "assets/images/camera_white.svg"),
-                                        //         ),
-                                        //       ),
-                                        //       const CustomText(
-                                        //         "Dus",
-                                        //         textAlign: TextAlign.center,
-                                        //         color: primaryGreen,
-                                        //       )
-                                        //     ]..map((e) => FittedBox(child: e)),
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                    );
+                                  }
                                 ),
                               ],
                             ));

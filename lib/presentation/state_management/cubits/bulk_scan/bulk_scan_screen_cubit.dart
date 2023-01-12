@@ -44,7 +44,6 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
               address: r.displayName
             ));
     emit(newState);
-
   }
 
   setFotoPath(String? path){
