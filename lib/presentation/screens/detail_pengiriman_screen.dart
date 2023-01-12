@@ -271,31 +271,39 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             node: TimelineNode(
                               // direction: Axis.horizontal,
                               indicator: Stack(
-                                alignment: Alignment.center,
+                                alignment: Alignment.bottomRight,
                                 children: [
-                                  CircleAvatar(
-                                    radius: sizeBig, // Image radius
-                                    backgroundColor: Colors.grey,
-                                    backgroundImage: nosjhistoryStatusPengirimanList
-                                        .isNotEmpty &&
-                                        nosjhistoryStatusPengirimanList
-                                            .contains("Terkirim")
-                                        ? const AssetImage(
-                                        "assets/images/background_main.png")
-                                        : null,
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: sizeBig, // Image radius
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage: nosjhistoryStatusPengirimanList
+                                            .isNotEmpty &&
+                                            nosjhistoryStatusPengirimanList
+                                                .contains("Terkirim")
+                                            ? const AssetImage(
+                                            "assets/images/background_main.png")
+                                            : null,
+                                      ),
+                                      SizedBox(
+                                        height: sizeMedium + sizeNormal,
+                                        width: sizeMedium + sizeNormal,
+                                        child: Container(
+                                          child: Image.asset(
+                                              "assets/images/home_icon_timeline.png"),
+                                        ),
+                                      )
+                                      // Icon(
+                                      //   Icons.home,
+                                      //   color: Colors.white,
+                                      // )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: sizeMedium + sizeNormal,
-                                    width: sizeMedium + sizeNormal,
-                                    child: Container(
-                                      child: Image.asset(
-                                          "assets/images/home_icon_timeline.png"),
-                                    ),
-                                  )
-                                  // Icon(
-                                  //   Icons.home,
-                                  //   color: Colors.white,
-                                  // )
+                                  const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                    backgroundColor: primaryColor,
+                                    child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),)
                                 ],
                               ),
                               // startConnector: SolidLineConnector(),
@@ -334,28 +342,42 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             node: TimelineNode(
                               // direction: Axis.horizontal,
                               indicator: Stack(
-                                alignment: Alignment.center,
+                                alignment: Alignment.bottomRight,
                                 children: [
-                                  CircleAvatar(
-                                    radius: sizeBig, // Image radius
-                                    backgroundColor: Colors.grey,
-                                    backgroundImage: nosjhistoryStatusPengirimanList
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: sizeBig, // Image radius
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage: nosjhistoryStatusPengirimanList
+                                            .isNotEmpty &&
+                                            nosjhistoryStatusPengirimanList
+                                                .contains("Diterima")
+                                            ? const AssetImage(
+                                            "assets/images/background_main.png")
+                                            : null,
+                                      ),
+                                      SizedBox(
+                                        height: sizeMedium + sizeNormal,
+                                        width: sizeMedium + sizeNormal,
+                                        child: Container(
+                                          child: Image.asset(
+                                              "assets/images/dropping_icon_timeline.png"),
+                                        ),
+                                      )
+                                      // Icon(Icons.home,color: Colors.white,)
+                                    ],
+                                  ),
+                                  Visibility(
+                                    visible: nosjhistoryStatusPengirimanList
                                         .isNotEmpty &&
                                         nosjhistoryStatusPengirimanList
-                                            .contains("Diterima")
-                                        ? const AssetImage(
-                                        "assets/images/background_main.png")
-                                        : null,
-                                  ),
-                                  SizedBox(
-                                    height: sizeMedium + sizeNormal,
-                                    width: sizeMedium + sizeNormal,
-                                    child: Container(
-                                      child: Image.asset(
-                                          "assets/images/dropping_icon_timeline.png"),
-                                    ),
+                                            .contains("Diterima"),
+                                    child: const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                      backgroundColor: primaryColor,
+                                      child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),),
                                   )
-                                  // Icon(Icons.home,color: Colors.white,)
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -406,16 +428,43 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             node: TimelineNode(
                               // direction: Axis.horizontal,
                               indicator: Stack(
-                                alignment: Alignment.center,
+                                alignment: Alignment.bottomRight,
                                 children: [
-                                  CircleAvatar(
-                                      radius: sizeBig, // Image radius
-                                      backgroundColor: Colors.grey,
-                                      backgroundImage: dusHistory.isNotEmpty &&
-                                          // listAll
-                                          //     .contains("Diterima") &&
-                                          // listAll
-                                          //     .contains("Terkirim") &&
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                          radius: sizeBig, // Image radius
+                                          backgroundColor: Colors.grey,
+                                          backgroundImage: dusHistory.isNotEmpty &&
+                                              ((int.parse(header?.total ??
+                                                  "0") !=
+                                                  int.parse(
+                                                      header?.selesai ??
+                                                          "-1")) &&
+                                                  (int.parse(header?.total ??
+                                                      "0") !=
+                                                      int.parse(
+                                                          header?.onproses ??
+                                                              "-1"))) ||
+                                              (int.parse(header?.total ?? "0") ==
+                                                  int.parse(
+                                                      header?.selesai ?? "-1"))
+                                              ? const AssetImage(
+                                              "assets/images/background_main.png")
+                                              : null),
+                                      SizedBox(
+                                        height: sizeMedium + sizeNormal,
+                                        width: sizeMedium + sizeNormal,
+                                        child: Container(
+                                          child: Image.asset(
+                                              "assets/images/delivery_icon_timeline.png"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Visibility(
+                                      visible: dusHistory.isNotEmpty &&
                                           ((int.parse(header?.total ??
                                               "0") !=
                                               int.parse(
@@ -428,18 +477,10 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                           "-1"))) ||
                                           (int.parse(header?.total ?? "0") ==
                                               int.parse(
-                                                  header?.selesai ?? "-1"))
-                                          ? const AssetImage(
-                                          "assets/images/background_main.png")
-                                          : null),
-                                  SizedBox(
-                                    height: sizeMedium + sizeNormal,
-                                    width: sizeMedium + sizeNormal,
-                                    child: Container(
-                                      child: Image.asset(
-                                          "assets/images/delivery_icon_timeline.png"),
-                                    ),
-                                  )
+                                                  header?.selesai ?? "-1")),
+                                      child: const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                        backgroundColor: primaryColor,
+                                        child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -483,31 +524,40 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                             node: TimelineNode(
                               // direction: Axis.horizontal,
                               indicator: Stack(
-                                alignment: Alignment.center,
+                                alignment: Alignment.bottomRight,
                                 children: [
-                                  CircleAvatar(
-                                    radius: sizeBig, // Image radius
-                                    backgroundColor: Colors.grey,
-                                    backgroundImage: listAll.isNotEmpty &&
-                                        // listAll
-                                        //     .contains("Diterima") &&
-                                        // listAll
-                                        //     .contains("Terkirim") &&
-                                        (int.parse(header?.total ?? "0") ==
-                                            int.parse(
-                                                header?.selesai ?? "-1"))
-                                        ? const AssetImage(
-                                        "assets/images/background_main.png")
-                                        : null,
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: sizeBig, // Image radius
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage: listAll.isNotEmpty &&
+                                            (int.parse(header?.total ?? "0") ==
+                                                int.parse(
+                                                    header?.selesai ?? "-1"))
+                                            ? const AssetImage(
+                                            "assets/images/background_main.png")
+                                            : null,
+                                      ),
+                                      SizedBox(
+                                        height: sizeMedium + sizeNormal,
+                                        width: sizeMedium + sizeNormal,
+                                        child: Container(
+                                          child: Image.asset(
+                                              "assets/images/received_icon_timeline.png"),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: sizeMedium + sizeNormal,
-                                    width: sizeMedium + sizeNormal,
-                                    child: Container(
-                                      child: Image.asset(
-                                          "assets/images/received_icon_timeline.png"),
-                                    ),
-                                  )
+                                  Visibility(
+                                      visible: listAll.isNotEmpty &&
+                                          (int.parse(header?.total ?? "0") ==
+                                              int.parse(
+                                                  header?.selesai ?? "-1")),
+                                      child: const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                    backgroundColor: primaryColor,
+                                    child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -825,7 +875,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           children: [
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "No SJ"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -836,7 +886,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "QR Code SJ"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -847,7 +897,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Nama Penerima"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -857,7 +907,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Lembaga"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -868,7 +918,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Alamat"),
                                                                                                 Text(
                                                                                                     ": ${"${listHeaderDus[index]
@@ -878,7 +928,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Kelurahan"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -889,7 +939,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Kecamatan"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -900,7 +950,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Kabupaten"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -911,7 +961,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Provinsi"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -922,7 +972,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Dibuat Tanggal"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -933,7 +983,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ),
                                                                                             TableRow(
                                                                                               children: [
-                                                                                                Text(
+                                                                                                const Text(
                                                                                                     "Dibuat Oleh"),
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
@@ -945,11 +995,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           ],),
                                                                                         Material(
                                                                                           child: ExpandablePanel(
-                                                                                            header: Text("Foto"),
+                                                                                            header: const Text("Foto"),
                                                                                             collapsed: Container(),
                                                                                             expanded: Image.network("https://$imageResourceUrl${listHeaderDus[index]
                                                                                                 .foto ?? "-"}",errorBuilder: (c,o,s){
-                                                                                              return Center(child: const Text("Image Not Found"));
+                                                                                              return const Center(child: Text("Image Not Found"));
                                                                                             },),
                                                                                             // tapHeaderToExpand: true,
                                                                                             // hasIcon: true,
@@ -987,7 +1037,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             children: [
                                                                                               TableRow(
                                                                                                 children: [
-                                                                                                  Text(
+                                                                                                  const Text(
                                                                                                       "No Dus"),
                                                                                                   Text(
                                                                                                       ": ${listDetailDus[index]
@@ -1007,13 +1057,13 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ]),
                                                                                         Material(
                                                                                           child: ExpandablePanel(
-                                                                                              header: Text("Foto"),
+                                                                                              header: const Text("Foto"),
                                                                                               collapsed: Container(),
                                                                                               expanded: Image.network("https://$imageResourceUrl${listDetailDus[index]
                                                                                               .foto
                                                                                               ??
                                                                                               "-"}",errorBuilder: (c,o,s){
-                                                                                            return Center(child: const Text("Image Not Found"));
+                                                                                            return const Center(child: Text("Image Not Found"));
                                                                                           },)),
                                                                                         )
                                                                                       ],
