@@ -250,7 +250,7 @@ mixin _$Dusdetail {
   String? get foto => throw _privateConstructorUsedError;
   @JsonKey(name: "id_location")
   String? get idLocation => throw _privateConstructorUsedError;
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   String? get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_by")
   String? get updatedBy => throw _privateConstructorUsedError;
@@ -277,7 +277,7 @@ abstract class $DusdetailCopyWith<$Res> {
       String? nodus,
       String? foto,
       @JsonKey(name: "id_location") String? idLocation,
-      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "created_by") String? createdBy,
       @JsonKey(name: "updated_by") String? updatedBy,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt});
@@ -366,7 +366,7 @@ abstract class _$$_DusdetailCopyWith<$Res> implements $DusdetailCopyWith<$Res> {
       String? nodus,
       String? foto,
       @JsonKey(name: "id_location") String? idLocation,
-      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "created_by") String? createdBy,
       @JsonKey(name: "updated_by") String? updatedBy,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt});
@@ -449,7 +449,7 @@ class _$_Dusdetail implements _Dusdetail {
       this.nodus,
       this.foto,
       @JsonKey(name: "id_location") this.idLocation,
-      @JsonKey(name: "createdBy") this.createdBy,
+      @JsonKey(name: "created_by") this.createdBy,
       @JsonKey(name: "updated_by") this.updatedBy,
       @JsonKey(name: "created_at") this.createdAt,
       @JsonKey(name: "updated_at") this.updatedAt});
@@ -472,7 +472,7 @@ class _$_Dusdetail implements _Dusdetail {
   @JsonKey(name: "id_location")
   final String? idLocation;
   @override
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   final String? createdBy;
   @override
   @JsonKey(name: "updated_by")
@@ -539,7 +539,7 @@ abstract class _Dusdetail implements Dusdetail {
       final String? nodus,
       final String? foto,
       @JsonKey(name: "id_location") final String? idLocation,
-      @JsonKey(name: "createdBy") final String? createdBy,
+      @JsonKey(name: "created_by") final String? createdBy,
       @JsonKey(name: "updated_by") final String? updatedBy,
       @JsonKey(name: "created_at") final DateTime? createdAt,
       @JsonKey(name: "updated_at") final DateTime? updatedAt}) = _$_Dusdetail;
@@ -562,7 +562,7 @@ abstract class _Dusdetail implements Dusdetail {
   @JsonKey(name: "id_location")
   String? get idLocation;
   @override
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   String? get createdBy;
   @override
   @JsonKey(name: "updated_by")
@@ -608,7 +608,7 @@ mixin _$Dushead {
   @JsonKey(name: "status_pengiriman")
   String? get statusPengiriman => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   String? get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_by")
   String? get updatedBy => throw _privateConstructorUsedError;
@@ -645,7 +645,7 @@ abstract class $DusheadCopyWith<$Res> {
       String? provinsi,
       @JsonKey(name: "status_pengiriman") String? statusPengiriman,
       String? foto,
-      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "created_by") String? createdBy,
       @JsonKey(name: "updated_by") String? updatedBy,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt});
@@ -800,7 +800,7 @@ abstract class _$$_DusheadCopyWith<$Res> implements $DusheadCopyWith<$Res> {
       String? provinsi,
       @JsonKey(name: "status_pengiriman") String? statusPengiriman,
       String? foto,
-      @JsonKey(name: "createdBy") String? createdBy,
+      @JsonKey(name: "created_by") String? createdBy,
       @JsonKey(name: "updated_by") String? updatedBy,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt});
@@ -948,7 +948,7 @@ class _$_Dushead implements _Dushead {
       this.provinsi,
       @JsonKey(name: "status_pengiriman") this.statusPengiriman,
       this.foto,
-      @JsonKey(name: "createdBy") this.createdBy,
+      @JsonKey(name: "created_by") this.createdBy,
       @JsonKey(name: "updated_by") this.updatedBy,
       @JsonKey(name: "created_at") this.createdAt,
       @JsonKey(name: "updated_at") this.updatedAt});
@@ -997,7 +997,7 @@ class _$_Dushead implements _Dushead {
   @override
   final String? foto;
   @override
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   final String? createdBy;
   @override
   @JsonKey(name: "updated_by")
@@ -1118,7 +1118,7 @@ abstract class _Dushead implements Dushead {
       final String? provinsi,
       @JsonKey(name: "status_pengiriman") final String? statusPengiriman,
       final String? foto,
-      @JsonKey(name: "createdBy") final String? createdBy,
+      @JsonKey(name: "created_by") final String? createdBy,
       @JsonKey(name: "updated_by") final String? updatedBy,
       @JsonKey(name: "created_at") final DateTime? createdAt,
       @JsonKey(name: "updated_at") final DateTime? updatedAt}) = _$_Dushead;
@@ -1166,7 +1166,7 @@ abstract class _Dushead implements Dushead {
   @override
   String? get foto;
   @override
-  @JsonKey(name: "createdBy")
+  @JsonKey(name: "created_by")
   String? get createdBy;
   @override
   @JsonKey(name: "updated_by")

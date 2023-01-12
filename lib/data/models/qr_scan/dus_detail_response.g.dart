@@ -34,7 +34,7 @@ _$_Dusdetail _$$_DusdetailFromJson(Map<String, dynamic> json) => _$_Dusdetail(
       nodus: json['nodus'] as String?,
       foto: json['foto'] as String?,
       idLocation: json['id_location'] as String?,
-      createdBy: json['createdBy'] as String?,
+      createdBy: json['created_by'] as String?,
       updatedBy: json['updated_by'] as String?,
       createdAt: json['created_at'] == null
           ? null
@@ -52,7 +52,7 @@ Map<String, dynamic> _$$_DusdetailToJson(_$_Dusdetail instance) =>
       'nodus': instance.nodus,
       'foto': instance.foto,
       'id_location': instance.idLocation,
-      'createdBy': instance.createdBy,
+      'created_by': instance.createdBy,
       'updated_by': instance.updatedBy,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
@@ -76,7 +76,7 @@ _$_Dushead _$$_DusheadFromJson(Map<String, dynamic> json) => _$_Dushead(
       provinsi: json['provinsi'] as String?,
       statusPengiriman: json['status_pengiriman'] as String?,
       foto: json['foto'] as String?,
-      createdBy: json['createdBy'] as String?,
+      createdBy: json['created_by'] as String?,
       updatedBy: json['updated_by'] as String?,
       createdAt: json['created_at'] == null
           ? null
@@ -105,7 +105,7 @@ Map<String, dynamic> _$$_DusheadToJson(_$_Dushead instance) =>
       'provinsi': instance.provinsi,
       'status_pengiriman': instance.statusPengiriman,
       'foto': instance.foto,
-      'createdBy': instance.createdBy,
+      'created_by': instance.createdBy,
       'updated_by': instance.updatedBy,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
