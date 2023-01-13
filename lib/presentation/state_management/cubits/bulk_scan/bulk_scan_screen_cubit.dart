@@ -41,7 +41,8 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
     var newState = eitherPositionOrFailure.fold(
             (l) => state.copyWith(address: ""),
             (r) => state.copyWith(
-              address: r.displayName
+              address: r.displayName,
+              sendScanDataModel: state.sendScanDataModel.copyWith(kota: r.address?.city ?? "" ),
             ));
     emit(newState);
   }

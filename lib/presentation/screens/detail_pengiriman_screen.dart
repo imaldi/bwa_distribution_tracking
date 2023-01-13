@@ -302,7 +302,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     ],
                                   ),
                                   const CircleAvatar(radius: sizeNormal+sizeSmall,
-                                    backgroundColor: primaryColor,
+                                    backgroundColor: checkIconColor,
                                     child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),)
                                 ],
                               ),
@@ -375,7 +375,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                         nosjhistoryStatusPengirimanList
                                             .contains("Diterima"),
                                     child: const CircleAvatar(radius: sizeNormal+sizeSmall,
-                                      backgroundColor: primaryColor,
+                                      backgroundColor: checkIconColor,
                                       child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),),
                                   )
                                 ],
@@ -479,7 +479,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               int.parse(
                                                   header?.selesai ?? "-1")),
                                       child: const CircleAvatar(radius: sizeNormal+sizeSmall,
-                                        backgroundColor: primaryColor,
+                                        backgroundColor: checkIconColor,
                                         child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
                                 ],
                               ),
@@ -556,7 +556,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                               int.parse(
                                                   header?.selesai ?? "-1")),
                                       child: const CircleAvatar(radius: sizeNormal+sizeSmall,
-                                    backgroundColor: primaryColor,
+                                    backgroundColor: checkIconColor,
                                     child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
                                 ],
                               ),
@@ -850,7 +850,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                         // Text(
                                                                         //     "detail dus: $stateDetailDus"),
                                                                         Text(
-                                                                            "Detail Alamat: ${state.address ?? "Loading..."}"),
+                                                                            "Detail Alamat:\n${state.address ?? "Loading..."}"),
+                                                                        // Text(
+                                                                        //     ": ${"${listHeaderDus.first
+                                                                        //         .nmTempat ?? ""} ${listHeaderDus.first
+                                                                        //         .detailTempat ?? ""}"}"),
                                                                         ListView
                                                                             .builder(
                                                                             itemCount: listHeaderDus
@@ -914,16 +918,6 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                                         .lembaga
                                                                                                         ??
                                                                                                         "-"}"),
-                                                                                              ],
-                                                                                            ),
-                                                                                            TableRow(
-                                                                                              children: [
-                                                                                                const Text(
-                                                                                                    "Alamat"),
-                                                                                                Text(
-                                                                                                    ": ${"${listHeaderDus[index]
-                                                                                                        .nmTempat} ${listHeaderDus[index]
-                                                                                                        .detailTempat}"}"),
                                                                                               ],
                                                                                             ),
                                                                                             TableRow(

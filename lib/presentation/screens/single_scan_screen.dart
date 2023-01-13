@@ -386,6 +386,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             .watch<BulkScanScreenCubit>()
                             .state
                             .address;
+                        cubit.updateStoreSelesaiResponse(
+                                (p0) => p0.copyWith(detailTempat: state));
                         return MyTextField(
                           enabled: false,
                           label: 'Google Address',

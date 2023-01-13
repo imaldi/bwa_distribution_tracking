@@ -54,7 +54,7 @@ class Dushead with _$Dushead {
     @JsonKey(name: "nama_penerima") String? namaPenerima,
     @JsonKey(name: "no_hp") String? noHp,
     String? lembaga,
-    String? nmTempat,
+    @JsonKey(name: "nama_tempat") String? nmTempat,
     @JsonKey(name: "detail_tempat")String? detailTempat,
     String? kelurahan,
     String? kecamatan,
