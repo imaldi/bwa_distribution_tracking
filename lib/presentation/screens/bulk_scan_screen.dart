@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import '../../core/resources/helper/number_formatter.dart';
 import '../../data/models/qr_scan/bulk_q_r_scan_model.dart';
@@ -520,7 +522,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                             color:
                                                                 Colors.white),
                                                         CustomText(
-                                                          "Nama Barang (Project): ${dataPerPage?[ind].nmProject}",
+                                                          "Jeni Qur'an  (Project): ${dataPerPage?[ind].nmProject}",
                                                           color: Colors.white,
                                                         ),
                                                       ],
@@ -661,6 +663,90 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           widget.willScanDus),
                                       child: Column(
                                         children: [
+                                          Builder(
+                                            builder: (context) {
+                                              var state =
+                                                  context.watch<BulkScanScreenCubit>().state;
+                                              var lat = double.parse(state.sendScanDataModel.latitude ?? "0.0");
+                                              var lng = double.parse(state.sendScanDataModel.longtitude ?? "0.0");
+                                              print("Lat Long: $lat | $lng");
+
+                                              return Column(
+                                                children: [
+                                                  lat != 0.0 && lng != 0.0 ?
+                                                  RoundedContainer(
+                                                      sizeMedium,
+                                                      boxDecoration:
+                                                      const BoxDecoration(
+                                                        color: Colors
+                                                            .white,
+                                                      ),
+                                                      constraints:
+                                                      const BoxConstraints(
+                                                          maxHeight:
+                                                          300),
+                                                      child:
+                                                      FlutterMap(
+                                                        options:
+                                                        MapOptions(
+                                                          center: LatLng(
+                                                              lat,
+                                                              lng),
+                                                          zoom:
+                                                          17.0,
+                                                          maxZoom:
+                                                          18.0,
+                                                        ),
+                                                        children: [
+                                                          TileLayer(
+                                                            urlTemplate:
+                                                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                            userAgentPackageName:
+                                                            'com.aim2u.app',
+                                                          ),
+                                                          MarkerLayer(
+                                                              markers: [
+                                                                Marker(
+                                                                  width: 80,
+                                                                  height: 80,
+                                                                  rotate: true,
+                                                                  point: LatLng(
+                                                                      lat,
+                                                                      lng),
+                                                                  builder: (
+                                                                      ctx) =>
+                                                                  const Icon(
+                                                                    Icons
+                                                                        .location_on_rounded,
+                                                                    color: primaryGreen,
+                                                                    size: sizeHuge,
+                                                                  ),
+                                                                  // FlutterLogo(
+                                                                  //   textColor: Colors.blue,
+                                                                  //   key: ObjectKey(Colors.blue),
+                                                                  // ),
+                                                                )
+                                                              ]),
+                                                        ],
+                                                      )
+                                                  ):
+                                                  Container(
+                                                    margin: const EdgeInsets.symmetric(vertical: sizeHuge),
+                                                    child: Center(child: SizedBox(
+                                                        width: sizeBig,
+                                                        height: sizeBig,
+                                                        child: CircularProgressIndicator(color: primaryColor,))),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                                    child: CustomText("${state.sendScanDataModel.alamat ?? "Loading..."}",color: primaryColor,),
+                                                  ),
+
+                                                ],
+                                              );
+                                            }
+                                          ),
+
                                           Padding(
                                             padding: const EdgeInsets.all(sizeMedium),
                                             child: MyDropdownButton<String>(

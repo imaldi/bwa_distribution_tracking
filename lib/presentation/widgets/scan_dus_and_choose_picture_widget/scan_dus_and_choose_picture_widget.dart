@@ -41,7 +41,13 @@ class _ScanDusAndChoosePictureWidgetState
         negativeButton: () async {
           await _takePicture(context, qrCode, state);
         },
-        negativeButtonText: "Pick From Camera");
+        negativeButtonText: "Pick From Camera",
+        dismissedDialogCallback: () {
+          if(widget.functionCallbackSetImageFilePath != null) {
+            widget.functionCallbackSetImageFilePath!(qrCode,null);
+          }
+        },
+    );
   }
 
   Future _takePicture(BuildContext context, String qrCode, ImagePickerCubitState state) async {

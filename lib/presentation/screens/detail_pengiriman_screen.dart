@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:timelines/timelines.dart';
 import 'package:flutter_map/flutter_map.dart'; // Suitable for most situations
+import 'package:timelines/timelines.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/consts/urls.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
@@ -94,154 +94,160 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
               return SingleChildScrollView(
                 controller: controller,
                 child: Container(
-                  margin: const EdgeInsets.only(bottom: sizeHuge*2),
+                  margin: const EdgeInsets.only(bottom: sizeMedium),
                   child: Column(
                     children: [
                       CustomAppbarContainer(
                           titleText: "Detail Pengiriman",
-                          child: Center(
-                            child: RoundedContainer(sizeMedium,
-                                padding: const EdgeInsets.all(sizeMedium),
-                                margin:
-                                const EdgeInsets.symmetric(vertical: sizeBig),
-                                boxDecoration: const BoxDecoration(
-                                    color: Colors.transparent),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                          child: Column(
+                            children: [
+                              CustomText("${data?.qrcodeSj}",color: Colors.white,size: sizeBig,),
+                              Center(
+                                child: RoundedContainer(sizeMedium,
+                                    padding: const EdgeInsets.all(sizeMedium),
+                                    margin:
+                                    const EdgeInsets.symmetric(vertical: sizeBig),
+                                    boxDecoration: const BoxDecoration(
+                                        color: Colors.transparent),
+                                    child: Column(
                                       children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Tanggal",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              // Fixme fix with date formatting helper
-                                              ": ${DateFormat("dd MMM yyyy", 'id')
-                                                  .format(data?.createdAt ??
-                                                  DateTime(2000))}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Nomor PC/PO",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.nopc}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "No Polisi",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.nopol}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Nama Ekspedisi",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.dikirimBy}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Nama Pengemudi",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.nmPengemudi}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Alamat Pengirimiman",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.alamat}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Tanggal",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  // Fixme fix with date formatting helper
+                                                  ": ${DateFormat(
+                                                      "dd MMM yyyy", 'id')
+                                                      .format(data?.createdAt ??
+                                                      DateTime(2000))}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Nomor PC/PO",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.nopc}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "No Polisi",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.nopol}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Nama Ekspedisi",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.dikirimBy}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Nama Pengemudi",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.nmPengemudi}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Alamat Pengirimiman",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.alamat}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
 
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Kode Project",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.kdProject}",
-                                              color: textColor,
-                                            )),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Kode Project",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.kdProject}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                                child: CustomText(
+                                                  "Nama Project",
+                                                  color: textColor,
+                                                )),
+                                            Expanded(
+                                                child: CustomText(
+                                                  ": ${data?.nmProject}",
+                                                  color: textColor,
+                                                )),
+                                          ],
+                                        ),
                                       ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                            child: CustomText(
-                                              "Nama Project",
-                                              color: textColor,
-                                            )),
-                                        Expanded(
-                                            child: CustomText(
-                                              ": ${data?.nmProject}",
-                                              color: textColor,
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                )),
+                                    )),
+                              ),
+                            ],
                           )),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -301,9 +307,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       // )
                                     ],
                                   ),
-                                  const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                  const CircleAvatar(
+                                    radius: sizeNormal + sizeSmall,
                                     backgroundColor: checkIconColor,
-                                    child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),)
+                                    child: Center(child: Icon(
+                                      Icons.check, color: Colors.white,
+                                      size: sizeNormal + sizeSmall,)),)
                                 ],
                               ),
                               // startConnector: SolidLineConnector(),
@@ -332,7 +341,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   child: CustomText(
                                     'Dropping',
                                     color:
-                                    nosjhistoryStatusPengirimanList.isNotEmpty &&
+                                    nosjhistoryStatusPengirimanList
+                                        .isNotEmpty &&
                                         nosjhistoryStatusPengirimanList
                                             .contains("Diterima")
                                         ? primaryColor
@@ -374,9 +384,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                         .isNotEmpty &&
                                         nosjhistoryStatusPengirimanList
                                             .contains("Diterima"),
-                                    child: const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                    child: const CircleAvatar(
+                                      radius: sizeNormal + sizeSmall,
                                       backgroundColor: checkIconColor,
-                                      child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),),
+                                      child: Center(child: Icon(
+                                        Icons.check, color: Colors.white,
+                                        size: sizeNormal + sizeSmall,)),),
                                   )
                                 ],
                               ),
@@ -436,7 +449,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       CircleAvatar(
                                           radius: sizeBig, // Image radius
                                           backgroundColor: Colors.grey,
-                                          backgroundImage: dusHistory.isNotEmpty &&
+                                          backgroundImage: dusHistory
+                                              .isNotEmpty &&
                                               ((int.parse(header?.total ??
                                                   "0") !=
                                                   int.parse(
@@ -447,7 +461,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                       int.parse(
                                                           header?.onproses ??
                                                               "-1"))) ||
-                                              (int.parse(header?.total ?? "0") ==
+                                              (int.parse(
+                                                  header?.total ?? "0") ==
                                                   int.parse(
                                                       header?.selesai ?? "-1"))
                                               ? const AssetImage(
@@ -478,9 +493,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                           (int.parse(header?.total ?? "0") ==
                                               int.parse(
                                                   header?.selesai ?? "-1")),
-                                      child: const CircleAvatar(radius: sizeNormal+sizeSmall,
+                                      child: const CircleAvatar(
+                                        radius: sizeNormal + sizeSmall,
                                         backgroundColor: checkIconColor,
-                                        child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
+                                        child: Center(child: Icon(
+                                          Icons.check, color: Colors.white,
+                                          size: sizeNormal + sizeSmall,)),))
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -555,9 +573,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                           (int.parse(header?.total ?? "0") ==
                                               int.parse(
                                                   header?.selesai ?? "-1")),
-                                      child: const CircleAvatar(radius: sizeNormal+sizeSmall,
-                                    backgroundColor: checkIconColor,
-                                    child: Center(child: Icon(Icons.check,color: Colors.white,size: sizeNormal+sizeSmall,)),))
+                                      child: const CircleAvatar(
+                                        radius: sizeNormal + sizeSmall,
+                                        backgroundColor: checkIconColor,
+                                        child: Center(child: Icon(
+                                          Icons.check, color: Colors.white,
+                                          size: sizeNormal + sizeSmall,)),))
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -591,7 +612,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                   return true;
                                 }
                                 controller
-                                    .jumpTo(controller.offset + value.overscroll);
+                                    .jumpTo(
+                                    controller.offset + value.overscroll);
                                 return true;
                               },
                               child: ListView.builder(
@@ -647,10 +669,20 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       ),
                                       contents: Container(
                                           padding: const EdgeInsets.all(8.0),
+                                          margin:
+                                          EdgeInsets.only(
+                                            left: sizeSmall,
+                                              right:
+                                              sizeNormal),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: hintTextColor),
+                                            borderRadius: BorderRadius.all(Radius.circular(sizeNormal)),
+                                          ),
                                           constraints:
                                           const BoxConstraints(maxWidth: 400),
                                           child: ListTile(
-                                            contentPadding: const EdgeInsets.only(
+                                            contentPadding: const EdgeInsets
+                                                .only(
                                                 left: sizeNormal,
                                                 right: sizeNormal),
                                             title: Container(
@@ -684,6 +716,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                       "No Address"}"}",
                                                   color: primaryColor,
                                                 ),
+                                                CustomText("Dibuat oleh: ${listAll[i].createdBy}",color:primaryColor,italic: true,),
                                                 const SizedBox(
                                                   height: sizeNormal,
                                                 ),
@@ -711,11 +744,40 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                     <Dushead>[];
                                                                 var listDetailDus = stateDetailDus
                                                                     ?.dusdetail ??
-                                                                    <Dusdetail>[];
+                                                                    <Dusdetail>[
+                                                                    ];
+                                                                var lat = 0.0;
+                                                                var lng = 0.0;
+                                                                if (listAll[i] is SendScanDataModel) {
+                                                                  lat = double
+                                                                      .parse(
+                                                                      (listAll[i] as SendScanDataModel)
+                                                                          .latitude ??
+                                                                          "0.0");
+                                                                  lng = double
+                                                                      .parse(
+                                                                      (listAll[i] as SendScanDataModel)
+                                                                          .longtitude ??
+                                                                          "0.0");
+                                                                } else {
+                                                                  lat = double
+                                                                      .parse(
+                                                                      (listAll[i] as DusData)
+                                                                          .latitude ??
+                                                                          "0.0");
+                                                                  lng = double
+                                                                      .parse(
+                                                                      (listAll[i] as DusData)
+                                                                          .longtitude ??
+                                                                          "0.0");
+                                                                }
                                                                 return RoundedContainer(
                                                                   sizeMedium,
-                                                                  initState: () {
-                                                                    context.read<
+                                                                  initState: listAll[i] is SendScanDataModel
+                                                                      ? null
+                                                                      : () {
+                                                                    context
+                                                                        .read<
                                                                         DetailRiwayatCubit>()
                                                                         .getDusDetailResponse(
                                                                         listAll[i] is DusData
@@ -731,6 +793,183 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                       vertical:
                                                                       sizeHuge),
                                                                   child:
+                                                                  listAll[i] is SendScanDataModel
+                                                                      ?
+                                                                  Builder(
+                                                                    builder: (context) {
+                                                                      var noSJHistory = (listAll[i] as SendScanDataModel);
+                                                                      return SingleChildScrollView(
+                                                                        child:
+                                                                        Column(
+                                                                          children: [
+                                                                            RoundedContainer(
+                                                                                sizeMedium,
+                                                                                boxDecoration:
+                                                                                const BoxDecoration(
+                                                                                  color: Colors
+                                                                                      .white,
+                                                                                ),
+                                                                                constraints:
+                                                                                const BoxConstraints(
+                                                                                    maxHeight:
+                                                                                    300),
+                                                                                child:
+                                                                                FlutterMap(
+                                                                                  options:
+                                                                                  MapOptions(
+                                                                                    center: LatLng(
+                                                                                        lat,
+                                                                                        lng),
+                                                                                    zoom:
+                                                                                    17.0,
+                                                                                    maxZoom:
+                                                                                    18.0,
+                                                                                  ),
+                                                                                  children: [
+                                                                                    TileLayer(
+                                                                                      urlTemplate:
+                                                                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                                                      userAgentPackageName:
+                                                                                      'com.example.app',
+                                                                                    ),
+                                                                                    MarkerLayer(
+                                                                                        markers: [
+                                                                                          Marker(
+                                                                                            width: 80,
+                                                                                            height: 80,
+                                                                                            rotate: true,
+                                                                                            point: LatLng(
+                                                                                                lat,
+                                                                                                lng),
+                                                                                            builder: (
+                                                                                                ctx) =>
+                                                                                            const Icon(
+                                                                                              Icons
+                                                                                                  .location_on_rounded,
+                                                                                              color: primaryGreen,
+                                                                                              size: sizeHuge,
+                                                                                            ),
+                                                                                            // FlutterLogo(
+                                                                                            //   textColor: Colors.blue,
+                                                                                            //   key: ObjectKey(Colors.blue),
+                                                                                            // ),
+                                                                                          )
+                                                                                        ]),
+                                                                                  ],
+                                                                                )
+                                                                            ),
+
+                                                                            Text(
+                                                                                "Detail Alamat:\n${noSJHistory.alamat}"),
+                                                                            RoundedContainer(
+                                                                                sizeNormal,
+                                                                                boxDecoration: BoxDecoration(
+                                                                                    border: Border
+                                                                                        .all(
+                                                                                        color: primaryGreen)),
+                                                                                child: Column(
+                                                                                  children: [
+                                                                                    Table(
+                                                                                      children: [
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "No SJ"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .nosj
+                                                                                                    ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "Kota"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .kota
+                                                                                                    ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "Keterangan"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .keterangan ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "Status Pengiriman"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .statusPengiriman
+                                                                                                    ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "Created By"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .createdBy
+                                                                                                    ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                        TableRow(
+                                                                                          children: [
+                                                                                            const Text(
+                                                                                                "Created At"),
+                                                                                            Text(
+                                                                                                ": ${noSJHistory
+                                                                                                    .createdAt
+                                                                                                    ??
+                                                                                                    "-"}"),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],),
+                                                                                    Material(
+                                                                                      child: ExpandablePanel(
+                                                                                        header: const Text(
+                                                                                            "Foto"),
+                                                                                        collapsed: Container(),
+                                                                                        expanded: Image
+                                                                                            .network(
+                                                                                          "https://$imageResourceUrl${noSJHistory
+                                                                                              .foto ??
+                                                                                              "-"}",
+                                                                                          errorBuilder: (
+                                                                                              c,
+                                                                                              o,
+                                                                                              s) {
+                                                                                            return const Center(
+                                                                                                child: Text(
+                                                                                                    "Image Not Found"));
+                                                                                          },),
+                                                                                        // tapHeaderToExpand: true,
+                                                                                        // hasIcon: true,
+                                                                                      ),
+                                                                                    ),
+
+
+                                                                                  ],
+                                                                                )
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                  )
+                                                                      :
                                                                   SingleChildScrollView(
                                                                     child: Column(
                                                                       children: [
@@ -759,28 +998,8 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                 //   });
                                                                                 // },
                                                                                 center: LatLng(
-                                                                                    (listAll[i] is DusData
-                                                                                        ? double
-                                                                                        .parse(
-                                                                                        (listAll[i] as DusData)
-                                                                                            .latitude ??
-                                                                                            "0.0")
-                                                                                        : (double
-                                                                                        .parse(
-                                                                                        (listAll[i] as SendScanDataModel)
-                                                                                            .latitude ??
-                                                                                            "0.0"))),
-                                                                                    (listAll[i] is DusData
-                                                                                        ? double
-                                                                                        .parse(
-                                                                                        (listAll[i] as DusData)
-                                                                                            .longtitude ??
-                                                                                            "0.0")
-                                                                                        : (double
-                                                                                        .parse(
-                                                                                        (listAll[i] as SendScanDataModel)
-                                                                                            .longtitude ??
-                                                                                            "0.0")))),
+                                                                                    lat,
+                                                                                    lng),
                                                                                 zoom:
                                                                                 17.0,
                                                                                 maxZoom:
@@ -847,10 +1066,14 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                           //   ],
                                                                           // )
                                                                         ),
-                                                                        // Text(
-                                                                        //     "detail dus: $stateDetailDus"),
-                                                                        Text(
-                                                                            "Detail Alamat:\n${state.address ?? "Loading..."}"),
+
+                                                                        Builder(
+                                                                          builder: (context) {
+                                                                            return Text(
+                                                                                "Detail Alamat:\n${ listHeaderDus.isNotEmpty ? listHeaderDus.first.detailTempat :
+                                                                                    "Loading..."}");
+                                                                          }
+                                                                        ),
                                                                         // Text(
                                                                         //     ": ${"${listHeaderDus.first
                                                                         //         .nmTempat ?? ""} ${listHeaderDus.first
@@ -989,12 +1212,22 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                           ],),
                                                                                         Material(
                                                                                           child: ExpandablePanel(
-                                                                                            header: const Text("Foto"),
+                                                                                            header: const Text(
+                                                                                                "Foto"),
                                                                                             collapsed: Container(),
-                                                                                            expanded: Image.network("https://$imageResourceUrl${listHeaderDus[index]
-                                                                                                .foto ?? "-"}",errorBuilder: (c,o,s){
-                                                                                              return const Center(child: Text("Image Not Found"));
-                                                                                            },),
+                                                                                            expanded: Image
+                                                                                                .network(
+                                                                                              "https://$imageResourceUrl${listHeaderDus[index]
+                                                                                                  .foto ??
+                                                                                                  "-"}",
+                                                                                              errorBuilder: (
+                                                                                                  c,
+                                                                                                  o,
+                                                                                                  s) {
+                                                                                                return const Center(
+                                                                                                    child: Text(
+                                                                                                        "Image Not Found"));
+                                                                                              },),
                                                                                             // tapHeaderToExpand: true,
                                                                                             // hasIcon: true,
                                                                                           ),
@@ -1051,14 +1284,23 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             ]),
                                                                                         Material(
                                                                                           child: ExpandablePanel(
-                                                                                              header: const Text("Foto"),
+                                                                                              header: const Text(
+                                                                                                  "Foto"),
                                                                                               collapsed: Container(),
-                                                                                              expanded: Image.network("https://$imageResourceUrl${listDetailDus[index]
-                                                                                              .foto
-                                                                                              ??
-                                                                                              "-"}",errorBuilder: (c,o,s){
-                                                                                            return const Center(child: Text("Image Not Found"));
-                                                                                          },)),
+                                                                                              expanded: Image
+                                                                                                  .network(
+                                                                                                "https://$imageResourceUrl${listDetailDus[index]
+                                                                                                    .foto
+                                                                                                    ??
+                                                                                                    "-"}",
+                                                                                                errorBuilder: (
+                                                                                                    c,
+                                                                                                    o,
+                                                                                                    s) {
+                                                                                                  return const Center(
+                                                                                                      child: Text(
+                                                                                                          "Image Not Found"));
+                                                                                                },)),
                                                                                         )
                                                                                       ],
                                                                                     ));
@@ -1086,6 +1328,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                       EdgeInsets.symmetric(
                                                           horizontal:
                                                           sizeSmall),
+
                                                       child: Center(
                                                           child: CustomText(
                                                               "Lihat Detail",

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/routes/app_router.gr.dart';
 import 'package:bwa_distribution_tracking/data/models/qr_scan/dus_list_response/store_selesai_response.dart';
@@ -654,11 +653,6 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                           isAllValidated = false;
                                         }
                                       });
-                                      // for(var element in listKey){
-                                      //   if(element.currentState?.validate() ?? false) {
-                                      //     element.currentState?.save();
-                                      //   }
-                                      // }
                                       if(isAllValidated) {
                                         context
                                             .read<SingleScanScreenBloc>()
@@ -666,32 +660,6 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                             .storeSelesaiResponse ??
                                             StoreSelesaiResponse()));
                                       }
-                                      // if (provinsiDropdownKey.currentState?.validate() ??
-                                      //     false) {
-                                      //   provinsiDropdownKey.currentState?.save();
-                                      //   if (dropdownKey.currentState
-                                      //           ?.validate() ??
-                                      //       false) {
-                                      //     dropdownKey.currentState?.save();
-                                      //     // TODO disini tambahkan event Bloc store selesai
-                                      //     // Future.delayed(const Duration(milliseconds: 100),()async{
-                                      //     context
-                                      //         .read<SingleScanScreenBloc>()
-                                      //         .add(SendRequesStoreSelesai(state
-                                      //                 .storeSelesaiResponse ??
-                                      //             StoreSelesaiResponse()));
-                                      //     // });
-                                      //   } else {
-                                      //     myToast(
-                                      //         "Dropdown Status Pengiriman Belum Dipilih");
-                                      //   }
-                                      // } else {
-                                      //   myToast(
-                                      //       "Dropdown Provinsi Belum Dipilih");
-                                      // }
-
-                                      // context.router
-                                      //     .push(const RiwayatSuratJalanRoute());
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: primaryColor),

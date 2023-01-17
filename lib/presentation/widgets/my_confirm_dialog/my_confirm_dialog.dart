@@ -13,6 +13,7 @@ Future myConfirmDialog(
       Function? positiveButton,
       Function? negativeButton,
       Widget? customContent,
+      Function()? dismissedDialogCallback,
     }) async {
   return await showDialog(
     context: context,
@@ -90,5 +91,5 @@ Future myConfirmDialog(
         ),
       ],
     ),
-  );
+  ).then((value) => dismissedDialogCallback != null ? dismissedDialogCallback() : null);
 }

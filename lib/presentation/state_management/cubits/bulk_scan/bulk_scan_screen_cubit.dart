@@ -42,7 +42,7 @@ class BulkScanScreenCubit extends Cubit<BulkScanScreenState> {
             (l) => state.copyWith(address: ""),
             (r) => state.copyWith(
               address: r.displayName,
-              sendScanDataModel: state.sendScanDataModel.copyWith(kota: r.address?.city ?? "" ),
+              sendScanDataModel: state.sendScanDataModel.copyWith(kota: r.address?.cityDistrict ?? "", alamat: r.displayName),
             ));
     emit(newState);
   }

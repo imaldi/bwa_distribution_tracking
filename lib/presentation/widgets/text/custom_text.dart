@@ -9,8 +9,10 @@ class CustomText extends StatelessWidget {
       this.weight,
       this.decoration,
       this.shadows,
+        this.italic,
       this.letterSpacing})
       : super(key: key);
+  final bool? italic;
   final String data;
   final Color? color;
   final double? size;
@@ -33,6 +35,7 @@ class CustomText extends StatelessWidget {
           decorationThickness: 2,
           decorationColor: shadows?.first.color,
           letterSpacing: letterSpacing,
+          fontStyle: (italic ?? false) ? FontStyle.italic : FontStyle.normal,
           shadows: shadows),
       softWrap: true,
     );
