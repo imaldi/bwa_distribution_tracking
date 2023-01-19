@@ -690,7 +690,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                 "${listAll[i] is SendScanDataModel
                                                     ? (listAll[i] as SendScanDataModel)
                                                     .statusPengiriman
-                                                    : "Selesai - Lokasi ${(listAll
+                                                    : "Distribusi - Lokasi ${(listAll
                                                     .length - 1) -
                                                     (dusHistory.indexOf(
                                                         listAll[i]) + 1)}"
@@ -1129,6 +1129,16 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                                 Text(
                                                                                                     ": ${listHeaderDus[index]
                                                                                                         .namaPenerima ??
+                                                                                                        "-"}"),
+                                                                                              ],
+                                                                                            ),
+                                                                                            TableRow(
+                                                                                              children: [
+                                                                                                const Text(
+                                                                                                    "Nomor HP"),
+                                                                                                Text(
+                                                                                                    ": ${listHeaderDus[index]
+                                                                                                        .noHp ??
                                                                                                         "-"}"),
                                                                                               ],
                                                                                             ),

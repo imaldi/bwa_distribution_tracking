@@ -213,7 +213,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           child: UnconstrainedBox(
                                             child: FittedBox(
                                               child: CustomText(
-                                                "Al-Quran diproses",
+                                                "Al-Quran Masih Distribusi",
                                                 color: Colors.white,
                                                 size: sizeMedium,
                                               ),
@@ -225,7 +225,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           child: UnconstrainedBox(
                                             child: FittedBox(
                                               child: CustomText(
-                                                "Al-Quran Selesai",
+                                                "Al-Quran Selesai Distribusi",
                                                 color: Colors.white,
                                                 size: sizeMedium,
                                               ),
@@ -584,7 +584,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                             secondaryColor: primaryColor,
                                           ),
                                           const CustomText(
-                                            "TOTAL STOCK DAN BERAT",
+                                            "TOTAL AL-QURAN DAN BERAT",
                                             color: Colors.white,
                                             weight: FontWeight.bold,
                                             decoration:
@@ -596,7 +596,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                             color: Colors.white,
                                           ),
                                           CustomText(
-                                            "TOTAL STOCK: ${data?.total}",
+                                            "TOTAL AL-QURAN: ${data?.total}",
                                             color: Colors.white,
                                             weight: FontWeight.bold,
                                             size: sizeMedium,

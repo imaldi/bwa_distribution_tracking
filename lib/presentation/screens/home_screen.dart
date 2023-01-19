@@ -228,12 +228,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                                const FittedBox(
-                                                  child: CustomText(
-                                                    "SELAMAT DATANG PETUGAS",
-                                                    color: Colors.white,
-                                                    size: sizeBig,
-                                                    weight: FontWeight.w700,
+                                                Visibility(
+                                                  visible:         (context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "").isNotEmpty,
+                                                  child: const FittedBox(
+                                                    child: CustomText(
+                                                      "SELAMAT DATANG PETUGAS",
+                                                      color: Colors.white,
+                                                      size: sizeBig,
+                                                      weight: FontWeight.w700,
+                                                    ),
                                                   ),
                                                 ),
                                                 FittedBox(child: BlocBuilder<
