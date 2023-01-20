@@ -26,6 +26,10 @@ class _SummaryStatusTagWidgetState extends State<SummaryStatusTagWidget> {
     int selesai = int.tryParse(widget.selesai) ?? 0;
     int onProses = int.tryParse(widget.onProses) ?? 0;
     int total = int.tryParse(widget.total) ?? 0;
+    print("Status Tag");
+    print("Selesai: $selesai");
+    print("On Proses: $onProses");
+    print("Total: $total");
 
     /// FIXME masih harus tanya soal ini
     if(onProses!=total&&selesai!=total) status = "On Proses";

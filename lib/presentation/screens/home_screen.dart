@@ -27,13 +27,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 
-
 /// menu status for pengiriman
 const constPengiriman = "Pengiriman";
 const constPenerimaan = "Penerimaan";
 const constDistribusi = "Distribusi";
 const constLaporan = "Laporan";
-
 
 class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
@@ -174,43 +172,50 @@ class _HomeScreenState extends State<HomeScreen> {
                                         //     }),
                                         //   ],
                                         // ),
-                                        Builder(
-                                          builder: (context) {
-                                            var appBarTitle = context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "-";
+                                        Builder(builder: (context) {
+                                          var appBarTitle = context
+                                                  .watch<SuratJalanCubit>()
+                                                  .state
+                                                  .menuStatusForTitle ??
+                                              "-";
 
-                                            return Visibility(
-                                              visible: appBarTitle != "-",
-                                              child: Stack(alignment: Alignment.centerLeft, children: [
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    Center(
-                                                        child: Builder(
+                                          return Visibility(
+                                            visible: appBarTitle != "-",
+                                            child: Stack(
+                                                alignment: Alignment.centerLeft,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Center(child: Builder(
                                                           builder: (context) {
-                                                            return CustomText(
-                                                              appBarTitle,
-                                                              color: Colors.white,
-                                                              size: sizeMedium,
-                                                            );
-                                                          }
-                                                        ))
-                                                  ],
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    context.router.pop();
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.keyboard_arrow_left_outlined,
-                                                    color: Colors.white,
-                                                    size: sizeBig,
+                                                        return CustomText(
+                                                          appBarTitle,
+                                                          color: Colors.white,
+                                                          size: sizeMedium,
+                                                        );
+                                                      }))
+                                                    ],
                                                   ),
-                                                ),
-                                              ]),
-                                            );
-                                          }
-                                        ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      context.router.pop();
+                                                    },
+                                                    child: const Icon(
+                                                      Icons
+                                                          .keyboard_arrow_left_outlined,
+                                                      color: Colors.white,
+                                                      size: sizeBig,
+                                                    ),
+                                                  ),
+                                                ]),
+                                          );
+                                        }),
 
                                         Container(
                                           // color: primaryGreen,
@@ -229,7 +234,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ),
                                                 Visibility(
-                                                  visible:         (context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "").isNotEmpty,
+                                                  visible: (context
+                                                              .watch<
+                                                                  SuratJalanCubit>()
+                                                              .state
+                                                              .menuStatusForTitle ??
+                                                          "")
+                                                      .isNotEmpty,
                                                   child: const FittedBox(
                                                     child: CustomText(
                                                       "SELAMAT DATANG PETUGAS",
@@ -259,17 +270,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                         // Image.asset("assets/images/foto_profil_dummy.png"),
 
                                         InkWell(
-                                          onTap: (){
+                                          onTap: () {
                                             // myToast("HEEYY HEEYY");
-                                            context.router.push(RiwayatSuratJalanRoute(isLacakPerSJ: true));
+                                            context.router.push(
+                                                RiwayatSuratJalanRoute(
+                                                    isLacakPerSJ: true));
                                           },
                                           child: Container(
                                             // color: Colors.green,
-                                            height: orientedHeightScreen(context,
+                                            height: orientedHeightScreen(
+                                                context,
                                                 portraitRatio: 0.15,
                                                 landscapeRatio: 0.15),
-                                            padding:
-                                                const EdgeInsets.all(sizeNormal),
+                                            padding: const EdgeInsets.all(
+                                                sizeNormal),
                                             child: Column(
                                               children: [
                                                 const CustomText(
@@ -281,15 +295,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Expanded(
                                                       child: RoundedContainer(
                                                         sizeMedium,
-                                                        boxDecoration: BoxDecoration(
-                                                          color: Colors.transparent,
+                                                        boxDecoration:
+                                                            BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
                                                           border: Border.all(
                                                               width: 3.0,
-                                                              color: Colors.white),
+                                                              color:
+                                                                  Colors.white),
                                                           // borderRadius: BorderRadius.all(Radius.circular(sizeBig)),
                                                         ),
-                                                        child:
-                                                        const Center(child: CustomText("Shipping Code", color: Colors.white,)),
+                                                        child: const Center(
+                                                            child: CustomText(
+                                                          "Shipping Code",
+                                                          color: Colors.white,
+                                                        )),
                                                         // NoUnderlineTextFormField(
                                                         //   controller: controller,
                                                         //   onEditingComplete: () {
@@ -359,7 +379,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,menuStatusForTitle: constPengiriman);
+                                        .getSuratJalanPerPage(1,
+                                            menuStatusForTitle:
+                                                constPengiriman);
                                   },
                                   child: RoundedContainer(sizeMedium,
                                       padding: const EdgeInsets.all(0),
@@ -393,7 +415,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,menuStatusForTitle: constPenerimaan);
+                                        .getSuratJalanPerPage(1,
+                                            menuStatusForTitle:
+                                                constPenerimaan);
                                   },
                                   child: RoundedContainer(sizeMedium,
                                       padding: const EdgeInsets.all(0),
@@ -429,7 +453,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     context
                                         .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,menuStatusForTitle: constDistribusi);
+                                        .getSuratJalanPerPage(1,
+                                            menuStatusForTitle:
+                                                constDistribusi);
                                     context
                                         .read<SuratJalanCubit>()
                                         .setWillScanDus();
@@ -505,14 +531,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   var suratJalanState =
                                       context.watch<SuratJalanCubit>().state;
                                   var listSJ = suratJalanState
-                                      .suratJalanResponse?.data?.data;
+                                          .suratJalanResponse?.data?.data
+                                      ?.where((element) => (element.total ?? "").isNotEmpty && (int.parse(element.total ?? "0") != int.parse(element.selesai ?? "0"))).toList()
+                                      ?? []
+                                      ;
                                   var internetConnection = context
                                       .watch<InternetConnectionCubit>()
                                       .state
                                       .isOnline;
-                                  var suratJalanResponseList = suratJalanState
-                                          .suratJalanResponse?.data?.data ??
-                                      [];
+                                  // var suratJalanResponseList = suratJalanState
+                                  //         .suratJalanResponse?.data?.data ??
+                                  //     [];
 
                                   log("listSJ: $listSJ");
                                   if (!internetConnection) {
@@ -626,7 +655,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           ),
                                                                         ),
                                                                         CustomText(
-                                                                          indonesianNumberFormat((int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0")).toString()),
+                                                                          indonesianNumberFormat(
+                                                                              (int.parse(listSJ?[i].total ?? "0") - int.parse(listSJ?[i].selesai ?? "0")).toString()),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,
@@ -649,7 +679,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           ),
                                                                         ),
                                                                         CustomText(
-                                                                          indonesianNumberFormat(listSJ?[i].selesai ?? "0"),
+                                                                          indonesianNumberFormat(listSJ?[i].selesai ??
+                                                                              "0"),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,
@@ -668,7 +699,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           // color: primaryColor,
                                                                         ),
                                                                         CustomText(
-                                                                          indonesianNumberFormat(listSJ?[i].total ?? "0"),
+                                                                          indonesianNumberFormat(listSJ?[i].total ??
+                                                                              "0"),
                                                                           // color: primaryColor,
                                                                           weight:
                                                                               FontWeight.bold,
@@ -683,17 +715,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         )),
                                                     SummaryStatusTagWidget(
                                                       total:
-                                                          suratJalanResponseList[
+                                                      listSJ[
                                                                       i]
                                                                   .total ??
                                                               "0",
                                                       onProses:
-                                                          suratJalanResponseList[
+                                                      listSJ[
                                                                       i]
                                                                   .onproses ??
                                                               "0",
                                                       selesai:
-                                                          suratJalanResponseList[
+                                                      listSJ[
                                                                       i]
                                                                   .selesai ??
                                                               "0",
@@ -747,119 +779,131 @@ class _HomeScreenState extends State<HomeScreen> {
                                           },
                                         );
                                 }),
-                                Builder(
-                                  builder: (context) {
-                                    var appBarTitle = context.watch<SuratJalanCubit>().state.menuStatusForTitle ?? "-";
+                                Builder(builder: (context) {
+                                  var appBarTitle = context
+                                          .watch<SuratJalanCubit>()
+                                          .state
+                                          .menuStatusForTitle ??
+                                      "-";
 
-                                    return Visibility(
-                                      visible: !(appBarTitle == constDistribusi),
-                                      child: Container(
-                                        height: orientedHeightScreen(context,
-                                            portraitRatio: 0.20,
-                                            landscapeRatio: 0.20),
-                                        margin: const EdgeInsets.only(
-                                            top: sizeMedium, bottom: sizeHuge*2),
-                                        child: FittedBox(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              FittedBox(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        // context.router.push(
-                                                        //     const TestDhriveRoute()
-                                                        // );
-                                                        await BarcodeScanner.scan()
-                                                            .then((ScanResult
-                                                                bulkDetail) {
-                                                          if (bulkDetail.rawContent
-                                                              .isNotEmpty) {
-                                                            var qrBloc = context
-                                                                .read<QRScanBloc>();
-                                                            print(
-                                                                "bulkDetail ${bulkDetail.rawContent}");
-                                                            qrBloc.add(BulkQRScanEvent(
-                                                                // "003SPJ34-JATIMPARK0213232-0002",
-                                                                bulkDetail.rawContent));
-                                                            context.router
-                                                                .push(BulkScanRoute(
-                                                              qrScanBloc: qrBloc,
-                                                              qrCode: bulkDetail
-                                                                      .rawContent ??
-                                                                  "-",
-                                                            ));
-                                                          }
-                                                        });
-                                                      },
-                                                      child: const RoundedContainer(
-                                                        sizeMedium,
-                                                        padding: EdgeInsets.all(
-                                                            sizeBig),
-                                                        margin: EdgeInsets.only(
-                                                            right: sizeMedium,
-                                                            left: sizeMedium,
-                                                            top: sizeMedium,
-                                                            bottom: sizeNormal),
-                                                        boxDecoration:
-                                                            BoxDecoration(
-                                                                color: primaryColor),
-                                                        child:
-                                                        CustomText("Scan SJ",color: Colors.white,),
-                                                        // SvgPicture.asset(
-                                                        //     "assets/images/camera_white.svg"),
+                                  return Visibility(
+                                    visible: !(appBarTitle == constDistribusi),
+                                    child: Container(
+                                      height: orientedHeightScreen(context,
+                                          portraitRatio: 0.20,
+                                          landscapeRatio: 0.20),
+                                      margin: const EdgeInsets.only(
+                                          top: sizeMedium,
+                                          bottom: sizeHuge * 2),
+                                      child: FittedBox(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            FittedBox(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      // context.router.push(
+                                                      //     const TestDhriveRoute()
+                                                      // );
+                                                      await BarcodeScanner
+                                                              .scan()
+                                                          .then((ScanResult
+                                                              bulkDetail) {
+                                                        if (bulkDetail
+                                                            .rawContent
+                                                            .isNotEmpty) {
+                                                          var qrBloc =
+                                                              context.read<
+                                                                  QRScanBloc>();
+                                                          print(
+                                                              "bulkDetail ${bulkDetail.rawContent}");
+                                                          qrBloc.add(
+                                                              BulkQRScanEvent(
+                                                                  // "003SPJ34-JATIMPARK0213232-0002",
+                                                                  bulkDetail
+                                                                      .rawContent));
+                                                          context.router.push(
+                                                              BulkScanRoute(
+                                                            qrScanBloc: qrBloc,
+                                                            qrCode: bulkDetail
+                                                                    .rawContent ??
+                                                                "-",
+                                                          ));
+                                                        }
+                                                      });
+                                                    },
+                                                    child:
+                                                        const RoundedContainer(
+                                                      sizeMedium,
+                                                      padding: EdgeInsets.all(
+                                                          sizeBig),
+                                                      margin: EdgeInsets.only(
+                                                          right: sizeMedium,
+                                                          left: sizeMedium,
+                                                          top: sizeMedium,
+                                                          bottom: sizeNormal),
+                                                      boxDecoration:
+                                                          BoxDecoration(
+                                                              color:
+                                                                  primaryColor),
+                                                      child: CustomText(
+                                                        "Scan SJ",
+                                                        color: Colors.white,
                                                       ),
+                                                      // SvgPicture.asset(
+                                                      //     "assets/images/camera_white.svg"),
                                                     ),
-                                                    const CustomText(
-                                                      "Surat Jalan",
-                                                      textAlign: TextAlign.center,
-                                                      // color: primaryColor,
-                                                    )
-                                                  ]..map((e) => FittedBox(
-                                                        child: e,
-                                                      )),
-                                                ),
+                                                  ),
+                                                  const CustomText(
+                                                    "Surat Jalan",
+                                                    textAlign: TextAlign.center,
+                                                    // color: primaryColor,
+                                                  )
+                                                ]..map((e) => FittedBox(
+                                                      child: e,
+                                                    )),
                                               ),
-                                              // FittedBox(
-                                              //   child: Column(
-                                              //     children: [
-                                              //       InkWell(
-                                              //         onTap: () {
-                                              //
-                                              //         },
-                                              //         child: RoundedContainer(
-                                              //           sizeMedium,
-                                              //           padding: const EdgeInsets.all(sizeBig),
-                                              //           margin: const EdgeInsets.only(
-                                              //               right: sizeMedium,
-                                              //               left: sizeMedium,
-                                              //               top: sizeMedium,
-                                              //               bottom: sizeNormal),
-                                              //           boxDecoration: const BoxDecoration(
-                                              //               color: primaryGreen),
-                                              //           child: SvgPicture.asset(
-                                              //               "assets/images/camera_white.svg"),
-                                              //         ),
-                                              //       ),
-                                              //       const CustomText(
-                                              //         "Dus",
-                                              //         textAlign: TextAlign.center,
-                                              //         color: primaryGreen,
-                                              //       )
-                                              //     ]..map((e) => FittedBox(child: e)),
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
+                                            ),
+                                            // FittedBox(
+                                            //   child: Column(
+                                            //     children: [
+                                            //       InkWell(
+                                            //         onTap: () {
+                                            //
+                                            //         },
+                                            //         child: RoundedContainer(
+                                            //           sizeMedium,
+                                            //           padding: const EdgeInsets.all(sizeBig),
+                                            //           margin: const EdgeInsets.only(
+                                            //               right: sizeMedium,
+                                            //               left: sizeMedium,
+                                            //               top: sizeMedium,
+                                            //               bottom: sizeNormal),
+                                            //           boxDecoration: const BoxDecoration(
+                                            //               color: primaryGreen),
+                                            //           child: SvgPicture.asset(
+                                            //               "assets/images/camera_white.svg"),
+                                            //         ),
+                                            //       ),
+                                            //       const CustomText(
+                                            //         "Dus",
+                                            //         textAlign: TextAlign.center,
+                                            //         color: primaryGreen,
+                                            //       )
+                                            //     ]..map((e) => FittedBox(child: e)),
+                                            //   ),
+                                            // ),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  }
-                                ),
+                                    ),
+                                  );
+                                }),
                               ],
                             ));
                       })

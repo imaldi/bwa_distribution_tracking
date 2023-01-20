@@ -209,26 +209,24 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                     children: [
                                       const TableRow(children: [
                                         Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran Masih Distribusi",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              ),
+                                          alignment: Alignment.center,
+                                          child: FittedBox(
+                                            child: CustomText(
+                                              "Al-Quran\nMasih Distribusi",
+                                              color: Colors.white,
+                                              size: sizeMedium,
+                                              textAlign: TextAlign.center,
                                             ),
                                           ),
                                         ),
                                         Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: UnconstrainedBox(
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran Selesai Distribusi",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              ),
+                                          alignment: Alignment.center,
+                                          child: FittedBox(
+                                            child: CustomText(
+                                              "Al-Quran\nSelesai Distribusi",
+                                              color: Colors.white,
+                                              size: sizeMedium,
+                                              textAlign: TextAlign.center,
                                             ),
                                           ),
                                         ),
@@ -243,7 +241,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                               child: CustomText(
                                                 // fixme kalau angkanya besar jadi overflow
                                                 indonesianNumberFormat(
-                                                    headerData.onproses),
+                                                    headerData.onproses ?? headerData.total),
                                                 color: Colors.white,
                                                 size: sizeBig + sizeMedium,
                                                 weight: FontWeight.bold,
