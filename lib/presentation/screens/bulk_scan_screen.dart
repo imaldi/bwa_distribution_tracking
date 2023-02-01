@@ -212,7 +212,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           alignment: Alignment.center,
                                           child: FittedBox(
                                             child: CustomText(
-                                              "Al-Quran\nMasih Distribusi",
+                                              "Al-Quran\nBelum Distribusi",
                                               color: Colors.white,
                                               size: sizeMedium,
                                               textAlign: TextAlign.center,
@@ -223,7 +223,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                           alignment: Alignment.center,
                                           child: FittedBox(
                                             child: CustomText(
-                                              "Al-Quran\nSelesai Distribusi",
+                                              "Al-Quran\nSudah Distribusi",
                                               color: Colors.white,
                                               size: sizeMedium,
                                               textAlign: TextAlign.center,
@@ -929,7 +929,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
             );
           }
 
-          return Container();
+          return Center(child: Text("State is ${state.runtimeType}"),);
         },
       ),
       bottomNavigationBar: const CustomBottomNavbar(),

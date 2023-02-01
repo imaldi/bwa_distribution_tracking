@@ -28,6 +28,10 @@ import '../widgets/my_text_field/my_text_field.dart';
 import '../widgets/scan_dus_and_choose_picture_widget/scan_dus_and_choose_picture_widget.dart';
 import '../widgets/text/custom_text.dart';
 
+// TODO perbaiki bug dropdown daerah
+// TODO ganti tempat tujuan ke -> jenis lokasi
+// TODO Buat aja tombol skip foto di scan dus
+// TODO Kalau salah PC dengan kardus => waktu nycan nanti API kasih respon kalau salah antara PC dan kardus
 class SingleScanScreen extends StatefulWidget implements AutoRouteWrapper {
   final String qrcodeSj;
 
@@ -197,7 +201,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                       // Fixme tidak tau field di JSON
                       MyTextField(
                         formKey: tmptTjnKeyForm,
-                          label: 'Tempat Tujuan',
+                          label: 'Jenis Lokasi',
                           controller: tmptTjnCtrl,
                           onChanged: (val) {
                             cubit.updateStoreSelesaiResponse(

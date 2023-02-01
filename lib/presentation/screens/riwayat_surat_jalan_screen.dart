@@ -12,6 +12,7 @@ import '../../core/resources/consts/colors.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/helper/number_formatter.dart';
 import '../../injection_container.dart';
+import '../state_management/blocs/scan/qr_scan_bloc.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
@@ -19,8 +20,9 @@ import '../widgets/text/custom_text.dart';
 class RiwayatSuratJalanScreen extends StatefulWidget
     implements AutoRouteWrapper {
   final bool isLacakPerSJ;
+  final QRScanBloc? qrScanBloc;
 
-  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, Key? key})
+  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, this.qrScanBloc, Key? key})
       : super(key: key);
 
   @override
@@ -32,6 +34,10 @@ class RiwayatSuratJalanScreen extends StatefulWidget
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (_) => sl<SuratJalanCubit>(),
+        child: this,
+      ),
+      BlocProvider(
+        create: (_) => qrScanBloc ?? sl<QRScanBloc>(),
         child: this,
       ),
     ], child: this);
@@ -59,6 +65,8 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
           var state = context.watch<SuratJalanCubit>().state;
           var suratJalanResponseList =
               state.suratJalanResponse?.data?.data ?? [];
+          var qrScanBloc = context
+              .read<QRScanBloc>();
           log("suratJalanResponseList hal riwayat $suratJalanResponseList");
           if (state.isLoading) {
             return Container(
@@ -87,13 +95,20 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                       onTap: () {
                                         // Fixme beri qr code dari item listnya ya nanti
                                         context.router.push(
-                                            DetailPengirimanRoute(
-                                                qrCode: state
+                                          BulkScanRoute(qrScanBloc: qrScanBloc, qrCode: state
                                                         .searchResult
                                                         ?.header
                                                         ?.first
                                                         .qrcodeSj ??
-                                                    "-"));
+                                                    "-")
+                                        );
+                                            // DetailPengirimanRoute(
+                                            //     qrCode: state
+                                            //             .searchResult
+                                            //             ?.header
+                                            //             ?.first
+                                            //             .qrcodeSj ??
+                                            //         "-"));
                                       },
                                       child: Stack(
                                         alignment: Alignment.topRight,

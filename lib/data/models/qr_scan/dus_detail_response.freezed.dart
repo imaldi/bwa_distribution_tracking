@@ -598,6 +598,7 @@ mixin _$Dushead {
   @JsonKey(name: "no_hp")
   String? get noHp => throw _privateConstructorUsedError;
   String? get lembaga => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_tempat")
   String? get nmTempat => throw _privateConstructorUsedError;
   @JsonKey(name: "detail_tempat")
   String? get detailTempat => throw _privateConstructorUsedError;
@@ -637,7 +638,7 @@ abstract class $DusheadCopyWith<$Res> {
       @JsonKey(name: "nama_penerima") String? namaPenerima,
       @JsonKey(name: "no_hp") String? noHp,
       String? lembaga,
-      String? nmTempat,
+      @JsonKey(name: "nama_tempat") String? nmTempat,
       @JsonKey(name: "detail_tempat") String? detailTempat,
       String? kelurahan,
       String? kecamatan,
@@ -792,7 +793,7 @@ abstract class _$$_DusheadCopyWith<$Res> implements $DusheadCopyWith<$Res> {
       @JsonKey(name: "nama_penerima") String? namaPenerima,
       @JsonKey(name: "no_hp") String? noHp,
       String? lembaga,
-      String? nmTempat,
+      @JsonKey(name: "nama_tempat") String? nmTempat,
       @JsonKey(name: "detail_tempat") String? detailTempat,
       String? kelurahan,
       String? kecamatan,
@@ -940,7 +941,7 @@ class _$_Dushead implements _Dushead {
       @JsonKey(name: "nama_penerima") this.namaPenerima,
       @JsonKey(name: "no_hp") this.noHp,
       this.lembaga,
-      this.nmTempat,
+      @JsonKey(name: "nama_tempat") this.nmTempat,
       @JsonKey(name: "detail_tempat") this.detailTempat,
       this.kelurahan,
       this.kecamatan,
@@ -979,6 +980,7 @@ class _$_Dushead implements _Dushead {
   @override
   final String? lembaga;
   @override
+  @JsonKey(name: "nama_tempat")
   final String? nmTempat;
   @override
   @JsonKey(name: "detail_tempat")
@@ -1110,7 +1112,7 @@ abstract class _Dushead implements Dushead {
       @JsonKey(name: "nama_penerima") final String? namaPenerima,
       @JsonKey(name: "no_hp") final String? noHp,
       final String? lembaga,
-      final String? nmTempat,
+      @JsonKey(name: "nama_tempat") final String? nmTempat,
       @JsonKey(name: "detail_tempat") final String? detailTempat,
       final String? kelurahan,
       final String? kecamatan,
@@ -1148,6 +1150,7 @@ abstract class _Dushead implements Dushead {
   @override
   String? get lembaga;
   @override
+  @JsonKey(name: "nama_tempat")
   String? get nmTempat;
   @override
   @JsonKey(name: "detail_tempat")

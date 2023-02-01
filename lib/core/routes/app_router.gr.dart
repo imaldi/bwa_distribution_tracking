@@ -94,6 +94,7 @@ class AppRouter extends _i12.RootStackRouter {
         child: _i12.WrappedRoute(
             child: _i7.RiwayatSuratJalanScreen(
           isLacakPerSJ: args.isLacakPerSJ,
+          qrScanBloc: args.qrScanBloc,
           key: args.key,
         )),
       );
@@ -321,12 +322,14 @@ class RiwayatSuratJalanRoute
     extends _i12.PageRouteInfo<RiwayatSuratJalanRouteArgs> {
   RiwayatSuratJalanRoute({
     bool isLacakPerSJ = false,
+    _i14.QRScanBloc? qrScanBloc,
     _i13.Key? key,
   }) : super(
           RiwayatSuratJalanRoute.name,
           path: '/riwayat-surat-jalan-screen',
           args: RiwayatSuratJalanRouteArgs(
             isLacakPerSJ: isLacakPerSJ,
+            qrScanBloc: qrScanBloc,
             key: key,
           ),
         );
@@ -337,16 +340,19 @@ class RiwayatSuratJalanRoute
 class RiwayatSuratJalanRouteArgs {
   const RiwayatSuratJalanRouteArgs({
     this.isLacakPerSJ = false,
+    this.qrScanBloc,
     this.key,
   });
 
   final bool isLacakPerSJ;
 
+  final _i14.QRScanBloc? qrScanBloc;
+
   final _i13.Key? key;
 
   @override
   String toString() {
-    return 'RiwayatSuratJalanRouteArgs{isLacakPerSJ: $isLacakPerSJ, key: $key}';
+    return 'RiwayatSuratJalanRouteArgs{isLacakPerSJ: $isLacakPerSJ, qrScanBloc: $qrScanBloc, key: $key}';
   }
 }
 

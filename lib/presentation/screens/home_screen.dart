@@ -33,6 +33,9 @@ const constPenerimaan = "Penerimaan";
 const constDistribusi = "Distribusi";
 const constLaporan = "Laporan";
 
+// TODO hapus Selamat Datang selain dari halaman home depan
+// TODO ubah supaya selamat datang ga muncul selain di awal
+// TODO Ketika Cari Arahin nanti ke halaman scan dus, jangan ke halaman riwayat
 class HomeScreen extends StatefulWidget implements AutoRouteWrapper {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -178,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .state
                                                   .menuStatusForTitle ??
                                               "-";
+                                          print("appBarTitle: $appBarTitle");
 
                                           return Visibility(
                                             visible: appBarTitle != "-",
@@ -233,22 +237,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                                Visibility(
-                                                  visible: (context
-                                                              .watch<
-                                                                  SuratJalanCubit>()
-                                                              .state
-                                                              .menuStatusForTitle ??
-                                                          "")
-                                                      .isNotEmpty,
-                                                  child: const FittedBox(
-                                                    child: CustomText(
-                                                      "SELAMAT DATANG PETUGAS",
-                                                      color: Colors.white,
-                                                      size: sizeBig,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
+                                                Builder(
+                                                  builder: (context) {
+                                                    var isDisplayingWelcome = context
+                                                        .watch<
+                                                        SuratJalanCubit>()
+                                                        .state
+                                                        .menuStatusForTitle ??
+                                                        "";
+                                                    print("isDisplayingWelcome: $isDisplayingWelcome");
+                                                    return Visibility(
+                                                      visible: isDisplayingWelcome
+                                                          .isEmpty,
+                                                      child: const FittedBox(
+                                                        child: CustomText(
+                                                          "SELAMAT DATANG PETUGAS",
+                                                          color: Colors.white,
+                                                          size: sizeBig,
+                                                          weight: FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
                                                 ),
                                                 FittedBox(child: BlocBuilder<
                                                     AuthBloc, AuthState>(
@@ -274,7 +284,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             // myToast("HEEYY HEEYY");
                                             context.router.push(
                                                 RiwayatSuratJalanRoute(
-                                                    isLacakPerSJ: true));
+                                                    qrScanBloc: context.read<QRScanBloc>(),
+                                                    isLacakPerSJ: true,
+                                                ));
                                           },
                                           child: Container(
                                             // color: Colors.green,
@@ -576,7 +588,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 const NeverScrollableScrollPhysics(),
                                             scrollDirection: Axis.vertical,
                                             shrinkWrap: true,
-                                            itemCount: listSJ?.length ?? 0,
+                                            itemCount: listSJ.length ?? 0,
                                             itemBuilder: (c, i) {
                                               return InkWell(
                                                 onTap: () {
@@ -586,7 +598,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   qrBloc.add(BulkQRScanEvent(
                                                       // textValue
                                                       // controller.text
-                                                      "${listSJ?[i].qrcodeSj}"));
+                                                      "${listSJ[i].qrcodeSj}"));
                                                   context.router
                                                       .push(BulkScanRoute(
                                                     qrScanBloc: qrBloc,
@@ -595,7 +607,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         suratJalanCubitState
                                                             .willScanDus,
                                                     qrCode:
-                                                        listSJ?[i].qrcodeSj ??
+                                                        listSJ[i].qrcodeSj ??
                                                             "-",
                                                   ));
                                                 },
@@ -852,7 +864,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               color:
                                                                   primaryColor),
                                                       child: CustomText(
-                                                        "Scan SJ",
+                                                        "Scan SJ", // TODO ubah jadi Icon Scan Saja
                                                         color: Colors.white,
                                                       ),
                                                       // SvgPicture.asset(
@@ -860,7 +872,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                   const CustomText(
-                                                    "Surat Jalan",
+                                                    "Scan Surat Jalan",
                                                     textAlign: TextAlign.center,
                                                     // color: primaryColor,
                                                   )
@@ -914,7 +926,6 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        // todo make this a widget that is given in every corresponding screen
         bottomNavigationBar: const CustomBottomNavbar(),
       ),
     );
