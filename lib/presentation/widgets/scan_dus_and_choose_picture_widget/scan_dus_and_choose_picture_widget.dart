@@ -10,6 +10,7 @@ import '../../../core/resources/consts/colors.dart';
 import '../../../core/resources/consts/sizes.dart';
 import '../../../core/resources/helper/file_compressor.dart';
 import '../../../core/resources/helper/file_size_check.dart';
+import '../../../core/resources/media_query/media_query_helpers.dart';
 import '../container/rounded_container.dart';
 import '../image_picker/widget_cubit/ImagePickerCubit.dart';
 import '../my_confirm_dialog/my_confirm_dialog.dart';
@@ -18,8 +19,10 @@ import '../toast/my_toast.dart';
 
 class ScanDusAndChoosePictureWidget extends StatefulWidget {
   final void Function(String, File?)? functionCallbackSetImageFilePath;
+  final bool isSkipFotoDus;
+  final Function(bool?)? skipFotoCallback;
 
-  const ScanDusAndChoosePictureWidget({this.functionCallbackSetImageFilePath, Key? key}) : super(key: key);
+  const ScanDusAndChoosePictureWidget({this.functionCallbackSetImageFilePath, this.isSkipFotoDus = false, this.skipFotoCallback, Key? key}) : super(key: key);
 
   @override
   _ScanDusAndChoosePictureWidgetState createState() =>
@@ -30,24 +33,109 @@ class _ScanDusAndChoosePictureWidgetState
     extends State<ScanDusAndChoosePictureWidget> {
   late File _storedImage;
 
+
   Future _showDialogPickImageFromGalleryOrCamera(
       BuildContext context, String qrCode, ImagePickerCubitState state) async {
-    return myConfirmDialog(context,
-        basicContentString: "Choose Report Image",
-        positiveButton: () async {
-          await _pickFile(context, qrCode, state);
-        },
-        positiveButtonText: "From Gallery",
-        negativeButton: () async {
-          await _takePicture(context, qrCode, state);
-        },
-        negativeButtonText: "Pick From Camera",
-        dismissedDialogCallback: () {
+    return
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                "Confirm",
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                "Choose Report Image"
+                // "$content",
+                // style: sansPro(fontWeight: FontWeight.w600, fontSize: 16),
+                ,
+                softWrap: true, textAlign: TextAlign.justify,
+              ),
+            ],
+          ),
+          actions: [
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(sizeNormal),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Container(
+                          height: 45,
+                          width: widthScreen(context),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              await _takePicture(context, qrCode, state);
+                              context.router.pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(sizeNormal)),
+                              backgroundColor: primaryGreen,
+                              side: const BorderSide(color: primaryGreen),
+                            ),
+                            child: Text("No"),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: sizeMedium),
+                      Flexible(
+                        child: Container(
+                          height: 45,
+                          width: widthScreen(context),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(sizeNormal)),
+                              backgroundColor: primaryGreen,
+                              side: const BorderSide(color: primaryGreen),
+                            ),
+                            onPressed: () async {
+                              await _pickFile(context, qrCode, state);
+                              context.router.pop();
+                            },
+                            child: Text("Yes"),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                ElevatedButton(onPressed: (){
+                  context.router.pop();
+                }, child: Text("Skip Foto Dus"))
+                // TODO ubah jadi checkbox
+                // StatefulBuilder(
+                //   builder: (stfContext, stfSetState) {
+                //     bool isSkipState = false;
+                //     isSkipState = widget.isSkipFotoDus;
+                //     return Row(children: [
+                //     Checkbox(value: isSkipState, onChanged: (val){
+                //       stfSetState(() {
+                //         isSkipState = !isSkipState;
+                //         print("isSkipState: $isSkipState");
+                //       });
+                //     }),
+                //     Text("Skip Foto Dus"),
+                //   ],);
+                //   },
+                // )
+              ],
+            ),
+          ],
+        ),
+      ).then((value) {
           if(widget.functionCallbackSetImageFilePath != null) {
             widget.functionCallbackSetImageFilePath!(qrCode,null);
           }
-        },
-    );
+      });
   }
 
   Future _takePicture(BuildContext context, String qrCode, ImagePickerCubitState state) async {

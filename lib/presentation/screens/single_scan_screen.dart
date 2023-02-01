@@ -427,10 +427,15 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                 nodus,
                                 theFile?.path ?? "")
                             .then((value) async {
+                              if(context
+                                  .read<SingleScanScreenCubit>().state.dusScanResponse?.success ?? false){
+                                myToast("Success Scan Dus");
+                              } else {
+                                myToast("Failed Scan Dus");
+                              }
                           await context
                               .read<SingleScanScreenCubit>()
                               .fetchScannedDusList();
-                          myToast("Success Scan Dus");
                         });
                       }),
                       Builder(builder: (context) {

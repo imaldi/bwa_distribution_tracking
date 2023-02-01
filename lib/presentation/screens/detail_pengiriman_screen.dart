@@ -19,6 +19,7 @@ import 'package:flutter_map/flutter_map.dart'; // Suitable for most situations
 import 'package:timelines/timelines.dart';
 import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/consts/urls.dart';
+import '../../core/resources/helper/number_formatter.dart';
 import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/history_scan/history_scan_bloc.dart';
@@ -102,6 +103,136 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                           child: Column(
                             children: [
                               CustomText("${data?.qrcodeSj}",color: Colors.white,size: sizeBig,),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: sizeMedium,
+                                          bottom: sizeMedium,
+                                          right: sizeMedium),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          const FittedBox(
+                                              child: CustomText(
+                                                "Total Al-Quran Keseluruhan",
+                                                color: Colors.white,
+                                                size: sizeMedium,
+                                              )),
+                                          FittedBox(
+                                              child: CustomText(
+                                                indonesianNumberFormat(
+                                                    data?.total ?? ""),
+                                                color: Colors.white,
+                                                size: sizeHuge - 10,
+                                                weight: FontWeight.bold,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                    Table(
+                                      children: [
+                                        const TableRow(children: [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                "Al-Quran\nBelum Distribusi",
+                                                color: Colors.white,
+                                                size: sizeMedium,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                "Al-Quran\nSudah Distribusi",
+                                                color: Colors.white,
+                                                size: sizeMedium,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                        TableRow(children: [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: FittedBox(
+                                                child: CustomText(
+                                                  // fixme kalau angkanya besar jadi overflow
+                                                  indonesianNumberFormat(
+                                                      header?.onproses ?? header?.total ?? "0"),
+                                                  color: Colors.white,
+                                                  size: sizeBig + sizeMedium,
+                                                  weight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: FittedBox(
+                                                child: CustomText(
+                                                  indonesianNumberFormat(
+                                                      header?.selesai ?? "0"),
+                                                  color: Colors.white,
+                                                  size: sizeBig + sizeMedium,
+                                                  weight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                      ],
+                                    ),
+                                    // Row(
+                                    //   children: [
+                                    //     Flexible(
+                                    //       child: Padding(
+                                    //         padding: EdgeInsets.all(sizeMedium),
+                                    //         child: Column(
+                                    //           crossAxisAlignment:
+                                    //           CrossAxisAlignment.start,
+                                    //           children: [
+                                    //             const FittedBox(
+                                    //                 child: ),
+                                    //             FittedBox(
+                                    //                 child: ),
+                                    //           ],
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Flexible(
+                                    //       child: Padding(
+                                    //         padding: EdgeInsets.all(sizeMedium),
+                                    //         child: Column(
+                                    //           crossAxisAlignment:
+                                    //           CrossAxisAlignment.start,
+                                    //           children: [
+                                    //             const FittedBox(
+                                    //                 child: ),
+                                    //             FittedBox(
+                                    //                 child: ),
+                                    //           ],
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                  ],
+                                ),
+                              ),
                               Center(
                                 child: RoundedContainer(sizeMedium,
                                     padding: const EdgeInsets.all(sizeMedium),
