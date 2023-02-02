@@ -322,46 +322,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           "Shipping Code",
                                                           color: Colors.white,
                                                         )),
-                                                        // NoUnderlineTextFormField(
-                                                        //   controller: controller,
-                                                        //   onEditingComplete: () {
-                                                        //     var state = context
-                                                        //         .read<AuthBloc>()
-                                                        //         .state;
-                                                        //     if (state is AuthSuccess) {
-                                                        //       // textValue = controller.text;
-                                                        //       var qrBloc = context
-                                                        //           .read<QRScanBloc>();
-                                                        //       // var isNewScan
-                                                        //       qrBloc.add(BulkQRScanEvent(
-                                                        //           // textValue
-                                                        //           controller.text
-                                                        //           // "003SPJ22-MERANTI00098-0002"
-                                                        //           ));
-                                                        //       context.router.push(
-                                                        //           BulkScanRoute(
-                                                        //               qrScanBloc:
-                                                        //                   qrBloc,
-                                                        //               qrCode: controller
-                                                        //                   .text));
-                                                        //     }
-                                                        //     FocusManager
-                                                        //         .instance.primaryFocus
-                                                        //         ?.unfocus();
-                                                        //   },
-                                                        //   textAlign: TextAlign.center,
-                                                        //   style: const TextStyle(
-                                                        //       color: Colors.white),
-                                                        //   decoration:
-                                                        //       const InputDecoration(
-                                                        //           // label: Center(child: CustomText("Kode UPC",color: Colors.white,)),
-                                                        //           hintStyle: TextStyle(
-                                                        //             color: Colors.white,
-                                                        //           ),
-                                                        //           // filled: true,
-                                                        //           hintText:
-                                                        //               "Nomor Surat Jalan"),
-                                                        // ),
                                                       ),
                                                     ),
                                                   ],
@@ -591,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             itemCount: listSJ.length ?? 0,
                                             itemBuilder: (c, i) {
                                               return InkWell(
-                                                onTap: () {
+                                                onTap: () async {
                                                   var qrBloc = context
                                                       .read<QRScanBloc>();
                                                   // myToast("${listSJ?[i].qrcodeSj}");
@@ -599,7 +559,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       // textValue
                                                       // controller.text
                                                       "${listSJ[i].qrcodeSj}"));
-                                                  context.router
+                                                  await context.router
                                                       .push(BulkScanRoute(
                                                     qrScanBloc: qrBloc,
                                                     firstTimeScan: false,
@@ -825,7 +785,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       await BarcodeScanner
                                                               .scan()
                                                           .then((ScanResult
-                                                              bulkDetail) {
+                                                              bulkDetail) async {
                                                         if (bulkDetail
                                                             .rawContent
                                                             .isNotEmpty) {
@@ -839,7 +799,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   // "003SPJ34-JATIMPARK0213232-0002",
                                                                   bulkDetail
                                                                       .rawContent));
-                                                          context.router.push(
+                                                          await context.router.push(
                                                               BulkScanRoute(
                                                             qrScanBloc: qrBloc,
                                                             qrCode: bulkDetail

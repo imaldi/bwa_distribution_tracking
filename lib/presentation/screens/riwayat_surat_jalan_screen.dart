@@ -93,7 +93,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                   children: [
                                     RiwayatScreenAppbarAndSearchbar(),
                                     InkWell(
-                                      onTap: () {
+                                      onTap: () async {
                                         // Fixme beri qr code dari item listnya ya nanti
                                         var qrBloc = context
                                             .read<QRScanBloc>();
@@ -104,7 +104,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                             ?.first
                                             .qrcodeSj ??
                                             "-"));
-                                        context.router.push(
+                                        await context.router.push(
                                           BulkScanRoute(qrScanBloc: qrScanBloc, qrCode: state
                                                         .searchResult
                                                         ?.header

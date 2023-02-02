@@ -50,7 +50,7 @@ class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: sl<QRScanBloc>(),
+          value: qrScanBloc,
         ),
         BlocProvider.value(value: sl<BulkScanScreenCubit>())
       ],

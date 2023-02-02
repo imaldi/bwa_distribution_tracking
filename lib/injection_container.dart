@@ -73,7 +73,7 @@ Future<void> init() async {
       userLogout: sl(),
     ),
   );
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => QRScanBloc(sl<BulkQRScanUseCase>(), sl<SendScanUseCase>()),
   );
 
