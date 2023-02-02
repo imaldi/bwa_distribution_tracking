@@ -13,6 +13,7 @@ import '../../core/resources/consts/sizes.dart';
 import '../../core/resources/helper/number_formatter.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/scan/qr_scan_bloc.dart';
+import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../widgets/riwayat_screen_appbar_and_searchbar/riwayat_screen_appbar_and_searchbar.dart';
 import '../widgets/summary_status_tag_widget/summary_status_tag_widget.dart';
 import '../widgets/text/custom_text.dart';
@@ -37,7 +38,7 @@ class RiwayatSuratJalanScreen extends StatefulWidget
         child: this,
       ),
       BlocProvider(
-        create: (_) => qrScanBloc ?? sl<QRScanBloc>(),
+        create: (_) => sl<QRScanBloc>(),
         child: this,
       ),
     ], child: this);
@@ -94,6 +95,15 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                     InkWell(
                                       onTap: () {
                                         // Fixme beri qr code dari item listnya ya nanti
+                                        var qrBloc = context
+                                            .read<QRScanBloc>();
+                                        // myToast("${listSJ?[i].qrcodeSj}");
+                                        qrBloc.add(BulkQRScanEvent(state
+                                            .searchResult
+                                            ?.header
+                                            ?.first
+                                            .qrcodeSj ??
+                                            "-"));
                                         context.router.push(
                                           BulkScanRoute(qrScanBloc: qrScanBloc, qrCode: state
                                                         .searchResult
@@ -297,7 +307,7 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
           );
         }),
       ),
-      // bottomNavigationBar: const CustomBottomNavbar(),
+      bottomNavigationBar: widget.isLacakPerSJ ? null : const CustomBottomNavbar(activeIndex: 3,),
     );
   }
 }

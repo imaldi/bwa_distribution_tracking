@@ -13,6 +13,7 @@ import 'package:bwa_distribution_tracking/presentation/widgets/toast/my_toast.da
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart'; // Suitable for most situations
@@ -24,9 +25,11 @@ import '../../data/models/qr_scan/bulk_scan_response.dart';
 import '../../injection_container.dart';
 import '../state_management/blocs/history_scan/history_scan_bloc.dart';
 import '../state_management/cubits/detail_riwayat/detail_riwayat_cubit.dart';
+import '../widgets/check_logo_widget/check_logo_widget.dart';
 import '../widgets/container/rounded_container.dart';
 import '../widgets/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../../data/models/qr_scan/dus_detail_response.dart';
+import '../widgets/my_vertical_divider/my_vertical_divider.dart';
 
 class DetailPengirimanScreen extends StatefulWidget
     implements AutoRouteWrapper {
@@ -102,142 +105,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                           titleText: "Detail Pengiriman",
                           child: Column(
                             children: [
-                              CustomText("${data?.qrcodeSj}",color: Colors.white,size: sizeBig,),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: sizeMedium,
-                                          bottom: sizeMedium,
-                                          right: sizeMedium),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          const FittedBox(
-                                              child: CustomText(
-                                                "Total Al-Quran Keseluruhan",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                              )),
-                                          FittedBox(
-                                              child: CustomText(
-                                                indonesianNumberFormat(
-                                                    data?.total ?? ""),
-                                                color: Colors.white,
-                                                size: sizeHuge - 10,
-                                                weight: FontWeight.bold,
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Table(
-                                      children: [
-                                        const TableRow(children: [
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran\nBelum Distribusi",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: FittedBox(
-                                              child: CustomText(
-                                                "Al-Quran\nSudah Distribusi",
-                                                color: Colors.white,
-                                                size: sizeMedium,
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          ),
-                                        ]),
-                                        TableRow(children: [
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  // fixme kalau angkanya besar jadi overflow
-                                                  indonesianNumberFormat(
-                                                      header?.onproses ?? header?.total ?? "0"),
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 8.0),
-                                              child: FittedBox(
-                                                child: CustomText(
-                                                  indonesianNumberFormat(
-                                                      header?.selesai ?? "0"),
-                                                  color: Colors.white,
-                                                  size: sizeBig + sizeMedium,
-                                                  weight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ]),
-                                      ],
-                                    ),
-                                    // Row(
-                                    //   children: [
-                                    //     Flexible(
-                                    //       child: Padding(
-                                    //         padding: EdgeInsets.all(sizeMedium),
-                                    //         child: Column(
-                                    //           crossAxisAlignment:
-                                    //           CrossAxisAlignment.start,
-                                    //           children: [
-                                    //             const FittedBox(
-                                    //                 child: ),
-                                    //             FittedBox(
-                                    //                 child: ),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //     Flexible(
-                                    //       child: Padding(
-                                    //         padding: EdgeInsets.all(sizeMedium),
-                                    //         child: Column(
-                                    //           crossAxisAlignment:
-                                    //           CrossAxisAlignment.start,
-                                    //           children: [
-                                    //             const FittedBox(
-                                    //                 child: ),
-                                    //             FittedBox(
-                                    //                 child: ),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                  ],
-                                ),
-                              ),
+                              CustomText(
+                                "${data?.qrcodeSj}", color: Colors.white,
+                                size: sizeBig,),
                               Center(
                                 child: RoundedContainer(sizeMedium,
                                     padding: const EdgeInsets.all(sizeMedium),
                                     margin:
-                                    const EdgeInsets.symmetric(vertical: sizeBig),
+                                    const EdgeInsets.symmetric(
+                                        vertical: sizeBig),
                                     boxDecoration: const BoxDecoration(
                                         color: Colors.transparent),
                                     child: Column(
@@ -380,6 +256,74 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               ),
                             ],
                           )),
+                      Row(children: [Expanded(child: RoundedContainer(sizeMedium,
+                        margin: const EdgeInsets.all(sizeMedium),
+                        boxDecoration: const BoxDecoration(color: customLightGreen),
+                        child: Container(
+                          // height: 100,
+                          constraints: const BoxConstraints(
+                            minHeight: 120,
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/images/book_icon.svg"),
+                                  const Padding(
+                                    padding: EdgeInsets.all(sizeNormal),
+                                    child: FittedBox(child: CustomText("Total Al-Quran\nKeseluruhan",textAlign: TextAlign.center,color: primaryGreen,size: 3*sizeSmall,)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                    child: FittedBox(child: CustomText("${indonesianNumberFormat(
+                                        data?.total ?? "")} Pcs",textAlign: TextAlign.center,color: primaryGreen,weight: FontWeight.bold,size: sizeMedium+ sizeNormal,)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const MyVerticalDivider(),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/images/book_icon.svg"),
+                                  const Padding(
+                                    padding: EdgeInsets.all(sizeNormal),
+                                    child: FittedBox(child: CustomText("Total Sisa\nAl-Quran",textAlign: TextAlign.center,color: primaryGreen,size: 3*sizeSmall,)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                    child: FittedBox(child: CustomText("${indonesianNumberFormat(
+                                        header?.onproses ??
+                                            header?.total ?? "0")} Pcs",textAlign: TextAlign.center,color: primaryGreen,weight: FontWeight.bold,size: sizeMedium+ sizeNormal,)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const MyVerticalDivider(),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/images/book_icon.svg"),
+                                  const Padding(
+                                    padding: EdgeInsets.all(sizeNormal),
+                                    child: FittedBox(child: CustomText("Total Al-Quran\nTerdistribusi",textAlign: TextAlign.center,color: primaryGreen,size: 3*sizeSmall,)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: sizeNormal),
+                                    child: FittedBox(child: CustomText("${indonesianNumberFormat(
+                                        header?.selesai ?? "0")} Pcs",textAlign: TextAlign.center,color: primaryGreen,weight: FontWeight.bold,size: sizeMedium+ sizeNormal,)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],),
+                        ),),)],),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -438,12 +382,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       // )
                                     ],
                                   ),
-                                  const CircleAvatar(
-                                    radius: sizeNormal + sizeSmall,
-                                    backgroundColor: checkIconColor,
-                                    child: Center(child: Icon(
-                                      Icons.check, color: Colors.white,
-                                      size: sizeNormal + sizeSmall,)),)
+                                  const CheckLogoWidget(),
                                 ],
                               ),
                               // startConnector: SolidLineConnector(),
@@ -515,12 +454,9 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                         .isNotEmpty &&
                                         nosjhistoryStatusPengirimanList
                                             .contains("Diterima"),
-                                    child: const CircleAvatar(
-                                      radius: sizeNormal + sizeSmall,
-                                      backgroundColor: checkIconColor,
-                                      child: Center(child: Icon(
-                                        Icons.check, color: Colors.white,
-                                        size: sizeNormal + sizeSmall,)),),
+                                    child:
+                                    const CheckLogoWidget(),
+
                                   )
                                 ],
                               ),
@@ -574,43 +510,14 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                               indicator: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                          radius: sizeBig, // Image radius
-                                          backgroundColor: Colors.grey,
-                                          backgroundImage: dusHistory
-                                              .isNotEmpty &&
-                                              ((int.parse(header?.total ??
-                                                  "0") !=
-                                                  int.parse(
-                                                      header?.selesai ??
-                                                          "-1")) &&
-                                                  (int.parse(header?.total ??
-                                                      "0") !=
-                                                      int.parse(
-                                                          header?.onproses ??
-                                                              "-1"))) ||
-                                              (int.parse(
-                                                  header?.total ?? "0") ==
-                                                  int.parse(
-                                                      header?.selesai ?? "-1"))
-                                              ? const AssetImage(
-                                              "assets/images/background_main.png")
-                                              : null),
-                                      SizedBox(
-                                        height: sizeMedium + sizeNormal,
-                                        width: sizeMedium + sizeNormal,
-                                        child: Container(
-                                          child: Image.asset(
-                                              "assets/images/delivery_icon_timeline.png"),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Visibility(
-                                      visible: dusHistory.isNotEmpty &&
+                                Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  CircleAvatar(
+                                      radius: sizeBig, // Image radius
+                                      backgroundColor: Colors.grey,
+                                      backgroundImage: dusHistory
+                                          .isNotEmpty &&
                                           ((int.parse(header?.total ??
                                               "0") !=
                                               int.parse(
@@ -621,15 +528,41 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                   int.parse(
                                                       header?.onproses ??
                                                           "-1"))) ||
-                                          (int.parse(header?.total ?? "0") ==
+                                          (int.parse(
+                                              header?.total ?? "0") ==
                                               int.parse(
-                                                  header?.selesai ?? "-1")),
-                                      child: const CircleAvatar(
-                                        radius: sizeNormal + sizeSmall,
-                                        backgroundColor: checkIconColor,
-                                        child: Center(child: Icon(
-                                          Icons.check, color: Colors.white,
-                                          size: sizeNormal + sizeSmall,)),))
+                                                  header?.selesai ?? "-1"))
+                                          ? const AssetImage(
+                                          "assets/images/background_main.png")
+                                          : null),
+                                  SizedBox(
+                                    height: sizeMedium + sizeNormal,
+                                    width: sizeMedium + sizeNormal,
+                                    child: Container(
+                                      child: Image.asset(
+                                          "assets/images/delivery_icon_timeline.png"),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Visibility(
+                                visible: dusHistory.isNotEmpty &&
+                                    ((int.parse(header?.total ??
+                                        "0") !=
+                                        int.parse(
+                                            header?.selesai ??
+                                                "-1")) &&
+                                        (int.parse(header?.total ??
+                                            "0") !=
+                                            int.parse(
+                                                header?.onproses ??
+                                                    "-1"))) ||
+                                    (int.parse(header?.total ?? "0") ==
+                                        int.parse(
+                                            header?.selesai ?? "-1")),
+                                child:
+                                const CheckLogoWidget(),),
+
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -700,16 +633,12 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                     ],
                                   ),
                                   Visibility(
-                                      visible: listAll.isNotEmpty &&
-                                          (int.parse(header?.total ?? "0") ==
-                                              int.parse(
-                                                  header?.selesai ?? "-1")),
-                                      child: const CircleAvatar(
-                                        radius: sizeNormal + sizeSmall,
-                                        backgroundColor: checkIconColor,
-                                        child: Center(child: Icon(
-                                          Icons.check, color: Colors.white,
-                                          size: sizeNormal + sizeSmall,)),))
+                                    visible: listAll.isNotEmpty &&
+                                        (int.parse(header?.total ?? "0") ==
+                                            int.parse(
+                                                header?.selesai ?? "-1")),
+                                    child: const CheckLogoWidget(),
+                                  )
                                 ],
                               ),
                               startConnector: const SolidLineConnector(
@@ -801,13 +730,15 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                       contents: Container(
                                           padding: const EdgeInsets.all(8.0),
                                           margin:
-                                          EdgeInsets.only(
-                                            left: sizeSmall,
+                                          const EdgeInsets.only(
+                                              left: sizeSmall,
                                               right:
                                               sizeNormal),
                                           decoration: BoxDecoration(
-                                            border: Border.all(color: hintTextColor),
-                                            borderRadius: BorderRadius.all(Radius.circular(sizeNormal)),
+                                            border: Border.all(
+                                                color: hintTextColor),
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(sizeNormal)),
                                           ),
                                           constraints:
                                           const BoxConstraints(maxWidth: 400),
@@ -847,7 +778,11 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                       "No Address"}"}",
                                                   color: primaryColor,
                                                 ),
-                                                CustomText("Dibuat oleh: ${listAll[i].createdBy}",color:primaryColor,italic: true,),
+                                                CustomText(
+                                                  "Dibuat oleh: ${listAll[i]
+                                                      .createdBy}",
+                                                  color: primaryColor,
+                                                  italic: true,),
                                                 const SizedBox(
                                                   height: sizeNormal,
                                                 ),
@@ -927,178 +862,180 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                   listAll[i] is SendScanDataModel
                                                                       ?
                                                                   Builder(
-                                                                    builder: (context) {
-                                                                      var noSJHistory = (listAll[i] as SendScanDataModel);
-                                                                      return SingleChildScrollView(
-                                                                        child:
-                                                                        Column(
-                                                                          children: [
-                                                                            RoundedContainer(
-                                                                                sizeMedium,
-                                                                                boxDecoration:
-                                                                                const BoxDecoration(
-                                                                                  color: Colors
-                                                                                      .white,
-                                                                                ),
-                                                                                constraints:
-                                                                                const BoxConstraints(
-                                                                                    maxHeight:
-                                                                                    300),
-                                                                                child:
-                                                                                FlutterMap(
-                                                                                  options:
-                                                                                  MapOptions(
-                                                                                    center: LatLng(
-                                                                                        lat,
-                                                                                        lng),
-                                                                                    zoom:
-                                                                                    17.0,
-                                                                                    maxZoom:
-                                                                                    18.0,
+                                                                      builder: (
+                                                                          context) {
+                                                                        var noSJHistory = (listAll[i] as SendScanDataModel);
+                                                                        return SingleChildScrollView(
+                                                                          child:
+                                                                          Column(
+                                                                            children: [
+                                                                              RoundedContainer(
+                                                                                  sizeMedium,
+                                                                                  boxDecoration:
+                                                                                  const BoxDecoration(
+                                                                                    color: Colors
+                                                                                        .white,
                                                                                   ),
-                                                                                  children: [
-                                                                                    TileLayer(
-                                                                                      urlTemplate:
-                                                                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                                                                      userAgentPackageName:
-                                                                                      'com.example.app',
+                                                                                  constraints:
+                                                                                  const BoxConstraints(
+                                                                                      maxHeight:
+                                                                                      300),
+                                                                                  child:
+                                                                                  FlutterMap(
+                                                                                    options:
+                                                                                    MapOptions(
+                                                                                      center: LatLng(
+                                                                                          lat,
+                                                                                          lng),
+                                                                                      zoom:
+                                                                                      17.0,
+                                                                                      maxZoom:
+                                                                                      18.0,
                                                                                     ),
-                                                                                    MarkerLayer(
-                                                                                        markers: [
-                                                                                          Marker(
-                                                                                            width: 80,
-                                                                                            height: 80,
-                                                                                            rotate: true,
-                                                                                            point: LatLng(
-                                                                                                lat,
-                                                                                                lng),
-                                                                                            builder: (
-                                                                                                ctx) =>
-                                                                                            const Icon(
-                                                                                              Icons
-                                                                                                  .location_on_rounded,
-                                                                                              color: primaryGreen,
-                                                                                              size: sizeHuge,
-                                                                                            ),
-                                                                                            // FlutterLogo(
-                                                                                            //   textColor: Colors.blue,
-                                                                                            //   key: ObjectKey(Colors.blue),
-                                                                                            // ),
-                                                                                          )
-                                                                                        ]),
-                                                                                  ],
-                                                                                )
-                                                                            ),
-
-                                                                            Text(
-                                                                                "Detail Alamat:\n${noSJHistory.alamat}"),
-                                                                            RoundedContainer(
-                                                                                sizeNormal,
-                                                                                boxDecoration: BoxDecoration(
-                                                                                    border: Border
-                                                                                        .all(
-                                                                                        color: primaryGreen)),
-                                                                                child: Column(
-                                                                                  children: [
-                                                                                    Table(
-                                                                                      children: [
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "No SJ"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .nosj
-                                                                                                    ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "Kota"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .kota
-                                                                                                    ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "Keterangan"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .keterangan ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "Status Pengiriman"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .statusPengiriman
-                                                                                                    ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "Created By"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .createdBy
-                                                                                                    ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                        TableRow(
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                                "Created At"),
-                                                                                            Text(
-                                                                                                ": ${noSJHistory
-                                                                                                    .createdAt
-                                                                                                    ??
-                                                                                                    "-"}"),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],),
-                                                                                    Material(
-                                                                                      child: ExpandablePanel(
-                                                                                        header: const Text(
-                                                                                            "Foto"),
-                                                                                        collapsed: Container(),
-                                                                                        expanded: Image
-                                                                                            .network(
-                                                                                          "https://$imageResourceUrl${noSJHistory
-                                                                                              .foto ??
-                                                                                              "-"}",
-                                                                                          errorBuilder: (
-                                                                                              c,
-                                                                                              o,
-                                                                                              s) {
-                                                                                            return const Center(
-                                                                                                child: Text(
-                                                                                                    "Image Not Found"));
-                                                                                          },),
-                                                                                        // tapHeaderToExpand: true,
-                                                                                        // hasIcon: true,
+                                                                                    children: [
+                                                                                      TileLayer(
+                                                                                        urlTemplate:
+                                                                                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                                                        userAgentPackageName:
+                                                                                        'com.example.app',
                                                                                       ),
-                                                                                    ),
+                                                                                      MarkerLayer(
+                                                                                          markers: [
+                                                                                            Marker(
+                                                                                              width: 80,
+                                                                                              height: 80,
+                                                                                              rotate: true,
+                                                                                              point: LatLng(
+                                                                                                  lat,
+                                                                                                  lng),
+                                                                                              builder: (
+                                                                                                  ctx) =>
+                                                                                              const Icon(
+                                                                                                Icons
+                                                                                                    .location_on_rounded,
+                                                                                                color: primaryGreen,
+                                                                                                size: sizeHuge,
+                                                                                              ),
+                                                                                              // FlutterLogo(
+                                                                                              //   textColor: Colors.blue,
+                                                                                              //   key: ObjectKey(Colors.blue),
+                                                                                              // ),
+                                                                                            )
+                                                                                          ]),
+                                                                                    ],
+                                                                                  )
+                                                                              ),
+
+                                                                              Text(
+                                                                                  "Detail Alamat:\n${noSJHistory
+                                                                                      .alamat}"),
+                                                                              RoundedContainer(
+                                                                                  sizeNormal,
+                                                                                  boxDecoration: BoxDecoration(
+                                                                                      border: Border
+                                                                                          .all(
+                                                                                          color: primaryGreen)),
+                                                                                  child: Column(
+                                                                                    children: [
+                                                                                      Table(
+                                                                                        children: [
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "No SJ"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .nosj
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "Kota"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .kota
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "Keterangan"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .keterangan ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "Status Pengiriman"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .statusPengiriman
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "Created By"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .createdBy
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                          TableRow(
+                                                                                            children: [
+                                                                                              const Text(
+                                                                                                  "Created At"),
+                                                                                              Text(
+                                                                                                  ": ${noSJHistory
+                                                                                                      .createdAt
+                                                                                                      ??
+                                                                                                      "-"}"),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ],),
+                                                                                      Material(
+                                                                                        child: ExpandablePanel(
+                                                                                          header: const Text(
+                                                                                              "Foto"),
+                                                                                          collapsed: Container(),
+                                                                                          expanded: Image
+                                                                                              .network(
+                                                                                            "https://$imageResourceUrl${noSJHistory
+                                                                                                .foto ??
+                                                                                                "-"}",
+                                                                                            errorBuilder: (
+                                                                                                c,
+                                                                                                o,
+                                                                                                s) {
+                                                                                              return const Center(
+                                                                                                  child: Text(
+                                                                                                      "Image Not Found"));
+                                                                                            },),
+                                                                                          // tapHeaderToExpand: true,
+                                                                                          // hasIcon: true,
+                                                                                        ),
+                                                                                      ),
 
 
-                                                                                  ],
-                                                                                )
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      );
-                                                                    }
+                                                                                    ],
+                                                                                  )
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        );
+                                                                      }
                                                                   )
                                                                       :
                                                                   SingleChildScrollView(
@@ -1199,11 +1136,17 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                         ),
 
                                                                         Builder(
-                                                                          builder: (context) {
-                                                                            return Text(
-                                                                                "Detail Alamat:\n${ listHeaderDus.isNotEmpty ? listHeaderDus.first.detailTempat :
-                                                                                    "Loading..."}");
-                                                                          }
+                                                                            builder: (
+                                                                                context) {
+                                                                              return Text(
+                                                                                  "Detail Alamat:\n${ listHeaderDus
+                                                                                      .isNotEmpty
+                                                                                      ? listHeaderDus
+                                                                                      .first
+                                                                                      .detailTempat
+                                                                                      :
+                                                                                  "Loading..."}");
+                                                                            }
                                                                         ),
                                                                         // Text(
                                                                         //     ": ${"${listHeaderDus.first
@@ -1525,7 +1468,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
           },
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavbar(),
+      bottomNavigationBar: const CustomBottomNavbar(activeIndex: 3,),
     );
   }
 }

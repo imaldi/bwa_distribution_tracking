@@ -863,9 +863,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           BoxDecoration(
                                                               color:
                                                                   primaryColor),
-                                                      child: CustomText(
-                                                        "Scan SJ", // TODO ubah jadi Icon Scan Saja
+                                                      child: Icon(
+                                                        Icons.qr_code_2,
                                                         color: Colors.white,
+                                                        size: sizeHuge,
                                                       ),
                                                       // SvgPicture.asset(
                                                       //     "assets/images/camera_white.svg"),
@@ -926,7 +927,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        bottomNavigationBar: const CustomBottomNavbar(),
+        bottomNavigationBar: const CustomBottomNavbar(activeIndex: 2),
       ),
     );
   }

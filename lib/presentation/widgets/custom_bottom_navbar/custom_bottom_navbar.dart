@@ -11,7 +11,10 @@ import '../../../core/routes/app_router.gr.dart';
 import '../../state_management/blocs/auth/auth_bloc.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
-  const CustomBottomNavbar({Key? key}) : super(key: key);
+  final int activeIndex;
+  const CustomBottomNavbar({
+    required this.activeIndex,
+    Key? key}) : super(key: key);
 
   @override
   _CustomBottomNavbarState createState() => _CustomBottomNavbarState();
@@ -35,12 +38,13 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         }
       },
       height: heightScreen(context) / 12,
-      curveSize: widthScreen(context) / 3,
+      curveSize: 0,
       style: TabStyle.fixedCircle,
       backgroundColor: Colors.white,
-      color: primaryGreen,
+      color: Colors.grey,
       elevation: 2,
       activeColor: primaryGreen,
+      initialActiveIndex: widget.activeIndex,
       items: [
         TabItem(
           title: "Logout",

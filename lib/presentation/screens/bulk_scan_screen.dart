@@ -50,7 +50,7 @@ class BulkScanScreen extends StatefulWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: qrScanBloc,
+          value: sl<QRScanBloc>(),
         ),
         BlocProvider.value(value: sl<BulkScanScreenCubit>())
       ],
@@ -520,7 +520,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
                                                             color:
                                                                 Colors.white),
                                                         CustomText(
-                                                          "Jeni Qur'an  (Project): ${dataPerPage?[ind].nmProject}",
+                                                          "Jenis Qur'an  (Project): ${dataPerPage?[ind].nmProject}",
                                                           color: Colors.white,
                                                         ),
                                                       ],
@@ -932,7 +932,7 @@ class _BulkScanScreenState extends State<BulkScanScreen> {
           return Center(child: Text("State is ${state.runtimeType}"),);
         },
       ),
-      bottomNavigationBar: const CustomBottomNavbar(),
+      bottomNavigationBar: const CustomBottomNavbar(activeIndex: 2,),
     );
   }
 }

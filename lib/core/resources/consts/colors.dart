@@ -11,7 +11,8 @@ const listColorLight = Color(0xFF01A2AD);
 const listColorDark = Color(0xFF11828A);
 const dikirimTagColor = Color(0xFFFCC201);
 const selesaiTagColor = Color(0xFF95D310);
-const checkIconColor = primaryBlue;
+const checkIconColor = Color(0xFF00FF94);
+const customLightGreen = Color(0x554DC9B3);
 
 Map<int, Color> customPrimarySwatch = {
   50: Color.fromRGBO(0, 189, 155, .1),
