@@ -94,6 +94,7 @@ class AppRouter extends _i12.RootStackRouter {
         child: _i12.WrappedRoute(
             child: _i7.RiwayatSuratJalanScreen(
           isLacakPerSJ: args.isLacakPerSJ,
+          isRedirectDetailRiwayat: args.isRedirectDetailRiwayat,
           qrScanBloc: args.qrScanBloc,
           key: args.key,
         )),
@@ -322,6 +323,7 @@ class RiwayatSuratJalanRoute
     extends _i12.PageRouteInfo<RiwayatSuratJalanRouteArgs> {
   RiwayatSuratJalanRoute({
     bool isLacakPerSJ = false,
+    bool isRedirectDetailRiwayat = false,
     _i14.QRScanBloc? qrScanBloc,
     _i13.Key? key,
   }) : super(
@@ -329,6 +331,7 @@ class RiwayatSuratJalanRoute
           path: '/riwayat-surat-jalan-screen',
           args: RiwayatSuratJalanRouteArgs(
             isLacakPerSJ: isLacakPerSJ,
+            isRedirectDetailRiwayat: isRedirectDetailRiwayat,
             qrScanBloc: qrScanBloc,
             key: key,
           ),
@@ -340,11 +343,14 @@ class RiwayatSuratJalanRoute
 class RiwayatSuratJalanRouteArgs {
   const RiwayatSuratJalanRouteArgs({
     this.isLacakPerSJ = false,
+    this.isRedirectDetailRiwayat = false,
     this.qrScanBloc,
     this.key,
   });
 
   final bool isLacakPerSJ;
+
+  final bool isRedirectDetailRiwayat;
 
   final _i14.QRScanBloc? qrScanBloc;
 
@@ -352,7 +358,7 @@ class RiwayatSuratJalanRouteArgs {
 
   @override
   String toString() {
-    return 'RiwayatSuratJalanRouteArgs{isLacakPerSJ: $isLacakPerSJ, qrScanBloc: $qrScanBloc, key: $key}';
+    return 'RiwayatSuratJalanRouteArgs{isLacakPerSJ: $isLacakPerSJ, isRedirectDetailRiwayat: $isRedirectDetailRiwayat, qrScanBloc: $qrScanBloc, key: $key}';
   }
 }
 

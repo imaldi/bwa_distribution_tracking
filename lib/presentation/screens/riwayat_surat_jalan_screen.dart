@@ -21,9 +21,10 @@ import '../widgets/text/custom_text.dart';
 class RiwayatSuratJalanScreen extends StatefulWidget
     implements AutoRouteWrapper {
   final bool isLacakPerSJ;
+  final bool isRedirectDetailRiwayat;
   final QRScanBloc? qrScanBloc;
 
-  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, this.qrScanBloc, Key? key})
+  const RiwayatSuratJalanScreen({this.isLacakPerSJ = false, this.isRedirectDetailRiwayat = false, this.qrScanBloc, Key? key})
       : super(key: key);
 
   @override
@@ -93,7 +94,21 @@ class _RiwayatSuratJalanScreenState extends State<RiwayatSuratJalanScreen> {
                                   children: [
                                     RiwayatScreenAppbarAndSearchbar(),
                                     InkWell(
-                                      onTap: () async {
+                                      onTap:
+                                          widget.isRedirectDetailRiwayat ?
+                                              () {
+                                            // Fixme beri qr code dari item listnya ya nanti
+                                            context.router.push(DetailPengirimanRoute(
+                                                qrCode: state
+                                                    .searchResult
+                                                    ?.header
+                                                    ?.first
+                                                    .qrcodeSj ??
+                                                    "-"));
+                                          }
+                                              :
+                                          // TODO nanti arahin ke riwayat kalau search tapi udah buka halaman Riwayat sejak awal
+                                          () async {
                                         // Fixme beri qr code dari item listnya ya nanti
                                         var qrBloc = context
                                             .read<QRScanBloc>();

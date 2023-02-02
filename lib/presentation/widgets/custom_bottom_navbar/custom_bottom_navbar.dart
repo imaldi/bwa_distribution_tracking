@@ -31,10 +31,10 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           context.read<AuthBloc>().add(const UserLogoutAuthEvent());
         }
         if (index == 2) {
-          context.router.push(HomeRoute());
+          context.router.replace(HomeRoute());
         }
         if (index == 3) {
-          context.router.push(RiwayatSuratJalanRoute());
+          context.router.replace(RiwayatSuratJalanRoute(isRedirectDetailRiwayat: true));
         }
       },
       height: heightScreen(context) / 12,
