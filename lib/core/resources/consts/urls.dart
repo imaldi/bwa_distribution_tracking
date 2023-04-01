@@ -1,4 +1,5 @@
-const baseUrl = "dev-trackingbwa.my.id";
+// const baseUrl = "dev-trackingbwa.my.id";
+const baseUrl = "dev-tracker.bwa.id";
 const apiUrl = "/api";
 // const baseUrl = "zulfikar.bwa.id:88";
 // const apiUrl = "/backend_inventory/api";

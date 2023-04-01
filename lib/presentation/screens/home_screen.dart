@@ -237,33 +237,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                                Builder(
-                                                  builder: (context) {
-                                                    var isDisplayingWelcome = context
-                                                        .watch<
-                                                        SuratJalanCubit>()
-                                                        .state
-                                                        .menuStatusForTitle ??
-                                                        "";
-                                                    print("isDisplayingWelcome: $isDisplayingWelcome");
-                                                    return Visibility(
-                                                      visible: isDisplayingWelcome
-                                                          .isEmpty,
-                                                      child: const FittedBox(
-                                                        child: CustomText(
-                                                          "SELAMAT DATANG PETUGAS",
-                                                          color: Colors.white,
-                                                          size: sizeBig,
-                                                          weight: FontWeight.w700,
-                                                        ),
+                                                Builder(builder: (context) {
+                                                  var isDisplayingWelcome = context
+                                                          .watch<
+                                                              SuratJalanCubit>()
+                                                          .state
+                                                          .menuStatusForTitle ??
+                                                      "";
+                                                  print(
+                                                      "isDisplayingWelcome: $isDisplayingWelcome");
+                                                  return Visibility(
+                                                    visible: isDisplayingWelcome
+                                                        .isEmpty,
+                                                    child: const FittedBox(
+                                                      child: CustomText(
+                                                        "SELAMAT DATANG PETUGAS",
+                                                        color: Colors.white,
+                                                        size: sizeBig,
+                                                        weight: FontWeight.w700,
                                                       ),
-                                                    );
-                                                  }
-                                                ),
+                                                    ),
+                                                  );
+                                                }),
                                                 FittedBox(child: BlocBuilder<
                                                     AuthBloc, AuthState>(
                                                   builder: (context, state) {
-                                                    /// FIXME ada bug nama null kalau di hot restart, why??
                                                     return CustomText(
                                                       (state is AuthSuccess)
                                                           ? "${state.loginResponse.user?.name}"
@@ -282,11 +280,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         InkWell(
                                           onTap: () {
                                             // myToast("HEEYY HEEYY");
-                                            context.router.push(
-                                                RiwayatSuratJalanRoute(
-                                                    qrScanBloc: context.read<QRScanBloc>(),
-                                                    isLacakPerSJ: true,
-                                                ));
+                                            context.router
+                                                .push(RiwayatSuratJalanRoute(
+                                              qrScanBloc:
+                                                  context.read<QRScanBloc>(),
+                                              isLacakPerSJ: true,
+                                            ));
                                           },
                                           child: Container(
                                             // color: Colors.green,
@@ -342,154 +341,235 @@ class _HomeScreenState extends State<HomeScreen> {
                             .watch<SuratJalanCubit>()
                             .state
                             .isFetchingList,
-                        child: Padding(
-                          padding: const EdgeInsets.all(sizeMedium),
-                          child: Table(
-                            children: [
-                              TableRow(children: [
-                                InkWell(
-                                  onTap: () {
-                                    context
-                                        .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,
-                                            menuStatusForTitle:
-                                                constPengiriman);
-                                  },
-                                  child: RoundedContainer(sizeMedium,
-                                      padding: const EdgeInsets.all(0),
-                                      margin: const EdgeInsets.all(sizeNormal),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          RoundedContainer(sizeMedium,
-                                              margin: const EdgeInsets.all(0),
-                                              padding: const EdgeInsets.all(0),
-                                              child: Image.asset(
-                                                  "assets/images/background_main.png")),
-                                          Container(
-                                              constraints: const BoxConstraints(
-                                                  minWidth: sizeHuge),
-                                              child: Column(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      "assets/images/iconoir_delivery_truck.svg"),
-                                                  const CustomText(
-                                                    constPengiriman,
-                                                    color: Colors.white,
-                                                  )
-                                                ],
-                                              )),
-                                        ],
-                                      )),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    context
-                                        .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,
-                                            menuStatusForTitle:
-                                                constPenerimaan);
-                                  },
-                                  child: RoundedContainer(sizeMedium,
-                                      padding: const EdgeInsets.all(0),
-                                      margin: const EdgeInsets.all(sizeNormal),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          RoundedContainer(sizeMedium,
-                                              margin: const EdgeInsets.all(0),
-                                              padding: const EdgeInsets.all(0),
-                                              child: Image.asset(
-                                                  "assets/images/background_main.png")),
-                                          Container(
-                                              constraints: const BoxConstraints(
-                                                  minWidth: sizeHuge),
-                                              child: Column(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      "assets/images/diterima_icon.svg"),
-                                                  const CustomText(
-                                                    constPenerimaan,
-                                                    color: Colors.white,
-                                                  )
-                                                ],
-                                              )),
-                                        ],
-                                      )),
-                                ),
-                              ]),
-                              TableRow(children: [
-                                InkWell(
-                                  onTap: () {
-                                    context
-                                        .read<SuratJalanCubit>()
-                                        .getSuratJalanPerPage(1,
-                                            menuStatusForTitle:
-                                                constDistribusi);
-                                    context
-                                        .read<SuratJalanCubit>()
-                                        .setWillScanDus();
-                                  },
-                                  child: RoundedContainer(sizeMedium,
-                                      padding: const EdgeInsets.all(0),
-                                      margin: const EdgeInsets.all(sizeNormal),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          RoundedContainer(sizeMedium,
-                                              margin: const EdgeInsets.all(0),
-                                              padding: const EdgeInsets.all(0),
-                                              child: Image.asset(
-                                                  "assets/images/background_main.png")),
-                                          Container(
-                                              constraints: const BoxConstraints(
-                                                  minWidth: sizeHuge),
-                                              child: Column(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      "assets/images/distribution_icon.svg"),
-                                                  const CustomText(
-                                                    constDistribusi,
-                                                    color: Colors.white,
-                                                  )
-                                                ],
-                                              )),
-                                        ],
-                                      )),
-                                ),
-                                RoundedContainer(sizeMedium,
-                                    padding: const EdgeInsets.all(0),
-                                    margin: const EdgeInsets.all(sizeNormal),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        RoundedContainer(sizeMedium,
-                                            margin: const EdgeInsets.all(0),
-                                            padding: const EdgeInsets.all(0),
-                                            child: Image.asset(
-                                                "assets/images/background_main.png")),
-                                        Container(
-                                            constraints: const BoxConstraints(
-                                                minWidth: sizeHuge),
-                                            child: Column(
-                                              children: [
-                                                SvgPicture.asset(
-                                                    "assets/images/laporan_icon.svg"),
-                                                const CustomText(
-                                                  constLaporan,
-                                                  color: Colors.white,
-                                                )
-                                              ],
-                                            )),
-                                      ],
-                                    )),
-                              ])
-                            ],
-                          ),
+                        child: BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            // var petugasEnabled = false;
+                            var kurirEnabled = false;
+                            var reportEnabled = false;
+                            if (state is AuthSuccess) {
+                              print(
+                                  "state.loginResponse.user?.role: ${state.loginResponse.user?.role}");
+                              if (state.loginResponse.user?.role == "Kurir") {
+                                // petugasEnabled = false;
+                                kurirEnabled = true;
+                              } else {
+                                // petugasEnabled = true;
+                                kurirEnabled = false;
+                              }
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.all(sizeMedium),
+                              child: Table(
+                                children: [
+                                  TableRow(children: [
+                                    InkWell(
+                                      onTap: () {
+                                        context
+                                            .read<SuratJalanCubit>()
+                                            .getSuratJalanPerPage(1,
+                                                menuStatusForTitle:
+                                                    constPengiriman);
+                                      },
+                                      child: RoundedContainer(sizeMedium,
+                                          padding: const EdgeInsets.all(0),
+                                          margin:
+                                              const EdgeInsets.all(sizeNormal),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              RoundedContainer(sizeMedium,
+                                                  margin:
+                                                      const EdgeInsets.all(0),
+                                                  padding:
+                                                      const EdgeInsets.all(0),
+                                                  child: Stack(
+                                                    children: [
+                                                      Image.asset(
+                                                          "assets/images/background_main.png"),
+                                                      Visibility(
+                                                          visible: kurirEnabled,
+                                                          child:
+                                                              Positioned.fill(
+                                                                  child:
+                                                                      Container(
+                                                            color: Colors.grey,
+                                                          ))),
+                                                    ],
+                                                  )),
+                                              Container(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                          minWidth: sizeHuge),
+                                                  child: Column(
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                          "assets/images/iconoir_delivery_truck.svg"),
+                                                      const CustomText(
+                                                        constPengiriman,
+                                                        color: Colors.white,
+                                                      )
+                                                    ],
+                                                  )),
+                                            ],
+                                          )),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        context
+                                            .read<SuratJalanCubit>()
+                                            .getSuratJalanPerPage(1,
+                                                menuStatusForTitle:
+                                                    constPenerimaan);
+                                      },
+                                      child: RoundedContainer(sizeMedium,
+                                          padding: const EdgeInsets.all(0),
+                                          margin:
+                                              const EdgeInsets.all(sizeNormal),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              RoundedContainer(sizeMedium,
+                                                  margin:
+                                                      const EdgeInsets.all(0),
+                                                  padding:
+                                                      const EdgeInsets.all(0),
+                                                  child: Stack(
+                                                    children: [
+                                                      Image.asset(
+                                                          "assets/images/background_main.png"),
+                                                      Visibility(
+                                                          visible:
+                                                              !kurirEnabled,
+                                                          child:
+                                                              Positioned.fill(
+                                                                  child:
+                                                                      Container(
+                                                            color: Colors.grey,
+                                                          ))),
+                                                    ],
+                                                  )),
+                                              Container(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                          minWidth: sizeHuge),
+                                                  child: Column(
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                          "assets/images/diterima_icon.svg"),
+                                                      const CustomText(
+                                                        constPenerimaan,
+                                                        color: Colors.white,
+                                                      )
+                                                    ],
+                                                  )),
+                                            ],
+                                          )),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    InkWell(
+                                      onTap: () {
+                                        context
+                                            .read<SuratJalanCubit>()
+                                            .getSuratJalanPerPage(1,
+                                                menuStatusForTitle:
+                                                    constDistribusi);
+                                        context
+                                            .read<SuratJalanCubit>()
+                                            .setWillScanDus();
+                                      },
+                                      child: RoundedContainer(sizeMedium,
+                                          padding: const EdgeInsets.all(0),
+                                          margin:
+                                              const EdgeInsets.all(sizeNormal),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              RoundedContainer(sizeMedium,
+                                                  margin:
+                                                      const EdgeInsets.all(0),
+                                                  padding:
+                                                      const EdgeInsets.all(0),
+                                                  child: Stack(
+                                                    children: [
+                                                      Image.asset(
+                                                          "assets/images/background_main.png"),
+                                                      Visibility(
+                                                          visible:
+                                                              !kurirEnabled,
+                                                          child:
+                                                              Positioned.fill(
+                                                                  child:
+                                                                      Container(
+                                                            color: Colors.grey,
+                                                          ))),
+                                                    ],
+                                                  )),
+                                              Container(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                          minWidth: sizeHuge),
+                                                  child: Column(
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                          "assets/images/distribution_icon.svg"),
+                                                      const CustomText(
+                                                        constDistribusi,
+                                                        color: Colors.white,
+                                                      )
+                                                    ],
+                                                  )),
+                                            ],
+                                          )),
+                                    ),
+                                    RoundedContainer(sizeMedium,
+                                        padding: const EdgeInsets.all(0),
+                                        margin:
+                                            const EdgeInsets.all(sizeNormal),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            RoundedContainer(sizeMedium,
+                                                margin: const EdgeInsets.all(0),
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                child: Stack(
+                                                  children: [
+                                                    Image.asset(
+                                                        "assets/images/background_main.png"),
+                                                    Visibility(
+                                                        visible: !reportEnabled,
+                                                        child: Positioned.fill(
+                                                            child: Container(
+                                                          color: Colors.grey,
+                                                        ))),
+                                                  ],
+                                                )),
+                                            Container(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        minWidth: sizeHuge),
+                                                child: Column(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                        "assets/images/laporan_icon.svg"),
+                                                    const CustomText(
+                                                      constLaporan,
+                                                      color: Colors.white,
+                                                    )
+                                                  ],
+                                                )),
+                                          ],
+                                        )),
+                                  ])
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ),
                       Builder(builder: (context) {
@@ -504,9 +584,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context.watch<SuratJalanCubit>().state;
                                   var listSJ = suratJalanState
                                           .suratJalanResponse?.data?.data
-                                      ?.where((element) => (element.total ?? "").isNotEmpty && (int.parse(element.total ?? "0") != int.parse(element.selesai ?? "0"))).toList()
-                                      ?? []
-                                      ;
+                                          ?.where((element) =>
+                                              (element.total ?? "")
+                                                  .isNotEmpty &&
+                                              (int.parse(
+                                                      element.total ?? "0") !=
+                                                  int.parse(
+                                                      element.selesai ?? "0")))
+                                          .toList() ??
+                                      [];
                                   var internetConnection = context
                                       .watch<InternetConnectionCubit>()
                                       .state
@@ -686,20 +772,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                         )),
                                                     SummaryStatusTagWidget(
-                                                      total:
-                                                      listSJ[
-                                                                      i]
-                                                                  .total ??
-                                                              "0",
+                                                      total: listSJ[i].total ??
+                                                          "0",
                                                       onProses:
-                                                      listSJ[
-                                                                      i]
-                                                                  .onproses ??
+                                                          listSJ[i].onproses ??
                                                               "0",
                                                       selesai:
-                                                      listSJ[
-                                                                      i]
-                                                                  .selesai ??
+                                                          listSJ[i].selesai ??
                                                               "0",
                                                     )
                                                   ],
@@ -799,8 +878,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   // "003SPJ34-JATIMPARK0213232-0002",
                                                                   bulkDetail
                                                                       .rawContent));
-                                                          await context.router.push(
-                                                              BulkScanRoute(
+                                                          await context.router
+                                                              .push(
+                                                                  BulkScanRoute(
                                                             qrScanBloc: qrBloc,
                                                             qrCode: bulkDetail
                                                                     .rawContent ??

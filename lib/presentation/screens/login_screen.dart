@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/core/resources/media_query/media_query_helpers.dart';
@@ -36,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     // pak kamal
-    // phone = "081288642147";
+    phone = "081288642147";
     // bambang wisnu
     // phone = "085780907168";
     // kurir 1
-    phone = "08121212";
+    // phone = "08121212";
 
     password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: BlocConsumer<AuthBloc,
                                                     AuthState>(
                                                 listener: (lc, state) {
-                                              print(
+                                              log(
                                                   "BlocConsumer.listener: ${state.toString()}");
                                               // Call Toast Here when Failed
                                               if (state is AuthFailed) {
