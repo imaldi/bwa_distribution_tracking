@@ -26,7 +26,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
   SuratJalanRemoteDataSourceImpl(this.client, this.authBox);
   @override
   Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber) async {
-    final url = Uri.https(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
+    final url =
+        Uri.http(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
     print("Surat Jalan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -38,7 +39,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         'Accept': 'application/json',
       },
     );
-    print("Surat Jalan Riwayat response code: ${response.statusCode.toString()}");
+    print(
+        "Surat Jalan Riwayat response code: ${response.statusCode.toString()}");
     log("Surat Jalan Riwayat scan response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
@@ -58,7 +60,7 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
 
   @override
   Future<BulkScanResponse> getHistoryPerId(String qrcodeSj) async {
-    final url = Uri.https(baseUrl, "$historyPerId/$qrcodeSj");
+    final url = Uri.http(baseUrl, "$historyPerId/$qrcodeSj");
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -69,7 +71,8 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         'Accept': 'application/json',
       },
     );
-    print("get history per id response code: ${response.statusCode.toString()}");
+    print(
+        "get history per id response code: ${response.statusCode.toString()}");
     log("get history per id response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
@@ -80,15 +83,17 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         throw ServerException();
       }
       return theResponse;
-    } if(response.statusCode == 404){
+    }
+    if (response.statusCode == 404) {
       throw DataNotFoundException();
     } else {
       throw ServerException();
     }
   }
+
   @override
   Future<DusDetailResponse> getDusDetailByQrCodeSJ(String qrcodeSj) async {
-    final url = Uri.https(baseUrl, "$dusDetailPopUp/$qrcodeSj");
+    final url = Uri.http(baseUrl, "$dusDetailPopUp/$qrcodeSj");
     print("Dus Detail Url: $url");
 
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -99,13 +104,15 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
         'Accept': 'application/json',
       },
     );
-    print("dus detail by qrcode response code: ${response.statusCode.toString()}");
+    print(
+        "dus detail by qrcode response code: ${response.statusCode.toString()}");
     log("dus detail by qrcode response body: ${response.body.toString()}");
 
     if (response.statusCode == 200) {
       var theResponse = DusDetailResponse.fromJson(jsonDecode(response.body));
       return theResponse;
-    } if(response.statusCode == 404){
+    }
+    if (response.statusCode == 404) {
       throw DataNotFoundException();
     } else {
       throw ServerException();

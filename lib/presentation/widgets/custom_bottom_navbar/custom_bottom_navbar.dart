@@ -12,9 +12,8 @@ import '../../state_management/blocs/auth/auth_bloc.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
   final int activeIndex;
-  const CustomBottomNavbar({
-    required this.activeIndex,
-    Key? key}) : super(key: key);
+  const CustomBottomNavbar({required this.activeIndex, Key? key})
+      : super(key: key);
 
   @override
   _CustomBottomNavbarState createState() => _CustomBottomNavbarState();
@@ -23,7 +22,7 @@ class CustomBottomNavbar extends StatefulWidget {
 class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
   @override
   Widget build(BuildContext context) {
-    return  ConvexAppBar(
+    return ConvexAppBar(
       /// Fixme for landscape orientation
       onTap: (index) {
         // myToast("index: $index");
@@ -34,7 +33,8 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           context.router.replace(HomeRoute());
         }
         if (index == 3) {
-          context.router.replace(RiwayatSuratJalanRoute(isRedirectDetailRiwayat: true));
+          context.router
+              .replace(RiwayatSuratJalanRoute(isRedirectDetailRiwayat: true));
         }
       },
       height: heightScreen(context) / 12,
@@ -44,7 +44,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       color: Colors.grey,
       elevation: 2,
       activeColor: primaryGreen,
-      initialActiveIndex: widget.activeIndex,
+      // initialActiveIndex: widget.activeIndex,
       items: [
         TabItem(
           title: "Logout",
@@ -67,13 +67,13 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         ),
         TabItem(
           icon:
-          // UnconstrainedBox(child: SizedBox(height: sizeMedium,width: sizeMedium,child: Container(color: Colors.white,),)),
-          UnconstrainedBox(
-              child: SvgPicture.asset(
-                "assets/images/home_icon_outlined.svg",
-                width: sizeBig,
-                height: sizeBig,
-              )),
+              // UnconstrainedBox(child: SizedBox(height: sizeMedium,width: sizeMedium,child: Container(color: Colors.white,),)),
+              UnconstrainedBox(
+                  child: SvgPicture.asset(
+            "assets/images/home_icon_outlined.svg",
+            width: sizeBig,
+            height: sizeBig,
+          )),
           // FloatingActionButton(
           //     backgroundColor: primaryColor,
           //     onPressed:null,elevation:0,child: SvgPicture.asset("assets/images/home_icon_outlined.svg")),

@@ -38,7 +38,8 @@ class CurrentLocationRemoteDataSourceImpl
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-        throw const PermissionDeniedException('Location permissions are denied');
+        throw const PermissionDeniedException(
+            'Location permissions are denied');
         return Future.error('Location permissions are denied');
       }
     }
@@ -56,18 +57,19 @@ class CurrentLocationRemoteDataSourceImpl
   }
 
   @override
-  Future<OpenStreetMapResponse> getCurrentAddress(double lat, double lon) async {
+  Future<OpenStreetMapResponse> getCurrentAddress(
+      double lat, double lon) async {
     print("lat: $lat");
     print("lon: $lon");
-      var result = await http.get(Uri.https("nominatim.openstreetmap.org","/reverse",{
-        "format": "jsonv2",
-        "lat": lat.toString(),
-        "lon": lon.toString(),
-      }));
-      print("addres status code: ${result.statusCode}");
-      print("addres response: ${result.body}");
-      if(result.statusCode != 200) throw ServerException();
-      return OpenStreetMapResponse.fromJson(jsonDecode(result.body));
-
+    var result =
+        await http.get(Uri.http("nominatim.openstreetmap.org", "/reverse", {
+      "format": "jsonv2",
+      "lat": lat.toString(),
+      "lon": lon.toString(),
+    }));
+    print("addres status code: ${result.statusCode}");
+    print("addres response: ${result.body}");
+    if (result.statusCode != 200) throw ServerException();
+    return OpenStreetMapResponse.fromJson(jsonDecode(result.body));
   }
 }

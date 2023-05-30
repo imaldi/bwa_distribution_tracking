@@ -17,7 +17,8 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
   Future<Either<Failure, List<KabupatenKotaResponse>>> getKabupaten(
       int id) async {
     try {
-      var url = Uri.https(baseWilayahApi, "$kabupatenKotaUrl/$id$jsonEndingPrefix");
+      var url =
+          Uri.http(baseWilayahApi, "$kabupatenKotaUrl/$id$jsonEndingPrefix");
       var response = await http.get(
         url,
         headers: {
@@ -25,8 +26,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
         },
       );
       if (response.statusCode == 200) {
-        var theResponse =
-            kabupatenKotaResponseFromJson(response.body);
+        var theResponse = kabupatenKotaResponseFromJson(response.body);
         var isResponseDataNull = theResponse.isEmpty;
         if (isResponseDataNull) {
           throw ServerException();
@@ -43,7 +43,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
   @override
   Future<Either<Failure, List<KecamatanResponse>>> getKecamatan(int id) async {
     try {
-      var url = Uri.https(baseWilayahApi, "$kecamatanUrl/$id$jsonEndingPrefix");
+      var url = Uri.http(baseWilayahApi, "$kecamatanUrl/$id$jsonEndingPrefix");
       var response = await http.get(
         url,
         headers: {
@@ -51,8 +51,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
         },
       );
       if (response.statusCode == 200) {
-        var theResponse =
-        kecamatanResponseFromJson(response.body);
+        var theResponse = kecamatanResponseFromJson(response.body);
         var isResponseDataNull = theResponse.isEmpty;
         if (isResponseDataNull) {
           throw ServerException();
@@ -69,7 +68,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
   @override
   Future<Either<Failure, List<KelurahanResponse>>> getKelurahan(int id) async {
     try {
-      var url = Uri.https(baseWilayahApi, "$kelurahanUrl/$id$jsonEndingPrefix");
+      var url = Uri.http(baseWilayahApi, "$kelurahanUrl/$id$jsonEndingPrefix");
       var response = await http.get(
         url,
         headers: {
@@ -77,8 +76,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
         },
       );
       if (response.statusCode == 200) {
-        var theResponse =
-        kelurahanResponseFromJson(response.body);
+        var theResponse = kelurahanResponseFromJson(response.body);
         var isResponseDataNull = theResponse.length == 0;
         if (isResponseDataNull) {
           throw ServerException();
@@ -104,8 +102,7 @@ class ApiWilayahIndonesiaRepositoryImpl extends ApiWilayahIndonesiaRepository {
         },
       );
       if (response.statusCode == 200) {
-        var theResponse =
-        provinceResponseFromJson(response.body);
+        var theResponse = provinceResponseFromJson(response.body);
         var isResponseDataNull = theResponse.length == 0;
         if (isResponseDataNull) {
           throw ServerException();

@@ -38,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     // pak kamal
-    phone = "081288642147";
+    // phone = "081288642147";
     // bambang wisnu
     // phone = "085780907168";
     // kurir 1
-    // phone = "08121212";
+    phone = "08121212";
 
     password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
@@ -59,15 +59,11 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: widthScreen(context),
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage(
-                  "assets/images/login_background.png"),
-              )
-            ),
-
+                image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage("assets/images/login_background.png"),
+            )),
           ),
-
           Container(
             decoration: BoxDecoration(
                 // color: Colors.transparent,
@@ -171,18 +167,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: BlocConsumer<AuthBloc,
                                                     AuthState>(
                                                 listener: (lc, state) {
-                                              log(
-                                                  "BlocConsumer.listener: ${state.toString()}");
+                                              log("BlocConsumer.listener: ${state.toString()}");
                                               // Call Toast Here when Failed
                                               if (state is AuthFailed) {
-                                                myToast("Gagal Login: ${state.errorMessage}");
+                                                myToast(
+                                                    "Gagal Login: ${state.errorMessage}");
                                               }
                                               if (state is AuthSuccess) {
                                                 context.router
                                                     .replace(const HomeRoute());
                                               }
                                             }, builder: (bc, state) {
-
                                               if (state is AuthLoading) {
                                                 return Row(
                                                   mainAxisAlignment:
@@ -268,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             )),
           ),
-          ],
+        ],
       ),
     ));
   }

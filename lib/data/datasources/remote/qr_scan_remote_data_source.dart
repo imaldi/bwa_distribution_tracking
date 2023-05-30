@@ -28,7 +28,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<BulkScanResponse> bulkScan(String qrcodeSj) async {
-    final url = Uri.https(baseUrl, "$scanUrl/$qrcodeSj");
+    final url = Uri.http(baseUrl, "$scanUrl/$qrcodeSj");
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -50,7 +50,8 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
         throw ServerException();
       }
       return theResponse;
-    } if(response.statusCode == 404){
+    }
+    if (response.statusCode == 404) {
       throw DataNotFoundException();
     } else {
       throw ServerException();
@@ -59,14 +60,14 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   // FIXME ada error kalau ngambil foto dua kali atau ganti orientasi layar
   @override
-  Future<SendScanResponse> sendScan(SendScanDataModel model,int total) async {
-    final url = Uri.https(baseUrl, storeUrl);
+  Future<SendScanResponse> sendScan(SendScanDataModel model, int total) async {
+    final url = Uri.http(baseUrl, storeUrl);
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
-    print("status_pengiriman: ${ model.statusPengiriman ?? ""}");
-    print("latitude di data source: ${ model.latitude ?? ""}");
-    print("longtitude di data source: ${ model.longtitude ?? ""}");
+    print("status_pengiriman: ${model.statusPengiriman ?? ""}");
+    print("latitude di data source: ${model.latitude ?? ""}");
+    print("longtitude di data source: ${model.longtitude ?? ""}");
     print("latitude from sendScan in remote data source: ${model.latitude}");
     var bodyMap = {
       // "qrcode_sj": model. ?? "-",
@@ -85,8 +86,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
     // var theImage = File(model.foto ?? "");
 
     if ((model.foto ?? "").isNotEmpty) {
-      request.files.add(await http.MultipartFile.fromPath(
-          'foto', model.foto!));
+      request.files.add(await http.MultipartFile.fromPath('foto', model.foto!));
     }
     request.fields.addAll(bodyMap);
     request.headers.addAll({
@@ -94,8 +94,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
       'Accept': 'application/json',
       // 'Content-Type': 'application/json'
     });
-    final response =
-    await http.Response.fromStream(await request.send());
+    final response = await http.Response.fromStream(await request.send());
     print("Bulk Scan response code: ${response.statusCode.toString()}");
     log("Bulk Scan response body: ${response.body.toString()}");
 
@@ -110,7 +109,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<ScanUserHistoryResponse> getUserScanHistory() async {
-    final url = Uri.https(baseUrl, historyUser);
+    final url = Uri.http(baseUrl, historyUser);
     print("User Scan History Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -127,16 +126,17 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     if (response.statusCode == 200) {
-    var theResponse = ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
-    return theResponse;
+      var theResponse =
+          ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
+      return theResponse;
     } else {
-    throw ServerException();
+      throw ServerException();
     }
   }
 
   @override
   Future<ScanUserHistoryResponse> getAllScanHistory() async {
-    final url = Uri.https(baseUrl, historyAll);
+    final url = Uri.http(baseUrl, historyAll);
     print("All Scan History Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -153,7 +153,8 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     if (response.statusCode == 200) {
-      var theResponse = ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
+      var theResponse =
+          ScanUserHistoryResponse.fromJson(jsonDecode(response.body));
       return theResponse;
     } else {
       throw ServerException();

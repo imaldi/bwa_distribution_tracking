@@ -15,11 +15,14 @@ import '../../../core/resources/consts/urls.dart';
 import '../../models/auth/login_response.dart';
 
 abstract class SingleScanRemoteDataSource {
-  Future<StoreSelesaiResponse> sendRequestStoreSelesai(StoreSelesaiResponse model);
-  Future<DusScanResponse> sendRequestScanSingleDusInsert(String nodus, String imagePath,
-      int currentDusNumber,
-      // StoreSelesaiResponse wholeFormData
-      );
+  Future<StoreSelesaiResponse> sendRequestStoreSelesai(
+      StoreSelesaiResponse model);
+  Future<DusScanResponse> sendRequestScanSingleDusInsert(
+    String nodus,
+    String imagePath,
+    int currentDusNumber,
+    // StoreSelesaiResponse wholeFormData
+  );
   Future<DusListResponse> fetchScannedDusList();
 }
 
@@ -28,25 +31,28 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
 
   SingleScanRemoteDataSourceImpl(this.authBox);
   @override
-  Future<StoreSelesaiResponse> sendRequestStoreSelesai(StoreSelesaiResponse model) async {
-    final url = Uri.https(baseUrl, "$storeSelesaiUrl/${model.header?.qrcodeSj ?? "0"}");
+  Future<StoreSelesaiResponse> sendRequestStoreSelesai(
+      StoreSelesaiResponse model) async {
+    final url =
+        Uri.http(baseUrl, "$storeSelesaiUrl/${model.header?.qrcodeSj ?? "0"}");
     print("Store Selesai Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
     final request = http.MultipartRequest("POST", url);
     // var theImage = File(model.foto ?? "");
 
-    if ((model.header?.foto is String) && (model.header?.foto.toString() ?? "").isNotEmpty) {
+    if ((model.header?.foto is String) &&
+        (model.header?.foto.toString() ?? "").isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
           'foto', model.header?.foto?.toString() ?? "-"));
-
     }
     print("model Param: ${model.toJson().toString()}");
-    var bodyMap = <String,String>{}..addAll(
-      model.header?.toJson().map((key, value) => MapEntry<String,String>(key, value.toString())) ?? <String,String>{}
-    )
-      // ..remove("foto")
-    ;
+    var bodyMap = <String, String>{}..addAll(model.header?.toJson().map(
+                (key, value) =>
+                    MapEntry<String, String>(key, value.toString())) ??
+            <String, String>{})
+        // ..remove("foto")
+        ;
     print("bodyMap: $bodyMap");
 
     request.fields.addAll(bodyMap);
@@ -55,15 +61,15 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
       'Accept': 'application/json',
       // 'Content-Type': 'application/json'
     });
-    final response =
-    await http.Response.fromStream(await request.send());
+    final response = await http.Response.fromStream(await request.send());
     print("Selesai Store response code: ${response.statusCode.toString()}");
     log("Selesai Store response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
     // TODO perbaiki response kalau hasilnya not found
     if (response.statusCode == 200) {
-      var theResponse = StoreSelesaiResponse.fromJson(jsonDecode(response.body));
+      var theResponse =
+          StoreSelesaiResponse.fromJson(jsonDecode(response.body));
       return theResponse;
     } else {
       throw ServerException();
@@ -71,12 +77,14 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
   }
 
   @override
-  Future<DusScanResponse> sendRequestScanSingleDusInsert(String nodus, String imagePath,
-      int currentDusNumber,
-      // StoreSelesaiResponse wholeFormData
-      ) async {
-    // final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus-$currentDusNumber");
-    final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus");
+  Future<DusScanResponse> sendRequestScanSingleDusInsert(
+    String nodus,
+    String imagePath,
+    int currentDusNumber,
+    // StoreSelesaiResponse wholeFormData
+  ) async {
+    // final url = Uri.http(baseUrl, "$scanInsertDusUrl/$nodus-$currentDusNumber");
+    final url = Uri.http(baseUrl, "$scanInsertDusUrl/$nodus");
     print("sendRequestScanSingleDusInsert Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -84,15 +92,14 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
     // var theImage = File(model.foto ?? "");
 
     if (imagePath.isNotEmpty) {
-      request.files.add(await http.MultipartFile.fromPath(
-          'foto', imagePath));
+      request.files.add(await http.MultipartFile.fromPath('foto', imagePath));
     }
     // print("imagePath Param: ${imagePath}");
     // var bodyMap = <String,String>{}..addAll(
     //     wholeFormData.header?.toJson().map((key, value) => MapEntry<String,String>(key, value.toString())) ?? <String,String>{}
     // )
     // ..remove("foto")
-        ;
+    ;
     // print("bodyMap: $bodyMap");
     //
     // request.fields.addAll(bodyMap);
@@ -101,9 +108,9 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
       'Accept': 'application/json',
       // 'Content-Type': 'application/json'
     });
-    final response =
-    await http.Response.fromStream(await request.send());
-    print("sendRequestScanSingleDusInsert response code: ${response.statusCode.toString()}");
+    final response = await http.Response.fromStream(await request.send());
+    print(
+        "sendRequestScanSingleDusInsert response code: ${response.statusCode.toString()}");
     log("sendRequestScanSingleDusInsert response body: ${response.body.toString()}");
 
     // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
@@ -118,7 +125,10 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
 
   @override
   Future<DusListResponse> fetchScannedDusList() async {
-    final url = Uri.https(baseUrl, "$loopDusUrl",);
+    final url = Uri.http(
+      baseUrl,
+      "$loopDusUrl",
+    );
     print("Dus List Url: $url");
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
     final response = await http.get(
@@ -143,5 +153,4 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
       throw ServerException();
     }
   }
-
 }

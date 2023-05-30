@@ -1,8 +1,6 @@
-// const baseUrl = "dev-trackingbwa.my.id";
-const baseUrl = "dev-tracker.bwa.id";
-const apiUrl = "/api";
 // const baseUrl = "zulfikar.bwa.id:88";
-// const apiUrl = "/backend_inventory/api";
+const baseUrl = "110.239.66.184";
+const apiUrl = "/api";
 const loginUrl = "$apiUrl/login";
 const scanUrl = "$apiUrl/scan_sj";
 const storeUrl = "$scanUrl/store";
