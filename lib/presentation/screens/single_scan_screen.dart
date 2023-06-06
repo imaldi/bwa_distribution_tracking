@@ -64,8 +64,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
   final lembagaKeyForm = GlobalKey<FormState>();
   final tmptTjnKeyForm = GlobalKey<FormState>();
   final dtailAlamatKeyForm = GlobalKey<FormState>();
-  final listKey = <GlobalKey<FormState>>[
-  ];
+  final listKey = <GlobalKey<FormState>>[];
   final namaPnrmaCtrl = TextEditingController();
   final noHpCtrl = TextEditingController();
   final lembagaCtrl = TextEditingController();
@@ -187,7 +186,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
 
                       // Fixme (Tidak ada field di JSON)
                       MyTextField(
-                        formKey: lembagaKeyForm,
+                          formKey: lembagaKeyForm,
                           label: 'Nama Lembaga',
                           controller: lembagaCtrl,
                           onChanged: (val) {
@@ -200,7 +199,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           }),
                       // Fixme tidak tau field di JSON
                       MyTextField(
-                        formKey: tmptTjnKeyForm,
+                          formKey: tmptTjnKeyForm,
                           label: 'Jenis Lokasi',
                           controller: tmptTjnCtrl,
                           onChanged: (val) {
@@ -213,7 +212,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           }),
                       // Fixme lebih dari 1 baris (freetext)
                       MyTextField(
-                        formKey: dtailAlamatKeyForm,
+                          formKey: dtailAlamatKeyForm,
                           label: 'Detail Alamat',
                           controller: dtailAlamatCtrl,
                           onChanged: (val) {
@@ -248,8 +247,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               context
                                   .read<WilayahIndonesiaCubit>()
                                   .fetchKabupaten(int.parse(provinceResp
-                                          ?.firstWhere((element) =>
-                                              element.name == val)
+                                          ?.firstWhere(
+                                              (element) => element.name == val)
                                           .id ??
                                       "0"));
                               cubit.updateStoreSelesaiResponse(
@@ -289,8 +288,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               context
                                   .read<WilayahIndonesiaCubit>()
                                   .fetchKecamatan(int.parse(resp
-                                          ?.firstWhere((element) =>
-                                              element.name == val)
+                                          ?.firstWhere(
+                                              (element) => element.name == val)
                                           .id ??
                                       "0"));
                               cubit.updateStoreSelesaiResponse(
@@ -330,8 +329,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               context
                                   .read<WilayahIndonesiaCubit>()
                                   .fetchKelurahan(int.parse(resp
-                                          ?.firstWhere((element) =>
-                                              element.name == val)
+                                          ?.firstWhere(
+                                              (element) => element.name == val)
                                           .id ??
                                       "0"));
                               cubit.updateStoreSelesaiResponse(
@@ -385,12 +384,10 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
 
                       // Fixme lebih dari satu baris
                       Builder(builder: (context) {
-                        var state = context
-                            .watch<BulkScanScreenCubit>()
-                            .state
-                            .address;
+                        var state =
+                            context.watch<BulkScanScreenCubit>().state.address;
                         cubit.updateStoreSelesaiResponse(
-                                (p0) => p0.copyWith(detailTempat: state));
+                            (p0) => p0.copyWith(detailTempat: state));
                         return MyTextField(
                           enabled: false,
                           label: 'Google Address',
@@ -427,12 +424,18 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                 nodus,
                                 theFile?.path ?? "")
                             .then((value) async {
-                              if(context
-                                  .read<SingleScanScreenCubit>().state.dusScanResponse?.success ?? false){
-                                myToast("Success Scan Dus");
-                              } else {
-                                myToast("Failed Scan Dus");
-                              }
+                          if (context
+                                  .read<SingleScanScreenCubit>()
+                                  .state
+                                  .dusScanResponse
+                                  ?.success ??
+                              false) {
+                            myToast("Success Scan Dus");
+                          } else {
+                            // TODO cek kenapa ada toast failed walaupun berhasil insert
+
+                            myToast("Failed Scan Dus");
+                          }
                           await context
                               .read<SingleScanScreenCubit>()
                               .fetchScannedDusList();
@@ -458,8 +461,7 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             alignment: Alignment.center,
                             children: [
                               NotificationListener<OverscrollNotification>(
-                                onNotification:
-                                    (OverscrollNotification value) {
+                                onNotification: (OverscrollNotification value) {
                                   if (value.overscroll < 0 &&
                                       controller.offset + value.overscroll <=
                                           0) {
@@ -471,8 +473,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                       controller.position.maxScrollExtent) {
                                     if (controller.offset !=
                                         controller.position.maxScrollExtent) {
-                                      controller.jumpTo(controller
-                                          .position.maxScrollExtent);
+                                      controller.jumpTo(
+                                          controller.position.maxScrollExtent);
                                     }
                                     return true;
                                   }
@@ -636,11 +638,10 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                 if (state is SingleScanScreenSuccess) {
                                   myToast("Success Save Data");
                                   // FIXME check udah bener belum bernilai qrCOdenya
-                                  context.router.replace(
-                                      DetailPengirimanRoute(
-                                          qrCode: state.storeSelesaiResponse
-                                                  .header?.qrcodeSj ??
-                                              "null"));
+                                  context.router.replace(DetailPengirimanRoute(
+                                      qrCode: state.storeSelesaiResponse.header
+                                              ?.qrcodeSj ??
+                                          "null"));
                                 }
                               },
                               builder: (ctx, s) {
@@ -649,25 +650,27 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                                 print("State value now is $s");
                                 return ElevatedButton(
                                     onPressed: () {
-                                      if(state
-                                          .storeSelesaiResponse?.header?.foto == null){
+                                      if (state.storeSelesaiResponse?.header
+                                              ?.foto ==
+                                          null) {
                                         myToast("Foto Belum Di pilih");
                                       }
                                       var isAllValidated = false;
                                       listKey.forEach((element) {
-                                        if(element.currentState?.validate() ?? false) {
+                                        if (element.currentState?.validate() ??
+                                            false) {
                                           element.currentState?.save();
                                           isAllValidated = true;
                                         } else {
                                           isAllValidated = false;
                                         }
                                       });
-                                      if(isAllValidated) {
+                                      if (isAllValidated) {
                                         context
                                             .read<SingleScanScreenBloc>()
-                                            .add(SendRequesStoreSelesai(state
-                                            .storeSelesaiResponse ??
-                                            StoreSelesaiResponse()));
+                                            .add(SendRequesStoreSelesai(
+                                                state.storeSelesaiResponse ??
+                                                    StoreSelesaiResponse()));
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(

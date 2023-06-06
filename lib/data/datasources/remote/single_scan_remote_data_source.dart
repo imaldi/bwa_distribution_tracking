@@ -108,17 +108,22 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
       'Accept': 'application/json',
       // 'Content-Type': 'application/json'
     });
-    final response = await http.Response.fromStream(await request.send());
-    print(
-        "sendRequestScanSingleDusInsert response code: ${response.statusCode.toString()}");
-    log("sendRequestScanSingleDusInsert response body: ${response.body.toString()}");
+    try {
+      // TODO cek kenapa ada toast failed walaupun berhasil insert
+      final response = await http.Response.fromStream(await request.send());
+      print(
+          "sendRequestScanSingleDusInsert response code: ${response.statusCode.toString()}");
+      log("sendRequestScanSingleDusInsert response body: ${response.body.toString()}");
 
-    // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
-    // TODO perbaiki response kalau hasilnya not found
-    if (response.statusCode == 200) {
-      var theResponse = DusScanResponse.fromJson(jsonDecode(response.body));
-      return theResponse;
-    } else {
+      // FIXME bilang mas bambang kalau not found code nya jangan 500, terlalu ga jelas
+      // TODO perbaiki response kalau hasilnya not found
+      if (response.statusCode == 200) {
+        var theResponse = DusScanResponse.fromJson(jsonDecode(response.body));
+        return theResponse;
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
       throw ServerException();
     }
   }
