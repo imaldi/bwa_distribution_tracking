@@ -235,8 +235,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                               (provinceResp ?? <ProvinceResponse>[])
                                   .map((e) => e.name ?? "null")
                                   .toList();
-                          print("provinceList: $provinceList");
-                          print("provinceResp: $provinceResp");
+                          // print("provinceList: $provinceList");
+                          // print("provinceResp: $provinceResp");
 
                           return MyDropdownButton<String>(
                             // ["Dropship", "Pengiriman"]
@@ -358,8 +358,8 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                           var theList = (resp ?? <KelurahanResponse>[])
                               .map((e) => e.name ?? "null")
                               .toList();
-                          print("resp: $resp");
-                          print("resp list: $theList");
+                          // print("resp: $resp");
+                          // print("resp list: $theList");
 
                           return MyDropdownButton<String>(
                             // ["Dropship", "Pengiriman"]
@@ -433,8 +433,13 @@ class _SingleScanScreenState extends State<SingleScanScreen> {
                             myToast("Success Scan Dus");
                           } else {
                             // TODO cek kenapa ada toast failed walaupun berhasil insert
-
-                            myToast("Failed Scan Dus");
+                            var errorMessage = context
+                                .read<SingleScanScreenCubit>()
+                                .state
+                                .dusScanResponse
+                                ?.message;
+                            myToast(
+                                "Failed Scan Dus${errorMessage != null ? ": $errorMessage" : ""}");
                           }
                           await context
                               .read<SingleScanScreenCubit>()

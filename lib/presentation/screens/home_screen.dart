@@ -369,13 +369,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     TableRow(children: [
                                       InkWell(
-                                        onTap: () {
-                                          context
-                                              .read<SuratJalanCubit>()
-                                              .getSuratJalanPerPage(1,
-                                                  menuStatusForTitle:
-                                                      constPengiriman);
-                                        },
+                                        onTap: kurirEnabled
+                                            ? null
+                                            : () {
+                                                context
+                                                    .read<SuratJalanCubit>()
+                                                    .getSuratJalanPerPage(1,
+                                                        menuStatusForTitle:
+                                                            constPengiriman);
+                                              },
                                         child: RoundedContainer(sizeMedium,
                                             padding: const EdgeInsets.all(0),
                                             margin: const EdgeInsets.all(
@@ -423,13 +425,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             )),
                                       ),
                                       InkWell(
-                                        onTap: () {
-                                          context
-                                              .read<SuratJalanCubit>()
-                                              .getSuratJalanPerPage(1,
-                                                  menuStatusForTitle:
-                                                      constPenerimaan);
-                                        },
+                                        onTap: kurirEnabled
+                                            ? () {
+                                                context
+                                                    .read<SuratJalanCubit>()
+                                                    .getSuratJalanPerPage(1,
+                                                        menuStatusForTitle:
+                                                            constPenerimaan);
+                                              }
+                                            : null,
                                         child: RoundedContainer(sizeMedium,
                                             padding: const EdgeInsets.all(0),
                                             margin: const EdgeInsets.all(
@@ -479,16 +483,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ]),
                                     TableRow(children: [
                                       InkWell(
-                                        onTap: () {
-                                          context
-                                              .read<SuratJalanCubit>()
-                                              .getSuratJalanPerPage(1,
-                                                  menuStatusForTitle:
-                                                      constDistribusi);
-                                          context
-                                              .read<SuratJalanCubit>()
-                                              .setWillScanDus();
-                                        },
+                                        onTap: kurirEnabled
+                                            ? () {
+                                                context
+                                                    .read<SuratJalanCubit>()
+                                                    .getSuratJalanPerPage(1,
+                                                        menuStatusForTitle:
+                                                            constDistribusi);
+                                                context
+                                                    .read<SuratJalanCubit>()
+                                                    .setWillScanDus();
+                                              }
+                                            : null,
                                         child: RoundedContainer(sizeMedium,
                                             padding: const EdgeInsets.all(0),
                                             margin: const EdgeInsets.all(

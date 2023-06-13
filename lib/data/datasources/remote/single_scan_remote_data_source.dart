@@ -120,6 +120,12 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
       if (response.statusCode == 200) {
         var theResponse = DusScanResponse.fromJson(jsonDecode(response.body));
         return theResponse;
+      } else if (response.statusCode == 500) {
+        if (jsonDecode(response.body)["message"]
+            .toString()
+            .contains("Data Sudah Ada"))
+          throw ServerException(message: "Data Sudah Ada");
+        throw ServerException();
       } else {
         throw ServerException();
       }

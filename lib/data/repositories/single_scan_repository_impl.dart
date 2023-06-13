@@ -17,11 +17,13 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
     this.networkInfo,
   );
   @override
-  Future<Either<Failure, StoreSelesaiResponse>> sendRequestStoreSelesai(StoreSelesaiResponse selesaiResponse) async {
+  Future<Either<Failure, StoreSelesaiResponse>> sendRequestStoreSelesai(
+      StoreSelesaiResponse selesaiResponse) async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
 
-    try{
-      final response = await singleScanRemoteDataSource.sendRequestStoreSelesai(selesaiResponse);
+    try {
+      final response = await singleScanRemoteDataSource
+          .sendRequestStoreSelesai(selesaiResponse);
 
       return Right(response);
     } on ServerException {
@@ -30,19 +32,22 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
   }
 
   @override
-  Future<Either<Failure, DusScanResponse>> sendRequestScanSingleDusInsert(String nodus, String imagePath,
-      int currentDusNumber,
-      // StoreSelesaiResponse wholeFormData
-      ) async {
+  Future<Either<Failure, DusScanResponse>> sendRequestScanSingleDusInsert(
+    String nodus,
+    String imagePath,
+    int currentDusNumber,
+    // StoreSelesaiResponse wholeFormData
+  ) async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
-    try{
-      final response = await singleScanRemoteDataSource.sendRequestScanSingleDusInsert(nodus, imagePath,
-          currentDusNumber
-          // wholeFormData
-      );
+    try {
+      final response = await singleScanRemoteDataSource
+          .sendRequestScanSingleDusInsert(nodus, imagePath, currentDusNumber
+              // wholeFormData
+              );
 
       return Right(response);
-    } on ServerException {
+    } catch (e) {
+      if (e is ServerException) return Left(ServerFailure(message: e.message));
       return Left(ServerFailure());
     }
   }
@@ -50,7 +55,7 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
   @override
   Future<Either<Failure, DusListResponse>> fetchScannedDusList() async {
     if (!(await networkInfo.isConnected)) return Left(NoInternetFailure());
-    try{
+    try {
       final response = await singleScanRemoteDataSource.fetchScannedDusList();
 
       return Right(response);
@@ -58,8 +63,4 @@ class SingleScanRepositoryImpl extends SingleScanRepository {
       return Left(ServerFailure());
     }
   }
-
-
-
-
 }

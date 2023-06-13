@@ -88,7 +88,7 @@ class _ScanDusAndChoosePictureWidgetState
                             backgroundColor: primaryGreen,
                             side: const BorderSide(color: primaryGreen),
                           ),
-                          child: Text("No"),
+                          child: Text("Take Picture"),
                         ),
                       ),
                     ),
@@ -109,7 +109,7 @@ class _ScanDusAndChoosePictureWidgetState
                             await _pickFile(context, qrCode, state);
                             context.router.pop();
                           },
-                          child: Text("Yes"),
+                          child: Text("Choose from Gallery"),
                         ),
                       ),
                     )

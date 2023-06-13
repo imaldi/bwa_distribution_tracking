@@ -19,13 +19,11 @@ import '../../presentation/screens/single_scan_screen.dart';
     AutoRoute(page: HomeScreen),
     AutoRoute(page: BulkScanScreen),
     AutoRoute(page: TestDhriveScreen),
-    AutoRoute(page: HistoryScreen,
-    children: [
+    AutoRoute(page: HistoryScreen, children: [
       AutoRoute(page: AllHistoryScreen, initial: true),
       AutoRoute(page: UsersHistoryScreen),
       AutoRoute(page: DusHistoryScreen),
-    ]
-    ),
+    ]),
     AutoRoute(page: SingleScanScreen),
     AutoRoute(page: RiwayatSuratJalanScreen),
     AutoRoute(page: DetailPengirimanScreen),

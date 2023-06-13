@@ -1,93 +1,211 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/colors.dart';
 import 'package:bwa_distribution_tracking/core/resources/consts/sizes.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/container/rounded_container.dart';
 import 'package:bwa_distribution_tracking/presentation/widgets/text_form_field/no_underline_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
-class TestDhriveScreen extends StatefulWidget {
+import '../../data/models/wilayah_indonesia_api/kabupaten_kota_model.dart';
+import '../../data/models/wilayah_indonesia_api/kecamatan_model.dart';
+import '../../data/models/wilayah_indonesia_api/kelurahan_model.dart';
+import '../../data/models/wilayah_indonesia_api/province_model.dart';
+import '../../injection_container.dart';
+import '../state_management/cubits/wilayah_indonesia/wilayah_indonesia_cubit.dart';
+import '../widgets/my_dropdown_button/my_dropdown_button.dart';
+
+class TestDhriveScreen extends StatefulWidget implements AutoRouteWrapper {
   const TestDhriveScreen({Key? key}) : super(key: key);
 
   @override
   State<TestDhriveScreen> createState() => _TestDhriveScreenState();
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return
+        // Fixme harusnya location bikin cubit sendiri, jangan coupled sama BulkScanScreenCubit
+        MultiBlocProvider(providers: [
+      BlocProvider.value(value: sl<WilayahIndonesiaCubit>()),
+    ], child: this);
+  }
 }
 
 class _TestDhriveScreenState extends State<TestDhriveScreen> {
   late Position position;
   String text = "";
+  final provinsiDropdownKey = GlobalKey<FormState>();
+  final kabupatenDropdownKey = GlobalKey<FormState>();
+  final kecamatanDropdownKey = GlobalKey<FormState>();
+  final kelurahanDropdownKey = GlobalKey<FormState>();
+  final listKey = <GlobalKey<FormState>>[];
+
   @override
   void initState() {
     super.initState();
-    // var userModelImpl = const UserModelFreezedHive(firstName: "majideeee", lastName: "hmmm",age: 3);
-    // var userModel2 = userModelImpl.rebuild((p1) => p1..name = "majidun");
-    // sl<Box<UserModelFreezedHive>>().put("some user class", userModelImpl);
-    // sl<Box<NormalDataClass>>().put("some data class", NormalDataClass(name: "Aldi Majid", country: "Brunei"));\
-    setState(() {
-      _callDeterminPosition();
-
-    });
+    listKey.addAll([
+      provinsiDropdownKey,
+      kabupatenDropdownKey,
+      kecamatanDropdownKey,
+      kelurahanDropdownKey,
+    ]);
+    context.read<WilayahIndonesiaCubit>().initProvince();
   }
 
-  _callDeterminPosition() async{
-    position = await _determinePosition();
-    text = "Lat: ${position.latitude.toString()}, Long: ${position.longitude.toString()}";
-    print("LATITUDE: $text");
-  }
-  /// Determine the current position of the device.
-  ///
-  /// When the location services are not enabled or permissions
-  /// are denied the `Future` will return an error.
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
-  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:Center(child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text("Hoi hoi hoi"),
-        RoundedContainer(sizeNormal,
-            boxDecoration: BoxDecoration(border: Border.all(color: primaryGreen)),
-            child: NoUnderlineTextFormField(controller: TextEditingController(text: text),)),
-      ],
-    )
-    // ${
-        // sl<Box<UserModelFreezedHive>>().get("some user class")?.firstName
-        // sl<Box<NormalDataClass>>().get("some data class")?.name
-      // }"
-    ),);
+    return Scaffold(
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Hoi hoi hoi"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+            child: Builder(builder: (context) {
+              var provinceResp =
+                  context.watch<WilayahIndonesiaCubit>().state.provinceResponse;
+              var provinceList = (provinceResp ?? <ProvinceResponse>[])
+                  .map((e) => e.name ?? "null")
+                  .toList();
+              // print("provinceList: $provinceList");
+              // print("provinceResp: $provinceResp");
+
+              return MyDropdownButton<String>(
+                // ["Dropship", "Pengiriman"]
+                []..addAll(provinceList),
+                (v) => v,
+                formKey: provinsiDropdownKey,
+                onItemTapped: (val) {
+                  context.read<WilayahIndonesiaCubit>().fetchKabupaten(
+                      int.parse(provinceResp
+                              ?.firstWhere((element) => element.name == val)
+                              .id ??
+                          "0"));
+                  // cubit.updateStoreSelesaiResponse(
+                  //     (p0) => p0.copyWith(provinsi: val));
+                },
+                validator: (val) {
+                  if (val == null) return "Wajib Isi";
+                  return null;
+                },
+                hint: const Text(
+                  "Provinsi",
+                  style: TextStyle(color: primaryGreen),
+                ),
+              );
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+            child: Builder(builder: (context) {
+              var resp = context
+                  .watch<WilayahIndonesiaCubit>()
+                  .state
+                  .kabupatenKotaResponse;
+              var theList = (resp ?? <KabupatenKotaResponse>[])
+                  .map((e) => e.name ?? "null")
+                  .toList();
+              print("kab/kota: $resp");
+              print("kan/kota list: $theList");
+
+              return MyDropdownButton<String>(
+                // ["Dropship", "Pengiriman"]
+                []..addAll(theList),
+                (v) => v,
+                formKey: kabupatenDropdownKey,
+                onItemTapped: (val) {
+                  context.read<WilayahIndonesiaCubit>().fetchKecamatan(
+                      int.parse(resp
+                              ?.firstWhere((element) => element.name == val)
+                              .id ??
+                          "0"));
+                  // cubit.updateStoreSelesaiResponse(
+                  //     (p0) => p0.copyWith(kabupaten: val));
+                },
+                validator: (val) {
+                  if (val == null) return "Wajib Isi";
+                  return null;
+                },
+                hint: const Text(
+                  "Kabupaten / Kota",
+                  style: TextStyle(color: primaryGreen),
+                ),
+              );
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+            child: Builder(builder: (context) {
+              var resp = context
+                  .watch<WilayahIndonesiaCubit>()
+                  .state
+                  .kecamatanResponse;
+              var theList = (resp ?? <KecamatanResponse>[])
+                  .map((e) => e.name ?? "null")
+                  .toList();
+              print("resp: $resp");
+              print("list: $theList");
+
+              return MyDropdownButton<String>(
+                // ["Dropship", "Pengiriman"]
+                []..addAll(theList),
+                (v) => v,
+                formKey: kecamatanDropdownKey,
+                onItemTapped: (val) {
+                  context.read<WilayahIndonesiaCubit>().fetchKelurahan(
+                      int.parse(resp
+                              ?.firstWhere((element) => element.name == val)
+                              .id ??
+                          "0"));
+                  // cubit.updateStoreSelesaiResponse(
+                  //     (p0) => p0.copyWith(kecamatan: val));
+                },
+                validator: (val) {
+                  if (val == null) return "Wajib Isi";
+                  return null;
+                },
+                hint: const Text(
+                  "Kecamatan",
+                  style: TextStyle(color: primaryGreen),
+                ),
+              );
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: sizeNormal),
+            child: Builder(builder: (context) {
+              var resp = context
+                  .watch<WilayahIndonesiaCubit>()
+                  .state
+                  .kelurahanResponse;
+              var theList = (resp ?? <KelurahanResponse>[])
+                  .map((e) => e.name ?? "null")
+                  .toList();
+              // print("resp: $resp");
+              // print("resp list: $theList");
+
+              return MyDropdownButton<String>(
+                // ["Dropship", "Pengiriman"]
+                []..addAll(theList),
+                (v) => v,
+                formKey: kelurahanDropdownKey,
+                onItemTapped: (val) {
+                  // cubit.updateStoreSelesaiResponse(
+                  //     (p0) => p0.copyWith(kelurahan: val));
+                },
+                validator: (val) {
+                  if (val == null) return "Wajib Isi";
+                  return null;
+                },
+                hint: const Text(
+                  "Kelurahan",
+                  style: TextStyle(color: primaryGreen),
+                ),
+              );
+            }),
+          ),
+        ],
+      )),
+    );
   }
 }
