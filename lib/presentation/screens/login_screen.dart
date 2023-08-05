@@ -38,13 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     // pak kamal
-    phone = "081288642147";
+    // phone = "081288642147";
     // bambang wisnu
     // phone = "085780907168";
     // kurir 1f
     // phone = "08121212";
 
-    password = "bwa123Password";
+    // password = "bwa123Password";
     phoneTEC = TextEditingController(text: phone);
     passwordTEC = TextEditingController(text: password);
     context.read<AuthBloc>().add(const GetCachedLoginEvent());
