@@ -27,7 +27,7 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
   @override
   Future<SuratJalanResponse> getSuratJalanPerPage(int pageNumber) async {
     final url =
-        Uri.http(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
+        Uri.https(baseUrl, "$suratJalanUrl", {"page": pageNumber.toString()});
     print("Surat Jalan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -60,7 +60,7 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
 
   @override
   Future<BulkScanResponse> getHistoryPerId(String qrcodeSj) async {
-    final url = Uri.http(baseUrl, "$historyPerId/$qrcodeSj");
+    final url = Uri.https(baseUrl, "$historyPerId/$qrcodeSj");
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -93,7 +93,7 @@ class SuratJalanRemoteDataSourceImpl extends SuratJalanRemoteDataSource {
 
   @override
   Future<DusDetailResponse> getDusDetailByQrCodeSJ(String qrcodeSj) async {
-    final url = Uri.http(baseUrl, "$dusDetailPopUp/$qrcodeSj");
+    final url = Uri.https(baseUrl, "$dusDetailPopUp/$qrcodeSj");
     print("Dus Detail Url: $url");
 
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";

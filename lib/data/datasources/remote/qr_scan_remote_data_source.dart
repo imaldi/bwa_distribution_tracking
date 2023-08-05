@@ -28,7 +28,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<BulkScanResponse> bulkScan(String qrcodeSj) async {
-    final url = Uri.http(baseUrl, "$scanUrl/$qrcodeSj");
+    final url = Uri.https(baseUrl, "$scanUrl/$qrcodeSj");
     print("Bulk Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -61,14 +61,14 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
   // FIXME ada error kalau ngambil foto dua kali atau ganti orientasi layar
   @override
   Future<SendScanResponse> sendScan(SendScanDataModel model, int total) async {
-    final url = Uri.http(baseUrl, storeUrl);
+    final url = Uri.https(baseUrl, storeUrl);
     print("Send Scan Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
     print("status_pengiriman: ${model.statusPengiriman ?? ""}");
-    print("latitude di data source: ${model.latitude ?? ""}");
-    print("longtitude di data source: ${model.longtitude ?? ""}");
-    print("latitude from sendScan in remote data source: ${model.latitude}");
+    print(
+        "authBox.get(cachedLoginResponse) token qrScan DS: ${authBox.get(cachedLoginResponse)?.token ?? ""}");
+
     var bodyMap = {
       // "qrcode_sj": model. ?? "-",
       "nosj": model.nosj ?? "-",
@@ -109,7 +109,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<ScanUserHistoryResponse> getUserScanHistory() async {
-    final url = Uri.http(baseUrl, historyUser);
+    final url = Uri.https(baseUrl, historyUser);
     print("User Scan History Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -136,7 +136,7 @@ class QRScanRemoteDataSourceImpl extends QRScanRemoteDataSource {
 
   @override
   Future<ScanUserHistoryResponse> getAllScanHistory() async {
-    final url = Uri.http(baseUrl, historyAll);
+    final url = Uri.https(baseUrl, historyAll);
     print("All Scan History Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";

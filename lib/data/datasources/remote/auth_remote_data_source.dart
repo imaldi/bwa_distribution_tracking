@@ -21,7 +21,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<LoginResponse> login(String phone, String password,
       {String? csrf_token}) async {
-    final url = Uri.http(baseUrl, loginUrl);
+    final url = Uri.https(baseUrl, loginUrl);
     print("URL login remote data source: $url");
 
     var requestHeaders = {'Accept': 'application/json'};
@@ -36,16 +36,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         'password': password,
       },
     ).timeout(const Duration(seconds: 5), onTimeout: () {
-      throw TimeoutException("Ini ada yang salah");
+      throw TimeoutException("Ini ada Error");
     });
 
-    print("Response Login status code: ${response.statusCode}");
-    print("Response Login headers: ${response.headers}");
-    print("Response Login: ${response.body}");
+    // print("Response Login status code: ${response.statusCode}");
+    // print("Response Login headers: ${response.headers}");
+    // print("Response Login: ${response.body}");
 
     if (response.statusCode == 200) {
       return LoginResponse.fromJson(jsonDecode(response.body));
     }
+
     // else if (response.statusCode == 419) {
     //   // TODO save ke shared pref nanti
     //   // Extract the CSRF token from the Set-Cookie header
@@ -66,6 +67,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     //   throw ServerException();
     // }
     else {
+      print("auth response status code: ${response.statusCode}");
+      print("auth response body: ${response.body}");
       throw ServerException();
     }
   }

@@ -1,5 +1,5 @@
-// const baseUrl = "zulfikar.bwa.id:88";
-const baseUrl = "110.239.66.184";
+const baseUrl = "erp.bwa.id";
+// const baseUrl = "103.175.217.68";
 const apiUrl = "/api";
 const loginUrl = "$apiUrl/login";
 const scanUrl = "$apiUrl/scan_sj";
@@ -22,4 +22,4 @@ const kabupatenKotaUrl = "$apiWilayahUrl/regencies";
 const kecamatanUrl = "$apiWilayahUrl/districts";
 const kelurahanUrl = "$apiWilayahUrl/villages";
 
-const imageResourceUrl = "$baseUrl/webinventory/public/";
+const imageResourceUrl = "https://$baseUrl/webinventory/public/documents/";

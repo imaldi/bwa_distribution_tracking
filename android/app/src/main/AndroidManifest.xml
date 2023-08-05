@@ -11,7 +11,7 @@
         android:maxSdkVersion="18"
         />
     <application
-        android:label="bwa_distribution_tracking"
+        android:label="BWA Distribution Tracking"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -107,7 +107,8 @@ Future<void> init() async {
     () => WilayahIndonesiaCubit(sl()),
   );
   sl.registerFactory(
-    () => DetailRiwayatCubit(sl<SuratJalanRepository>(),sl<GetCurrentAddressUseCase>()),
+    () => DetailRiwayatCubit(
+        sl<SuratJalanRepository>(), sl<GetCurrentAddressUseCase>()),
   );
 
   sl.registerFactory(() => SuratJalanCubit(

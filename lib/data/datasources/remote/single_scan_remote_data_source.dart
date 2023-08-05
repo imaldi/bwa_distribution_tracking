@@ -34,7 +34,7 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
   Future<StoreSelesaiResponse> sendRequestStoreSelesai(
       StoreSelesaiResponse model) async {
     final url =
-        Uri.http(baseUrl, "$storeSelesaiUrl/${model.header?.qrcodeSj ?? "0"}");
+        Uri.https(baseUrl, "$storeSelesaiUrl/${model.header?.qrcodeSj ?? "0"}");
     print("Store Selesai Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";
@@ -83,8 +83,8 @@ class SingleScanRemoteDataSourceImpl extends SingleScanRemoteDataSource {
     int currentDusNumber,
     // StoreSelesaiResponse wholeFormData
   ) async {
-    // final url = Uri.http(baseUrl, "$scanInsertDusUrl/$nodus-$currentDusNumber");
-    final url = Uri.http(baseUrl, "$scanInsertDusUrl/$nodus");
+    // final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus-$currentDusNumber");
+    final url = Uri.https(baseUrl, "$scanInsertDusUrl/$nodus");
     print("sendRequestScanSingleDusInsert Url: $url");
     // final box = Hive.box(authBoxKey);
     final token = authBox.get(cachedLoginResponse)?.token?.token ?? "";

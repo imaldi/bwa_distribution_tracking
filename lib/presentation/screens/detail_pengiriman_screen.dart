@@ -1014,7 +1014,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                             collapsed: Container(),
                                                                                             expanded: Image
                                                                                                 .network(
-                                                                                              "https://$imageResourceUrl${noSJHistory
+                                                                                              "$imageResourceUrl${noSJHistory
                                                                                                   .foto ??
                                                                                                   "-"}",
                                                                                               errorBuilder: (
@@ -1303,7 +1303,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                               collapsed: Container(),
                                                                                               expanded: Image
                                                                                                   .network(
-                                                                                                "https://$imageResourceUrl${listHeaderDus[index]
+                                                                                                "$imageResourceUrl${listHeaderDus[index]
                                                                                                     .foto ??
                                                                                                     "-"}",
                                                                                                 errorBuilder: (
@@ -1375,7 +1375,7 @@ class _DetailPengirimanScreenState extends State<DetailPengirimanScreen> {
                                                                                                 collapsed: Container(),
                                                                                                 expanded: Image
                                                                                                     .network(
-                                                                                                  "https://$imageResourceUrl${listDetailDus[index]
+                                                                                                  "$imageResourceUrl${listDetailDus[index]
                                                                                                       .foto
                                                                                                       ??
                                                                                                       "-"}",
